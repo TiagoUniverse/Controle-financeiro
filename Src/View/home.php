@@ -19,15 +19,15 @@ require_once "Recursos/Navegacao.php";
 </head>
 
 <body>
- <form method="POST" action="home.php">
+ <form method="GET" action="home.php">
                                                                    
-    <input type="number" name="ano" min="1900" max="2099" step="1" value="<?php if (isset($_POST['ano'])) echo $_POST['ano']; ?>" />
+    <input type="number" name="ano" min="1900" max="2099" step="1" value="<?php if (isset($_GET['ano'])) echo $_GET['ano']; ?>" />
     <button type="submit"> Pesquisar</button>
  </form>   
 
     <?php
-    if (isset($_POST['ano']) != null){
-     echo $_POST['ano'];
+    if (isset($_GET['ano']) != null){
+     echo $_GET['ano'];
     }
     ?>
 
@@ -41,6 +41,8 @@ require_once "Recursos/Navegacao.php";
     </div>
   </div>
 </div>
+
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
