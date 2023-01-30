@@ -7,6 +7,8 @@
  */
 
 require_once "Recursos/Navegacao.php";
+require_once "conexao.php";
+
 ?>
 <!doctype html>
 <html lang="en">
