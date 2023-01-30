@@ -23,18 +23,26 @@ require_once "conexao.php";
 
 <body>
 
-  <div class="row g-0 text-center" style="background-color: green;">
-    <div class="col-sm-6 col-md-1 filtro
-    ">
-    <form method="POST" action="home.php">
-        <input type="number" name="ano" min="1900" max="2099" step="1" value="<?php if (isset($_POST['ano'])) echo $_POST['ano']; ?>" />
-        <button type="submit"> Pesquisar</button>
-      </form>
-    </div>
-    <div class="col-6 col-md-1" style="background-color: violet;">
-      <form method="POST" action="home.php">
-        <button type="submit"> Limpar filtro</button>
-      </form>
+
+
+
+  <div class="container px-4 text-center">
+    <div class="row gx-5">
+      <div class="col">
+        <div class="p-3 filtro">
+          <form method="POST" action="home.php">
+            <input type="number" name="ano" min="1900" max="2099" step="1" value="<?php if (isset($_POST['ano'])) echo $_POST['ano']; ?>" />
+            <button type="submit"> Pesquisar</button>
+          </form>
+        </div>
+      </div>
+      <div class="col">
+        <div class="p-3 limparFiltro">
+          <form method="POST" action="home.php">
+            <button type="submit" class=""> Limpar filtro</button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -44,7 +52,7 @@ require_once "conexao.php";
   ?>
     <div class="container px-4 text-center">
       <div class="row gx-5">
-        <div class="box">Janeiro</div>
+        <div class="box"> <a>Janeiro</a></div>
         <div class="box">Janeiro</div>
         <div class="box">Janeiro</div>
         <div class="box">Janeiro</div>

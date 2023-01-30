@@ -7,5 +7,25 @@
   }
 
   .filtro{
-    margin-left: 21cm;
+    margin-left: 7cm;
   }
+
+  .limparFiltro{
+    margin-left: -20cm;
+  }
+
+
+@media screen and (max-width: 768px){
+  .box{
+    margin: 3px;
+  }
+
+  .filtro{
+    margin-left: 0cm;
+  }
+
+  .limparFiltro{
+    margin-left: 1cm;
+  }
+
+}
