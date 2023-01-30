@@ -32,15 +32,15 @@ require_once "conexao.php";
       <div class="col">
         <div class="p-3 filtro">
           <form method="POST" action="home.php">
-            <input type="number" name="ano" min="1900" max="2099" step="1" value="<?php if (isset($_POST['ano'])) echo $_POST['ano']; ?>" />
-            <button type="submit"> Pesquisar</button>
+            <input type="number" name="ano" min="1900" max="2099" step="1" value="<?php echo  date('Y'); ?> " />
+            <button type="submit" class="btn btn-primary">Pesquisar</button>
           </form>
         </div>
       </div>
       <div class="col">
-        <div class="p-3 limparFiltro">
+        <div class="p-3">
           <form method="POST" action="home.php">
-            <button type="submit" class=""> Limpar filtro</button>
+            <button type="submit" class="btn btn-secondary limparFiltro">Limpar filtro</button>
           </form>
         </div>
       </div>
@@ -52,6 +52,7 @@ require_once "conexao.php";
   if (isset($_POST['ano']) != null) {
   ?>
     <div class="container px-4 text-center">
+      <h1><?php echo $_POST['ano']; ?> </h1>
       <div class="row gx-5">
         <div class="box"> <a>Janeiro</a></div>
         <div class="box">Fevereiro</div>
@@ -76,18 +77,7 @@ require_once "conexao.php";
 
 
 
-
-
-
-
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-  <footer>
-    Tiago Universe, PE 2023.
-  </footer>
-
-
-
 </body>
 
 </html>
