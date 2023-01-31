@@ -54,65 +54,18 @@ require_once "conexao.php";
     <div class="container px-4 text-center">
       <h1><?php echo $_POST['ano']; ?> </h1>
       <div class="row gx-5">
-        <a>
-          <div class="box">
-            <a href="mes.php">Janeiro</a>
-          </div>
-          <div class="box">
-            <a href="mes.php">
-              Fevereiro
-            </a>
-          </div>
-          <div class="box">
-            <a href="mes.php">
-              Março
-            </a>
-          </div>
-          <div class="box">
-            <a href="mes.php">
-              Abril
-            </a>
-          </div>
-          <div class="box">
-            <a href="mes.php">
-              Maio
-            </a>
-          </div>
-          <div class="box">
-            <a href="mes.php">
-              Junho
-            </a>
-          </div>
-          <div class="box">
-            <a href="mes.php">
-              Julho
-            </a>
-          </div>
-          <div class="box">
-            <a href="mes.php">
-              Agosto
-            </a>
-          </div>
-          <div class="box">
-            <a href="mes.php">
-              Setembro
-            </a>
-          </div>
-          <div class="box">
-            <a href="mes.php">
-              Outubro
-            </a>
-          </div>
-          <div class="box">
-            <a href="mes.php">
-              Novembro
-            </a>
-          </div>
-          <div class="box">
-            <a href="mes.php">
-              Dezembro
-            </a>
-          </div>
+        <div class="box"> <a href="Janeiro.php">Janeiro</a></div>
+        <div class="box">Fevereiro</div>
+        <div class="box">Março</div>
+        <div class="box">Abril</div>
+        <div class="box">Maio</div>
+        <div class="box">Junho</div>
+        <div class="box">Julho</div>
+        <div class="box">Agosto</div>
+        <div class="box">Setembro</div>
+        <div class="box">Outubro</div>
+        <div class="box">Novembro</div>
+        <div class="box">Dezembro</div>
       </div>
     </div>
   <?php
