@@ -14,6 +14,9 @@
     margin-left: -20cm;
   }
 
+  .botao-voltar{
+    margin-left: 1cm;
+  }
 
 @media screen and (max-width: 768px){
   .box{
