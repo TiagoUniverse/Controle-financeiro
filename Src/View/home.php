@@ -12,63 +12,41 @@ require_once "conexao.php";
 //Variáveis
 if (isset($_POST['ano']) != null) {
   $_SESSION['ano'] = $_POST['ano'];
+}
 
 ?>
-  <!doctype html>
-  <html lang="en">
+<!doctype html>
+<html lang="en">
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../Assets/Css/Content.css" />
-    <link rel="stylesheet" href="../../Assets/Css/Footer.css" />
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../Assets/Css/Content.css" />
+  <link rel="stylesheet" href="../../Assets/Css/Footer.css" />
+</head>
 
-  <body>
-   <form method="POST" action="home.php">
-    <div class="input-group mb-3">
-     
-        <select class="form-control" name="ano">
-          <?php
-          for ($year = (int)date('Y'); 1900 <= $year; $year--) : ?>
-            <option value="<?= $year; ?>" n><?= $year; ?></option>
-          <?php endfor; ?>
-        </select>
-        <button type="submit" class="btn btn-primary">Pesquisar</button>
-      </form>
-    </div>
+<body>
+  <form method="POST" action="home.php">
+    <div class="input-group mb-3" style="width: 8cm; margin-left:22cm;">
+      <select class="form-control" name="ano">
+        <?php
+        for ($year = (int)date('Y'); 1900 <= $year; $year--) : ?>
+          <option value="<?= $year; ?>" n><?= $year; ?></option>
+        <?php endfor; ?>
+      </select>
+      <button type="submit" class="btn btn-primary">Pesquisar</button>
+  </form>
 
-    <!-- 
-  <div class="p-3 filtro" style="background-color: red;">
-            <form method="POST" action="home.php">
+  <form method="POST" action="home.php">
+    <button type="submit" class="btn btn-secondary limparFiltro" style="margin-left: 0.3cm;">Limpar filtro</button>
+  </form>
+  </div>
 
-              <select class="form-control" name="ano" style="width: 5cm; ">
-                <?php
-                for ($year = (int)date('Y'); 1900 <= $year; $year--) : ?>
-                  <option value="<?= $year; ?>" n><?= $year; ?></option>
-                <?php endfor; ?>
-              </select>
-
-              <button type="submit" class="btn btn-primary" >Pesquisar</button>
-            </form>
-          </div>
-    <div class="container px-4 text-center">
-      <div class="row gx-5">
-        <div class="col">
-          
-        </div>
-        <div class="col">
-          <div class="p-3">
-            <form method="POST" action="home.php">
-              <button type="submit" class="btn btn-secondary limparFiltro">Limpar filtro</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
+  <?php
+  if (isset($_POST['ano'])) {
+  ?>
     <div class="container px-4 text-center">
       <h1><?php echo $_POST['ano']; ?> </h1>
       <div class="row gx-5">
@@ -196,7 +174,7 @@ if (isset($_POST['ano']) != null) {
       </div>
     </div>
   <?php
-}
+  }
   ?>
 
 
@@ -208,6 +186,6 @@ if (isset($_POST['ano']) != null) {
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-  </body>
+</body>
 
-  </html>
+</html>
