@@ -8,8 +8,6 @@
 require_once "Recursos/Navegacao.php";
 require_once "conexao.php";
 
-
-
 //Variáveis
 if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1){
   $_SESSION['ano'] = null;
@@ -17,8 +15,8 @@ if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1){
   $_SESSION['ano'] = $_POST['ano'];
 }
 
-echo $_SESSION['ano'];
 ?>
+
 <!doctype html>
 <html lang="en">
 
