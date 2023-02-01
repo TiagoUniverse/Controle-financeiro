@@ -1,0 +1,5 @@
+Todas as variáveis ano existentes:
+
+Session['ano']
+
+SESSION['nomeMes']
