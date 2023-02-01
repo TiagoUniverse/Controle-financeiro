@@ -39,6 +39,13 @@
     </ul>
   </header>
 </div>
+<?php
+if ((isset($_POST['nomeMes']) && $_POST['ano'] ) || (isset($_POST['nomeMes']) && $_POST['ano'] == "" ) ){
+  ?>
+  <a href="home.php" class="botao-voltar">Voltar</a>
+  <?php
+}
+?>
 
 
 <footer>
