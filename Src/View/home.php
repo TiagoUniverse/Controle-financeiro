@@ -65,59 +65,103 @@ require_once "conexao.php";
            </form>
           </div>
           <div class="box">
-            <a href="mes.php">
-              Fevereiro
-            </a>
+           <form action="mes.php" method="post">
+              <?php
+              $NomeMes = "Fevereiro";
+              ?>
+              <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
+              <button type="submit"> <?php echo $NomeMes; ?> </button>
+           </form>
           </div>
           <div class="box">
-            <a href="mes.php">
-              Março
-            </a>
+           <form action="mes.php" method="post">
+              <?php
+              $NomeMes = "Março";
+              ?>
+              <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
+              <button type="submit"> <?php echo $NomeMes; ?> </button>
+           </form>
           </div>
           <div class="box">
-            <a href="mes.php">
-              Abril
-            </a>
+           <form action="mes.php" method="post">
+              <?php
+              $NomeMes = "Abril";
+              ?>
+              <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
+              <button type="submit"> <?php echo $NomeMes; ?> </button>
+           </form>
           </div>
           <div class="box">
-            <a href="mes.php">
-              Maio
-            </a>
+           <form action="mes.php" method="post">
+              <?php
+              $NomeMes = "Maio";
+              ?>
+              <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
+              <button type="submit"> <?php echo $NomeMes; ?> </button>
+           </form>
           </div>
           <div class="box">
-            <a href="mes.php">
-              Junho
-            </a>
+           <form action="mes.php" method="post">
+              <?php
+              $NomeMes = "Junho";
+              ?>
+              <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
+              <button type="submit"> <?php echo $NomeMes; ?> </button>
+           </form>
           </div>
           <div class="box">
-            <a href="mes.php">
-              Julho
-            </a>
+           <form action="mes.php" method="post">
+              <?php
+              $NomeMes = "Julho";
+              ?>
+              <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
+              <button type="submit"> <?php echo $NomeMes; ?> </button>
+           </form>
           </div>
           <div class="box">
-            <a href="mes.php">
-              Agosto
-            </a>
+           <form action="mes.php" method="post">
+              <?php
+              $NomeMes = "Agosto";
+              ?>
+              <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
+              <button type="submit"> <?php echo $NomeMes; ?> </button>
+           </form>
           </div>
           <div class="box">
-            <a href="mes.php">
-              Setembro
-            </a>
+           <form action="mes.php" method="post">
+              <?php
+              $NomeMes = "Setembro";
+              ?>
+              <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
+              <button type="submit"> <?php echo $NomeMes; ?> </button>
+           </form>
           </div>
           <div class="box">
-            <a href="mes.php">
-              Outubro
-            </a>
+           <form action="mes.php" method="post">
+              <?php
+              $NomeMes = "Outubro";
+              ?>
+              <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
+              <button type="submit"> <?php echo $NomeMes; ?> </button>
+           </form>
           </div>
           <div class="box">
-            <a href="mes.php">
-              Novembro
-            </a>
+           <form action="mes.php" method="post">
+              <?php
+              $NomeMes = "Novembro";
+              ?>
+              <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
+              <button type="submit"> <?php echo $NomeMes; ?> </button>
+           </form>
           </div>
           <div class="box">
-            <a href="mes.php">
-              Dezembro
-            </a>
+           <form action="mes.php" method="post">
+              <?php
+              $NomeMes = "Dezembro";
+              ?>
+              <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
+              <button type="submit"> <?php echo $NomeMes; ?> </button>
+           </form>
           </div>
       </div>
     </div>
