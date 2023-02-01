@@ -29,7 +29,7 @@ if (isset($_POST['ano']) != null) {
 
 <body>
   <form method="POST" action="home.php">
-    <div class="input-group mb-3" style="width: 8cm; margin-left:22cm;">
+    <div class="input-group mb-3 filtro" >
       <select class="form-control" name="ano">
         <?php
         for ($year = (int)date('Y'); 1900 <= $year; $year--) : ?>
@@ -40,7 +40,7 @@ if (isset($_POST['ano']) != null) {
   </form>
 
   <form method="POST" action="home.php">
-    <button type="submit" class="btn btn-secondary limparFiltro" style="margin-left: 0.3cm;">Limpar resultado</button>
+    <button type="submit" class="btn btn-secondary" style="margin-left: 0.3cm;">Limpar resultado</button>
   </form>
   </div>
 

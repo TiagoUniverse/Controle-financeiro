@@ -7,11 +7,7 @@
   }
 
   .filtro{
-    /* margin-left: 7cm; */
-  }
-
-  .limparFiltro{
-    /* margin-left: -20cm; */
+    width: 10cm; margin-left:22cm;
   }
 
   .botao-voltar{
@@ -25,10 +21,7 @@
 
   .filtro{
     margin-left: 0cm;
-  }
-
-  .limparFiltro{
-    margin-left: -1cm;
+    width: 9cm;
   }
 
 }
