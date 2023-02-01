@@ -9,7 +9,7 @@
       <?php
       if (isset($_POST['nomeMes']) && $_POST['ano']) {
       ?>
-        <span class="fs-4">Controle monetário: <?php echo $_POST['nomeMes']; ?> de <?php echo $_POST['ano']; ?>  </span>
+        <span class="fs-4">Controle monetário: <b> <?php echo $_POST['nomeMes']; ?> de <?php echo $_POST['ano']; ?>  </b> </span>
       <?php
       } else {
       ?>
