@@ -61,7 +61,8 @@ require_once "conexao.php";
               $NomeMes = "Janeiro";
               ?>
               <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-              <button type="submit"> <?php echo $NomeMes; ?> </button>
+              <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+              <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
            </form>
           </div>
           <div class="box">
@@ -70,7 +71,8 @@ require_once "conexao.php";
               $NomeMes = "Fevereiro";
               ?>
               <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-              <button type="submit"> <?php echo $NomeMes; ?> </button>
+              <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+              <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
            </form>
           </div>
           <div class="box">
@@ -79,7 +81,8 @@ require_once "conexao.php";
               $NomeMes = "Março";
               ?>
               <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-              <button type="submit"> <?php echo $NomeMes; ?> </button>
+              <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+              <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
            </form>
           </div>
           <div class="box">
@@ -88,7 +91,8 @@ require_once "conexao.php";
               $NomeMes = "Abril";
               ?>
               <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-              <button type="submit"> <?php echo $NomeMes; ?> </button>
+              <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+              <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
            </form>
           </div>
           <div class="box">
@@ -97,7 +101,8 @@ require_once "conexao.php";
               $NomeMes = "Maio";
               ?>
               <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-              <button type="submit"> <?php echo $NomeMes; ?> </button>
+              <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+              <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
            </form>
           </div>
           <div class="box">
@@ -106,7 +111,8 @@ require_once "conexao.php";
               $NomeMes = "Junho";
               ?>
               <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-              <button type="submit"> <?php echo $NomeMes; ?> </button>
+              <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+              <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
            </form>
           </div>
           <div class="box">
@@ -115,7 +121,8 @@ require_once "conexao.php";
               $NomeMes = "Julho";
               ?>
               <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-              <button type="submit"> <?php echo $NomeMes; ?> </button>
+              <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+              <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
            </form>
           </div>
           <div class="box">
@@ -124,7 +131,8 @@ require_once "conexao.php";
               $NomeMes = "Agosto";
               ?>
               <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-              <button type="submit"> <?php echo $NomeMes; ?> </button>
+              <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+              <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
            </form>
           </div>
           <div class="box">
@@ -133,7 +141,8 @@ require_once "conexao.php";
               $NomeMes = "Setembro";
               ?>
               <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-              <button type="submit"> <?php echo $NomeMes; ?> </button>
+              <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+              <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
            </form>
           </div>
           <div class="box">
@@ -142,7 +151,8 @@ require_once "conexao.php";
               $NomeMes = "Outubro";
               ?>
               <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-              <button type="submit"> <?php echo $NomeMes; ?> </button>
+              <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+              <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
            </form>
           </div>
           <div class="box">
@@ -151,7 +161,8 @@ require_once "conexao.php";
               $NomeMes = "Novembro";
               ?>
               <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-              <button type="submit"> <?php echo $NomeMes; ?> </button>
+              <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+              <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
            </form>
           </div>
           <div class="box">
@@ -160,7 +171,8 @@ require_once "conexao.php";
               $NomeMes = "Dezembro";
               ?>
               <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-              <button type="submit"> <?php echo $NomeMes; ?> </button>
+              <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+              <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
            </form>
           </div>
       </div>

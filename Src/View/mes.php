@@ -3,11 +3,15 @@
 /** 
  * Author: Tiago César da Silva Lopes
  * Description: Homepage
- * Date: 25/01/23
+ * Date: 01/02/23
  */
 
 require_once "Recursos/Navegacao.php";
 require_once "conexao.php";
+
+//Variáveis
+$nomeMes = $_POST['nomeMes'];
+$ano = $_POST['ano'];
 
 ?>
 <!doctype html>
@@ -27,7 +31,6 @@ require_once "conexao.php";
 
 
 <?php
-echo $_POST['nomeMes'];
 ?>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
