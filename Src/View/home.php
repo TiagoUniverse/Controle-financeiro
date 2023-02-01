@@ -54,9 +54,15 @@ require_once "conexao.php";
     <div class="container px-4 text-center">
       <h1><?php echo $_POST['ano']; ?> </h1>
       <div class="row gx-5">
-        <a>
+
           <div class="box">
-            <a href="mes.php">Janeiro</a>
+           <form action="mes.php" method="post">
+              <?php
+              $NomeMes = "Janeiro";
+              ?>
+              <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
+              <button type="submit"> <?php echo $NomeMes; ?> </button>
+           </form>
           </div>
           <div class="box">
             <a href="mes.php">
