@@ -1,5 +1,4 @@
 <?php
-
 /** 
  * Author: Tiago César da Silva Lopes
  * Description: Homepage
@@ -9,11 +8,16 @@
 require_once "Recursos/Navegacao.php";
 require_once "conexao.php";
 
+
+
 //Variáveis
-if (isset($_POST['ano']) != null) {
+if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1){
+  $_SESSION['ano'] = null;
+} else if (isset($_POST['ano']) != null) {
   $_SESSION['ano'] = $_POST['ano'];
 }
 
+echo $_SESSION['ano'];
 ?>
 <!doctype html>
 <html lang="en">
@@ -40,15 +44,16 @@ if (isset($_POST['ano']) != null) {
   </form>
 
   <form method="POST" action="home.php">
+    <input type="hidden" name="limpaFiltro" value="1">
     <button type="submit" class="btn btn-secondary" style="margin-left: 0.3cm;">Limpar resultado</button>
   </form>
   </div>
 
   <?php
-  if (isset($_POST['ano'])) {
+  if ($_SESSION['ano'] != null) {
   ?>
     <div class="container px-4 text-center">
-      <h1><?php echo $_POST['ano']; ?> </h1>
+      <h1><?php echo $_SESSION['ano']; ?> </h1>
       <div class="row gx-5">
 
         <div class="box">
@@ -57,7 +62,7 @@ if (isset($_POST['ano']) != null) {
             $NomeMes = "Janeiro";
             ?>
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-            <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+            <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
           </form>
         </div>
@@ -67,7 +72,7 @@ if (isset($_POST['ano']) != null) {
             $NomeMes = "Fevereiro";
             ?>
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-            <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+            <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
           </form>
         </div>
@@ -77,7 +82,7 @@ if (isset($_POST['ano']) != null) {
             $NomeMes = "Março";
             ?>
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-            <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+            <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
           </form>
         </div>
@@ -87,7 +92,7 @@ if (isset($_POST['ano']) != null) {
             $NomeMes = "Abril";
             ?>
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-            <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+            <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
           </form>
         </div>
@@ -97,7 +102,7 @@ if (isset($_POST['ano']) != null) {
             $NomeMes = "Maio";
             ?>
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-            <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+            <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
           </form>
         </div>
@@ -107,7 +112,7 @@ if (isset($_POST['ano']) != null) {
             $NomeMes = "Junho";
             ?>
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-            <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+            <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
           </form>
         </div>
@@ -117,7 +122,7 @@ if (isset($_POST['ano']) != null) {
             $NomeMes = "Julho";
             ?>
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-            <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+            <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
           </form>
         </div>
@@ -127,7 +132,7 @@ if (isset($_POST['ano']) != null) {
             $NomeMes = "Agosto";
             ?>
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-            <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+            <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
           </form>
         </div>
@@ -137,7 +142,7 @@ if (isset($_POST['ano']) != null) {
             $NomeMes = "Setembro";
             ?>
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-            <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+            <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
           </form>
         </div>
@@ -147,7 +152,7 @@ if (isset($_POST['ano']) != null) {
             $NomeMes = "Outubro";
             ?>
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-            <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+            <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
           </form>
         </div>
@@ -157,7 +162,7 @@ if (isset($_POST['ano']) != null) {
             $NomeMes = "Novembro";
             ?>
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-            <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+            <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
           </form>
         </div>
@@ -167,7 +172,7 @@ if (isset($_POST['ano']) != null) {
             $NomeMes = "Dezembro";
             ?>
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
-            <input type="hidden" value="<?php echo $_POST['ano']; ?>" name="ano">
+            <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
           </form>
         </div>
