@@ -6,6 +6,10 @@
  */
 
 require_once "conexao.php";
+
+//Atualizando session
+$_SESSION['nomeMes'] = null;
+
 require_once "Recursos/Navegacao.php";
 
 

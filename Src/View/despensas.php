@@ -6,8 +6,9 @@
  * Date: 01/02/23
  */
 
-require_once "Recursos/Navegacao.php";
 require_once "conexao.php";
+require_once "Recursos/Navegacao.php";
+
 
 echo $_SESSION['nomeMes'];
 
