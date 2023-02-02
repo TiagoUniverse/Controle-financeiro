@@ -12,11 +12,6 @@ require_once "Recursos/Navegacao.php";
 
 $consulta = $pdo->query("Select * from usuario");
 
-while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
-  echo "Nome: {$linha['nome']}   , email: {$linha['email']}            " ;
-}
-
-
 ?>
 
 <!doctype html>
@@ -50,6 +45,20 @@ while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
             </tr>
           </thead>
           <tbody>
+            <?php
+
+            while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+            ?>
+              <tr>
+                <th scope="row">1</th>
+                <td> <?php echo $linha['nome']; ?> </td>
+                <td> <?php echo $linha['email']; ?> </td>
+              </tr>
+            <?php
+            }
+
+
+            ?>
             <!-- <tr>
               <th scope="row">1</th>
               <td>Mark</td>

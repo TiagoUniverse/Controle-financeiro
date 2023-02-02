@@ -31,3 +31,6 @@ FOREIGN KEY (idStatus_despensa) REFERENCES status_despensas(id)
 
 
 );
+
+
+insert into usuario (nome, email, senha) values ('Tiago', 'tiagocesar68@gmail.com',  sha1('tiago123')    )
