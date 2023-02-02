@@ -9,9 +9,6 @@
 require_once "conexao.php";
 require_once "Recursos/Navegacao.php";
 
-
-echo $_SESSION['nomeMes'];
-
 ?>
 
 <!doctype html>
@@ -27,6 +24,56 @@ echo $_SESSION['nomeMes'];
 </head>
 
 <body>
+
+  <div class="px-4 py-5 my-5 text-center">
+    <img class="d-block mx-auto mb-4" src="../../Assets/img/dia 15.png" alt="" width="72" height="70">
+
+    <h1 class="display-5 fw-bold">Formulário</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">Por favor, digite um ano e mês válido na tela inicial.</p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Nª</th>
+              <th scope="col">Descrição</th>
+              <th scope="col">valor</th>
+              <th scope="col">Data</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td colspan="2">Larry the Bird</td>
+              <td>@twitter</td>
+            </tr> -->
+          </tbody>
+        </table>
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+
 
 
 
