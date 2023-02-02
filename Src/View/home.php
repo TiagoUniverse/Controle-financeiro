@@ -5,8 +5,9 @@
  * Date: 25/01/23
  */
 
-require_once "Recursos/Navegacao.php";
 require_once "conexao.php";
+require_once "Recursos/Navegacao.php";
+
 
 //Variáveis
 if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1){

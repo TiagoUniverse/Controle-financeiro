@@ -7,10 +7,9 @@
       </svg>
 
       <?php
-      //if ( $_SESSION['nomeMes'] != null && $_SESSION['ano'] != null  ) {
-      if (isset($_POST['nomeMes']) && $_POST['ano']) {
+      if (isset($_SESSION['nomeMes'])  && isset($_SESSION['ano']) ) {
       ?>
-        <span class="fs-4">Controle monetário: <b> <?php echo $_POST['nomeMes']; ?> de <?php echo $_POST['ano']; ?>  </b> </span>
+        <span class="fs-4">Controle monetário: <b> <?php echo $_SESSION['nomeMes']; ?> de <?php echo $_SESSION['ano']; ?>  </b> </span>
       <?php
       } else {
       ?>

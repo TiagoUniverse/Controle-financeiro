@@ -6,14 +6,14 @@
  * Date: 01/02/23
  */
 
-require_once "Recursos/Navegacao.php";
+
 require_once "conexao.php";
 
-//Variáveis
-$_SESSION['nomeMes'] = $_POST['nomeMes'];
+ //Variáveis
+ $_SESSION['nomeMes'] = $_POST['nomeMes'];
 
+require_once "Recursos/Navegacao.php";
 
-var_dump($_SESSION['nomeMes'] != null && $_SESSION['ano'] != null );
 ?>
 
 <!doctype html>
