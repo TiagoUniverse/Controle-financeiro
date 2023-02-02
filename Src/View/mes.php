@@ -10,6 +10,7 @@ require_once "conexao.php";
 
 //Variáveis
 $_SESSION['nomeMes'] = $_POST['nomeMes'];
+$status_mes = $_POST['statusMes'];
 
 require_once "Recursos/Navegacao.php";
 
@@ -54,10 +55,14 @@ require_once "Recursos/Navegacao.php";
         <p class="lead mb-4">Registre os gastos entre o dia 01 até o dia 19, que são os dias da entrada de salário da casa.</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <form action="despensas.php" method="post">
+            <input type="hidden" value="<?php echo $status_mes;  ?>" name="status_Mes" >
+            <input type="hidden" value="Quinzena 1" name="quinzena" >
             <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Registrar despensas</button>
           </form>
 
           <form action="despensas.php" method="post">
+            <input type="hidden" value="<?php echo $status_mes;  ?>" name="status_Mes" >
+            <input type="hidden" value="Quinzena 2" name="quinzena" >
             <button type="submit" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
           </form>
 

@@ -9,8 +9,18 @@
 require_once "conexao.php";
 require_once "Recursos/Navegacao.php";
 
+//Variáveis
+$status_Mes = $_POST['status_Mes'];
+$quinzena = $_POST['quinzena'];
+
+echo $status_Mes;
+
+echo $quinzena;
+
 
 $consulta = $pdo->query("Select * from usuario");
+
+
 
 ?>
 

@@ -64,6 +64,7 @@ if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1){
             <?php
             $NomeMes = "Janeiro";
             ?>
+            <input type="hidden" value="1" name="statusMes">
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
             <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
@@ -74,6 +75,7 @@ if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1){
             <?php
             $NomeMes = "Fevereiro";
             ?>
+            <input type="hidden" value="2" name="statusMes">
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
             <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
@@ -84,6 +86,7 @@ if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1){
             <?php
             $NomeMes = "Março";
             ?>
+            <input type="hidden" value="3" name="statusMes">
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
             <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
@@ -94,6 +97,7 @@ if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1){
             <?php
             $NomeMes = "Abril";
             ?>
+            <input type="hidden" value="4" name="statusMes">
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
             <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
@@ -104,6 +108,7 @@ if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1){
             <?php
             $NomeMes = "Maio";
             ?>
+            <input type="hidden" value="5" name="statusMes">
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
             <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
@@ -114,6 +119,7 @@ if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1){
             <?php
             $NomeMes = "Junho";
             ?>
+            <input type="hidden" value="6" name="statusMes">
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
             <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
@@ -124,6 +130,7 @@ if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1){
             <?php
             $NomeMes = "Julho";
             ?>
+            <input type="hidden" value="7" name="statusMes">
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
             <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
@@ -134,6 +141,7 @@ if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1){
             <?php
             $NomeMes = "Agosto";
             ?>
+            <input type="hidden" value="8" name="statusMes">
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
             <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
@@ -144,6 +152,7 @@ if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1){
             <?php
             $NomeMes = "Setembro";
             ?>
+            <input type="hidden" value="9" name="statusMes">
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
             <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
@@ -154,6 +163,7 @@ if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1){
             <?php
             $NomeMes = "Outubro";
             ?>
+            <input type="hidden" value="10" name="statusMes">
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
             <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
@@ -164,6 +174,7 @@ if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1){
             <?php
             $NomeMes = "Novembro";
             ?>
+            <input type="hidden" value="11" name="statusMes">
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
             <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
@@ -174,6 +185,7 @@ if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1){
             <?php
             $NomeMes = "Dezembro";
             ?>
+            <input type="hidden" value="12" name="statusMes">
             <input type="hidden" value="<?php echo $NomeMes; ?>" name="nomeMes">
             <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
