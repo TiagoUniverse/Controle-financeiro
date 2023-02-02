@@ -63,7 +63,7 @@ require_once "Recursos/Navegacao.php";
           <form action="despensas.php" method="post">
             <input type="hidden" value="<?php echo $status_mes;  ?>" name="status_Mes" >
             <input type="hidden" value="Quinzena 2" name="quinzena" >
-            <button type="submit" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+            <button type="submit" class="btn btn-outline-secondary btn-lg px-4">Registrar poupanças</button>
           </form>
 
 
@@ -77,8 +77,8 @@ require_once "Recursos/Navegacao.php";
       <div class="col-lg-6 mx-auto">
         <p class="lead mb-4">Registre os gastos entre o dia 20 até dia 04 do próximo mês, antes de começar uma nova quinzena.</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-          <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
-          <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+          <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Registrar despensas</button>
+          <button type="button" class="btn btn-outline-secondary btn-lg px-4">Registrar poupanças</button>
         </div>
       </div>
     </div>

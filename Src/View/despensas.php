@@ -3,7 +3,7 @@
 /** 
  * Author: Tiago César da Silva Lopes
  * Description: Register of all money spent
- * Date: 01/02/23
+ * Date: 02/02/23
  */
 
 require_once "conexao.php";
@@ -13,24 +13,12 @@ require_once "Recursos/Navegacao.php";
 $status_Mes = $_POST['status_Mes'];
 $quinzena = $_POST['quinzena'];
 
-if (isset($_POST['idStatus_despensa'])){
-  $idStatus_despensa = $_POST['idStatus_despensa'];
-}
-
-//Status_despensa's section
-$consultaDespensas = $pdo->query("Select * from Status_despensas where id = 3 or id = 4  ");
-
-$listarStatusDespensa = null;
-while ($linha = $consultaDespensas->fetch(PDO::FETCH_ASSOC)) {
-  $listarStatusDespensa .= "<option value='{$linha['id']}'>{$linha['nome']}</option>";
-}
-
-
 // $consulta = $pdo->query("Select * from Despensas where quinzena = '{$quinzena}' and idStatus_mes = '{$status_Mes}' and idStatus_despensa = '{$idStatus_despensa}'             ");
 
-$consulta = $pdo->query("Select * from Despensas where quinzena = '{$quinzena}' and idStatus_mes = '{$status_Mes}' and idStatus_despensa = '{$idStatus_despensa}'             ");
+$consulta = $pdo->query("Select * from despensas where status = 'ATIVO' and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$status_Mes}' and quinzena = '{$quinzena}' 
+and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
 
-
+var_dump($consulta);
 
 
 ?>
@@ -49,16 +37,8 @@ $consulta = $pdo->query("Select * from Despensas where quinzena = '{$quinzena}' 
 
 <body>
 
-  <select class="form-select" name="idStatus_despensa" id="validationCustom04" required>
-    <option selected disabled value="">Selecione uma opção</option>
-    <?= $listarStatusDespensa; ?>
-  </select>
-
-  <div class="invalid-feedback">
-    Por favor, escolha um nível de acesso.
-  </div>
-
   <h1 class="display-5 fw-bold" style="text-align: center;">Despensas: gastos pessoais</h1>
+  <h3  style="text-align: center;">Quando estiver pronto, clique no botão de avançar para registrar as despensas da casa</h3>
 
   <div class="px-4 py-5 my-5 text-center">
     <img class="d-block mx-auto mb-4" src="../../Assets/img/dia 15.png" alt="" width="72" height="70">

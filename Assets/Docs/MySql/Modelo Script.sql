@@ -45,6 +45,8 @@ id 			INT  NOT NULL PRIMARY KEY AUTO_INCREMENT,
 descricao		VARCHAR(300) 	NOT NULL,
 valor	float	NOT NULL, 
 data 	date 	 NULL,
+/* Ano vai ser usado pelo sistema  */
+ano     VARCHAR(300) NOT NULL,
 quinzena VARCHAR(300) NOT NULL,
 status 	VARCHAR(300) 	NOT NULL DEFAULT 'ATIVO' ,
 created	DATETIME NOT NULL DEFAULT NOW(),
@@ -62,4 +64,7 @@ FOREIGN KEY (idStatus_despensa) REFERENCES status_despensas(id)
 insert into usuario (nome, email, senha) values ('Tiago', 'tiagocesar68@gmail.com',  sha1('tiago123')    ) ;
 
 
-insert into status_mes ( nome ) values (' Janeiro ' )
+insert into status_mes ( nome ) values (' Janeiro ' );
+
+/* Busca de despensa de gasto pessoais da quinzena 1 de janeiro/2023  */
+Select * from despensas where status = "ATIVO" and ano = "2023"  and IdStatus_mes = "1" and quinzena = "Quinzena 01" and ( idStatus_despensa = 3 OR idstatus_despensa = 4 );
