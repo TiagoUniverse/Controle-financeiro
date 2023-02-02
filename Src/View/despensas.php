@@ -9,6 +9,14 @@
 require_once "conexao.php";
 require_once "Recursos/Navegacao.php";
 
+
+$consulta = $pdo->query("Select * from usuario");
+
+while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
+  echo "Nome: {$linha['nome']}   , email: {$linha['email']}            " ;
+}
+
+
 ?>
 
 <!doctype html>
