@@ -13,13 +13,13 @@ require_once "Recursos/Navegacao.php";
 $status_Mes = $_POST['status_Mes'];
 $quinzena = $_POST['quinzena'];
 
-echo $status_Mes;
-
-echo $quinzena;
 
 
-$consulta = $pdo->query("Select * from usuario");
+$consultaDespensas = $pdo->query("Select * from Status_despensas");
 
+while ($linha = $consultaDespensas->fetch( PDO::FETCH_ASSOC)){
+  echo $linha['nome'] . "<br>";
+}
 
 
 ?>

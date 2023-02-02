@@ -19,6 +19,20 @@ created	DATETIME NOT NULL DEFAULT NOW()
 
 );
 
+/*  INSERT INTO */
+insert into status_despensas (nome, descricao) values ('Despensas: Entrada da casa' , '');
+insert into status_despensas (nome, descricao) values ('Despensas: Saida da casa' , '');
+
+insert into status_despensas (nome, descricao) values ('Despensas: Entrada dos gastos pessoais' , '');
+insert into status_despensas (nome, descricao) values ('Despensas: Saída dos gastos pessoais' , '');
+
+insert into status_despensas (nome, descricao) values ('Poupanca: Entrada da casa' , '');
+insert into status_despensas (nome, descricao) values ('Poupanca: Saida da casa' , '');
+
+insert into status_despensas (nome, descricao) values ('Despensas: Entrada dos gastos pessoais' , '');
+insert into status_despensas (nome, descricao) values ('Despensas: Saída dos gastos pessoais' , '');
+
+
 Create table Status_mes (
 id 			INT  NOT NULL PRIMARY KEY AUTO_INCREMENT,
 nome		VARCHAR(300) 	NOT NULL,
