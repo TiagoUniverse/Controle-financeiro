@@ -3,3 +3,7 @@ Todas as variáveis ano existentes:
 Session['ano']
 
 SESSION['nomeMes']
+
+Session['status_Mes']
+
+Session['quinzena']

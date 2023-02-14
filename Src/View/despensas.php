@@ -10,16 +10,24 @@ require_once "conexao.php";
 require_once "Recursos/Navegacao.php";
 
 //Variáveis
-$status_Mes = $_POST['status_Mes'];
-$quinzena = $_POST['quinzena'];
+if (isset($_POST['quinzena'])){ 
+  $_SESSION['quinzena'] = $_POST['quinzena'];
+}
 
 
-// $consulta = $pdo->query("Select * from Despensas where quinzena = '{$quinzena}' and idStatus_mes = '{$status_Mes}' and idStatus_despensa = '{$idStatus_despensa}'             ");
+$quinzena = $_SESSION['quinzena'];
 
-$consulta = $pdo->query("Select * from despensas where status = 'ATIVO' and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$status_Mes}' and quinzena = '{$quinzena}' 
+echo $_SESSION['status_mes'];
+
+$adicionando_registro = false;
+
+
+// $consulta = $pdo->query("Select * from Despensas where quinzena = '{$quinzena}' and idStatus_mes = '{$_SESSION['status_mes']}' and idStatus_despensa = '{$idStatus_despensa}'             ");
+
+$consulta = $pdo->query("Select * from despensas where status = 'ATIVO' and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$_SESSION['status_mes']}' and quinzena = '{$quinzena}' 
 and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
 
-// var_dump($consulta);
+var_dump($consulta);
 
 ?>
 
@@ -38,12 +46,12 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
 <body>
 
   <form action="mes.php" method="post">
-    <input type="hidden" name="statusMes" value="<?php echo $status_Mes; ?>">
+    <input type="hidden" name="statusMes" value="<?php echo $_SESSION['status_mes']; ?>">
     <button class="btn btn-link">Voltar</button>
   </form>
 
   <h1 class="display-5 fw-bold" style="text-align: center;">Despensas: gastos pessoais</h1>
-  <h3  style="text-align: center;">Quando estiver pronto, clique no botão de avançar para registrar as despensas da casa</h3>
+  <h3 style="text-align: center;">Quando estiver pronto, clique no botão de avançar para registrar as despensas da casa</h3>
 
   <div class="px-4 py-5 my-5 text-center">
     <img class="d-block mx-auto mb-4" src="../../Assets/img/dia 15.png" alt="" width="72" height="70">
@@ -96,17 +104,17 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
           </tbody>
         </table>
 
-
-
-
-
-
-
-
-
       </div>
     </div>
   </div>
+
+  <div class="px-4 py-5 my-5 text-center">
+    <form action="despensas.php" method="post">
+      <button>Adicionar um novo registro</button>
+    </form>
+
+  </div>
+
 
 
 
@@ -173,6 +181,9 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
     </div>
   </div>
 
+  <div class="px-4 py-5 my-5 text-center">
+    <button>Adicionar um novo registro</button>
+  </div>
 
 
 
