@@ -10,24 +10,24 @@ require_once "conexao.php";
 require_once "Recursos/Navegacao.php";
 
 //Variáveis
-if (isset($_POST['quinzena'])){ 
+if (isset($_POST['quinzena'])) {
   $_SESSION['quinzena'] = $_POST['quinzena'];
 }
 
+if (isset($_POST['adicionando_registro'])) {
+  $adicionando_registro = $_POST['adicionando_registro'];
+} else {
+  $adicionando_registro = null;
+}
 
-$quinzena = $_SESSION['quinzena'];
+echo $adicionando_registro;
 
-echo $_SESSION['status_mes'];
+// $consulta = $pdo->query("Select * from Despensas where quinzena = '{$quinzena}' and idstatusMes = '{$_SESSION['statusMes']}' and idStatus_despensa = '{$idStatus_despensa}'             ");
 
-$adicionando_registro = false;
-
-
-// $consulta = $pdo->query("Select * from Despensas where quinzena = '{$quinzena}' and idStatus_mes = '{$_SESSION['status_mes']}' and idStatus_despensa = '{$idStatus_despensa}'             ");
-
-$consulta = $pdo->query("Select * from despensas where status = 'ATIVO' and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$_SESSION['status_mes']}' and quinzena = '{$quinzena}' 
+$consulta = $pdo->query("Select * from despensas where status = 'ATIVO' and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$_SESSION['statusMes']}' and quinzena = '{$_SESSION['quinzena']}' 
 and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
 
-var_dump($consulta);
+// var_dump($consulta);
 
 ?>
 
@@ -46,7 +46,7 @@ var_dump($consulta);
 <body>
 
   <form action="mes.php" method="post">
-    <input type="hidden" name="statusMes" value="<?php echo $_SESSION['status_mes']; ?>">
+    <input type="hidden" name="statusMes" value="<?php echo $_SESSION['statusMes']; ?>">
     <button class="btn btn-link">Voltar</button>
   </form>
 
@@ -109,9 +109,18 @@ var_dump($consulta);
   </div>
 
   <div class="px-4 py-5 my-5 text-center">
-    <form action="despensas.php" method="post">
-      <button>Adicionar um novo registro</button>
-    </form>
+    <?php
+    if ($adicionando_registro == null) {
+    ?>
+      <form action="despensas.php" method="post">
+        <input type="hidden" value="REGISTRANDO ENTRADA" name="adicionando_registro">
+        <button>Adicionar um novo registro</button>
+      </form>
+    <?php
+    }
+    ?>
+
+
 
   </div>
 
@@ -182,9 +191,16 @@ var_dump($consulta);
   </div>
 
   <div class="px-4 py-5 my-5 text-center">
-    <button>Adicionar um novo registro</button>
-  </div>
-
+    <?php
+    if ($adicionando_registro == null) {
+    ?>
+      <form action="despensas.php" method="post">
+        <input type="hidden" value="REGISTRANDO ENTRADA" name="adicionando_registro">
+        <button>Adicionar um novo registro</button>
+      </form>
+    <?php
+    }
+    ?>
 
 
 

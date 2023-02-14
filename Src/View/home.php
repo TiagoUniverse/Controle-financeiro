@@ -9,7 +9,7 @@ require_once "conexao.php";
 
 //Atualizando session
 $_SESSION['nomeMes'] = null;
-$_SESSION['status_mes'] = null;
+$_SESSION['statusMes'] = null;
 $_SESSION['quinzena'] = null;
 
 require_once "Recursos/Navegacao.php";
