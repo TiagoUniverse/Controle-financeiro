@@ -89,13 +89,13 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
                 <tr>
                   <th scope="col">Nª</th>
                   <th scope="col">
-                    <input type="text">
+                    <input type="text" name="descricao">
                   </th>
                   <th scope="col">
-                    <input type="text">
+                    <input  type="number" min="1" step="any" name="valor">
                   </th>
                   <th scope="col">
-                    <input type="text">
+                    <input type="date" name="data">
                   </th>
                   <button>Registrar</button>
                 </tr>
