@@ -82,6 +82,29 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
             <?php
             }
 
+            if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO ENTRADA") {
+            ?>
+              <form method="post">
+                <input type="hidden" name= "adicionando_registro" value=''>
+                <tr>
+                  <th scope="col">Nª</th>
+                  <th scope="col">
+                    <input type="text">
+                  </th>
+                  <th scope="col">
+                    <input type="text">
+                  </th>
+                  <th scope="col">
+                    <input type="text">
+                  </th>
+                  <button>Registrar</button>
+                </tr>
+              </form>
+
+
+            <?php
+            }
+
 
             ?>
             <!-- <tr>
@@ -102,6 +125,7 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
               <td>@twitter</td>
             </tr> -->
           </tbody>
+
         </table>
 
       </div>
@@ -116,6 +140,25 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
         <input type="hidden" value="REGISTRANDO ENTRADA" name="adicionando_registro">
         <button>Adicionar um novo registro</button>
       </form>
+    <?php
+    }
+
+    if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO ENTRADA") {
+    ?>
+      <tr>
+        <th scope="col">Nª</th>
+        <th scope="col">
+          <input type="text">
+        </th>
+        <th scope="col">
+          <input type="text">
+        </th>
+        <th scope="col">
+          <input type="text">
+        </th>
+        <button>Registrar</button>
+      </tr>
+
     <?php
     }
     ?>
@@ -208,7 +251,7 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
 
 
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 
 </html>
