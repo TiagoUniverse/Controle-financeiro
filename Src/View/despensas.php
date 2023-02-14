@@ -13,13 +13,13 @@ require_once "Recursos/Navegacao.php";
 $status_Mes = $_POST['status_Mes'];
 $quinzena = $_POST['quinzena'];
 
+
 // $consulta = $pdo->query("Select * from Despensas where quinzena = '{$quinzena}' and idStatus_mes = '{$status_Mes}' and idStatus_despensa = '{$idStatus_despensa}'             ");
 
 $consulta = $pdo->query("Select * from despensas where status = 'ATIVO' and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$status_Mes}' and quinzena = '{$quinzena}' 
 and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
 
-var_dump($consulta);
-
+// var_dump($consulta);
 
 ?>
 
@@ -36,6 +36,11 @@ var_dump($consulta);
 </head>
 
 <body>
+
+  <form action="mes.php" method="post">
+    <input type="hidden" name="statusMes" value="<?php echo $status_Mes; ?>">
+    <button class="btn btn-link">Voltar</button>
+  </form>
 
   <h1 class="display-5 fw-bold" style="text-align: center;">Despensas: gastos pessoais</h1>
   <h3  style="text-align: center;">Quando estiver pronto, clique no botão de avançar para registrar as despensas da casa</h3>

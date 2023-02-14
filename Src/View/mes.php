@@ -9,7 +9,11 @@
 require_once "conexao.php";
 
 //Variáveis
-$_SESSION['nomeMes'] = $_POST['nomeMes'];
+
+if (isset($_POST['nomeMes'])){ 
+  $_SESSION['nomeMes'] = $_POST['nomeMes'];
+}
+
 $status_mes = $_POST['statusMes'];
 
 require_once "Recursos/Navegacao.php";
