@@ -17,7 +17,7 @@ class Despensas_repositorio
     {
         try {
         
-echo $idStatus_despensa;
+        // echo $idStatus_despensa;
 
         require_once "../view/conexao.php";
         // $sql = "Insert into clientes (descricao, valor, data, ano, quinzena, idstatus_Mes, idStatus_Despensa)
@@ -39,9 +39,9 @@ echo $idStatus_despensa;
         echo "funcionou!!";
 
 
-    } catch(PDOException $e) {
-        echo 'Error: ' . $e->getMessage();
-    }
+        } catch(PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
 
     }
 
@@ -60,10 +60,25 @@ echo $idStatus_despensa;
         echo "funcionou!!";
 
 
-    } catch(PDOException $e) {
-        echo 'Error: ' . $e->getMessage();
+        } catch(PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+
     }
 
+
+    public function consultarRegistro($descricao, $valor, $dataDespensa ,$pdo ){
+        $consulta = $pdo->query("SELECT * FROM despensas WHERE descricao = '{$descricao}' and valor = '{$valor}' and dataDespensa = '{$dataDespensa}'   ;");
+
+
+        while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+            if ($descricao = $linha['descricao']){
+                return true;
+            }
+        }
+
+        return false;
+    
     }
 
 }

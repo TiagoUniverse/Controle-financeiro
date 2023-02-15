@@ -74,9 +74,15 @@ echo $adicionando_registro;
 if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO"){
   // $Despensas_repositorio->cadastro_StatusDespensas("Tiago" , $pdo);
   
+  $retorno = $Despensas_repositorio->consultarRegistro($descricao, $valor, $data , $pdo);
   
+  if ($retorno == false){
+
+
+
   $Despensas_repositorio->cadastro_entrada($descricao, $valor, $data , $_SESSION['ano'], $_SESSION['quinzena'] , $_SESSION['statusMes']  , $statusDespensa , $pdo);
-  $adicionando_registro = "";
+  $adicionando_registro = null;
+  }
 }
 
 // $consulta = $pdo->query("Select * from Despensas where quinzena = '{$quinzena}' and idstatusMes = '{$_SESSION['statusMes']}' and idStatus_despensa = '{$idStatus_despensa}'             ");
@@ -133,8 +139,9 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
             ?>
               <tr>
                 <th scope="row">1</th>
-                <td> <?php echo $linha['nome']; ?> </td>
-                <td> <?php echo $linha['email']; ?> </td>
+                <td> <?php echo $linha['id']; ?> </td>
+                <td> <?php echo $linha['descricao']; ?> </td>
+                <td> <?php echo $linha['valor']; ?> </td>
               </tr>
             <?php
             }
