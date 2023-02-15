@@ -9,7 +9,23 @@
 require_once "conexao.php";
 require_once "Recursos/Navegacao.php";
 
-//Variáveis
+
+/*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+* │                                Despensas's section                                                            │
+* └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/
+
+require_once "../Model/Despensas_repositorio.php";
+use model\Despensas_repositorio;
+
+$Despensas_repositorio = new Despensas_repositorio();
+
+
+/*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+* │                                Variables                                                                      │
+* └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/
+
 if (isset($_POST['quinzena'])) {
   $_SESSION['quinzena'] = $_POST['quinzena'];
 }
@@ -21,6 +37,17 @@ if (isset($_POST['adicionando_registro'])) {
 }
 
 echo $adicionando_registro;
+
+
+/**
+ * Salvando registros no BD
+ * Funcionamento: Após o usuário enviar os dados, o sistema irá salvá-los no BD
+ * Data: 15/02/23
+ */
+if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO"){
+  $Despensas_repositorio->teste();
+  // $adicionando_registro = "";
+}
 
 // $consulta = $pdo->query("Select * from Despensas where quinzena = '{$quinzena}' and idstatusMes = '{$_SESSION['statusMes']}' and idStatus_despensa = '{$idStatus_despensa}'             ");
 
@@ -85,7 +112,7 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
             if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO ENTRADA") {
             ?>
               <form method="post">
-                <input type="hidden" name= "adicionando_registro" value=''>
+                <input type="hidden" name= "adicionando_registro" value='SALVANDO REGISTRO'>
                 <tr>
                   <th scope="col">Nª</th>
                   <th scope="col">
