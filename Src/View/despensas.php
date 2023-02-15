@@ -9,7 +9,6 @@
 require_once "conexao.php";
 require_once "Recursos/Navegacao.php";
 
-
 /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 * │                                Despensas's section                                                            │
 * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
@@ -36,16 +35,47 @@ if (isset($_POST['adicionando_registro'])) {
   $adicionando_registro = null;
 }
 
+if (isset($_POST['descricao'])) {
+  $descricao = $_POST['descricao'];
+} else {
+  $descricao = null;
+}
+
+if (isset($_POST['valor'])) {
+  $valor = $_POST['valor'];
+} else {
+  $valor = null;
+}
+
+if (isset($_POST['data'])) {
+  $data = $_POST['data'];
+} else {
+  $data = null;
+}
+
+
+$statusDespensa = $_POST['statusDespensa'];
+if (isset($_POST['idStatus_despensa'])) {
+  $idStatus_despensa = $_POST['idStatus_despensa'];
+} else {
+  $idStatus_despensa = null;
+}
+
+
+
 echo $adicionando_registro;
 
 
-/**
- * Salvando registros no BD
- * Funcionamento: Após o usuário enviar os dados, o sistema irá salvá-los no BD
- * Data: 15/02/23
- */
+/*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+* │                                Conexão com BD                                                                 │
+* └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/
+
 if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO"){
-  $Despensas_repositorio->teste();
+  $Despensas_repositorio->cadastro_StatusDespensas("Tiago" , $pdo);
+  
+  
+  // $Despensas_repositorio->cadastro_entrada($descricao, $valor, $data , $_SESSION['ano'], $_SESSION['quinzena'] , $_SESSION['statusMes']  , $statusDespensa , $pdo);
   // $adicionando_registro = "";
 }
 
@@ -113,6 +143,7 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
             ?>
               <form method="post">
                 <input type="hidden" name= "adicionando_registro" value='SALVANDO REGISTRO'>
+                <input type="hidden" name= "statusDespensa" value='3'>
                 <tr>
                   <th scope="col">Nª</th>
                   <th scope="col">
