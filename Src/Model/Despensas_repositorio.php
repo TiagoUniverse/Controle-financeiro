@@ -17,21 +17,23 @@ class Despensas_repositorio
     {
         try {
         
+echo $idStatus_despensa;
+
         require_once "../view/conexao.php";
         // $sql = "Insert into clientes (descricao, valor, data, ano, quinzena, idstatus_Mes, idStatus_Despensa)
         //         Values ({$descricao}, {$valor}, {$data}, {$ano}, {$quinzena}, {$idstatus_Mes}, {$idStatus_despensa})";
 
-        $stmt =  $pdo->prepare('INSERT INTO despensas (descricao, valor, data, ano, quinzena, idstatus_Mes, idStatus_despensa)
-        VALUES (:descricao , :valor , :data , :ano , :quinzena , :idstatus_Mes , :idStatus_despensa');
+        $stmt =  $pdo->prepare('INSERT INTO despensas (descricao, valor, dataDespensa, ano, quinzena, idstatus_Mes, idStatus_despensa)
+        VALUES (:descricao , :valor , :dataDespensa , :ano , :quinzena , :idstatus_Mes , :statusDespensa )  ');
         
         $stmt->execute(array(
             ':descricao' => $descricao ,
             ':valor' => $valor ,
-            ':data' => $data ,
+            ':dataDespensa' => $data ,
             ':ano' => $ano ,
             ':quinzena' => $quinzena ,
             ':idstatus_Mes' => $idstatus_Mes ,
-            ':idStatus_despensa' => $idStatus_despensa
+            ':statusDespensa' => '3'
         ));
 
         echo "funcionou!!";

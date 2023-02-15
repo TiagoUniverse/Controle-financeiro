@@ -44,7 +44,7 @@ Create table Despensas (
 id 			INT  NOT NULL PRIMARY KEY AUTO_INCREMENT,
 descricao		VARCHAR(300) 	NOT NULL,
 valor	float	NOT NULL, 
-data 	date 	 NULL,
+dataDespensa 	date 	 NULL,
 /* Ano vai ser usado pelo sistema  */
 ano     VARCHAR(300) NOT NULL,
 quinzena VARCHAR(300) NOT NULL,
