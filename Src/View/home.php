@@ -14,13 +14,19 @@ $_SESSION['quinzena'] = null;
 
 require_once "Recursos/Navegacao.php";
 
-
 //Variáveis
+
+if (!isset($_POST['limpaFiltro'])){
+  $_SESSION['ano'] = null;
+}
+
 if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1){
   $_SESSION['ano'] = null;
 } else if (isset($_POST['ano']) != null) {
   $_SESSION['ano'] = $_POST['ano'];
 }
+
+
 
 ?>
 
