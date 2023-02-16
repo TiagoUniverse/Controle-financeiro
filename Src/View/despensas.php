@@ -207,32 +207,44 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )  Order By dataDespensa   
                     <td> <a href=""><img src="../../Assets//Icons//pencil.png" class="icon_exclusao"> </a> </td>
                     <td>
 
-                       <a type="button" data-bs-target="#exampleModal" data-bs-toggle="modal">
-                        <img src="../../Assets//Icons//x-mark-xxl.png" class="icon_exclusao"> 
-                       </a> 
+                      <a type="button" data-bs-target="#exampleModal" data-bs-toggle="modal">
+                        <img src="../../Assets//Icons//x-mark-xxl.png" class="icon_exclusao">
+                      </a>
 
                       <!-- Modal -->
-                      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                              ...
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-primary">Save changes</button>
+                      <form method="post">
+                        <input type="hidden" name="adicionando_registro" value='DELETANDO REGISTRO'>
+                        <input type="hidden" value="<?php echo $linha['descricao'] ?>" name="descricao">
+                        <input type="hidden" value="<?php echo $linha['valor'] ?>" name="valor">
+                        <input type="hidden" value="<?php echo $linha['dataDespensa'] ?>" name="dataDespensa">
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Exclusão</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                Deseja mesmo excluir este registro? Por favor, confirme com as informações abaixo que deseja excluir: <br>
+                                Descrição: '<?php echo $contador ?>' <br>
+                                Descrição: '<?php echo $linha['descricao'] ?>' <br>
+                                Valor: '<?php echo $linha['valor'] ?>' <br>
+                                Data: '<?php echo $linha['dataDespensa'] ?>'
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                <button type="submit" class="btn btn-danger">Excluir</button>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
 
-                      </td>
-                   
-                      
+                      </form>
+
+                    </td>
+
+
                   </tr>
                 <?php
                   $contador++;
