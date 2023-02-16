@@ -82,4 +82,23 @@ class Despensas_repositorio
     
     }
 
+
+    public function excluir_registro($descricao, $valor, $data, $ano, $quinzena, $idstatus_Mes, $idStatus_despensa , $pdo)
+    {
+        require_once "../view/conexao.php";
+
+        try {
+            $stmt = $pdo->prepare('DELETE FROM despensas WHERE id = :id');
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+          
+            echo $stmt->rowCount();
+          } catch(PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+          }
+
+
+
+    }
+
 }
