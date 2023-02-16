@@ -177,7 +177,7 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
         <img class="d-block mx-auto mb-4" src="../../Assets/img/dia 15.png" alt="" width="72" height="70">
 
         <h1 class="display-5 fw-bold">Entrada</h1>
-        <div class="col-lg-6 mx-auto" style="background-color:red">
+        <div class="col-lg-6 mx-auto" style="background-color:#c79797">
           <p class="lead mb-4">Por favor, digite um ano e mês válido na tela inicial.</p>
           <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
             <table class="table">
@@ -254,9 +254,26 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
           </div>
           <?php
           if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO ENTRADA") {
-            ?>
-          <button>Registrar</button>
-          </form>
+          ?>
+
+            <div class="row g-0 text-center">
+              <div class="col-sm-6 col-md-6">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+                </form>
+              </div>
+              <div class="col-6 col-md-6">
+                <form action="despensas.php" method="post">
+                  <input type="hidden" value="" name="adicionando_registro">
+                  <button type="submit" class="btn btn-secondary">Cancelar</button>
+                </form>
+              </div>
+            </div>
+
+
+
+
+
+
           <?php
           }
 
@@ -264,12 +281,12 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
           ?>
             <form action="despensas.php" method="post">
               <input type="hidden" value="REGISTRANDO ENTRADA" name="adicionando_registro">
-              <button>Adicionar um novo registro</button>
+              <button type="submit" class="btn btn-primary">Adicionar um novo registro</button>
             </form>
           <?php
           }
 
-         
+
           ?>
 
 
