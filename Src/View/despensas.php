@@ -188,6 +188,8 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )  Order By dataDespensa   
                   <th scope="col">Descrição</th>
                   <th scope="col">valor</th>
                   <th scope="col">Data</th>
+                  <th scope="col">Alteração</th>
+                  <th scope="col">Exclusão</th>
                 </tr>
               </thead>
               <tbody>
@@ -202,6 +204,8 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )  Order By dataDespensa   
                     <td> <?php echo $linha['descricao']; ?> </td>
                     <td> <?php echo "R$" . $linha['valor']; ?> </td>
                     <td> <?php echo $linha['dataDespensa']; ?> </td>
+                    <td> <img src="../../Assets//Icons//pencil.png" class="icon_exclusao"> </td>
+                    <td> <img src="../../Assets//Icons//x-mark-xxl.png" class="icon_exclusao"> </td>
                   </tr>
                 <?php
                   $contador++;
