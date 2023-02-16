@@ -147,7 +147,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
 
   $consulta = $pdo->query("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano, quinzena from despensas where status = 'ATIVO' 
 and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$_SESSION['statusMes']}' and quinzena = '{$_SESSION['quinzena']}' 
-and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
+and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )  Order By dataDespensa        ");
 
     ?>
 
