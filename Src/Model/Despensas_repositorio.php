@@ -69,10 +69,11 @@ class Despensas_repositorio
 
     public function consultarRegistro($descricao, $valor, $dataDespensa ,$pdo ){
         $consulta = $pdo->query("SELECT * FROM despensas WHERE descricao = '{$descricao}' and valor = '{$valor}' and dataDespensa = '{$dataDespensa}'   ;");
+        
 
-
-        while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-            if ($descricao = $linha['descricao']){
+        while ($linha = $consulta->fetch(\PDO::FETCH_ASSOC)) {
+            if ($descricao = $linha['descricao'] && $valor = $linha['valor'] && $dataDespensa = $linha['dataDespensa']){
+                // ECHO "tá igual";
                 return true;
             }
         }
