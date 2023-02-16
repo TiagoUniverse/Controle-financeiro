@@ -130,18 +130,18 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
 
   // Mensagem do resultado
   if ($mensagemVermelha) {
-  ?>
+?>
     <div class="alert alert-danger" role="alert">
-  <?php
+    <?php
   } else {
-  ?>
-    <div class="alert alert-success" role="alert">
-  <?php
-  }
+    ?>
+      <div class="alert alert-success" role="alert">
+      <?php
+    }
     echo $mensagem;
-  ?>
-    </div>
-  <?php
+      ?>
+      </div>
+    <?php
   }
 
 
@@ -177,10 +177,10 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
         <img class="d-block mx-auto mb-4" src="../../Assets/img/dia 15.png" alt="" width="72" height="70">
 
         <h1 class="display-5 fw-bold">Entrada</h1>
-        <div class="col-lg-6 mx-auto">
+        <div class="col-lg-6 mx-auto" style="background-color:red">
           <p class="lead mb-4">Por favor, digite um ano e mês válido na tela inicial.</p>
-          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <table class="table">
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" >
+            <table class="table" >
               <thead>
                 <tr>
                   <th scope="col">Nª</th>
@@ -222,14 +222,12 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
                       <th scope="col">
                         <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'>
                       </th>
-                      <button>Registrar</button>
+                      
                     </tr>
-                  </form>
 
 
                 <?php
                 }
-
 
                 ?>
                 <!-- <tr>
@@ -254,10 +252,9 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
             </table>
 
           </div>
-        </div>
-      </div>
+<button>Registrar</button>
+                  </form>
 
-      <div class="px-4 py-5 my-5 text-center">
         <?php
         if ($adicionando_registro == null) {
         ?>
@@ -290,7 +287,13 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
 
 
 
+ 
+
+
+        </div>
       </div>
+
+     
 
 
 
