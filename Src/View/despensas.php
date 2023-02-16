@@ -63,7 +63,6 @@ if (isset($_POST['idStatus_despensa'])) {
 
 
 
-echo $adicionando_registro;
 
 
 /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -71,6 +70,11 @@ echo $adicionando_registro;
 * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
 
+/**
+ * Salvando Registros
+ * funcionamento: Quando a variável está no status de 'Salvando registro', ele só vai salvar se ele não encontrar o mesmo registro já salvo 
+ * Data: 16/02/23
+ */
 if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO"){
   // $Despensas_repositorio->cadastro_StatusDespensas("Tiago" , $pdo);
   
@@ -81,9 +85,11 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
 
 
   $Despensas_repositorio->cadastro_entrada($descricao, $valor, $data , $_SESSION['ano'], $_SESSION['quinzena'] , $_SESSION['statusMes']  , $statusDespensa , $pdo);
-  $adicionando_registro = null;
   }
+  $adicionando_registro = null;
 }
+
+echo "O status é :" . $adicionando_registro;
 
 // $consulta = $pdo->query("Select * from Despensas where quinzena = '{$quinzena}' and idstatusMes = '{$_SESSION['statusMes']}' and idStatus_despensa = '{$idStatus_despensa}'             ");
 
