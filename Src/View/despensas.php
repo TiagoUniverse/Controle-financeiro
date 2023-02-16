@@ -177,9 +177,9 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )  Order By dataDespensa   
         <img class="d-block mx-auto mb-4" src="../../Assets/img/dia 15.png" alt="" width="72" height="70">
 
         <h1 class="display-5 fw-bold">Entrada</h1>
-          <p class="lead mb-4">Por favor, digite um ano e mês válido na tela inicial.</p>
+        <p class="lead mb-4">Por favor, digite um ano e mês válido na tela inicial.</p>
         <div class="col-lg-6 mx-auto" style="background-color:#c79797">
-        
+
           <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
             <table class="table">
               <thead>
@@ -231,23 +231,6 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )  Order By dataDespensa   
                 }
 
                   ?>
-                  <!-- <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td colspan="2">Larry the Bird</td>
-              <td>@twitter</td>
-            </tr> -->
               </tbody>
 
             </table>
@@ -271,10 +254,6 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )  Order By dataDespensa   
             </div>
 
 
-
-
-
-
           <?php
           }
 
@@ -286,20 +265,10 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )  Order By dataDespensa   
             </form>
           <?php
           }
-
-
           ?>
-
-
-
-
-
 
         </div>
       </div>
-
-
-
 
 
 
