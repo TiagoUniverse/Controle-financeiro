@@ -15,6 +15,7 @@ require_once "Recursos/Navegacao.php";
 */
 
 require_once "../Model/Despensas_repositorio.php";
+
 use model\Despensas_repositorio;
 
 $Despensas_repositorio = new Despensas_repositorio();
@@ -54,11 +55,10 @@ if (isset($_POST['data'])) {
 }
 
 
-$statusDespensa = $_POST['statusDespensa'];
-if (isset($_POST['idStatus_despensa'])) {
-  $idStatus_despensa = $_POST['idStatus_despensa'];
+if (isset($_POST['statusDespensa'])) {
+  $statusDespensa = $_POST['statusDespensa'];
 } else {
-  $idStatus_despensa = null;
+  $statusDespensa = null;
 }
 
 
@@ -75,16 +75,16 @@ if (isset($_POST['idStatus_despensa'])) {
  * funcionamento: Quando a variável está no status de 'Salvando registro', ele só vai salvar se ele não encontrar o mesmo registro já salvo 
  * Data: 16/02/23
  */
-if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO"){
+if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO") {
   // $Despensas_repositorio->cadastro_StatusDespensas("Tiago" , $pdo);
-  
-  $retorno = $Despensas_repositorio->consultarRegistro($descricao, $valor, $data , $pdo);
-  
-  if ($retorno == false){
+
+  $retorno = $Despensas_repositorio->consultarRegistro($descricao, $valor, $data, $pdo);
+
+  if ($retorno == false) {
 
 
 
-  $Despensas_repositorio->cadastro_entrada($descricao, $valor, $data , $_SESSION['ano'], $_SESSION['quinzena'] , $_SESSION['statusMes']  , $statusDespensa , $pdo);
+    $Despensas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], $statusDespensa, $pdo);
   }
   $adicionando_registro = null;
 }
@@ -93,7 +93,8 @@ echo "O status é :" . $adicionando_registro;
 
 // $consulta = $pdo->query("Select * from Despensas where quinzena = '{$quinzena}' and idstatusMes = '{$_SESSION['statusMes']}' and idStatus_despensa = '{$idStatus_despensa}'             ");
 
-$consulta = $pdo->query("Select * from despensas where status = 'ATIVO' and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$_SESSION['statusMes']}' and quinzena = '{$_SESSION['quinzena']}' 
+$consulta = $pdo->query("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano, quinzena from despensas where status = 'ATIVO' 
+and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$_SESSION['statusMes']}' and quinzena = '{$_SESSION['quinzena']}' 
 and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
 
 // var_dump($consulta);
@@ -141,29 +142,32 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
           <tbody>
             <?php
 
+            $contador = 1;
             while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
             ?>
               <tr>
-                <th scope="row">1</th>
-                <td> <?php echo $linha['id']; ?> </td>
+                <!-- <th scope="row">1</th> -->
+                <td> <?php echo $contador; ?> </td>
                 <td> <?php echo $linha['descricao']; ?> </td>
                 <td> <?php echo $linha['valor']; ?> </td>
+                <td> <?php echo $linha['dataDespensa']; ?> </td>
               </tr>
             <?php
+            $contador++;
             }
 
             if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO ENTRADA") {
             ?>
               <form method="post">
-                <input type="hidden" name= "adicionando_registro" value='SALVANDO REGISTRO'>
-                <input type="hidden" name= "statusDespensa" value='3'>
+                <input type="hidden" name="adicionando_registro" value='SALVANDO REGISTRO'>
+                <input type="hidden" name="statusDespensa" value='3'>
                 <tr>
                   <th scope="col">Nª</th>
                   <th scope="col">
                     <input type="text" name="descricao">
                   </th>
                   <th scope="col">
-                    <input  type="number" min="1" step="any" name="valor">
+                    <input type="number" min="1" step="any" name="valor">
                   </th>
                   <th scope="col">
                     <input type="date" name="data">
