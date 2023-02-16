@@ -149,7 +149,7 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
                 <!-- <th scope="row">1</th> -->
                 <td> <?php echo $contador; ?> </td>
                 <td> <?php echo $linha['descricao']; ?> </td>
-                <td> <?php echo $linha['valor']; ?> </td>
+                <td> <?php echo "R$" . $linha['valor']; ?> </td>
                 <td> <?php echo $linha['dataDespensa']; ?> </td>
               </tr>
             <?php
@@ -170,7 +170,7 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
                     <input type="number" min="1" step="any" name="valor">
                   </th>
                   <th scope="col">
-                    <input type="date" name="data">
+                    <input type="date" name="data"  value='<?php echo date("Y-m-d"); ?>'>
                   </th>
                   <button>Registrar</button>
                 </tr>
