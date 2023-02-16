@@ -179,8 +179,8 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
         <h1 class="display-5 fw-bold">Entrada</h1>
         <div class="col-lg-6 mx-auto" style="background-color:red">
           <p class="lead mb-4">Por favor, digite um ano e mês válido na tela inicial.</p>
-          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" >
-            <table class="table" >
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <table class="table">
               <thead>
                 <tr>
                   <th scope="col">Nª</th>
@@ -222,15 +222,15 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
                       <th scope="col">
                         <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'>
                       </th>
-                      
+
                     </tr>
 
 
-                <?php
+                  <?php
                 }
 
-                ?>
-                <!-- <tr>
+                  ?>
+                  <!-- <tr>
               <th scope="row">1</th>
               <td>Mark</td>
               <td>Otto</td>
@@ -252,48 +252,35 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
             </table>
 
           </div>
-<button>Registrar</button>
-                  </form>
-
-        <?php
-        if ($adicionando_registro == null) {
-        ?>
-          <form action="despensas.php" method="post">
-            <input type="hidden" value="REGISTRANDO ENTRADA" name="adicionando_registro">
-            <button>Adicionar um novo registro</button>
+          <?php
+          if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO ENTRADA") {
+            ?>
+          <button>Registrar</button>
           </form>
-        <?php
-        }
+          <?php
+          }
 
-        if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO ENTRADA") {
-        ?>
-          <tr>
-            <th scope="col">Nª</th>
-            <th scope="col">
-              <input type="text">
-            </th>
-            <th scope="col">
-              <input type="text">
-            </th>
-            <th scope="col">
-              <input type="text">
-            </th>
-            <button>Registrar</button>
-          </tr>
+          if ($adicionando_registro == null) {
+          ?>
+            <form action="despensas.php" method="post">
+              <input type="hidden" value="REGISTRANDO ENTRADA" name="adicionando_registro">
+              <button>Adicionar um novo registro</button>
+            </form>
+          <?php
+          }
 
-        <?php
-        }
-        ?>
+         
+          ?>
 
 
 
- 
+
 
 
         </div>
       </div>
 
-     
+
 
 
 
