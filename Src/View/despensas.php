@@ -204,8 +204,8 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )  Order By dataDespensa   
                     <td> <?php echo $linha['descricao']; ?> </td>
                     <td> <?php echo "R$" . $linha['valor']; ?> </td>
                     <td> <?php echo $linha['dataDespensa']; ?> </td>
-                    <td> <img src="../../Assets//Icons//pencil.png" class="icon_exclusao"> </td>
-                    <td> <img src="../../Assets//Icons//x-mark-xxl.png" class="icon_exclusao"> </td>
+                    <td> <a href=""><img src="../../Assets//Icons//pencil.png" class="icon_exclusao"> </a>  </td>
+                    <td> <a href=""><img src="../../Assets//Icons//x-mark-xxl.png" class="icon_exclusao"> </a> </td>
                   </tr>
                 <?php
                   $contador++;
