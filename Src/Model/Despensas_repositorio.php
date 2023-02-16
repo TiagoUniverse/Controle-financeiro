@@ -36,7 +36,7 @@ class Despensas_repositorio
             ':statusDespensa' => '3'
         ));
 
-        echo "funcionou!!";
+        // echo "funcionou!!";
 
 
         } catch(PDOException $e) {
@@ -57,7 +57,7 @@ class Despensas_repositorio
             ':nome' => $nome 
         ));
 
-        echo "funcionou!!";
+        // echo "funcionou!!";
 
 
         } catch(PDOException $e) {

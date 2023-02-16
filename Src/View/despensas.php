@@ -54,15 +54,11 @@ if (isset($_POST['data'])) {
   $data = null;
 }
 
-
 if (isset($_POST['statusDespensa'])) {
   $statusDespensa = $_POST['statusDespensa'];
 } else {
   $statusDespensa = null;
 }
-
-
-
 
 
 /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -75,29 +71,58 @@ if (isset($_POST['statusDespensa'])) {
  * funcionamento: Quando a variável está no status de 'Salvando registro', ele só vai salvar se ele não encontrar o mesmo registro já salvo 
  * Data: 16/02/23
  */
+
+
 if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO") {
-  // $Despensas_repositorio->cadastro_StatusDespensas("Tiago" , $pdo);
-
-  $retorno = $Despensas_repositorio->consultarRegistro($descricao, $valor, $data, $pdo);
-
-  if ($retorno == false) {
 
 
+  /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+  * │                                Validações                                                                     │
+  * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+  */
+  echo $_POST['data'];
+  $dataDividida = explode("-", $_POST['data']);
+  echo "<br>";
+  var_dump($dataDividida);
 
-    $Despensas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], $statusDespensa, $pdo);
+  echo "<br>";
+  $mes_selecionado = "0" . $_SESSION['statusMes'];
+  echo $mes_selecionado;
+
+
+  $mensagemVermelha = true;
+  if (!isset($_POST['data'])) {
+    $mensagem = "Informe uma data";
+  } else if ($dataDividida[1] != $mes_selecionado) {
+    $mensagem = "Selecione uma data do mes de " . $_SESSION['nomeMes'];
+  } else if ($dataDividida[0] != $_SESSION['ano']) {
+    $mensagem = "Faça um registro no ano de " . $_SESSION['ano'];
+  } else if ($descricao == null) {
+    $mensagem = "Por favor, preencha a descrição sobre o registro";
+  } else if ($valor <= 0) {
+    $mensagem = "Por favor, informe um valor positivo";
+  } else {
+
+    $retorno = $Despensas_repositorio->consultarRegistro($descricao, $valor, $data, $pdo);
+
+    if ($retorno == false) {
+      $mensagemVermelha = false;
+      $mensagem = "Informação registrada com sucesso!";
+
+
+      $Despensas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], $statusDespensa, $pdo);
+    } else {
+      $mensagem = "Registro já cadastrado!";
+    }
   }
+
   $adicionando_registro = null;
 }
 
-echo "O status é :" . $adicionando_registro;
-
-// $consulta = $pdo->query("Select * from Despensas where quinzena = '{$quinzena}' and idstatusMes = '{$_SESSION['statusMes']}' and idStatus_despensa = '{$idStatus_despensa}'             ");
 
 $consulta = $pdo->query("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano, quinzena from despensas where status = 'ATIVO' 
 and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$_SESSION['statusMes']}' and quinzena = '{$_SESSION['quinzena']}' 
 and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
-
-// var_dump($consulta);
 
 ?>
 
@@ -153,7 +178,7 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
                 <td> <?php echo $linha['dataDespensa']; ?> </td>
               </tr>
             <?php
-            $contador++;
+              $contador++;
             }
 
             if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO ENTRADA") {
@@ -170,7 +195,7 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )          ");
                     <input type="number" min="1" step="any" name="valor">
                   </th>
                   <th scope="col">
-                    <input type="date" name="data"  value='<?php echo date("Y-m-d"); ?>'>
+                    <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'>
                   </th>
                   <button>Registrar</button>
                 </tr>
