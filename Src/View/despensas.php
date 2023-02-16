@@ -177,8 +177,9 @@ and ( idStatus_despensa = 3 OR idstatus_despensa = 4 )  Order By dataDespensa   
         <img class="d-block mx-auto mb-4" src="../../Assets/img/dia 15.png" alt="" width="72" height="70">
 
         <h1 class="display-5 fw-bold">Entrada</h1>
-        <div class="col-lg-6 mx-auto" style="background-color:#c79797">
           <p class="lead mb-4">Por favor, digite um ano e mês válido na tela inicial.</p>
+        <div class="col-lg-6 mx-auto" style="background-color:#c79797">
+        
           <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
             <table class="table">
               <thead>
