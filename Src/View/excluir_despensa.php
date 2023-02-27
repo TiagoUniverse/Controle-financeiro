@@ -16,11 +16,20 @@ require_once "Recursos/Navegacao.php";
 */
 
 require_once "../Model/Despensas_repositorio.php";
-
 use model\Despensas_repositorio;
 
-$Despensas_repositorio = new Despensas_repositorio();
+require_once "../Model/Despensas.php";
+use model\Despensas;
 
+$Despensas_repositorio = new Despensas_repositorio();
+$Despensas = new Despensas();
+
+// Variables
+$id = $_POST['id'];
+
+$Despensas = $Despensas_repositorio->consultaById($id , $pdo);
+
+var_dump($Despensas);
 
 ?>
 
@@ -37,228 +46,6 @@ $Despensas_repositorio = new Despensas_repositorio();
 </head>
 
 <body>
-
-  <form action="mes.php" method="post">
-    <input type="hidden" name="statusMes" value="<?php echo $_SESSION['statusMes']; ?>">
-    <button class="btn btn-link">Voltar</button>
-  </form>
-
-  <h1 class="display-5 fw-bold" style="text-align: center;">Despensas: gastos pessoais</h1>
-  <h3 style="text-align: center;">Quando estiver pronto, clique no botão de avançar para registrar as despensas da casa</h3>
-
-  <div class="px-4 py-5 my-5 text-center">
-    <img class="d-block mx-auto mb-4" src="../../Assets/img/dia 15.png" alt="" width="72" height="70">
-
-    <h1 class="display-5 fw-bold">Entrada</h1>
-    <p class="lead mb-4">Por favor, digite um ano e mês válido na tela inicial.</p>
-    <div class="col-lg-6 mx-auto" style="background-color:#c79797">
-
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Nª</th>
-              <th scope="col">Descrição</th>
-              <th scope="col">valor</th>
-              <th scope="col">Data</th>
-              <th scope="col">Alteração</th>
-              <th scope="col">Exclusão</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-
-            $contador = 1;
-            while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-            ?>
-              <tr>
-                <!-- <th scope="row">1</th> -->
-                <td> <?php echo $contador; ?> </td>
-                <td> <?php echo $linha['descricao']; ?> </td>
-                <td> <?php echo "R$" . $linha['valor']; ?> </td>
-                <td> <?php echo $linha['dataDespensa']; ?> </td>
-                <td> <a href=""><img src="../../Assets//Icons//pencil.png" class="icon_exclusao"> </a> </td>
-                <td>
-
-                  <a type="button" data-bs-target="#exampleModal" data-bs-toggle="modal">
-                    <img src="../../Assets//Icons//x-mark-xxl.png" class="icon_exclusao">
-                  </a>
-
-                  <!-- Modal -->
-                  <form method="post" action="despensas.php">
-                    <input type="hidden" name="adicionando_registro" value='DELETANDO REGISTRO'>
-                    <input type="hidden" value="<?php echo $linha['id']; ?>" name="idExclusao">
-                    <input type="text" value="<?php echo $linha['descricao']; ?>" name="descricaoExclusao">
-                    <input type="hidden" value="<?php echo $linha['valor']; ?>" name="valorExclusao">
-                    <input type="hidden" value="<?php echo $linha['dataDespensa']; ?>" name="dataDespensaExclusao">
-
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Exclusão</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            Deseja mesmo excluir este registro? Por favor, confirme com as informações abaixo que deseja excluir. <br>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                            <button type="submit" class="btn btn-danger">Excluir</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                  </form>
-
-                </td>
-
-
-              </tr>
-            <?php
-              $contador++;
-            }
-
-            if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO ENTRADA") {
-            ?>
-              <form method="post">
-                <input type="hidden" name="adicionando_registro" value='SALVANDO REGISTRO'>
-                <input type="hidden" name="statusDespensa" value='3'>
-                <tr>
-                  <th scope="col">Nª</th>
-                  <th scope="col">
-                    <input type="text" name="descricao">
-                  </th>
-                  <th scope="col">
-                    <input type="number" min="1" step="any" name="valor">
-                  </th>
-                  <th scope="col">
-                    <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'>
-                  </th>
-
-                </tr>
-
-
-              <?php
-            }
-
-              ?>
-          </tbody>
-
-        </table>
-
-      </div>
-      <?php
-      if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO ENTRADA") {
-      ?>
-
-        <div class="row g-0 text-center">
-          <div class="col-sm-6 col-md-6">
-            <button type="submit" class="btn btn-primary">Registrar</button>
-            </form>
-          </div>
-          <div class="col-6 col-md-6">
-            <form action="despensas.php" method="post">
-              <input type="hidden" value="" name="adicionando_registro">
-              <button type="submit" class="btn btn-secondary">Cancelar</button>
-            </form>
-          </div>
-        </div>
-
-
-      <?php
-      }
-
-      if ($adicionando_registro == null) {
-      ?>
-        <form action="despensas.php" method="post">
-          <input type="hidden" value="REGISTRANDO ENTRADA" name="adicionando_registro">
-          <button type="submit" class="btn btn-primary">Adicionar um novo registro</button>
-        </form>
-      <?php
-      }
-      ?>
-
-    </div>
-  </div>
-
-
-
-  <div class="px-4 py-5 my-5 text-center">
-    <img class="d-block mx-auto mb-4" src="../../Assets/img/dia 15.png" alt="" width="72" height="70">
-
-    <h1 class="display-5 fw-bold">Saída</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">Por favor, digite um ano e mês válido na tela inicial.</p>
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Nª</th>
-              <th scope="col">Descrição</th>
-              <th scope="col">valor</th>
-              <th scope="col">Data</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-
-            while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-            ?>
-              <tr>
-                <th scope="row">1</th>
-                <td> <?php echo $linha['nome']; ?> </td>
-                <td> <?php echo $linha['email']; ?> </td>
-              </tr>
-            <?php
-            }
-
-
-            ?>
-            <!-- <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td colspan="2">Larry the Bird</td>
-              <td>@twitter</td>
-            </tr> -->
-          </tbody>
-        </table>
-
-
-
-
-
-
-
-
-
-      </div>
-    </div>
-  </div>
-
-  <div class="px-4 py-5 my-5 text-center">
-    <?php
-    if ($adicionando_registro == null) {
-    ?>
-      <form action="despensas.php" method="post">
-        <input type="hidden" value="REGISTRANDO ENTRADA" name="adicionando_registro">
-        <button>Adicionar um novo registro</button>
-      </form>
-    <?php
-    }
-    ?>
 
 
 

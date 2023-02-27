@@ -8,6 +8,7 @@
 
 namespace Model;
 
+use model\Despensas;
 
 require_once "conexao.php";
 class Despensas_repositorio
@@ -83,6 +84,26 @@ class Despensas_repositorio
     
     }
 
+
+    public function consultaById($id ,$pdo ){
+        $consulta = $pdo->query("SELECT * FROM despensas WHERE id = '{$id}'   ;");
+        
+        var_dump( $consulta);
+
+        while ($linha = $consulta->fetch(\PDO::FETCH_ASSOC)) {
+            $Despensas = new Despensas();
+
+            $Despensas->setDescricao($linha['descricao']);
+            $Despensas->setValor($linha['valor']);
+            $Despensas->setData($linha['dataDespensa']);
+            $Despensas->setAno($linha['ano']);
+            $Despensas->setQuinzena($linha['quinzena']);
+            $Despensas->setStatus($linha['status']);
+        }
+
+        return $Despensas;
+    
+    }
 
     public function excluir_registro($descricao, $valor, $data, $ano, $quinzena, $idstatus_Mes, $idStatus_despensa , $pdo)
     {

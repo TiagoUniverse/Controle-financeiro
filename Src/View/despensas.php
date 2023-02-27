@@ -227,9 +227,11 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
                     <td> <a href=""><img src="../../Assets//Icons//pencil.png" class="icon_exclusao"> </a> </td>
                     <td>
 
-                      <a href="excluir_despensa.php">
-                        <img src="../../Assets//Icons//x-mark-xxl.png" class="icon_exclusao">
-                      </a>
+                      <form action="excluir_despensa.php" method="post">
+                        <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id" > 
+                        <button type="submit"> <img src="../../Assets//Icons//x-mark-xxl.png" class="icon_exclusao"></button>
+                      </form>
+
 
                     </td>
 
