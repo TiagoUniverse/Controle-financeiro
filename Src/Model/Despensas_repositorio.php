@@ -105,7 +105,7 @@ class Despensas_repositorio
     
     }
 
-    public function excluir_registro($descricao, $valor, $data, $ano, $quinzena, $idstatus_Mes, $idStatus_despensa , $pdo)
+    public function excluir_registro($id , $pdo)
     {
         require_once "../view/conexao.php";
 

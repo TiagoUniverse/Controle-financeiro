@@ -31,6 +31,10 @@ $id = $_POST['id'];
 
 $Despensas = $Despensas_repositorio->consultaById($id, $pdo);
 
+if (isset($_POST['foiExcluido']) && $_POST['foiExcluido'] == "EXCLUIDO"){
+  $Despensas_repositorio->excluir_registro($id , $pdo);
+}
+
 // var_dump($Despensas);
 
 ?>
@@ -55,13 +59,17 @@ $Despensas = $Despensas_repositorio->consultaById($id, $pdo);
   </form>
 
   <h1 class="display-5 fw-bold" style="text-align: center;">Despensas: gastos pessoais</h1>
-  <h3 style="text-align: center;">Quando estiver pronto, clique no botão de avançar para registrar as despensas da casa</h3>
+  <h3 style="text-align: center;">Verifique se é este o registro que deseja excluir e confirme</h3>
 
   <div class="px-4 py-5 my-5 text-center">
     <img class="d-block mx-auto mb-4" src="../../Assets/img/dia 15.png" alt="" width="72" height="70">
 
-
-    <form action="despensas.php" method="post">
+  <?php
+  if (!isset($_POST['foiExcluido'])){
+    ?>
+    <form action="excluir_despensa.php" method="post">
+      <input type="hidden" name="foiExcluido" value="EXCLUIDO">
+      <input type="hidden" name="id" value="<?php echo $id; ?>">
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label"> Descrição: </label>
         <input type="text" value="<?php echo $Despensas->getDescricao();  ?> " class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" disabled>
@@ -77,6 +85,14 @@ $Despensas = $Despensas_repositorio->consultaById($id, $pdo);
       </div>
       <button type="submit" class="btn btn-danger">Excluir</button>
     </form>
+    <?php
+  } else {
+    ?>
+    <h1>Excluido!</h1>
+    <?php
+  }
+  ?>
+
 
 
 
