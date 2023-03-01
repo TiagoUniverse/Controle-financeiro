@@ -123,4 +123,30 @@ class Despensas_repositorio
 
     }
 
+
+    public function alterar($descricao, $valor, $dataDespensa, $id , $pdo)
+    {
+        require_once "../view/conexao.php";
+        try {
+
+        $stmt =  $pdo->prepare('Update despensas  SET descricao = (:descricao), valor = (:valor) , dataDespensa = (:dataDespensa) , updated = current_time()
+
+        Where id = (:id)');
+        
+        $stmt->execute(array(
+            ':descricao' => $descricao, 
+            ':valor' => $valor, 
+            ':dataDespensa' => $dataDespensa, 
+            ':id' => $id, 
+        ));
+
+        // echo "funcionou!!";
+
+
+        } catch(PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+
+    }
+
 }
