@@ -46,6 +46,38 @@ class Despensas_repositorio
 
     }
 
+    public function cadastro_Saida($descricao, $valor, $data, $ano, $quinzena, $idstatus_Mes, $idStatus_despensa , $pdo)
+    {
+        try {
+        
+        // echo $idStatus_despensa;
+
+        require_once "../view/conexao.php";
+        // $sql = "Insert into clientes (descricao, valor, data, ano, quinzena, idstatus_Mes, idStatus_Despensa)
+        //         Values ({$descricao}, {$valor}, {$data}, {$ano}, {$quinzena}, {$idstatus_Mes}, {$idStatus_despensa})";
+
+        $stmt =  $pdo->prepare('INSERT INTO despensas (descricao, valor, dataDespensa, ano, quinzena, idstatus_Mes, idStatus_despensa)
+        VALUES (:descricao , :valor , :dataDespensa , :ano , :quinzena , :idstatus_Mes , :statusDespensa )  ');
+        
+        $stmt->execute(array(
+            ':descricao' => $descricao ,
+            ':valor' => $valor ,
+            ':dataDespensa' => $data ,
+            ':ano' => $ano ,
+            ':quinzena' => $quinzena ,
+            ':idstatus_Mes' => $idstatus_Mes ,
+            ':statusDespensa' => '4'
+        ));
+
+        // echo "funcionou!!";
+
+
+        } catch(PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+
+    }
+
 
     public function cadastro_StatusDespensas($nome , $pdo)
     {
@@ -68,8 +100,9 @@ class Despensas_repositorio
     }
 
 
-    public function consultarRegistro($descricao, $valor, $dataDespensa ,$pdo ){
-        $consulta = $pdo->query("SELECT * FROM despensas WHERE descricao = '{$descricao}' and valor = '{$valor}' and dataDespensa = '{$dataDespensa}'   ;");
+    public function consultarRegistro($descricao, $valor, $dataDespensa , $idStatus_despensa ,$pdo ){
+        
+        $consulta = $pdo->query("SELECT * FROM despensas WHERE descricao = '{$descricao}' and valor = '{$valor}' and dataDespensa = '{$dataDespensa}' and idStatus_despensa = '{$idStatus_despensa}'   ;");
         
         var_dump( $consulta);
 
