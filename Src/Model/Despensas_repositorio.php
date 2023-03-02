@@ -104,7 +104,7 @@ class Despensas_repositorio
         
         $consulta = $pdo->query("SELECT * FROM despensas WHERE descricao = '{$descricao}' and valor = '{$valor}' and dataDespensa = '{$dataDespensa}' and idStatus_despensa = '{$idStatus_despensa}'   ;");
         
-        var_dump( $consulta);
+       // var_dump( $consulta);
 
         while ($linha = $consulta->fetch(\PDO::FETCH_ASSOC)) {
             if ($descricao = $linha['descricao'] && $valor = $linha['valor'] && $dataDespensa = $linha['dataDespensa']){
@@ -121,7 +121,7 @@ class Despensas_repositorio
     public function consultaById($id ,$pdo ){
         $consulta = $pdo->query("SELECT * FROM despensas WHERE id = '{$id}'   ;");
         
-        var_dump( $consulta);
+      //  var_dump( $consulta);
 
         while ($linha = $consulta->fetch(\PDO::FETCH_ASSOC)) {
             $Despensas = new Despensas();
@@ -147,7 +147,7 @@ class Despensas_repositorio
             $stmt->bindParam(':id', $id);
             $stmt->execute();
           
-            echo $stmt->rowCount();
+            // echo $stmt->rowCount();
           } catch(PDOException $e) {
             echo 'Error: ' . $e->getMessage();
           }
