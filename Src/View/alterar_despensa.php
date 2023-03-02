@@ -31,15 +31,49 @@ $id = $_POST['id'];
 
 $Despensas = $Despensas_repositorio->consultaById($id, $pdo);
 
-if (isset($_POST['foiAlterado']) && $_POST['foiAlterado'] == "ALTERADO"){
-
+if (isset($_POST['foiAlterado']) && $_POST['foiAlterado'] == "ALTERADO"){ 
+  
   //Variables
   $descricao = $_POST['descricao'];
   $valor = $_POST['valor'];
   $dataDespensa = $_POST['dataDespensa'];
 
-  $Despensas_repositorio->alterar($descricao , $valor, $dataDespensa , $id , $pdo);
 
+  if (isset($_POST['dataDespensa'])) {
+    $dataDividida = explode("-", $_POST['dataDespensa']);
+  }
+
+  // Mês para validação
+  if ($_SESSION['statusMes'] < 10) {
+    $mes_selecionado = "0" . $_SESSION['statusMes'];
+  } else {
+    $mes_selecionado = $_SESSION['statusMes'];
+  }
+
+
+  $mensagemVermelha = true;
+  if (!isset($_POST['dataDespensa'])) {
+    $mensagem = "Informe uma data";
+  } else if ($dataDividida[1] != $mes_selecionado) {
+    $mensagem = "Selecione uma data do mes de " . $_SESSION['nomeMes'];
+  } else if ($dataDividida[0] != $_SESSION['ano']) {
+    $mensagem = "Faça um registro no ano de " . $_SESSION['ano'];
+  } else if ($descricao == null) {
+    $mensagem = "Por favor, preencha a descrição sobre o registro";
+  } else if ($valor <= 0) {
+    $mensagem = "Por favor, informe um valor positivo do dinheiro";
+  } else if ($_SESSION['quinzena'] == "Quinzena 1" && $dataDividida[2] > 14) {
+    $mensagem = "Por favor, insira um registro dentro dos dias da primeira quinzena (dia 1 até dia 14)";
+  }else if ($_SESSION['quinzena'] == "Quinzena 2" && $dataDividida[2] < 15) {
+    $mensagem = "Por favor, insira um registro dentro dos dias da segunda quinzena (15 até dia 31)";
+  }else {
+    $mensagemVermelha = false;
+    $mensagem = "Registro alterado!";
+
+
+
+  $Despensas_repositorio->alterar($descricao , $valor, $dataDespensa , $id , $pdo);
+  }
 
 }
 
@@ -95,8 +129,26 @@ if (isset($_POST['foiAlterado']) && $_POST['foiAlterado'] == "ALTERADO"){
     </form>
     <?php
   } else {
+
+
+    // Mensagem do resultado
+  if ($mensagemVermelha) {
+?>
+    <div class="alert alert-danger" role="alert">
+    <?php
+  } else {
     ?>
-    <h1>Registro alterado!</h1>
+      <div class="alert alert-success" role="alert">
+      <?php
+    }    
+    ?>
+
+    
+
+
+
+    <h1> <?php  echo $mensagem; ?> </h1>
+  </div>
     <?php
   }
   ?>

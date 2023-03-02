@@ -115,7 +115,11 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
     $mensagem = "Por favor, preencha a descrição sobre o registro";
   } else if ($valor <= 0) {
     $mensagem = "Por favor, informe um valor positivo do dinheiro";
-  } else {
+  } else if ($_SESSION['quinzena'] == "Quinzena 1" && $dataDividida[2] > 14) {
+    $mensagem = "Por favor, insira um registro dentro dos dias da primeira quinzena (dia 1 até dia 14)";
+  }else if ($_SESSION['quinzena'] == "Quinzena 2" && $dataDividida[2] < 15) {
+    $mensagem = "Por favor, insira um registro dentro dos dias da segunda quinzena (15 até dia 31)";
+  }else {
 
     $retorno = $Despensas_repositorio->consultarRegistro($descricao, $valor, $data, 3, $pdo);
 
@@ -268,14 +272,30 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
             <button class="btn btn-link">Voltar</button>
           </form>
 
-          <h1 class="display-5 fw-bold" style="text-align: center;">Despensas: gastos pessoais</h1>
+
+          <h1 class="display-5 fw-bold" style="text-align: center;"> <?php echo $_SESSION['quinzena'];  ?> </h1>
+
+          <h2 class="display-5 fw-bold" style="text-align: center;">Despensas: gastos pessoais</h2>
 
 
 
           <h3 style="text-align: center;">Quando estiver pronto, clique no botão de avançar para registrar as despensas da casa</h3>
 
           <div class="px-4 py-5 my-5 text-center">
-            <img class="d-block mx-auto mb-4" src="../../Assets/img/dia 15.png" alt="" width="72" height="70">
+
+            <?php
+
+            if ($_SESSION['quinzena'] == "Quinzena 1") {
+            ?>
+              <img class="d-block mx-auto mb-4" src="../../Assets/img/dia 15.png" alt="" width="72" height="70">
+            <?php
+            } else {
+            ?>
+              <img class="d-block mx-auto mb-4" src="../../Assets/img/dia 30.png" alt="" width="72" height="70">
+            <?php
+            }
+            ?>
+
 
             <h1 class="display-5 fw-bold" id="Entrada_title">Entrada</h1>
             <p class="lead mb-4">Por favor, digite um ano e mês válido na tela inicial.</p>
@@ -398,7 +418,18 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
 
 
           <div class="px-4 py-5 my-5 text-center">
-            <img class="d-block mx-auto mb-4" src="../../Assets/img/dia 15.png" alt="" width="72" height="70">
+            <?php
+
+            if ($_SESSION['quinzena'] == "Quinzena 1") {
+            ?>
+              <img class="d-block mx-auto mb-4" src="../../Assets/img/dia 15.png" alt="" width="72" height="70">
+            <?php
+            } else {
+            ?>
+              <img class="d-block mx-auto mb-4" src="../../Assets/img/dia 30.png" alt="" width="72" height="70">
+            <?php
+            }
+            ?>
 
             <h1 class="display-5 fw-bold" id="Saida_title">Saída</h1>
             <div class="col-lg-6 mx-auto">
