@@ -59,7 +59,7 @@ require_once "Recursos/Navegacao.php";
 
       <h1 class="display-5 fw-bold">Primeira quinzena</h1>
       <div class="col-lg-6 mx-auto">
-        <p class="lead mb-4">Registre os gastos entre o dia 01 até o dia 19, que são os dias da entrada de salário da casa.</p>
+        <p class="lead mb-4">Registre os gastos entre o dia 05 até o dia 19, que são os dias da entrada de salário da casa.</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <form action="despensas.php" method="post">
             <input type="hidden" value="<?php echo $_SESSION['statusMes'];  ?>" name="statusMes" >

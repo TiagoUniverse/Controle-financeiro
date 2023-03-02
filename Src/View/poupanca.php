@@ -79,7 +79,6 @@ if (isset($_POST['statusDespensa'])) {
 
 if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO ENTRADA") {
 
-
   /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
   * │                                Validações                                                                     │
   * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
@@ -104,25 +103,26 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
    * Data: 16/02/23
    */
 
-   $mensagemVermelha = true;
-   if (!isset($_POST['data'])) {
-     $mensagem = "Informe uma data";
-   } else if ($_SESSION['quinzena'] == "Quinzena 1" && $dataDividida[1] != $mes_selecionado){
-     $mensagem = "Selecione uma data do mes de " . $_SESSION['nomeMes'];
-   } else if ($_SESSION['quinzena'] == "Quinzena 2" && $dataDividida[1] != $mes_selecionado && $dataDividida[2] > 5 )
-     $mensagem = "Informe um valor da segunda quinzena até o dia 4";  
-   else if ($dataDividida[0] != $_SESSION['ano']) {
-     $mensagem = "Faça um registro no ano de " . $_SESSION['ano'];
-   } else if ($descricao == null) {
-     $mensagem = "Por favor, preencha a descrição sobre o registro";
-   } else if ($valor <= 0) {
-     $mensagem = "Por favor, informe um valor positivo do dinheiro";
-   } else if ($_SESSION['quinzena'] == "Quinzena 1" && ($dataDividida[2] < 5 || $dataDividida[2] > 19 ) ) {
-     $mensagem = "Por favor, insira um registro dentro dos dias da primeira quinzena (dia 5 até dia 19)";
-   }else if ($_SESSION['quinzena'] == "Quinzena 2" && ( $dataDividida[2] > 5     || ( $dataDividida[2] != 1 && $dataDividida[2] != 2 && $dataDividida[2] != 3 &&
-   $dataDividida[2] != 4 &&  $dataDividida[2] < 19 )  ) ) {
-     $mensagem = "Por favor, insira um registro dentro dos dias da segunda quinzena (20 até dia 4 do próximo mês)";
-   }else {
+
+
+  $mensagemVermelha = true;
+  if (!isset($_POST['data'])) {
+    $mensagem = "Informe uma data";
+  } else if ($_SESSION['quinzena'] == "Quinzena 1" && $dataDividida[1] != $mes_selecionado){
+    $mensagem = "Selecione uma data do mes de " . $_SESSION['nomeMes'];
+  } else if ($_SESSION['quinzena'] == "Quinzena 2" && $dataDividida[1] != $mes_selecionado && $dataDividida[2] > 5 )
+    $mensagem = "Informe um valor da segunda quinzena até o dia 4";  
+  else if ($dataDividida[0] != $_SESSION['ano']) {
+    $mensagem = "Faça um registro no ano de " . $_SESSION['ano'];
+  } else if ($descricao == null) {
+    $mensagem = "Por favor, preencha a descrição sobre o registro";
+  } else if ($valor <= 0) {
+    $mensagem = "Por favor, informe um valor positivo do dinheiro";
+  } else if ($_SESSION['quinzena'] == "Quinzena 1" && ($dataDividida[2] < 5 || $dataDividida[2] > 19 ) ) {
+    $mensagem = "Por favor, insira um registro dentro dos dias da primeira quinzena (dia 5 até dia 19)";
+  }else if ($_SESSION['quinzena'] == "Quinzena 2" && ($dataDividida[2] > 5 || $dataDividida[2] < 19) ) {
+    $mensagem = "Por favor, insira um registro dentro dos dias da segunda quinzena (20 até dia 4 do próximo mês)";
+  }else {
 
     $retorno = $Despensas_repositorio->consultarRegistro($descricao, $valor, $data, 3, $pdo);
 
@@ -247,12 +247,12 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
       // Consulta
       $consulta_Entrada = $pdo->query("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano, quinzena from despensas where status = 'ATIVO' 
   and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$_SESSION['statusMes']}' and quinzena = '{$_SESSION['quinzena']}' 
-  and ( idStatus_despensa = 3)  Order By month(dataDespensa)        ");
+  and ( idStatus_despensa = 3)  Order By dataDespensa        ");
 
 
       $consulta_Saida = $pdo->query("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano, quinzena from despensas where status = 'ATIVO' 
   and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$_SESSION['statusMes']}' and quinzena = '{$_SESSION['quinzena']}' 
-  and ( idstatus_despensa = 4 )  Order By month(dataDespensa)        ");
+  and ( idstatus_despensa = 4 )  Order By dataDespensa        ");
 
         ?>
 
