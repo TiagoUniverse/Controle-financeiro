@@ -98,31 +98,47 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
   }
 
   /**
+   * mes limite
+   * Funcionamento: A quinzena 2 permite registro do dia 20/mes atual até o dia 04/próximo mes. Para isso, vamos limitar o registro para registrar apenas
+   * o mes atual ou o próximo mes
+   * Data: 03/03/23
+   */
+
+  if ($mes_selecionado == 12) {
+    $mes_limite = 1;
+  } else {
+    $mes_limite = $mes_selecionado + 1;
+  }
+
+
+  /**
    * Mensagem Vermelha
    * Funcionamento: A validação começa com ela definida como verdadeira. Se depois de todas as validações as informações estiverem corretas, então o sistema
    * vai exibir uma mensagem de sucesso e informar que o cadastro foi feito com sucesso
    * Data: 16/02/23
    */
 
-   $mensagemVermelha = true;
-   if (!isset($_POST['data'])) {
-     $mensagem = "Informe uma data";
-   } else if ($_SESSION['quinzena'] == "Quinzena 1" && $dataDividida[1] != $mes_selecionado){
-     $mensagem = "Selecione uma data do mes de " . $_SESSION['nomeMes'];
-   } else if ($_SESSION['quinzena'] == "Quinzena 2" && $dataDividida[1] != $mes_selecionado && $dataDividida[2] > 5 )
-     $mensagem = "Informe um valor da segunda quinzena até o dia 4";  
-   else if ($dataDividida[0] != $_SESSION['ano']) {
-     $mensagem = "Faça um registro no ano de " . $_SESSION['ano'];
-   } else if ($descricao == null) {
-     $mensagem = "Por favor, preencha a descrição sobre o registro";
-   } else if ($valor <= 0) {
-     $mensagem = "Por favor, informe um valor positivo do dinheiro";
-   } else if ($_SESSION['quinzena'] == "Quinzena 1" && ($dataDividida[2] < 5 || $dataDividida[2] > 19 ) ) {
-     $mensagem = "Por favor, insira um registro dentro dos dias da primeira quinzena (dia 5 até dia 19)";
-   }else if ($_SESSION['quinzena'] == "Quinzena 2" && ( $dataDividida[2] > 5     || ( $dataDividida[2] != 1 && $dataDividida[2] != 2 && $dataDividida[2] != 3 &&
-   $dataDividida[2] != 4 &&  $dataDividida[2] < 19 )  ) ) {
-     $mensagem = "Por favor, insira um registro dentro dos dias da segunda quinzena (20 até dia 4 do próximo mês)";
-   }else {
+  $mensagemVermelha = true;
+  if (!isset($_POST['data'])) {
+    $mensagem = "Informe uma data";
+  } else if ($_SESSION['quinzena'] == "Quinzena 1" && $dataDividida[1] != $mes_selecionado) {
+    $mensagem = "Selecione uma data do mes de " . $_SESSION['nomeMes'];
+  } else if ($_SESSION['quinzena'] == "Quinzena 2" && $dataDividida[1] != $mes_selecionado && $dataDividida[2] > 5) {
+    $mensagem = "Informe um valor da segunda quinzena até o dia 4";
+  } else if ($dataDividida[1] > $mes_limite) {
+    $mensagem = "Para cadastrar na 2ª quinzena, insira registro entre o mês atual e o próximo mês.";
+  } else if ($dataDividida[0] != $_SESSION['ano']) {
+    $mensagem = "Faça um registro no ano de " . $_SESSION['ano'];
+  } else if ($descricao == null) {
+    $mensagem = "Por favor, preencha a descrição sobre o registro";
+  } else if ($valor <= 0) {
+    $mensagem = "Por favor, informe um valor positivo do dinheiro";
+  } else if ($_SESSION['quinzena'] == "Quinzena 1" && ($dataDividida[2] < 5 || $dataDividida[2] > 19)) {
+    $mensagem = "Por favor, insira um registro dentro dos dias da primeira quinzena (dia 5 até dia 19)";
+  } else if ($_SESSION['quinzena'] == "Quinzena 2" && ($dataDividida[2] > 5     || ($dataDividida[2] != 1 && $dataDividida[2] != 2 && $dataDividida[2] != 3 &&
+    $dataDividida[2] != 4 &&  $dataDividida[2] < 19))) {
+    $mensagem = "Por favor, insira um registro dentro dos dias da segunda quinzena (20 até dia 4 do próximo mês)";
+  } else {
 
     $retorno = $Despensas_repositorio->consultarRegistro($descricao, $valor, $data, 3, $pdo);
 
@@ -159,9 +175,9 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
 
 
       /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-  * │                                Validações                                                                     │
-  * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-  */
+    * │                                Validações                                                                     │
+    * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+    */
 
       if (isset($_POST['data'])) {
         $dataDividida = explode("-", $_POST['data']);
@@ -176,6 +192,20 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
       }
 
       /**
+       * mes limite
+       * Funcionamento: A quinzena 2 permite registro do dia 20/mes atual até o dia 04/próximo mes. Para isso, vamos limitar o registro para registrar apenas
+       * o mes atual ou o próximo mes
+       * Data: 03/03/23
+       */
+
+      if ($mes_selecionado == 12) {
+        $mes_limite = 1;
+      } else {
+        $mes_limite = $mes_selecionado + 1;
+      }
+
+
+      /**
        * Mensagem Vermelha
        * Funcionamento: A validação começa com ela definida como verdadeira. Se depois de todas as validações as informações estiverem corretas, então o sistema
        * vai exibir uma mensagem de sucesso e informar que o cadastro foi feito com sucesso
@@ -185,14 +215,23 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
       $mensagemVermelha = true;
       if (!isset($_POST['data'])) {
         $mensagem = "Informe uma data";
-      } else if ($dataDividida[1] != $mes_selecionado) {
+      } else if ($_SESSION['quinzena'] == "Quinzena 1" && $dataDividida[1] != $mes_selecionado) {
         $mensagem = "Selecione uma data do mes de " . $_SESSION['nomeMes'];
+      } else if ($_SESSION['quinzena'] == "Quinzena 2" && $dataDividida[1] != $mes_selecionado && $dataDividida[2] > 5) {
+        $mensagem = "Informe um valor da segunda quinzena até o dia 4";
+      } else if ($dataDividida[1] > $mes_limite) {
+        $mensagem = "Para cadastrar na 2ª quinzena, insira registro entre o mês atual e o próximo mês.";
       } else if ($dataDividida[0] != $_SESSION['ano']) {
         $mensagem = "Faça um registro no ano de " . $_SESSION['ano'];
       } else if ($descricao == null) {
         $mensagem = "Por favor, preencha a descrição sobre o registro";
       } else if ($valor <= 0) {
         $mensagem = "Por favor, informe um valor positivo do dinheiro";
+      } else if ($_SESSION['quinzena'] == "Quinzena 1" && ($dataDividida[2] < 5 || $dataDividida[2] > 19)) {
+        $mensagem = "Por favor, insira um registro dentro dos dias da primeira quinzena (dia 5 até dia 19)";
+      } else if ($_SESSION['quinzena'] == "Quinzena 2" && ($dataDividida[2] > 5     || ($dataDividida[2] != 1 && $dataDividida[2] != 2 && $dataDividida[2] != 3 &&
+        $dataDividida[2] != 4 &&  $dataDividida[2] < 19))) {
+        $mensagem = "Por favor, insira um registro dentro dos dias da segunda quinzena (20 até dia 4 do próximo mês)";
       } else {
 
         $retorno = $Despensas_repositorio->consultarRegistro($descricao, $valor, $data, 4, $pdo);
