@@ -67,7 +67,7 @@ require_once "Recursos/Navegacao.php";
             <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Registrar despensas</button>
           </form>
 
-          <form action="despensas.php" method="post">
+          <form action="poupancas.php" method="post">
             <input type="hidden" value="<?php echo $_SESSION['statusMes'];  ?>" name="statusMes" >
             <input type="hidden" value="Quinzena 2" name="quinzena" >
             <button type="submit" class="btn btn-outline-secondary btn-lg px-4">Registrar poupanças</button>
@@ -86,7 +86,7 @@ require_once "Recursos/Navegacao.php";
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <!-- <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Registrar despensas</button> -->
 
-          <form action="despensas.php" method="post">
+          <form action="poupancas.php" method="post">
             <input type="hidden" value="<?php echo $_SESSION['statusMes'];  ?>" name="statusMes" >
             <input type="hidden" value="Quinzena 2" name="quinzena" >
             <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Registrar despensas</button>

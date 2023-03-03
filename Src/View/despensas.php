@@ -147,7 +147,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
       $mensagem = "Informação registrada com sucesso!";
 
 
-      $Despensas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], $statusDespensa, $pdo);
+      $Despensas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], 3, $pdo);
     } else {
       $mensagem = "Registro já cadastrado!";
     }
@@ -241,7 +241,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
           $mensagem = "Informação registrada com sucesso!";
 
 
-          $Despensas_repositorio->cadastro_Saida($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], $statusDespensa, $pdo);
+          $Despensas_repositorio->cadastro_Saida($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], 4, $pdo);
         } else {
           $mensagem = "Registro já cadastrado!";
         }
@@ -380,8 +380,9 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
                         </td>
                         <td>
 
-                          <form action="excluir_despensa.php" method="post">
+                          <form action="excluir.php" method="post">
                             <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
+                            <input type="hidden" value= "DESPENSAS" name="pagina_inicial">
                             <button type="submit"> <img src="../../Assets//Icons//x-mark-xxl.png" class="icon_exclusao"></button>
                           </form>
 
@@ -513,7 +514,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
                         </td>
                         <td>
 
-                          <form action="excluir_despensa.php" method="post">
+                          <form action="excluir.php" method="post">
                             <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
                             <button type="submit"> <img src="../../Assets//Icons//x-mark-xxl.png" class="icon_exclusao"></button>
                           </form>

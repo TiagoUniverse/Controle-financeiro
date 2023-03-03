@@ -34,7 +34,7 @@ class Despensas_repositorio
             ':ano' => $ano ,
             ':quinzena' => $quinzena ,
             ':idstatus_Mes' => $idstatus_Mes ,
-            ':statusDespensa' => '3'
+            ':statusDespensa' => $idStatus_despensa
         ));
 
         // echo "funcionou!!";
@@ -66,7 +66,7 @@ class Despensas_repositorio
             ':ano' => $ano ,
             ':quinzena' => $quinzena ,
             ':idstatus_Mes' => $idstatus_Mes ,
-            ':statusDespensa' => '4'
+            ':statusDespensa' => $idStatus_despensa
         ));
 
         // echo "funcionou!!";

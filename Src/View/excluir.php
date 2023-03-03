@@ -29,6 +29,9 @@ $Despensas = new Despensas();
 // Variables
 $id = $_POST['id'];
 
+$pagina_inicial = $_POST['pagina_inicial'];
+
+
 $Despensas = $Despensas_repositorio->consultaById($id, $pdo);
 
 if (isset($_POST['foiExcluido']) && $_POST['foiExcluido'] == "EXCLUIDO"){
@@ -53,12 +56,22 @@ if (isset($_POST['foiExcluido']) && $_POST['foiExcluido'] == "EXCLUIDO"){
 
 <body>
 
-  <form action="despensas.php" method="post">
+  <?php
+  if ($pagina_inicial == "POUPANCA"){
+    ?>
+      <form action="poupancas.php" method="post">
+    <?php
+  } else {
+    ?>
+      <form action="despensas.php" method="post">
+    <?php
+  }
+  ?>
     <input type="hidden" name="statusMes" value="<?php echo $_SESSION['statusMes']; ?>">
     <button class="btn btn-link">Voltar</button>
   </form>
 
-  <h1 class="display-5 fw-bold" style="text-align: center;">Despensas: gastos pessoais</h1>
+  <h1 class="display-5 fw-bold" style="text-align: center;"><?php echo strtolower($pagina_inicial) . ": gastos pessoais"; ?></h1>
   <h3 style="text-align: center;">Verifique se é este o registro que deseja excluir e confirme</h3>
 
   <div class="px-4 py-5 my-5 text-center">
@@ -67,7 +80,7 @@ if (isset($_POST['foiExcluido']) && $_POST['foiExcluido'] == "EXCLUIDO"){
   <?php
   if (!isset($_POST['foiExcluido'])){
     ?>
-    <form action="excluir_despensa.php" method="post">
+    <form action="excluir.php" method="post">
       <input type="hidden" name="foiExcluido" value="EXCLUIDO">
       <input type="hidden" name="id" value="<?php echo $id; ?>">
       <div class="mb-3">
