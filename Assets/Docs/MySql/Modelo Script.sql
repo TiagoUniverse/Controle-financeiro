@@ -44,7 +44,7 @@ Create table Despensas (
 id 			INT  NOT NULL PRIMARY KEY AUTO_INCREMENT,
 descricao		VARCHAR(300) 	NOT NULL,
 valor	float	NOT NULL, 
-dataDespensa 	date 	 NULL,
+dataDespensa 	date 	NOT NULL,
 /* Ano vai ser usado pelo sistema  */
 ano     VARCHAR(300) NOT NULL,
 quinzena VARCHAR(300) NOT NULL,
@@ -68,3 +68,23 @@ insert into status_mes ( nome ) values (' Janeiro ' );
 
 /* Busca de despensa de gasto pessoais da quinzena 1 de janeiro/2023  */
 Select * from despensas where status = "ATIVO" and ano = "2023"  and IdStatus_mes = "1" and quinzena = "Quinzena 01" and ( idStatus_despensa = 3 OR idstatus_despensa = 4 );
+
+
+
+/** POUPANCAS
+*/
+Create table poupancas (
+id 				INT  NOT NULL PRIMARY KEY AUTO_INCREMENT,
+descricao		VARCHAR(300) 	NOT NULL,
+valor			float	 	    NOT NULL,
+dataPoupanca	DATE 	        NOT NULL,
+ano				VARCHAR(300) 	NOT NULL,
+status			VARCHAR(300) 	NOT NULL,
+created			DATETIME	 	NOT NULL,
+updated			DATETIME 			NULL,
+
+idUsuario INT,
+
+Foreign key (idUsuario) references Usuario(id)
+
+);

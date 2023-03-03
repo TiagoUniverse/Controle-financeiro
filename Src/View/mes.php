@@ -69,7 +69,7 @@ require_once "Recursos/Navegacao.php";
 
           <form action="poupancas.php" method="post">
             <input type="hidden" value="<?php echo $_SESSION['statusMes'];  ?>" name="statusMes" >
-            <input type="hidden" value="Quinzena 2" name="quinzena" >
+            <input type="hidden" value="Quinzena 1" name="quinzena" >
             <button type="submit" class="btn btn-outline-secondary btn-lg px-4">Registrar poupanças</button>
           </form>
 
@@ -92,7 +92,13 @@ require_once "Recursos/Navegacao.php";
             <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Registrar despensas</button>
           </form>
 
-          <button type="button" class="btn btn-outline-secondary btn-lg px-4">Registrar poupanças</button>
+         
+          <form action="poupancas.php" method="post">
+            <input type="hidden" value="<?php echo $_SESSION['statusMes'];  ?>" name="statusMes" >
+            <input type="hidden" value="Quinzena 2" name="quinzena" >
+            <button type="submit" class="btn btn-outline-secondary btn-lg px-4">Registrar poupanças</button>
+          </form>
+
         </div>
       </div>
     </div>
