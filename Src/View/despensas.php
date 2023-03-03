@@ -509,6 +509,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
 
                           <form action="alterar.php" method="post">
                             <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
+                            <input type="hidden" value= "DESPENSAS" name="pagina_inicial">
                             <button type="submit"> <img src="../../Assets//Icons//pencil.png" class="icon_exclusao"></button>
                           </form>
 
@@ -517,6 +518,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
 
                           <form action="excluir.php" method="post">
                             <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
+                            <input type="hidden" value= "DESPENSAS" name="pagina_inicial">
                             <button type="submit"> <img src="../../Assets//Icons//x-mark-xxl.png" class="icon_exclusao"></button>
                           </form>
 

@@ -83,6 +83,7 @@ if (isset($_POST['foiExcluido']) && $_POST['foiExcluido'] == "EXCLUIDO"){
     <form action="excluir.php" method="post">
       <input type="hidden" name="foiExcluido" value="EXCLUIDO">
       <input type="hidden" name="id" value="<?php echo $id; ?>">
+      <input type="hidden" name="pagina_inicial" value="<?php echo $pagina_inicial; ?>">
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label"> Descrição: </label>
         <input type="text" value="<?php echo $Despensas->getDescricao();  ?> " class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" disabled>
