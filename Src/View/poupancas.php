@@ -379,8 +379,9 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
                         <td> <?php echo $linha['dataDespensa']; ?> </td>
                         <td>
 
-                          <form action="alterar_despensa.php" method="post">
+                          <form action="alterar.php" method="post">
                             <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
+                            <input type="hidden" value= "POUPANCA" name="pagina_inicial">
                             <button type="submit"> <img src="../../Assets//Icons//pencil.png" class="icon_exclusao"></button>
                           </form>
 
@@ -513,7 +514,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
                         <td> <?php echo $linha['dataDespensa']; ?> </td>
                         <td>
 
-                          <form action="alterar_despensa.php" method="post">
+                          <form action="alterar.php" method="post">
                             <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
                             <button type="submit"> <img src="../../Assets//Icons//pencil.png" class="icon_exclusao"></button>
                           </form>
