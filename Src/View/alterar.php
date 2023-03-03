@@ -9,6 +9,16 @@
 require_once "conexao.php";
 require_once "Recursos/Navegacao.php";
 
+/*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+* │                                Poupancas's section                                                            │
+* └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/
+
+require_once "../Model/Poupancas_repositorio.php";
+
+use model\Poupancas_repositorio;
+
+$Poupancas_repositorio = new Poupancas_repositorio();
 
 /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 * │                                Despensas's section                                                            │
@@ -31,7 +41,14 @@ $id = $_POST['id'];
 
 $pagina_inicial = $_POST['pagina_inicial'];
 
-$Despensas = $Despensas_repositorio->consultaById($id, $pdo);
+
+if ($pagina_inicial == "POUPANCA") {
+  $Despensas = $Poupancas_repositorio->consultaById($id, $pdo);
+} else {
+  $Despensas = $Despensas_repositorio->consultaById($id, $pdo);
+}
+
+
 
 if (isset($_POST['foiAlterado']) && $_POST['foiAlterado'] == "ALTERADO") {
 
@@ -73,33 +90,59 @@ if (isset($_POST['foiAlterado']) && $_POST['foiAlterado'] == "ALTERADO") {
    * Data: 16/02/23
    */
 
-  $mensagemVermelha = true;
-  if (!isset($_POST['dataDespensa'])) {
-    $mensagem = "Informe uma data";
-  } else if ($_SESSION['quinzena'] == "Quinzena 1" && $dataDividida[1] != $mes_selecionado) {
-    $mensagem = "Selecione uma data do mes de " . $_SESSION['nomeMes'];
-  } else if ($_SESSION['quinzena'] == "Quinzena 2" && $dataDividida[1] != $mes_selecionado && $dataDividida[2] > 5) {
-    $mensagem = "Informe um valor da segunda quinzena até o dia 4";
-  } else if ($dataDividida[1] > $mes_limite) {
-    $mensagem = "Para cadastrar na 2ª quinzena, insira registro entre o mês atual e o próximo mês.";
-  } else if ($dataDividida[0] != $_SESSION['ano']) {
-    $mensagem = "Faça um registro no ano de " . $_SESSION['ano'];
-  } else if ($descricao == null) {
-    $mensagem = "Por favor, preencha a descrição sobre o registro";
-  } else if ($valor <= 0) {
-    $mensagem = "Por favor, informe um valor positivo do dinheiro";
-  } else if ($_SESSION['quinzena'] == "Quinzena 1" && ($dataDividida[2] < 5 || $dataDividida[2] > 19)) {
-    $mensagem = "Por favor, insira um registro dentro dos dias da primeira quinzena (dia 5 até dia 19)";
-  } else if ($_SESSION['quinzena'] == "Quinzena 2" && ($dataDividida[2] > 5     || ($dataDividida[2] != 1 && $dataDividida[2] != 2 && $dataDividida[2] != 3 &&
-    $dataDividida[2] != 4 &&  $dataDividida[2] < 19))) {
-    $mensagem = "Por favor, insira um registro dentro dos dias da segunda quinzena (20 até dia 4 do próximo mês)";
+  if ($pagina_inicial == "POUPANCA") {
+    $mensagemVermelha = true;
+    if (!isset($_POST['data'])) {
+      $mensagem = "Informe uma data";
+    } else if ($dataDividida[0] != $_SESSION['ano']) {
+      $mensagem = "Faça um registro no ano de " . $_SESSION['ano'];
+    } else if ($descricao == null) {
+      $mensagem = "Por favor, preencha a descrição sobre o registro";
+    } else if ($valor <= 0) {
+      $mensagem = "Por favor, informe um valor positivo do dinheiro";
+    } else {
+
+      $retorno = $Poupancas_repositorio->consultarRegistro($descricao, $valor, $data, 7, $pdo);
+
+      if ($retorno == false) {
+        $mensagemVermelha = false;
+        $mensagem = "Informação registrada com sucesso!";
+
+
+        $Poupancas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], 7, $pdo);
+      } else {
+        $mensagem = "Registro já cadastrado!";
+      }
+    }
   } else {
-    $mensagemVermelha = false;
-    $mensagem = "Registro alterado!";
+    $mensagemVermelha = true;
+    if (!isset($_POST['dataDespensa'])) {
+      $mensagem = "Informe uma data";
+    } else if ($_SESSION['quinzena'] == "Quinzena 1" && $dataDividida[1] != $mes_selecionado) {
+      $mensagem = "Selecione uma data do mes de " . $_SESSION['nomeMes'];
+    } else if ($_SESSION['quinzena'] == "Quinzena 2" && $dataDividida[1] != $mes_selecionado && $dataDividida[2] > 5) {
+      $mensagem = "Informe um valor da segunda quinzena até o dia 4";
+    } else if ($dataDividida[1] > $mes_limite) {
+      $mensagem = "Para cadastrar na 2ª quinzena, insira registro entre o mês atual e o próximo mês.";
+    } else if ($dataDividida[0] != $_SESSION['ano']) {
+      $mensagem = "Faça um registro no ano de " . $_SESSION['ano'];
+    } else if ($descricao == null) {
+      $mensagem = "Por favor, preencha a descrição sobre o registro";
+    } else if ($valor <= 0) {
+      $mensagem = "Por favor, informe um valor positivo do dinheiro";
+    } else if ($_SESSION['quinzena'] == "Quinzena 1" && ($dataDividida[2] < 5 || $dataDividida[2] > 19)) {
+      $mensagem = "Por favor, insira um registro dentro dos dias da primeira quinzena (dia 5 até dia 19)";
+    } else if ($_SESSION['quinzena'] == "Quinzena 2" && ($dataDividida[2] > 5     || ($dataDividida[2] != 1 && $dataDividida[2] != 2 && $dataDividida[2] != 3 &&
+      $dataDividida[2] != 4 &&  $dataDividida[2] < 19))) {
+      $mensagem = "Por favor, insira um registro dentro dos dias da segunda quinzena (20 até dia 4 do próximo mês)";
+    } else {
+      $mensagemVermelha = false;
+      $mensagem = "Registro alterado!";
 
 
 
-    $Despensas_repositorio->alterar($descricao, $valor, $dataDespensa, $id, $pdo);
+      $Despensas_repositorio->alterar($descricao, $valor, $dataDespensa, $id, $pdo);
+    }
   }
 }
 
@@ -144,26 +187,59 @@ if (isset($_POST['foiAlterado']) && $_POST['foiAlterado'] == "ALTERADO") {
 
         <?php
         if (!isset($_POST['foiAlterado'])) {
-        ?>
-          <form action="alterar.php" method="post">
-            <input type="hidden" name="foiAlterado" value="ALTERADO">
-            <input type="hidden" name="id" value="<?php echo $id; ?>">
-            <input type="hidden" name="pagina_inicial" value="<?php echo $pagina_inicial; ?>">
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label"> Descrição: </label>
-              <input type="text" value="<?php echo $Despensas->getDescricao();  ?> " name="descricao" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Valor:</label>
-              <input type="text" value="<?php echo $Despensas->getValor();  ?> " name="valor" class="form-control" id="exampleInputPassword1">
-            </div>
 
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Data:</label>
-              <input type="text" value="<?php echo $Despensas->getData();  ?> " name="dataDespensa" class="form-control" id="exampleInputPassword1">
-            </div>
-            <button type="submit" class="btn btn-danger">Alterar</button>
-          </form>
+
+          if ($pagina_inicial == "POUPANCA") {
+        ?>
+            <form action="alterar.php" method="post">
+              <input type="hidden" name="foiAlterado" value="ALTERADO">
+              <input type="hidden" name="id" value="<?php echo $id; ?>">
+              <input type="hidden" name="pagina_inicial" value="<?php echo $pagina_inicial; ?>">
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label"> Descrição: </label>
+                <input type="text" value="<?php echo $Despensas->getDescricao();  ?> " name="descricao" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Valor:</label>
+                <input type="text" value="<?php echo $Despensas->getValor();  ?> " name="valor" class="form-control" id="exampleInputPassword1">
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Data:</label>
+                <input type="text" value="<?php echo $Despensas->getData();  ?> " name="dataDespensa" class="form-control" id="exampleInputPassword1">
+              </div>
+              <button type="submit" class="btn btn-danger">Alterar</button>
+            </form>
+
+          <?php
+          } else {
+          ?>
+            <form action="alterar.php" method="post">
+              <input type="hidden" name="foiAlterado" value="ALTERADO">
+              <input type="hidden" name="id" value="<?php echo $id; ?>">
+              <input type="hidden" name="pagina_inicial" value="<?php echo $pagina_inicial; ?>">
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label"> Descrição: </label>
+                <input type="text" value="<?php echo $Despensas->getDescricao();  ?> " name="descricao" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Valor:</label>
+                <input type="text" value="<?php echo $Despensas->getValor();  ?> " name="valor" class="form-control" id="exampleInputPassword1">
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Data:</label>
+                <input type="text" value="<?php echo $Despensas->getData();  ?> " name="dataDespensa" class="form-control" id="exampleInputPassword1">
+              </div>
+              <button type="submit" class="btn btn-danger">Alterar</button>
+            </form>
+          <?php
+          }
+
+
+          ?>
+
+
           <?php
         } else {
 

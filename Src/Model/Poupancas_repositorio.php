@@ -56,7 +56,7 @@ class Poupancas_repositorio
         //         Values ({$descricao}, {$valor}, {$data}, {$ano}, {$quinzena}, {$idstatus_Mes}, {$idStatus_despensa})";
 
         $stmt =  $pdo->prepare('INSERT INTO Poupancas (descricao, valor, dataPoupanca, ano, idStatus_despensa , idUsuario)
-        VALUES (:descricao , :valor , :dataPoupanca , :ano , :quinzena , :idstatus_Mes , :statusDespensa, :idUsuario )  ');
+        VALUES (:descricao , :valor , :dataPoupanca , :ano , :statusDespensa, :idUsuario )  ');
         
         $stmt->execute(array(
             ':descricao' => $descricao ,
@@ -96,18 +96,18 @@ class Poupancas_repositorio
 
 
     public function consultaById($id ,$pdo ){
-        $consulta = $pdo->query("SELECT * FROM despensas WHERE id = '{$id}'   ;");
+        $consulta = $pdo->query("SELECT * FROM poupancas WHERE id = '{$id}'   ;");
         
       //  var_dump( $consulta);
 
         while ($linha = $consulta->fetch(\PDO::FETCH_ASSOC)) {
+            //O correto seria ter a própria classe de Poupancas, mas vou reutilizar esta
             $Despensas = new Despensas();
 
             $Despensas->setDescricao($linha['descricao']);
             $Despensas->setValor($linha['valor']);
             $Despensas->setData($linha['dataPoupanca']);
             $Despensas->setAno($linha['ano']);
-            $Despensas->setQuinzena($linha['quinzena']);
             $Despensas->setStatus($linha['status']);
         }
 
