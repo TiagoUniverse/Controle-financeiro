@@ -92,7 +92,7 @@ if (isset($_POST['foiAlterado']) && $_POST['foiAlterado'] == "ALTERADO") {
 
   if ($pagina_inicial == "POUPANCA") {
     $mensagemVermelha = true;
-    if (!isset($_POST['data'])) {
+    if (!isset($_POST['dataDespensa'])) {
       $mensagem = "Informe uma data";
     } else if ($dataDividida[0] != $_SESSION['ano']) {
       $mensagem = "Faça um registro no ano de " . $_SESSION['ano'];
@@ -102,17 +102,12 @@ if (isset($_POST['foiAlterado']) && $_POST['foiAlterado'] == "ALTERADO") {
       $mensagem = "Por favor, informe um valor positivo do dinheiro";
     } else {
 
-      $retorno = $Poupancas_repositorio->consultarRegistro($descricao, $valor, $data, 7, $pdo);
-
-      if ($retorno == false) {
-        $mensagemVermelha = false;
-        $mensagem = "Informação registrada com sucesso!";
+      $mensagemVermelha = false;
+      $mensagem = "Registro alterado!";
 
 
-        $Poupancas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], 7, $pdo);
-      } else {
-        $mensagem = "Registro já cadastrado!";
-      }
+
+      $Poupancas_repositorio->alterar($descricao, $valor, $dataDespensa, $id, $pdo);
     }
   } else {
     $mensagemVermelha = true;

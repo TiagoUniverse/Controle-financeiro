@@ -139,7 +139,7 @@ class Poupancas_repositorio
         require_once "../view/conexao.php";
         try {
 
-        $stmt =  $pdo->prepare('Update despensas  SET descricao = (:descricao), valor = (:valor) , dataPoupanca = (:dataPoupanca) , updated = current_time()
+        $stmt =  $pdo->prepare('Update poupancas  SET descricao = (:descricao), valor = (:valor) , dataPoupanca = (:dataPoupanca) , updated = current_time()
 
         Where id = (:id)');
         
