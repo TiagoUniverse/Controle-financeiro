@@ -7,3 +7,5 @@ SESSION['nomeMes']
 Session['statusMes']
 
 Session['quinzena']
+
+Session['tipo_registro']

@@ -19,10 +19,31 @@
       ?>
     </a>
 
+    <?php
+      if (!isset($_SESSION['tipo_registro']) ){
+        $_SESSION['tipo_registro'] = "Registros pessoais";
+      }
+
+      ?>
+
+
+
     <ul class="nav nav-pills">
-      <li class="nav-item"><a href="Home.php" class="nav-link active" aria-current="page">Despensas</a></li>
-      <li class="nav-item"><a href="#" class="nav-link">Poupança</a></li>
-      <!-- <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li> -->
+      
+    <?php
+    if ($_SESSION['tipo_registro'] = "Registros pessoais"){
+      ?>
+        <li class="nav-item"><a href="Home.php" class="nav-link active" aria-current="page">Registros pessoais</a></li>
+      <li class="nav-item"><a class="nav-link" style="background-color: gray;">Registros da casa</a></li>
+      <?php
+    } else {
+      ?>
+        <li class="nav-item"><a  class="nav-link active" aria-current="page">Registros pessoais</a></li>
+      <li class="nav-item"><a href="Home.php" class="nav-link">Registros da casa</a></li>
+      <?php
+    }
+    ?>
+
 
       <div class="dropdown text-end">
         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
