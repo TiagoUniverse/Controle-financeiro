@@ -10,6 +10,19 @@ require_once "conexao.php";
 require_once "Recursos/Navegacao.php";
 
 
+
+/*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+* │                                Poupancas's section                                                            │
+* └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/
+
+require_once "../Model/Poupancas_repositorio.php";
+
+use model\Poupancas_repositorio;
+
+$Poupancas_repositorio = new Poupancas_repositorio();
+
+
 /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 * │                                Despensas's section                                                            │
 * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
@@ -32,10 +45,21 @@ $id = $_POST['id'];
 $pagina_inicial = $_POST['pagina_inicial'];
 
 
-$Despensas = $Despensas_repositorio->consultaById($id, $pdo);
+if ($pagina_inicial == "POUPANCA") {
+  $Despensas = $Poupancas_repositorio->consultaById($id, $pdo);
+} else {
+  $Despensas = $Despensas_repositorio->consultaById($id, $pdo);
+}
+
 
 if (isset($_POST['foiExcluido']) && $_POST['foiExcluido'] == "EXCLUIDO"){
+
+  if ($pagina_inicial == "POUPANCA") {
+    $Poupancas_repositorio->excluir_registro($id , $pdo);
+  }else {
   $Despensas_repositorio->excluir_registro($id , $pdo);
+  }
+
 }
 
 // var_dump($Despensas);
@@ -79,6 +103,7 @@ if (isset($_POST['foiExcluido']) && $_POST['foiExcluido'] == "EXCLUIDO"){
 
   <?php
   if (!isset($_POST['foiExcluido'])){
+    
     ?>
     <form action="excluir.php" method="post">
       <input type="hidden" name="foiExcluido" value="EXCLUIDO">

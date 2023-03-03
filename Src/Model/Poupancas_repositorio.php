@@ -120,7 +120,7 @@ class Poupancas_repositorio
         require_once "../view/conexao.php";
 
         try {
-            $stmt = $pdo->prepare('DELETE FROM despensas WHERE id = :id');
+            $stmt = $pdo->prepare('DELETE FROM poupancas WHERE id = :id');
             $stmt->bindParam(':id', $id);
             $stmt->execute();
           
