@@ -10,11 +10,11 @@ require_once "conexao.php";
 
 //Variáveis
 
-if (isset($_POST['nomeMes'])){ 
+if (isset($_POST['nomeMes'])) {
   $_SESSION['nomeMes'] = $_POST['nomeMes'];
 }
 
-if (isset($_POST['statusMes'])){ 
+if (isset($_POST['statusMes'])) {
   $_SESSION['statusMes'] = $_POST['statusMes'];
 }
 
@@ -55,23 +55,27 @@ require_once "Recursos/Navegacao.php";
   } else {
   ?>
     <div class="px-4 py-5 my-5 text-center">
+      <h1 class="display-5 fw-bold"> <?php echo "Poupança de " . $_SESSION['ano'];  ?> </h1>
+      <br><br>
+      <form action="poupancas.php" method="post">
+        <button type="submit" class="btn btn-outline-secondary btn-lg px-4">Registrar poupanças</button>
+      </form>
+    </div>
+
+    <div class="px-4 py-5 my-5 text-center">
       <img class="d-block mx-auto mb-4" src="../../Assets/img/dia 15.png" alt="" width="72" height="70">
 
-      <h1 class="display-5 fw-bold">Primeira quinzena</h1>
+      <h1 class="display-5 fw-bold">Despensas: Primeira quinzena</h1>
       <div class="col-lg-6 mx-auto">
         <p class="lead mb-4">Registre os gastos entre o dia 05 até o dia 19, que são os dias da entrada de salário da casa.</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <form action="despensas.php" method="post">
-            <input type="hidden" value="<?php echo $_SESSION['statusMes'];  ?>" name="statusMes" >
-            <input type="hidden" value="Quinzena 1" name="quinzena" >
+            <input type="hidden" value="<?php echo $_SESSION['statusMes'];  ?>" name="statusMes">
+            <input type="hidden" value="Quinzena 1" name="quinzena">
             <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Registrar despensas</button>
           </form>
 
-          <form action="poupancas.php" method="post">
-            <input type="hidden" value="<?php echo $_SESSION['statusMes'];  ?>" name="statusMes" >
-            <input type="hidden" value="Quinzena 1" name="quinzena" >
-            <button type="submit" class="btn btn-outline-secondary btn-lg px-4">Registrar poupanças</button>
-          </form>
+
 
 
         </div>
@@ -80,24 +84,18 @@ require_once "Recursos/Navegacao.php";
 
     <div class="px-4 py-5 my-5 text-center">
       <img class="d-block mx-auto mb-4" src="../../Assets/img/dia 30.png" alt="" width="72" height="70">
-      <h1 class="display-5 fw-bold">Segunda quinzena</h1>
+      <h1 class="display-5 fw-bold">Despensas: Segunda quinzena</h1>
       <div class="col-lg-6 mx-auto">
         <p class="lead mb-4">Registre os gastos entre o dia 20 até dia 04 do próximo mês, antes de começar uma nova quinzena.</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <!-- <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Registrar despensas</button> -->
 
           <form action="poupancas.php" method="post">
-            <input type="hidden" value="<?php echo $_SESSION['statusMes'];  ?>" name="statusMes" >
-            <input type="hidden" value="Quinzena 2" name="quinzena" >
+            <input type="hidden" value="<?php echo $_SESSION['statusMes'];  ?>" name="statusMes">
+            <input type="hidden" value="Quinzena 2" name="quinzena">
             <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Registrar despensas</button>
           </form>
 
-         
-          <form action="poupancas.php" method="post">
-            <input type="hidden" value="<?php echo $_SESSION['statusMes'];  ?>" name="statusMes" >
-            <input type="hidden" value="Quinzena 2" name="quinzena" >
-            <button type="submit" class="btn btn-outline-secondary btn-lg px-4">Registrar poupanças</button>
-          </form>
 
         </div>
       </div>

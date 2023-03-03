@@ -2,8 +2,8 @@
 
 /** 
  * Author: Tiago César da Silva Lopes
- * Description: Register of all money spent
- * Date: 02/02/23
+ * Description: Register of all money spent and saved
+ * Date: 03/03/23
  */
 
 require_once "conexao.php";
@@ -11,25 +11,21 @@ require_once "Recursos/Navegacao.php";
 
 
 /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-* │                                Despensas's section                                                            │
+* │                                Poupancas's section                                                            │
 * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
 
-require_once "../Model/Despensas_repositorio.php";
+require_once "../Model/Poupancas_repositorio.php";
 
-use model\Despensas_repositorio;
+use model\Poupancas_repositorio;
 
-$Despensas_repositorio = new Despensas_repositorio();
+$Poupancas_repositorio = new Poupancas_repositorio();
 
 
 /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 * │                                Variables                                                                      │
 * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
-
-if (isset($_POST['quinzena'])) {
-  $_SESSION['quinzena'] = $_POST['quinzena'];
-}
 
 if (isset($_POST['adicionando_registro'])) {
   $adicionando_registro = $_POST['adicionando_registro'];
@@ -61,6 +57,7 @@ if (isset($_POST['statusDespensa'])) {
   $statusDespensa = null;
 }
 
+
 /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 * │                                Conexão com BD                                                                 │
 * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
@@ -90,27 +87,6 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
   }
 
 
-  // Mês para validação
-  if ($_SESSION['statusMes'] < 10) {
-    $mes_selecionado = "0" . $_SESSION['statusMes'];
-  } else {
-    $mes_selecionado = $_SESSION['statusMes'];
-  }
-
-  /**
-   * mes limite
-   * Funcionamento: A quinzena 2 permite registro do dia 20/mes atual até o dia 04/próximo mes. Para isso, vamos limitar o registro para registrar apenas
-   * o mes atual ou o próximo mes
-   * Data: 03/03/23
-   */
-
-  if ($mes_selecionado == 12) {
-    $mes_limite = 1;
-  } else {
-    $mes_limite = $mes_selecionado + 1;
-  }
-
-
   /**
    * Mensagem Vermelha
    * Funcionamento: A validação começa com ela definida como verdadeira. Se depois de todas as validações as informações estiverem corretas, então o sistema
@@ -121,33 +97,22 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
   $mensagemVermelha = true;
   if (!isset($_POST['data'])) {
     $mensagem = "Informe uma data";
-  } else if ($_SESSION['quinzena'] == "Quinzena 1" && $dataDividida[1] != $mes_selecionado) {
-    $mensagem = "Selecione uma data do mes de " . $_SESSION['nomeMes'];
-  } else if ($_SESSION['quinzena'] == "Quinzena 2" && $dataDividida[1] != $mes_selecionado && $dataDividida[2] > 5) {
-    $mensagem = "Informe um valor da segunda quinzena até o dia 4";
-  } else if ($dataDividida[1] > $mes_limite) {
-    $mensagem = "Para cadastrar na 2ª quinzena, insira registro entre o mês atual e o próximo mês.";
-  } else if ($dataDividida[0] != $_SESSION['ano']) {
+  }  else if ($dataDividida[0] != $_SESSION['ano']) {
     $mensagem = "Faça um registro no ano de " . $_SESSION['ano'];
   } else if ($descricao == null) {
     $mensagem = "Por favor, preencha a descrição sobre o registro";
   } else if ($valor <= 0) {
     $mensagem = "Por favor, informe um valor positivo do dinheiro";
-  } else if ($_SESSION['quinzena'] == "Quinzena 1" && ($dataDividida[2] < 5 || $dataDividida[2] > 19)) {
-    $mensagem = "Por favor, insira um registro dentro dos dias da primeira quinzena (dia 5 até dia 19)";
-  } else if ($_SESSION['quinzena'] == "Quinzena 2" && ($dataDividida[2] > 5     || ($dataDividida[2] != 1 && $dataDividida[2] != 2 && $dataDividida[2] != 3 &&
-    $dataDividida[2] != 4 &&  $dataDividida[2] < 19))) {
-    $mensagem = "Por favor, insira um registro dentro dos dias da segunda quinzena (20 até dia 4 do próximo mês)";
   } else {
 
-    $retorno = $Despensas_repositorio->consultarRegistro($descricao, $valor, $data, 7, $pdo);
-
+    $retorno = $Poupancas_repositorio->consultarRegistro($descricao, $valor, $data, 7, $pdo);
+    
     if ($retorno == false) {
       $mensagemVermelha = false;
       $mensagem = "Informação registrada com sucesso!";
 
 
-      $Despensas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], 7, $pdo);
+      $Poupancas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'] , 7 , $pdo);
     } else {
       $mensagem = "Registro já cadastrado!";
     }
@@ -179,69 +144,36 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
     * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
     */
 
-      if (isset($_POST['data'])) {
-        $dataDividida = explode("-", $_POST['data']);
-      }
+    if (isset($_POST['data'])) {
+      $dataDividida = explode("-", $_POST['data']);
+    }
+  
+  
+    /**
+     * Mensagem Vermelha
+     * Funcionamento: A validação começa com ela definida como verdadeira. Se depois de todas as validações as informações estiverem corretas, então o sistema
+     * vai exibir uma mensagem de sucesso e informar que o cadastro foi feito com sucesso
+     * Data: 16/02/23
+     */
+  
+    $mensagemVermelha = true;
+    if (!isset($_POST['data'])) {
+      $mensagem = "Informe uma data";
+    }  else if ($dataDividida[0] != $_SESSION['ano']) {
+      $mensagem = "Faça um registro no ano de " . $_SESSION['ano'];
+    } else if ($descricao == null) {
+      $mensagem = "Por favor, preencha a descrição sobre o registro";
+    } else if ($valor <= 0) {
+      $mensagem = "Por favor, informe um valor positivo do dinheiro";
+    } else {
 
-
-      // Mês para validação
-      if ($_SESSION['statusMes'] < 10) {
-        $mes_selecionado = "0" . $_SESSION['statusMes'];
-      } else {
-        $mes_selecionado = $_SESSION['statusMes'];
-      }
-
-      /**
-       * mes limite
-       * Funcionamento: A quinzena 2 permite registro do dia 20/mes atual até o dia 04/próximo mes. Para isso, vamos limitar o registro para registrar apenas
-       * o mes atual ou o próximo mes
-       * Data: 03/03/23
-       */
-
-      if ($mes_selecionado == 12) {
-        $mes_limite = 1;
-      } else {
-        $mes_limite = $mes_selecionado + 1;
-      }
-
-
-      /**
-       * Mensagem Vermelha
-       * Funcionamento: A validação começa com ela definida como verdadeira. Se depois de todas as validações as informações estiverem corretas, então o sistema
-       * vai exibir uma mensagem de sucesso e informar que o cadastro foi feito com sucesso
-       * Data: 16/02/23
-       */
-
-      $mensagemVermelha = true;
-      if (!isset($_POST['data'])) {
-        $mensagem = "Informe uma data";
-      } else if ($_SESSION['quinzena'] == "Quinzena 1" && $dataDividida[1] != $mes_selecionado) {
-        $mensagem = "Selecione uma data do mes de " . $_SESSION['nomeMes'];
-      } else if ($_SESSION['quinzena'] == "Quinzena 2" && $dataDividida[1] != $mes_selecionado && $dataDividida[2] > 5) {
-        $mensagem = "Informe um valor da segunda quinzena até o dia 4";
-      } else if ($dataDividida[1] > $mes_limite) {
-        $mensagem = "Para cadastrar na 2ª quinzena, insira registro entre o mês atual e o próximo mês.";
-      } else if ($dataDividida[0] != $_SESSION['ano']) {
-        $mensagem = "Faça um registro no ano de " . $_SESSION['ano'];
-      } else if ($descricao == null) {
-        $mensagem = "Por favor, preencha a descrição sobre o registro";
-      } else if ($valor <= 0) {
-        $mensagem = "Por favor, informe um valor positivo do dinheiro";
-      } else if ($_SESSION['quinzena'] == "Quinzena 1" && ($dataDividida[2] < 5 || $dataDividida[2] > 19)) {
-        $mensagem = "Por favor, insira um registro dentro dos dias da primeira quinzena (dia 5 até dia 19)";
-      } else if ($_SESSION['quinzena'] == "Quinzena 2" && ($dataDividida[2] > 5     || ($dataDividida[2] != 1 && $dataDividida[2] != 2 && $dataDividida[2] != 3 &&
-        $dataDividida[2] != 4 &&  $dataDividida[2] < 19))) {
-        $mensagem = "Por favor, insira um registro dentro dos dias da segunda quinzena (20 até dia 4 do próximo mês)";
-      } else {
-
-        $retorno = $Despensas_repositorio->consultarRegistro($descricao, $valor, $data, 8, $pdo);
+        $retorno = $Poupancas_repositorio->consultarRegistro($descricao, $valor, $data, 8, $pdo);
 
         if ($retorno == false) {
           $mensagemVermelha = false;
           $mensagem = "Informação registrada com sucesso!";
 
-
-          $Despensas_repositorio->cadastro_Saida($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], 8, $pdo);
+          $Poupancas_repositorio->cadastro_Saida($descricao, $valor, $data, $_SESSION['ano'] , 8 , $pdo);
         } else {
           $mensagem = "Registro já cadastrado!";
         }
@@ -268,9 +200,9 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
 
 
       /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-  * │                                Exclusão de registros                                                          │
-  * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-  */
+      * │                                Exclusão de registros                                                          │
+      * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+      */
       // var_dump(isset($_POST['descricaoExclusao']));
 
 
@@ -284,14 +216,12 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
 
 
       // Consulta
-      $consulta_Entrada = $pdo->query("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano, quinzena from despensas where status = 'ATIVO' 
-  and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$_SESSION['statusMes']}' and quinzena = '{$_SESSION['quinzena']}' 
-  and ( idStatus_despensa = 7)  Order By month(dataDespensa)        ");
+      $consulta_Entrada = $pdo->query("Select * from poupancas where status = 'ATIVO' 
+  and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 7 )    Order By month(dataPoupanca)        ");
 
 
-      $consulta_Saida = $pdo->query("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano, quinzena from despensas where status = 'ATIVO' 
-  and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$_SESSION['statusMes']}' and quinzena = '{$_SESSION['quinzena']}' 
-  and ( idstatus_despensa = 8 )  Order By month(dataDespensa)        ");
+      $consulta_Saida = $pdo->query("Select * from poupancas where status = 'ATIVO' 
+      and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 8 )    Order By month(dataPoupanca)         ");
 
         ?>
 
@@ -301,7 +231,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
         <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
-          <title> Despensas de <?php echo $_SESSION['nomeMes']; ?> de <?php echo $_SESSION['ano']; ?></title>
+          <title> Poupança de <?php echo $_SESSION['ano']; ?></title>
           <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
           <link rel="stylesheet" href="../../Assets/Css/Content.css" />
           <link rel="stylesheet" href="../../Assets/Css/Footer.css" />
@@ -315,29 +245,14 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
           </form>
 
 
-          <h1 class="display-5 fw-bold" style="text-align: center;"> <?php echo $_SESSION['quinzena'];  ?> </h1>
-
           <h2 class="display-5 fw-bold" style="text-align: center;">Poupança: gastos pessoais</h2>
 
-
-
-          <h3 style="text-align: center;">Quando estiver pronto, clique no botão de avançar para registrar as despensas da casa</h3>
+          <h3 style="text-align: center;">Abaixo registre todas as entradas e saídas da sua poupança</h3>
 
           <div class="px-4 py-5 my-5 text-center">
 
-            <?php
 
-            if ($_SESSION['quinzena'] == "Quinzena 1") {
-            ?>
-              <img class="d-block mx-auto mb-4" src="../../Assets/img/dia 15.png" alt="" width="72" height="70">
-            <?php
-            } else {
-            ?>
-              <img class="d-block mx-auto mb-4" src="../../Assets/img/dia 30.png" alt="" width="72" height="70">
-            <?php
-            }
-            ?>
-
+            <img class="d-block mx-auto mb-4" src="../../Assets/Icons//bank.png" alt="" width="72" height="70">
 
             <h1 class="display-5 fw-bold" id="Entrada_title">Entrada</h1>
             <p class="lead mb-4">Por favor, digite um ano e mês válido na tela inicial.</p>
@@ -345,10 +260,10 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
             <br><br>
 
             <?php
-              // while ($linha = $consulta_Entrada->fetch(PDO::FETCH_ASSOC)) {
-              //   echo $linha['descricao'];
-              // }
-            
+            // while ($linha = $consulta_Entrada->fetch(PDO::FETCH_ASSOC)) {
+            //   echo $linha['descricao'];
+            // }
+
             ?>
 
             <div class="col-lg-6 mx-auto" style="background-color:#c79797">
@@ -376,12 +291,12 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
                         <td> <?php echo $contador; ?> </td>
                         <td> <?php echo $linha['descricao']; ?> </td>
                         <td> <?php echo "R$" . $linha['valor']; ?> </td>
-                        <td> <?php echo $linha['dataDespensa']; ?> </td>
+                        <td> <?php echo $linha['dataPoupanca']; ?> </td>
                         <td>
 
                           <form action="alterar.php" method="post">
                             <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
-                            <input type="hidden" value= "POUPANCA" name="pagina_inicial">
+                            <input type="hidden" value="POUPANCA" name="pagina_inicial">
                             <button type="submit"> <img src="../../Assets//Icons//pencil.png" class="icon_exclusao"></button>
                           </form>
 
@@ -390,7 +305,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
 
                           <form action="excluir.php" method="post">
                             <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
-                            <input type="hidden" value= "POUPANCA" name="pagina_inicial">
+                            <input type="hidden" value="POUPANCA" name="pagina_inicial">
                             <button type="submit"> <img src="../../Assets//Icons//x-mark-xxl.png" class="icon_exclusao"></button>
                           </form>
 
@@ -469,18 +384,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
 
 
           <div class="px-4 py-5 my-5 text-center">
-            <?php
-
-            if ($_SESSION['quinzena'] == "Quinzena 1") {
-            ?>
-              <img class="d-block mx-auto mb-4" src="../../Assets/img/dia 15.png" alt="" width="72" height="70">
-            <?php
-            } else {
-            ?>
-              <img class="d-block mx-auto mb-4" src="../../Assets/img/dia 30.png" alt="" width="72" height="70">
-            <?php
-            }
-            ?>
+          <img class="d-block mx-auto mb-4" src="../../Assets/Icons//bank.png" alt="" width="72" height="70">
 
             <h1 class="display-5 fw-bold" id="Saida_title">Saída</h1>
             <div class="col-lg-6 mx-auto">
@@ -511,12 +415,12 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
                         <td> <?php echo $contador; ?> </td>
                         <td> <?php echo $linha['descricao']; ?> </td>
                         <td> <?php echo "R$" . $linha['valor']; ?> </td>
-                        <td> <?php echo $linha['dataDespensa']; ?> </td>
+                        <td> <?php echo $linha['dataPoupanca']; ?> </td>
                         <td>
 
                           <form action="alterar.php" method="post">
                             <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
-                            <input type="hidden" value= "POUPANCA" name="pagina_inicial">
+                            <input type="hidden" value="POUPANCA" name="pagina_inicial">
                             <button type="submit"> <img src="../../Assets//Icons//pencil.png" class="icon_exclusao"></button>
                           </form>
 
@@ -525,7 +429,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
 
                           <form action="excluir.php" method="post">
                             <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
-                            <input type="hidden" value= "POUPANCA" name="pagina_inicial">
+                            <input type="hidden" value="POUPANCA" name="pagina_inicial">
                             <button type="submit"> <img src="../../Assets//Icons//x-mark-xxl.png" class="icon_exclusao"></button>
                           </form>
 

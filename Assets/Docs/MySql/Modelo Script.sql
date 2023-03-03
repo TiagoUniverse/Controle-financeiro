@@ -75,16 +75,18 @@ Select * from despensas where status = "ATIVO" and ano = "2023"  and IdStatus_me
 */
 Create table poupancas (
 id 				INT  NOT NULL PRIMARY KEY AUTO_INCREMENT,
-descricao		VARCHAR(300) 	NOT NULL,
+descricao		VARCHAR(300) 	NOT NULL DEFAULT '',
 valor			float	 	    NOT NULL,
-dataPoupanca	DATE 	        NOT NULL,
-ano				VARCHAR(300) 	NOT NULL,
-status			VARCHAR(300) 	NOT NULL,
-created			DATETIME	 	NOT NULL,
+dataPoupanca	DATE 	        NOT NULL ,
+ano				VARCHAR(300) 	NOT NULL DEFAULT '',
+status			VARCHAR(300) 	NOT NULL DEFAULT 'ATIVO',
+created			DATETIME	 	NOT NULL default NOW(),
 updated			DATETIME 			NULL,
 
 idUsuario INT,
+idStatus_despensa INT,
 
-Foreign key (idUsuario) references Usuario(id)
+Foreign key (idUsuario) references Usuario(id) ,
+FOREIGN KEY (idStatus_despensa) references Status_despensas(id)
 
 );
