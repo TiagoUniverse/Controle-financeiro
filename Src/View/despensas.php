@@ -138,7 +138,14 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
     if ($retorno == false) {
       $mensagemVermelha = false;
       $mensagem = "Informação registrada com sucesso!";
-      $Despensas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], 3, $pdo);
+
+      if ($_SESSION['tipo_registro'] == "Registros pessoais"){
+        $statusDespensa = 3;
+      } else {
+        $statusDespensa = 1;
+      }
+
+      $Despensas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], $statusDespensa , $pdo);
     } else {
       $mensagem = "Registro já cadastrado!";
     }
@@ -221,7 +228,14 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
     if ($retorno == false) {
       $mensagemVermelha = false;
       $mensagem = "Informação registrada com sucesso!";
-      $Despensas_repositorio->cadastro_Saida($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], 4, $pdo);
+
+      if ($_SESSION['tipo_registro'] == "Registros pessoais"){
+        $statusDespensa = 4;
+      } else {
+        $statusDespensa = 2;
+      }
+
+      $Despensas_repositorio->cadastro_Saida($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], $statusDespensa , $pdo);
     } else {
       $mensagem = "Registro já cadastrado!";
     }
