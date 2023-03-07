@@ -132,7 +132,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
     && $dataDividida[2] != 3 && $dataDividida[2] != 4 &&  $dataDividida[2] < 19))) {
     $mensagem = "Por favor, insira um registro dentro dos dias da segunda quinzena (20 até dia 4 do próximo mês)";
   } else {
-
+    // echo "entrei pra registrar";
     $retorno = $Despensas_repositorio->consultarRegistro($descricao, $valor, $data, 3, $pdo);
 
     if ($retorno == false) {
@@ -149,8 +149,9 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
     } else {
       $mensagem = "Registro já cadastrado!";
     }
+  }
 
-    $adicionando_registro = null;
+  $adicionando_registro = null;
 
     // Mensagem do resultado
     if ($mensagemVermelha) {
@@ -160,7 +161,6 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
     }
     echo $mensagem;
     echo "</div>";
-  }
 }
 
 
@@ -239,16 +239,18 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
     } else {
       $mensagem = "Registro já cadastrado!";
     }
-
-    // Mensagem do resultado
-    if ($mensagemVermelha) {
-      echo "<div class='alert alert-danger' role='alert'> ";
-    } else {
-      echo "<div class='alert alert-success' role='alert'> ";
-    }
-    echo $mensagem;
-    echo "</div>";
   }
+
+  $adicionando_registro = null;
+
+  // Mensagem do resultado
+  if ($mensagemVermelha) {
+    echo "<div class='alert alert-danger' role='alert'> ";
+  } else {
+    echo "<div class='alert alert-success' role='alert'> ";
+  }
+  echo $mensagem;
+  echo "</div>";
 }
 
 /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
