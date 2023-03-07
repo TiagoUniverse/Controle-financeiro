@@ -104,13 +104,13 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
       $mensagemVermelha = false;
       $mensagem = "Informação registrada com sucesso!";
 
-      if ($_SESSION['tipo_registro'] == "Registros pessoais"){
+      if ($_SESSION['tipo_registro'] == "Registros pessoais") {
         $statusDespensa = 7;
       } else {
         $statusDespensa = 5;
       }
 
-      $Poupancas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], $statusDespensa , $pdo);
+      $Poupancas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], $statusDespensa, $pdo);
     } else {
       $mensagem = "Registro já cadastrado!";
     }
@@ -163,13 +163,13 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
       $mensagemVermelha = false;
       $mensagem = "Informação registrada com sucesso!";
 
-      if ($_SESSION['tipo_registro'] == "Registros pessoais"){
+      if ($_SESSION['tipo_registro'] == "Registros pessoais") {
         $statusDespensa = 8;
       } else {
         $statusDespensa = 6;
       }
 
-      $Poupancas_repositorio->cadastro_Saida($descricao, $valor, $data, $_SESSION['ano'], $statusDespensa , $pdo);
+      $Poupancas_repositorio->cadastro_Saida($descricao, $valor, $data, $_SESSION['ano'], $statusDespensa, $pdo);
     } else {
       $mensagem = "Registro já cadastrado!";
     }
@@ -209,6 +209,24 @@ if ($_SESSION['tipo_registro'] == "Registros da casa") {
   and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 8 )    Order By month(dataPoupanca) ");
 }
 
+var_dump($consulta_Saida);
+
+/*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+* │                                Registros do dinheiro total                                                    |
+* | Description: After viewing the SQL, we are going to calculate how many money do we have                       │
+* └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/
+$dinheiroTotal = 0;
+$dinheiroGastoTotal = 0;
+
+while ($linha = $consulta_Entrada->fetch(PDO::FETCH_ASSOC)) {
+  $dinheiroTotal +=  $linha['valor'];
+}
+
+while ($linha = $consulta_Saida->fetch(PDO::FETCH_ASSOC)) {
+  $dinheiroGastoTotal +=  $linha['valor'];
+}
+
 ?>
 
 <!doctype html>
@@ -231,6 +249,33 @@ if ($_SESSION['tipo_registro'] == "Registros da casa") {
   </form>
 
   <h2 class="display-5 fw-bold" style="text-align: center;">Poupança: gastos pessoais</h2>
+
+
+  <!-- Dinheiro total -->
+  <br>
+  <div class="col-lg-6 mx-auto" style="background-color:cadetblue">
+
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Valor atual da poupança</th>
+            <th scope="col">Dinheiro total gasto</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <th scope="col" ><?php echo $dinheiroTotal; ?> </th>
+            <th scope="col"><?php echo $dinheiroGastoTotal; ?> </th>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+  <br>
   <h3 style="text-align: center;">Abaixo registre todas as entradas e saídas da sua poupança</h3>
 
   <div class="px-4 py-5 my-5 text-center">
