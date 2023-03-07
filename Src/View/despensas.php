@@ -235,5 +235,32 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
     echo $mensagem;
     echo "</div>";
   }
-
 }
+
+/*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+* │                                Consulta dos registro                                                          |
+* | Description: Show the registers dependind if the SESSION['tipo_registro'] is about                            │
+* └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/
+
+if ($_SESSION['tipo_registro'] == "Registros da casa") {
+
+  $consulta_Entrada = $pdo->query("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano, quinzena from despensas where status = 'ATIVO' 
+  and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$_SESSION['statusMes']}' and quinzena = '{$_SESSION['quinzena']}' 
+  and ( idStatus_despensa = 1)  Order By month(dataDespensa)        ");
+
+  $consulta_Saida = $pdo->query("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano, quinzena from despensas where status = 'ATIVO' 
+  and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$_SESSION['statusMes']}' and quinzena = '{$_SESSION['quinzena']}' 
+  and ( idstatus_despensa = 2 )  Order By month(dataDespensa)        ");
+} else {
+
+  $consulta_Entrada = $pdo->query("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano, quinzena from despensas where status = 'ATIVO' 
+  and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$_SESSION['statusMes']}' and quinzena = '{$_SESSION['quinzena']}' 
+  and ( idStatus_despensa = 3)  Order By month(dataDespensa)        ");
+
+  $consulta_Saida = $pdo->query("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano, quinzena from despensas where status = 'ATIVO' 
+  and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$_SESSION['statusMes']}' and quinzena = '{$_SESSION['quinzena']}' 
+  and ( idstatus_despensa = 4 )  Order By month(dataDespensa)        "); 
+}
+
+?>
