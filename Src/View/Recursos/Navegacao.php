@@ -7,9 +7,9 @@
       </svg>
 
       <?php
-      if (isset($_SESSION['nomeMes'])  && isset($_SESSION['ano']) ) {
+      if (isset($_SESSION['nomeMes'])  && isset($_SESSION['ano'])) {
       ?>
-        <span class="fs-4">Controle monetário: <b> <?php echo $_SESSION['nomeMes']; ?> de <?php echo $_SESSION['ano']; ?>  </b> </span>
+        <span class="fs-4">Controle monetário: <b> <?php echo $_SESSION['nomeMes']; ?> de <?php echo $_SESSION['ano']; ?> </b> </span>
       <?php
       } else {
       ?>
@@ -20,29 +20,74 @@
     </a>
 
     <?php
-      if (!isset($_SESSION['tipo_registro']) ){
-        $_SESSION['tipo_registro'] = "Registros pessoais";
-      }
+    /**
+     * Tipo de registro
+     * Fucnionamento: Os tipos de registros se classificam em registros pessoais e em registros da casa. Cada um deles possui poupança e despensas
+     * Data: 07/03/23
+     */
 
-      ?>
-
-
-
-    <ul class="nav nav-pills">
-      
-    <?php
-    if ($_SESSION['tipo_registro'] = "Registros pessoais"){
-      ?>
-        <li class="nav-item"><a href="Home.php" class="nav-link active" aria-current="page">Registros pessoais</a></li>
-      <li class="nav-item"><a class="nav-link" style="background-color: gray;">Registros da casa</a></li>
-      <?php
-    } else {
-      ?>
-        <li class="nav-item"><a  class="nav-link active" aria-current="page">Registros pessoais</a></li>
-      <li class="nav-item"><a href="Home.php" class="nav-link">Registros da casa</a></li>
-      <?php
+    if ($_SESSION['tipo_registro'] == null){
+      $_SESSION['tipo_registro'] = "Registro pessoais";
     }
+
+
+    if (isset($_POST['tipo_registro'])){
+      $_SESSION['tipo_registro'] = $_POST['tipo_registro'];
+    }
+
+
     ?>
+
+
+
+    <ul class="nav nav-pills" >
+
+      <?php
+
+      if ($_SESSION['tipo_registro'] == "Registros pessoais") {
+      ?>
+
+        <li class="nav-item">
+
+          <form action="home.php" method="post">
+            <input type="hidden" name="tipo_registro" value="Registros pessoais">
+            <button type="submit" class="btn btn-success">Registros pessoais</button>
+          </form>
+        </li>
+
+
+        <li class="nav-item">
+
+          <form action="home.php" method="post">
+            <input type="hidden" name="tipo_registro" value="Registros da casa">
+            <button type="submit" class="btn btn-secondary" style="margin-right:0.5cm;">Registros da casa</button>
+          </form>
+        </li>
+
+      <?php
+      } else {
+      ?>
+
+        <li class="nav-item">
+
+          <form action="home.php" method="post">
+            <input type="hidden" name="tipo_registro" value="Registros pessoais">
+            <button type="submit" class="btn btn-secondary">Registros pessoais</button>
+          </form>
+        </li>
+
+
+        <li class="nav-item">
+
+          <form action="home.php" method="post" >
+            <input type="hidden" name="tipo_registro" value="Registros da casa">
+            <button type="submit" class="btn btn-success" style="margin-right:0.5cm;">Registros da casa</button>
+          </form>
+        </li>
+
+      <?php
+      }
+      ?>
 
 
       <div class="dropdown text-end">
@@ -61,10 +106,10 @@
   </header>
 </div>
 <?php
-if ((isset($_POST['nomeMes']) && $_POST['ano'] ) || (isset($_POST['nomeMes']) && $_POST['ano'] == "" ) ){
-  ?>
+if ((isset($_POST['nomeMes']) && $_POST['ano']) || (isset($_POST['nomeMes']) && $_POST['ano'] == "")) {
+?>
   <a href="home.php" class="botao-voltar">Voltar</a>
-  <?php
+<?php
 }
 ?>
 
