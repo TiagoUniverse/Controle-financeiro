@@ -216,16 +216,16 @@ var_dump($consulta_Saida);
 * | Description: After viewing the SQL, we are going to calculate how many money do we have                       │
 * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
-$dinheiroTotal = 0;
-$dinheiroGastoTotal = 0;
+// $dinheiroTotal = 0;
+// $dinheiroGastoTotal = 0;
 
-while ($linha = $consulta_Entrada->fetch(PDO::FETCH_ASSOC)) {
-  $dinheiroTotal +=  $linha['valor'];
-}
+// while ($linha = $consulta_Entrada->fetch(PDO::FETCH_ASSOC)) {
+//   $dinheiroTotal +=  $linha['valor'];
+// }
 
-while ($linha = $consulta_Saida->fetch(PDO::FETCH_ASSOC)) {
-  $dinheiroGastoTotal +=  $linha['valor'];
-}
+// while ($linha = $consulta_Saida->fetch(PDO::FETCH_ASSOC)) {
+//   $dinheiroGastoTotal +=  $linha['valor'];
+// }
 
 ?>
 
@@ -252,7 +252,7 @@ while ($linha = $consulta_Saida->fetch(PDO::FETCH_ASSOC)) {
 
 
   <!-- Dinheiro total -->
-  <br>
+  <!-- <br>
   <div class="col-lg-6 mx-auto" style="background-color:cadetblue">
 
     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
@@ -273,7 +273,7 @@ while ($linha = $consulta_Saida->fetch(PDO::FETCH_ASSOC)) {
       </table>
 
     </div>
-  </div>
+  </div> -->
 
   <br>
   <h3 style="text-align: center;">Abaixo registre todas as entradas e saídas da sua poupança</h3>
