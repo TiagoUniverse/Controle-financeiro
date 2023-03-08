@@ -115,7 +115,9 @@ class Poupancas_repositorio
     {
 
         try{
-            $consulta = $pdo->query("Update poupancas SET valor = ''  where descricao = '{$descricao}' and valor = '{$valor}' and idStatus_despensa = '{$idStatus_despensa}' and ano = '{$ano}'    ;");
+            $consulta = $pdo->query("Update poupancas SET valor = '{$valor}'  where descricao = '{$descricao}' and idStatus_despensa = '{$idStatus_despensa}' and ano = '{$ano}'    ;");
+            
+            // var_dump($consulta);
             return true;
         }catch (PDOException $e){
             echo "Error: " . $e->getMessage();

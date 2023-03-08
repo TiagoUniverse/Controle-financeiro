@@ -234,19 +234,6 @@ foreach ($Saida_fetch as $row) {
 * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
 
-$consulta_ValorEstimado = $pdo->query("Select * from poupancas where status = 'ATIVO' 
-and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 11 ) ");
-
-$ValorEstimado_fetch = $consulta_ValorEstimado->fetchAll(pdo::FETCH_ASSOC);
-
-if (!empty($ValorEstimado_fetch) ){
-  echo "entrei";
-  foreach($ValorEstimado_fetch as $linha){
-    echo $linha['valor'];
-  }
-}
-
-
 if ($adicionando_registro != null && $adicionando_registro == "SALVANDO VALOR ESTIMADO") {
 
   $mensagemVermelha = true;
@@ -281,6 +268,22 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO VALOR ES
   echo $mensagem;
   echo "</div>";
 }
+
+
+$consulta_ValorEstimado = $pdo->query("Select * from poupancas where status = 'ATIVO' 
+and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 11 ) ");
+
+$ValorEstimado_fetch = $consulta_ValorEstimado->fetchAll(pdo::FETCH_ASSOC);
+
+$valorEstimado = 0;
+if (!empty($ValorEstimado_fetch) ){
+  foreach($ValorEstimado_fetch as $linha){
+    $valorEstimado = $linha['valor'];
+  }
+}
+
+
+var_dump($valorEstimado);
 
 
 
@@ -328,7 +331,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO VALOR ES
             <th scope="col">
               <form action="poupancas.php" method="post">
                 <input type="hidden" value="SALVANDO VALOR ESTIMADO" name="adicionando_registro">
-                <input type="number" name="valor_estimado"   required>
+                <input type="float" name="valor_estimado" value=" <?php echo $valorEstimado; ?> "  required>
                 <button type="submit"> Salvar</button>
               </form>
 
