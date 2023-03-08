@@ -215,7 +215,7 @@ if ($_SESSION['tipo_registro'] == "Registros da casa") {
 * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
 $dinheiroEntrada = 0;
-$dinheiroGastoTotal = 0;
+$dinheiroSaida = 0;
 
 $Entrada_fetch = $consulta_Entrada->fetchAll(PDO::FETCH_ASSOC);
 $Saida_fetch = $consulta_Saida->fetchAll(PDO::FETCH_ASSOC);
@@ -225,7 +225,7 @@ foreach ($Entrada_fetch as $row) {
 }
 
 foreach ($Saida_fetch as $row) {
-  $dinheiroGastoTotal +=  $row['valor'];
+  $dinheiroSaida +=  $row['valor'];
 }
 
 /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -300,14 +300,10 @@ if (!empty($ValorEstimado_fetch)) {
 $consulta_TotalPoupanca = $pdo->query("Select * from poupancas where status = 'ATIVO' 
 and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 5 or idstatus_despensa = 7 )");
 
-var_dump($consulta_TotalPoupanca);
-
 $dinheiroTotal = 0;
 foreach ($consulta_TotalPoupanca as $linha) {
   $dinheiroTotal += $linha['valor'];
 }
-
-echo $dinheiroTotal;
 
 ?>
 
@@ -356,24 +352,38 @@ echo $dinheiroTotal;
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">Valor atual da poupança</th>
-            <th scope="col">Valor estimado da poupança manualmente</th>
-            <th scope="col">Dinheiro total gasto</th>
+
+            <?php
+            if ($_SESSION['tipo_registro'] == "Registros pessoais") {
+            ?>
+              <th scope="col"> Gastos pessoais total </th>
+              <th scope="col">Receita pessoal total</th>
+            <?php
+            } else {
+            ?>
+              <th scope="col"> Gasto total da casa </th>
+              <th scope="col">Receita total da casa</th>
+            <?php
+            }
+            ?>
+            <th scope="col">Soma total da casa com o pessoal</th>
+            <th scope="col">Valor total da poupança estimado</th>
           </tr>
         </thead>
 
-        <tbody>
+        <tbody style="color: #fff8f1;">
           <tr>
-            <th scope="col"><?php echo $dinheiroEntrada; ?> </th>
+            <th scope="col"><?php echo "R$" . $dinheiroSaida; ?> </th>
+            <th scope="col"><?php echo "R$" . $dinheiroEntrada; ?> </th>
+            <th scope="col"><?php echo "R$" . $dinheiroTotal; ?> </th>
             <th scope="col">
               <form action="poupancas.php" method="post">
                 <input type="hidden" value="SALVANDO VALOR ESTIMADO" name="adicionando_registro">
-                <input type="float" name="valor_estimado" value=" <?php echo $valorEstimado; ?> " required>
-                <button type="submit"> Salvar</button>
+                <input type="float" class="form-control" name="valor_estimado" value=" <?php echo $valorEstimado; ?> " required>
+                <button type="submit" class="btn btn-primary"> Salvar</button>
               </form>
 
             </th>
-            <th scope="col"><?php echo $dinheiroGastoTotal; ?> </th>
           </tr>
         </tbody>
       </table>
