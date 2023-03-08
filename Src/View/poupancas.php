@@ -237,24 +237,26 @@ foreach ($Saida_fetch as $row) {
 if ($adicionando_registro != null && $adicionando_registro == "SALVANDO VALOR ESTIMADO") {
 
   $mensagemVermelha = true;
+  $descricao = "Valor total e estimado da poupança atual";
+  $valor = $_POST['valor_estimado'];
+  $data = date('Y-m-d');
 
   if (!isset($_POST['valor_estimado'])) {
     $mensagem = "Informe um valor estimado";
+  } else if ($Poupancas_repositorio->verificar_ExisteValorEstimado($valor, $_SESSION['ano'] , 11 , $pdo)){
+    $mensagem = "Cadastre um valor diferente";
   } else {
     $mensagemVermelha = false;
-    $descricao = "Valor total e estimado da poupança atual";
-    $valor = $_POST['valor_estimado'];
-    $data = date('Y-m-d H:i:s');
+
 
     $retorno = $Poupancas_repositorio->consultarValorEstimado($descricao, $_SESSION['ano'], 11, $pdo);
-    if ($retorno){ 
+    if ($retorno) {
       $mensagem = "Valor estimado atualizado";
-      $Poupancas_repositorio->atualizar_ValorEstimado($descricao, $valor, 11 , $_SESSION['ano'] , $pdo);
+      $Poupancas_repositorio->atualizar_ValorEstimado($descricao, $valor, 11, $_SESSION['ano'], $pdo);
     } else {
       $mensagem = "Valor estimado registrado pela primeira vez!";
       $Poupancas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], 11, $pdo);
     }
-
   }
 
   $adicionando_registro = null;
@@ -275,17 +277,19 @@ and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 11 ) ");
 
 $ValorEstimado_fetch = $consulta_ValorEstimado->fetchAll(pdo::FETCH_ASSOC);
 
+/**  | @anotacao: Variável Valor estimado                                                                          |
+ *   | Funcionamento: Depois de consultar o valor estimado do ano e fazer um fetchAll para gerar um array, o       |
+ *   | sistema vai definir o valor padrão do valor estimado de um ano. Caso o array esteja vazio, o valor perma-   |
+ *   | nece zero                                                                                                   |
+ *   | Data: 08/03/23                                                                                              |
+ */
+
 $valorEstimado = 0;
-if (!empty($ValorEstimado_fetch) ){
-  foreach($ValorEstimado_fetch as $linha){
+if (!empty($ValorEstimado_fetch)) {
+  foreach ($ValorEstimado_fetch as $linha) {
     $valorEstimado = $linha['valor'];
   }
 }
-
-
-var_dump($valorEstimado);
-
-
 
 ?>
 
@@ -331,7 +335,7 @@ var_dump($valorEstimado);
             <th scope="col">
               <form action="poupancas.php" method="post">
                 <input type="hidden" value="SALVANDO VALOR ESTIMADO" name="adicionando_registro">
-                <input type="float" name="valor_estimado" value=" <?php echo $valorEstimado; ?> "  required>
+                <input type="float" name="valor_estimado" value=" <?php echo $valorEstimado; ?> " required>
                 <button type="submit"> Salvar</button>
               </form>
 

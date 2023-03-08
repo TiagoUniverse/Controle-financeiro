@@ -94,6 +94,24 @@ class Poupancas_repositorio
     }
 
 
+    public function verificar_ExisteValorEstimado($valor,  $ano, $idStatus_despensa, $pdo)
+    {
+
+        $consulta = $pdo->query("Select * from poupancas where status = 'ATIVO' and idStatus_despensa = '{$idStatus_despensa}' and ano = '{$ano}' 
+        and valor = '{$valor}'   ;");
+
+        //    var_dump( $consulta);
+
+        while ($linha = $consulta->fetch(\PDO::FETCH_ASSOC)) {
+            if ($valor = $linha['valor'] && $ano = $linha['ano'] && $idStatus_despensa = $linha['idStatus_despensa']) {
+                // ECHO "tá igual";
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function consultarValorEstimado($descricao, $ano, $idStatus_despensa, $pdo)
     {
 
