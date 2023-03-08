@@ -216,9 +216,22 @@ var_dump($consulta_Saida);
 * | Description: After viewing the SQL, we are going to calculate how many money do we have                       │
 * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
-// $dinheiroTotal = 0;
-// $dinheiroGastoTotal = 0;
+$dinheiroTotal = 0;
+$dinheiroGastoTotal = 0;
 
+$Entrada_fetch = $consulta_Entrada->fetchAll(PDO::FETCH_ASSOC);
+$Saida_fetch = $consulta_Saida->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($Entrada_fetch as $row){
+  $dinheiroTotal +=  $row['valor'];
+}
+
+foreach ($Saida_fetch as $row){
+  $dinheiroGastoTotal +=  $row['valor'];
+}
+
+// echo $dinheiroTotal;
+// echo $dinheiroGastoTotal;
 // while ($linha = $consulta_Entrada->fetch(PDO::FETCH_ASSOC)) {
 //   $dinheiroTotal +=  $linha['valor'];
 // }
@@ -305,7 +318,7 @@ var_dump($consulta_Saida);
             <?php
 
             $contador = 1;
-            while ($linha = $consulta_Entrada->fetch(PDO::FETCH_ASSOC)) {
+            foreach ($Entrada_fetch as $linha) {
             ?>
               <tr>
                 <!-- <th scope="row">1</th> -->
@@ -422,7 +435,7 @@ var_dump($consulta_Saida);
             <?php
 
             $contador = 1;
-            while ($linha = $consulta_Saida->fetch(PDO::FETCH_ASSOC)) {
+            foreach ($Saida_fetch as $linha) {
             ?>
               <tr>
                 <!-- <th scope="row">1</th> -->
