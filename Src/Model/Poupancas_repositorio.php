@@ -99,7 +99,7 @@ class Poupancas_repositorio
 
         $consulta = $pdo->query("SELECT * FROM poupancas WHERE descricao = '{$descricao}' and ano = '{$ano}' and idStatus_despensa = '{$idStatus_despensa}'   ;");
 
-           var_dump( $consulta);
+        //    var_dump( $consulta);
 
         while ($linha = $consulta->fetch(\PDO::FETCH_ASSOC)) {
             if ($descricao = $linha['descricao'] && $ano = $linha['ano'] && $idStatus_despensa = $linha['idStatus_despensa']) {

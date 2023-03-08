@@ -239,7 +239,13 @@ and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 11 ) ");
 
 $ValorEstimado_fetch = $consulta_ValorEstimado->fetchAll(pdo::FETCH_ASSOC);
 
-// var_dump($ValorEstimado_fetch);
+if (!empty($ValorEstimado_fetch) ){
+  echo "entrei";
+  foreach($ValorEstimado_fetch as $linha){
+    echo $linha['valor'];
+  }
+}
+
 
 if ($adicionando_registro != null && $adicionando_registro == "SALVANDO VALOR ESTIMADO") {
 
@@ -249,22 +255,17 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO VALOR ES
     $mensagem = "Informe um valor estimado";
   } else {
     $mensagemVermelha = false;
-    $mensagem = "Valor estimado atualizado";
-
     $descricao = "Valor total e estimado da poupança atual";
     $valor = $_POST['valor_estimado'];
     $data = date('Y-m-d H:i:s');
 
     $retorno = $Poupancas_repositorio->consultarValorEstimado($descricao, $_SESSION['ano'], 11, $pdo);
-
-    var_dump($retorno);
-
-    if ($retorno){
-      echo "atualizando";
-      // $Poupancas_repositorio->atualizar_ValorEstimado($descricao, $valor, 11 , $_SESSION['ano'] , $pdo);
+    if ($retorno){ 
+      $mensagem = "Valor estimado atualizado";
+      $Poupancas_repositorio->atualizar_ValorEstimado($descricao, $valor, 11 , $_SESSION['ano'] , $pdo);
     } else {
-      echo "cadastrando";
-      // $Poupancas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], 11, $pdo);
+      $mensagem = "Valor estimado registrado pela primeira vez!";
+      $Poupancas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], 11, $pdo);
     }
 
   }
@@ -280,6 +281,8 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO VALOR ES
   echo $mensagem;
   echo "</div>";
 }
+
+
 
 ?>
 
@@ -325,7 +328,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO VALOR ES
             <th scope="col">
               <form action="poupancas.php" method="post">
                 <input type="hidden" value="SALVANDO VALOR ESTIMADO" name="adicionando_registro">
-                <input type="number" name="valor_estimado"  required>
+                <input type="number" name="valor_estimado"   required>
                 <button type="submit"> Salvar</button>
               </form>
 
