@@ -250,8 +250,18 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO VALOR ES
     $mensagem = "Valor estimado atualizado";
 
     $descricao = "Valor total e estimado da poupança atual";
+    $valor = $_POST['valor_estimado'];
     $data = date('Y-m-d H:i:s');
-    $Poupancas_repositorio->cadastro_entrada($descricao, $_POST['valor_estimado'], $data, $_SESSION['ano'], 11, $pdo);
+
+    $retorno = $Poupancas_repositorio->consultarValorEstimado($descricao, $valor, 11, $pdo);
+
+    if ($retorno == false) {
+
+      // $Poupancas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], 11, $pdo);
+    } else {
+      echo "encontrei";
+    }
+
   }
 
   $adicionando_registro = null;

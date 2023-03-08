@@ -14,91 +14,108 @@ require_once "conexao.php";
 class Poupancas_repositorio
 {
 
-    public function cadastro_entrada($descricao, $valor, $data, $ano, $idStatus_despensa , $pdo)
+    public function cadastro_entrada($descricao, $valor, $data, $ano, $idStatus_despensa, $pdo)
     {
         try {
-        
-        // echo $idStatus_despensa;
 
-        require_once "../view/conexao.php";
-        // $sql = "Insert into clientes (descricao, valor, data, ano, quinzena, idstatus_Mes, idStatus_Despensa)
-        //         Values ({$descricao}, {$valor}, {$data}, {$ano}, {$quinzena}, {$idstatus_Mes}, {$idStatus_despensa})";
+            // echo $idStatus_despensa;
 
-        $stmt =  $pdo->prepare('INSERT INTO Poupancas (descricao, valor, dataPoupanca, ano, idStatus_despensa , idUsuario)
+            require_once "../view/conexao.php";
+            // $sql = "Insert into clientes (descricao, valor, data, ano, quinzena, idstatus_Mes, idStatus_Despensa)
+            //         Values ({$descricao}, {$valor}, {$data}, {$ano}, {$quinzena}, {$idstatus_Mes}, {$idStatus_despensa})";
+
+            $stmt =  $pdo->prepare('INSERT INTO Poupancas (descricao, valor, dataPoupanca, ano, idStatus_despensa , idUsuario)
         VALUES (:descricao , :valor , :dataPoupanca , :ano , :statusDespensa, :idUsuario )  ');
-        
-        $stmt->execute(array(
-            ':descricao' => $descricao ,
-            ':valor' => $valor ,
-            ':dataPoupanca' => $data ,
-            ':ano' => $ano ,
-            ':statusDespensa' => $idStatus_despensa,
-            ':idUsuario' => 1
-        ));
 
-        // echo "funcionou!!";
+            $stmt->execute(array(
+                ':descricao' => $descricao,
+                ':valor' => $valor,
+                ':dataPoupanca' => $data,
+                ':ano' => $ano,
+                ':statusDespensa' => $idStatus_despensa,
+                ':idUsuario' => 1
+            ));
+
+            // echo "funcionou!!";
 
 
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
             echo 'Error: ' . $e->getMessage();
         }
-
     }
 
-    public function cadastro_Saida($descricao, $valor, $data, $ano, $idStatus_despensa , $pdo)
+    public function cadastro_Saida($descricao, $valor, $data, $ano, $idStatus_despensa, $pdo)
     {
         try {
-        
-        // echo $idStatus_despensa;
 
-        require_once "../view/conexao.php";
-        // $sql = "Insert into clientes (descricao, valor, data, ano, quinzena, idstatus_Mes, idStatus_Despensa)
-        //         Values ({$descricao}, {$valor}, {$data}, {$ano}, {$quinzena}, {$idstatus_Mes}, {$idStatus_despensa})";
+            // echo $idStatus_despensa;
 
-        $stmt =  $pdo->prepare('INSERT INTO Poupancas (descricao, valor, dataPoupanca, ano, idStatus_despensa , idUsuario)
+            require_once "../view/conexao.php";
+            // $sql = "Insert into clientes (descricao, valor, data, ano, quinzena, idstatus_Mes, idStatus_Despensa)
+            //         Values ({$descricao}, {$valor}, {$data}, {$ano}, {$quinzena}, {$idstatus_Mes}, {$idStatus_despensa})";
+
+            $stmt =  $pdo->prepare('INSERT INTO Poupancas (descricao, valor, dataPoupanca, ano, idStatus_despensa , idUsuario)
         VALUES (:descricao , :valor , :dataPoupanca , :ano , :statusDespensa, :idUsuario )  ');
-        
-        $stmt->execute(array(
-            ':descricao' => $descricao ,
-            ':valor' => $valor ,
-            ':dataPoupanca' => $data ,
-            ':ano' => $ano ,
-            ':statusDespensa' => $idStatus_despensa,
-            ':idUsuario' => 1
-        ));
 
-        // echo "funcionou!!";
+            $stmt->execute(array(
+                ':descricao' => $descricao,
+                ':valor' => $valor,
+                ':dataPoupanca' => $data,
+                ':ano' => $ano,
+                ':statusDespensa' => $idStatus_despensa,
+                ':idUsuario' => 1
+            ));
+
+            // echo "funcionou!!";
 
 
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
             echo 'Error: ' . $e->getMessage();
         }
-
     }
 
 
-    public function consultarRegistro($descricao, $valor, $dataPoupanca , $idStatus_despensa ,$pdo ){
-        
+    public function consultarRegistro($descricao, $valor, $dataPoupanca, $idStatus_despensa, $pdo)
+    {
+
         $consulta = $pdo->query("SELECT * FROM poupancas WHERE descricao = '{$descricao}' and valor = '{$valor}' and dataPoupanca = '{$dataPoupanca}' and idStatus_despensa = '{$idStatus_despensa}'   ;");
-        
-       // var_dump( $consulta);
+
+        //    var_dump( $consulta);
 
         while ($linha = $consulta->fetch(\PDO::FETCH_ASSOC)) {
-            if ($descricao = $linha['descricao'] && $valor = $linha['valor'] && $dataPoupanca = $linha['dataPoupanca']){
+            if ($descricao = $linha['descricao'] && $valor = $linha['valor'] && $dataPoupanca = $linha['dataPoupanca']) {
                 // ECHO "tá igual";
                 return true;
             }
         }
 
         return false;
-    
     }
 
 
-    public function consultaById($id ,$pdo ){
+    public function consultarValorEstimado($descricao, $valor, $idStatus_despensa, $pdo)
+    {
+
+        $consulta = $pdo->query("SELECT * FROM poupancas WHERE descricao = '{$descricao}' and valor = '{$valor}' and idStatus_despensa = '{$idStatus_despensa}'   ;");
+
+        //    var_dump( $consulta);
+
+        while ($linha = $consulta->fetch(\PDO::FETCH_ASSOC)) {
+            if ($descricao = $linha['descricao'] && $valor = $linha['valor'] && $dataPoupanca = $linha['dataPoupanca']) {
+                // ECHO "tá igual";
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+    public function consultaById($id, $pdo)
+    {
         $consulta = $pdo->query("SELECT * FROM poupancas WHERE id = '{$id}'   ;");
-        
-      //  var_dump( $consulta);
+
+        //  var_dump( $consulta);
 
         while ($linha = $consulta->fetch(\PDO::FETCH_ASSOC)) {
             //O correto seria ter a própria classe de Poupancas, mas vou reutilizar esta
@@ -112,10 +129,9 @@ class Poupancas_repositorio
         }
 
         return $Despensas;
-    
     }
 
-    public function excluir_registro($id , $pdo)
+    public function excluir_registro($id, $pdo)
     {
         require_once "../view/conexao.php";
 
@@ -123,40 +139,35 @@ class Poupancas_repositorio
             $stmt = $pdo->prepare('DELETE FROM poupancas WHERE id = :id');
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-          
+
             // echo $stmt->rowCount();
-          } catch(PDOException $e) {
+        } catch (PDOException $e) {
             echo 'Error: ' . $e->getMessage();
-          }
-
-
-
+        }
     }
 
 
-    public function alterar($descricao, $valor, $dataPoupanca, $id , $pdo)
+    public function alterar($descricao, $valor, $dataPoupanca, $id, $pdo)
     {
         require_once "../view/conexao.php";
         try {
 
-        $stmt =  $pdo->prepare('Update poupancas  SET descricao = (:descricao), valor = (:valor) , dataPoupanca = (:dataPoupanca) , updated = current_time()
+            $stmt =  $pdo->prepare('Update poupancas  SET descricao = (:descricao), valor = (:valor) , dataPoupanca = (:dataPoupanca) , updated = current_time()
 
         Where id = (:id)');
-        
-        $stmt->execute(array(
-            ':descricao' => $descricao, 
-            ':valor' => $valor, 
-            ':dataPoupanca' => $dataPoupanca, 
-            ':id' => $id, 
-        ));
 
-        // echo "funcionou!!";
+            $stmt->execute(array(
+                ':descricao' => $descricao,
+                ':valor' => $valor,
+                ':dataPoupanca' => $dataPoupanca,
+                ':id' => $id,
+            ));
+
+            // echo "funcionou!!";
 
 
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
             echo 'Error: ' . $e->getMessage();
         }
-
     }
-
 }
