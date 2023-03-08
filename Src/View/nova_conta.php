@@ -5,6 +5,8 @@ require_once "conexao.php";
 require_once "../Model/Usuario_repositorio.php";
 use model\Usuario_repositorio;
 
+$Usuario_repositorio = new Usuario_repositorio();
+
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +17,7 @@ use model\Usuario_repositorio;
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../Assets//Css//login.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <title>Criar conta</title>
 </head>
 
@@ -35,13 +38,15 @@ use model\Usuario_repositorio;
       <div class="container">
         <h1>Controle<br />monetário: criar conta</h1>
 
+        <a href="login.php"> Voltar</a>
+
         <?php
 
         if (isset($_POST['status_criacao'])) {
-          $Usuario_repositorio = new Usuario_repositorio();
+          $mensagemVermelha = true;
+          
+          if ()
 
-          $Usuario_repositorio->cadastrar($_POST['nome'] , $_POST['email'] , $_POST['senha'] , $pdo );
-          echo "cadastrei";
         }
         ?>
 
@@ -65,6 +70,7 @@ use model\Usuario_repositorio;
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -28,8 +28,11 @@
                 ':senha' => $senha
             ));
 
+            return true;
+
         } catch(PDOException $e) {
             echo 'Error: ' . $e->getMessage();
+            return false;
         }
     }
 
