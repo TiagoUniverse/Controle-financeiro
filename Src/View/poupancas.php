@@ -214,14 +214,14 @@ if ($_SESSION['tipo_registro'] == "Registros da casa") {
 * | Description: After viewing the SQL, we are going to calculate how many money do we have                       │
 * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
-$dinheiroTotal = 0;
+$dinheiroEntrada = 0;
 $dinheiroGastoTotal = 0;
 
 $Entrada_fetch = $consulta_Entrada->fetchAll(PDO::FETCH_ASSOC);
 $Saida_fetch = $consulta_Saida->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($Entrada_fetch as $row) {
-  $dinheiroTotal +=  $row['valor'];
+  $dinheiroEntrada +=  $row['valor'];
 }
 
 foreach ($Saida_fetch as $row) {
@@ -291,6 +291,24 @@ if (!empty($ValorEstimado_fetch)) {
   }
 }
 
+/*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+* │                                Soma total da poupança da casa e pessoal                                       |
+* | Description: The system will sum the total of the personal money with the house's money  (Date: 08/03/23)     │
+* └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/
+
+$consulta_TotalPoupanca = $pdo->query("Select * from poupancas where status = 'ATIVO' 
+and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 5 or idstatus_despensa = 7 )");
+
+var_dump($consulta_TotalPoupanca);
+
+$dinheiroTotal = 0;
+foreach ($consulta_TotalPoupanca as $linha){
+  $dinheiroTotal += $linha['valor'];
+}
+
+echo $dinheiroTotal;
+
 ?>
 
 <!doctype html>
@@ -324,14 +342,14 @@ if (!empty($ValorEstimado_fetch)) {
         <thead>
           <tr>
             <th scope="col">Valor atual da poupança</th>
-            <th scope="col">Valor estimado manualmente</th>
+            <th scope="col">Valor estimado da poupança manualmente</th>
             <th scope="col">Dinheiro total gasto</th>
           </tr>
         </thead>
 
         <tbody>
           <tr>
-            <th scope="col"><?php echo $dinheiroTotal; ?> </th>
+            <th scope="col"><?php echo $dinheiroEntrada; ?> </th>
             <th scope="col">
               <form action="poupancas.php" method="post">
                 <input type="hidden" value="SALVANDO VALOR ESTIMADO" name="adicionando_registro">
