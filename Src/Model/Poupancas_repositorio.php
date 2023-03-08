@@ -9,6 +9,7 @@
 namespace Model;
 
 use model\Despensas;
+use PDOException;
 
 require_once "conexao.php";
 class Poupancas_repositorio
@@ -93,21 +94,34 @@ class Poupancas_repositorio
     }
 
 
-    public function consultarValorEstimado($descricao, $valor, $idStatus_despensa, $pdo)
+    public function consultarValorEstimado($descricao, $ano, $idStatus_despensa, $pdo)
     {
 
-        $consulta = $pdo->query("SELECT * FROM poupancas WHERE descricao = '{$descricao}' and valor = '{$valor}' and idStatus_despensa = '{$idStatus_despensa}'   ;");
+        $consulta = $pdo->query("SELECT * FROM poupancas WHERE descricao = '{$descricao}' and ano = '{$ano}' and idStatus_despensa = '{$idStatus_despensa}'   ;");
 
-        //    var_dump( $consulta);
+           var_dump( $consulta);
 
         while ($linha = $consulta->fetch(\PDO::FETCH_ASSOC)) {
-            if ($descricao = $linha['descricao'] && $valor = $linha['valor'] && $dataPoupanca = $linha['dataPoupanca']) {
+            if ($descricao = $linha['descricao'] && $ano = $linha['ano'] && $idStatus_despensa = $linha['idStatus_despensa']) {
                 // ECHO "tá igual";
                 return true;
             }
         }
 
         return false;
+    }
+
+    public function atualizar_ValorEstimado($descricao, $valor, $idStatus_despensa, $ano,  $pdo)
+    {
+
+        try{
+            $consulta = $pdo->query("Update poupancas SET valor = ''  where descricao = '{$descricao}' and valor = '{$valor}' and idStatus_despensa = '{$idStatus_despensa}' and ano = '{$ano}'    ;");
+            return true;
+        }catch (PDOException $e){
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+        
     }
 
 
