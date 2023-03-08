@@ -209,8 +209,6 @@ if ($_SESSION['tipo_registro'] == "Registros da casa") {
   and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 8 )    Order By month(dataPoupanca) ");
 }
 
-var_dump($consulta_Saida);
-
 /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 * │                                Registros do dinheiro total                                                    |
 * | Description: After viewing the SQL, we are going to calculate how many money do we have                       │
@@ -222,23 +220,51 @@ $dinheiroGastoTotal = 0;
 $Entrada_fetch = $consulta_Entrada->fetchAll(PDO::FETCH_ASSOC);
 $Saida_fetch = $consulta_Saida->fetchAll(PDO::FETCH_ASSOC);
 
-foreach ($Entrada_fetch as $row){
+foreach ($Entrada_fetch as $row) {
   $dinheiroTotal +=  $row['valor'];
 }
 
-foreach ($Saida_fetch as $row){
+foreach ($Saida_fetch as $row) {
   $dinheiroGastoTotal +=  $row['valor'];
 }
 
-// echo $dinheiroTotal;
-// echo $dinheiroGastoTotal;
-// while ($linha = $consulta_Entrada->fetch(PDO::FETCH_ASSOC)) {
-//   $dinheiroTotal +=  $linha['valor'];
-// }
+/*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+* │                                Valor estimado da poupança                                                     |
+* | Description: The user can say the estimate value of the actual money in a specific year. (Date: 08/03/23)     │
+* └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/
 
-// while ($linha = $consulta_Saida->fetch(PDO::FETCH_ASSOC)) {
-//   $dinheiroGastoTotal +=  $linha['valor'];
-// }
+$consulta_ValorEstimado = $pdo->query("Select * from poupancas where status = 'ATIVO' 
+and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 11 ) ");
+
+var_dump($consulta_ValorEstimado);
+
+if ($adicionando_registro != null && $adicionando_registro == "SALVANDO VALOR ESTIMADO") {
+
+  $mensagemVermelha = true;
+
+  if (!isset($_POST['valor_estimado'])) {
+    $mensagem = "Informe um valor estimado";
+  } else {
+    $mensagemVermelha = false;
+    $mensagem = "Valor estimado atualizado";
+
+    $descricao = "Valor total e estimado da poupança atual";
+    $data = date('Y-m-d H:i:s');
+    $Poupancas_repositorio->cadastro_entrada($descricao, $_POST['valor_estimado'], $data, $_SESSION['ano'], 11, $pdo);
+  }
+
+  $adicionando_registro = null;
+
+  // Mensagem do resultado
+  if ($mensagemVermelha) {
+    echo "<div class='alert alert-danger' role='alert'> ";
+  } else {
+    echo "<div class='alert alert-success' role='alert'> ";
+  }
+  echo $mensagem;
+  echo "</div>";
+}
 
 ?>
 
@@ -261,11 +287,11 @@ foreach ($Saida_fetch as $row){
     <button class="btn btn-link">Voltar</button>
   </form>
 
-  <h2 class="display-5 fw-bold" style="text-align: center;">Poupança: gastos pessoais</h2>
+  <h2 class="display-5 fw-bold" style="text-align: center;"> <?php echo "Poupança de " . $_SESSION['ano']  . ": " . $_SESSION['tipo_registro']; ?> </h2>
 
 
   <!-- Dinheiro total -->
-  <!-- <br>
+  <br>
   <div class="col-lg-6 mx-auto" style="background-color:cadetblue">
 
     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
@@ -273,20 +299,29 @@ foreach ($Saida_fetch as $row){
         <thead>
           <tr>
             <th scope="col">Valor atual da poupança</th>
+            <th scope="col">Valor estimado manualmente</th>
             <th scope="col">Dinheiro total gasto</th>
           </tr>
         </thead>
 
         <tbody>
           <tr>
-            <th scope="col" ><?php echo $dinheiroTotal; ?> </th>
+            <th scope="col"><?php echo $dinheiroTotal; ?> </th>
+            <th scope="col">
+              <form action="poupancas.php" method="post">
+                <input type="hidden" value="SALVANDO VALOR ESTIMADO" name="adicionando_registro">
+                <input type="number" name="valor_estimado" required>
+                <button type="submit"> Salvar</button>
+              </form>
+
+            </th>
             <th scope="col"><?php echo $dinheiroGastoTotal; ?> </th>
           </tr>
         </tbody>
       </table>
 
     </div>
-  </div> -->
+  </div>
 
   <br>
   <h3 style="text-align: center;">Abaixo registre todas as entradas e saídas da sua poupança</h3>
