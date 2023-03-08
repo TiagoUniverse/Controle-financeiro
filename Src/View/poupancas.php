@@ -243,7 +243,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO VALOR ES
 
   if (!isset($_POST['valor_estimado'])) {
     $mensagem = "Informe um valor estimado";
-  } else if ($Poupancas_repositorio->verificar_ExisteValorEstimado($valor, $_SESSION['ano'] , 11 , $pdo)){
+  } else if ($Poupancas_repositorio->verificar_ExisteValorEstimado($valor, $_SESSION['ano'], 11, $pdo)) {
     $mensagem = "Cadastre um valor diferente";
   } else {
     $mensagemVermelha = false;
@@ -303,7 +303,7 @@ and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 5 or idstatus_despensa 
 var_dump($consulta_TotalPoupanca);
 
 $dinheiroTotal = 0;
-foreach ($consulta_TotalPoupanca as $linha){
+foreach ($consulta_TotalPoupanca as $linha) {
   $dinheiroTotal += $linha['valor'];
 }
 
@@ -325,10 +325,25 @@ echo $dinheiroTotal;
 
 <body>
 
-  <form action="mes.php" method="post">
-    <input type="hidden" name="statusMes" value="<?php echo $_SESSION['statusMes']; ?>">
-    <button class="btn btn-link">Voltar</button>
-  </form>
+  <?php
+  echo $_SESSION['statusMes'];
+  if (empty($_SESSION['statusMes'])) {
+  ?>
+    <form action="home.php" method="post">
+      <button class="btn btn-link">Voltar</button>
+    </form>
+  <?php
+  } else {
+  ?>
+    <form action="mes.php" method="post">
+      <input type="hidden" name="statusMes" value="<?php echo $_SESSION['statusMes']; ?>">
+      <button class="btn btn-link">Voltar</button>
+    </form>
+  <?php
+  }
+  ?>
+
+
 
   <h2 class="display-5 fw-bold" style="text-align: center;"> <?php echo "Poupança de " . $_SESSION['ano']  . ": " . $_SESSION['tipo_registro']; ?> </h2>
 

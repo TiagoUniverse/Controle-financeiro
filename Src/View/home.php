@@ -207,6 +207,15 @@ if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1){
             <button type="submit" class="btn btn-primary"><?php echo $NomeMes; ?></button>
           </form>
         </div>
+        <div class="box_Poupanca">
+          <form action="poupancas.php" method="post">
+            <?php
+            // $NomeMes = "Dezembro";
+            ?>
+            <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
+            <button type="submit" class="btn btn-primary"><?php echo "Poupança de " . $_SESSION['ano']; ?></button>
+          </form>
+        </div>
       </div>
     </div>
   <?php
