@@ -1,9 +1,9 @@
 <?php
-session_start();
+
 
 function talogado()
 {
-  if ($_SESSION['connected'] !== '1') {
+  if ($_SESSION['connected'] !== 1) {
     header("location: login.php");
   }
 }
