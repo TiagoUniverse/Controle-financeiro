@@ -89,4 +89,27 @@ use PDOException;
         }
     }
 
+
+    public function consultar_Nome ($email, $senha, $pdo){
+        try{
+            $stmt = $pdo->prepare("Select * from Usuario where email = :email and senha = sha1( :senha ) ; ");
+
+            $stmt->execute(array(
+                ":email" => $email,
+                "senha" => $senha
+            ));
+
+            // var_dump($stmt);
+            while ($linha = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                
+                return $linha['nome'];
+            }
+
+            return false;
+        }catch (PDOException $e){
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
  }

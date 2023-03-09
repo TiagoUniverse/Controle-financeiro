@@ -95,11 +95,16 @@
           <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
         </a>
         <ul class="dropdown-menu text-small">
-          <li><a class="dropdown-item" href="#">Perfil</a></li>
+
+          <?php
+          $nome_dividido = explode(" " , $_SESSION['user_name']);
+          ?>
+
+          <li><a class="dropdown-item" href="#"><?php echo "Perfil: <b>" . $nome_dividido[0] . "</b>" ; ?> </a></li>
           <li>
             <hr class="dropdown-divider">
           </li>
-          <li><a class="dropdown-item" href="#">Sair</a></li>
+          <li><a class="dropdown-item" href="logoff.php">Sair</a></li>
         </ul>
       </div>
     </ul>
