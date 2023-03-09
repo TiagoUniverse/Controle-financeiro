@@ -15,7 +15,7 @@ require_once "conexao.php";
 class Poupancas_repositorio
 {
 
-    public function cadastro_entrada($descricao, $valor, $data, $ano, $idStatus_despensa, $pdo)
+    public function cadastro_entrada($descricao, $valor, $data, $ano, $idStatus_despensa, $idUsuario , $pdo)
     {
         try {
 
@@ -34,7 +34,7 @@ class Poupancas_repositorio
                 ':dataPoupanca' => $data,
                 ':ano' => $ano,
                 ':statusDespensa' => $idStatus_despensa,
-                ':idUsuario' => 1
+                ':idUsuario' => $idUsuario
             ));
 
             // echo "funcionou!!";
@@ -45,7 +45,7 @@ class Poupancas_repositorio
         }
     }
 
-    public function cadastro_Saida($descricao, $valor, $data, $ano, $idStatus_despensa, $pdo)
+    public function cadastro_Saida($descricao, $valor, $data, $ano, $idStatus_despensa, $idUsuario , $pdo)
     {
         try {
 
@@ -64,7 +64,7 @@ class Poupancas_repositorio
                 ':dataPoupanca' => $data,
                 ':ano' => $ano,
                 ':statusDespensa' => $idStatus_despensa,
-                ':idUsuario' => 1
+                ':idUsuario' => $idUsuario
             ));
 
             // echo "funcionou!!";
@@ -76,10 +76,11 @@ class Poupancas_repositorio
     }
 
 
-    public function consultarRegistro($descricao, $valor, $dataPoupanca, $idStatus_despensa, $pdo)
+    public function consultarRegistro($descricao, $valor, $dataPoupanca, $idStatus_despensa, $idUsuario , $pdo)
     {
 
-        $consulta = $pdo->query("SELECT * FROM poupancas WHERE descricao = '{$descricao}' and valor = '{$valor}' and dataPoupanca = '{$dataPoupanca}' and idStatus_despensa = '{$idStatus_despensa}'   ;");
+        $consulta = $pdo->query("SELECT * FROM poupancas WHERE descricao = '{$descricao}' and valor = '{$valor}' and dataPoupanca = '{$dataPoupanca}' and
+        idStatus_despensa = '{$idStatus_despensa}'  and idUsuario = '{$idUsuario}'  ;");
 
         //    var_dump( $consulta);
 
@@ -94,11 +95,11 @@ class Poupancas_repositorio
     }
 
 
-    public function verificar_ExisteValorEstimado($valor,  $ano, $idStatus_despensa, $pdo)
+    public function verificar_ExisteValorEstimado($valor,  $ano, $idStatus_despensa, $idUsuario , $pdo)
     {
 
         $consulta = $pdo->query("Select * from poupancas where status = 'ATIVO' and idStatus_despensa = '{$idStatus_despensa}' and ano = '{$ano}' 
-        and valor = '{$valor}'   ;");
+        and valor = '{$valor}' and idUsuario = '{$idUsuario}'  ;");
 
         //    var_dump( $consulta);
 
@@ -112,10 +113,11 @@ class Poupancas_repositorio
         return false;
     }
 
-    public function consultarValorEstimado($descricao, $ano, $idStatus_despensa, $pdo)
+    public function consultarValorEstimado($descricao, $ano, $idStatus_despensa, $idUsuario , $pdo)
     {
 
-        $consulta = $pdo->query("SELECT * FROM poupancas WHERE descricao = '{$descricao}' and ano = '{$ano}' and idStatus_despensa = '{$idStatus_despensa}'   ;");
+        $consulta = $pdo->query("SELECT * FROM poupancas WHERE descricao = '{$descricao}' and ano = '{$ano}' and idStatus_despensa = '{$idStatus_despensa}'
+        and idUsuario = '{$idUsuario}'   ;");
 
         //    var_dump( $consulta);
 
@@ -129,11 +131,12 @@ class Poupancas_repositorio
         return false;
     }
 
-    public function atualizar_ValorEstimado($descricao, $valor, $idStatus_despensa, $ano,  $pdo)
+    public function atualizar_ValorEstimado($descricao, $valor, $idStatus_despensa, $ano, $idUsuario ,  $pdo)
     {
 
         try{
-            $consulta = $pdo->query("Update poupancas SET valor = '{$valor}'  where descricao = '{$descricao}' and idStatus_despensa = '{$idStatus_despensa}' and ano = '{$ano}'    ;");
+            $consulta = $pdo->query("Update poupancas SET valor = '{$valor}'  where descricao = '{$descricao}' and idStatus_despensa = '{$idStatus_despensa}' and ano = '{$ano}'
+            and idUsuario = '{$idUsuario}'    ;");
             
             // var_dump($consulta);
             return true;

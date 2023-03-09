@@ -98,7 +98,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
     $mensagem = "Por favor, informe um valor positivo do dinheiro";
   } else {
 
-    $retorno = $Poupancas_repositorio->consultarRegistro($descricao, $valor, $data, 7, $pdo);
+    $retorno = $Poupancas_repositorio->consultarRegistro($descricao, $valor, $data, 7, $_SESSION['user_id'] , $pdo);
 
     if ($retorno == false) {
       $mensagemVermelha = false;
@@ -110,7 +110,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
         $statusDespensa = 5;
       }
 
-      $Poupancas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], $statusDespensa, $pdo);
+      $Poupancas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], $statusDespensa, $_SESSION['user_id'] , $pdo);
     } else {
       $mensagem = "Registro já cadastrado!";
     }
@@ -157,7 +157,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
     $mensagem = "Por favor, informe um valor positivo do dinheiro";
   } else {
 
-    $retorno = $Poupancas_repositorio->consultarRegistro($descricao, $valor, $data, 8, $pdo);
+    $retorno = $Poupancas_repositorio->consultarRegistro($descricao, $valor, $data, 8, $_SESSION['user_id'] , $pdo);
 
     if ($retorno == false) {
       $mensagemVermelha = false;
@@ -169,7 +169,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
         $statusDespensa = 6;
       }
 
-      $Poupancas_repositorio->cadastro_Saida($descricao, $valor, $data, $_SESSION['ano'], $statusDespensa, $pdo);
+      $Poupancas_repositorio->cadastro_Saida($descricao, $valor, $data, $_SESSION['ano'], $statusDespensa, $_SESSION['user_id'] , $pdo);
     } else {
       $mensagem = "Registro já cadastrado!";
     }
@@ -243,19 +243,19 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO VALOR ES
 
   if (!isset($_POST['valor_estimado'])) {
     $mensagem = "Informe um valor estimado";
-  } else if ($Poupancas_repositorio->verificar_ExisteValorEstimado($valor, $_SESSION['ano'], 11, $pdo)) {
+  } else if ($Poupancas_repositorio->verificar_ExisteValorEstimado($valor, $_SESSION['ano'], 11, $_SESSION['user_id'] , $pdo)) {
     $mensagem = "Cadastre um valor diferente";
   } else {
     $mensagemVermelha = false;
 
 
-    $retorno = $Poupancas_repositorio->consultarValorEstimado($descricao, $_SESSION['ano'], 11, $pdo);
+    $retorno = $Poupancas_repositorio->consultarValorEstimado($descricao, $_SESSION['ano'], 11, $_SESSION['user_id'] ,  $pdo);
     if ($retorno) {
       $mensagem = "Valor estimado atualizado";
-      $Poupancas_repositorio->atualizar_ValorEstimado($descricao, $valor, 11, $_SESSION['ano'], $pdo);
+      $Poupancas_repositorio->atualizar_ValorEstimado($descricao, $valor, 11, $_SESSION['ano'], $_SESSION['user_id'] ,  $pdo);
     } else {
       $mensagem = "Valor estimado registrado pela primeira vez!";
-      $Poupancas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], 11, $pdo);
+      $Poupancas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], 11, $_SESSION['user_id'] , $pdo);
     }
   }
 
