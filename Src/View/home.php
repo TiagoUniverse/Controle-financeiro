@@ -35,8 +35,6 @@ if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1){
   $_SESSION['ano'] = $_POST['ano'];
 }
 
-
-
 ?>
 
 <!doctype html>

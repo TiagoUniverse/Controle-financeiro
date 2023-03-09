@@ -90,7 +90,7 @@ use PDOException;
     }
 
 
-    public function consultar_Nome ($email, $senha, $pdo){
+    public function consultar_usuario ($email, $senha, $pdo){
         try{
             $stmt = $pdo->prepare("Select * from Usuario where email = :email and senha = sha1( :senha ) ; ");
 
@@ -99,10 +99,17 @@ use PDOException;
                 "senha" => $senha
             ));
 
-            // var_dump($stmt);
+            $Usuario = new Usuario();
             while ($linha = $stmt->fetch(\PDO::FETCH_ASSOC)){
                 
-                return $linha['nome'];
+                $Usuario->setId($linha['id']);
+                $Usuario->setNome($linha['nome']);
+                $Usuario->setEmail($linha['email']);
+                $Usuario->setStatus($linha['status']);
+                $Usuario->setCreated($linha['created']);
+
+
+                return $Usuario;
             }
 
             return false;

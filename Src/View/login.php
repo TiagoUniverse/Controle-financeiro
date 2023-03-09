@@ -13,10 +13,19 @@
  */
 
 require_once "conexao.php";
-require_once "../Model/Usuario_repositorio.php";
 
+/*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+* │                                Usuario's section                                                              │
+* └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/
+
+require_once "../Model/Usuario_repositorio.php";
 use model\Usuario_repositorio;
 
+require_once "../Model/Usuario.php";
+use model\Usuario;
+
+$Usuario = new Usuario();
 $Usuario_repositorio = new Usuario_repositorio();
 
 ?>
@@ -60,11 +69,12 @@ $Usuario_repositorio = new Usuario_repositorio();
           if ($return) {
             $mensagem = "Login efetuado com sucesso!";
 
-           $nome_usuario = $Usuario_repositorio->consultar_Nome($_POST['email'], $_POST['senha'], $pdo);
+           $Usuario = $Usuario_repositorio->consultar_usuario($_POST['email'], $_POST['senha'], $pdo);
 
             $_SESSION['connected'] = 1;
             $_SESSION['user_email'] = $_POST['email'];
-            $_SESSION['user_name'] = $nome_usuario;
+            $_SESSION['user_name'] = $Usuario->getNome();
+            $_SESSION['user_id'] = $Usuario->getId();
 
             header("location: home.php");
           } else {
