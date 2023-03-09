@@ -64,4 +64,29 @@ use PDOException;
         }
     }
 
+    
+    public function login ($email, $senha, $pdo){
+        try{
+            $stmt = $pdo->prepare("Select * from Usuario where email = :email and senha = sha1( :senha ) ; ");
+
+            $stmt->execute(array(
+                ":email" => $email,
+                "senha" => $senha
+            ));
+
+            // var_dump($stmt);
+            while ($linha = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                // if ($email = $linha['email'] and sha1($senha) = sha1($linha['senha'])){
+
+                // }
+                return true;
+            }
+
+            return false;
+        }catch (PDOException $e){
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
  }

@@ -26,6 +26,8 @@ updated DATETIME NULL
 */
 insert into usuario (nome, email, senha) values ('Tiago', 'tiagocesar68@gmail.com',  sha1('tiago123')    ) ;
 
+Select * from Usuario where email = 'teste@gmail.com' and senha = sha1( 'teste123' )
+
 
 /**
 * ╔═══════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
