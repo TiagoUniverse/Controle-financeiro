@@ -196,17 +196,17 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
 if ($_SESSION['tipo_registro'] == "Registros da casa") {
 
   $consulta_Entrada = $pdo->query("Select * from poupancas where status = 'ATIVO' 
-  and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 5 )    Order By month(dataPoupanca)     ");
+  and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 5 )  and idUsuario = '{$_SESSION['user_id']}'     Order By month(dataPoupanca)     ");
 
   $consulta_Saida = $pdo->query("Select * from poupancas where status = 'ATIVO' 
-  and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 6 )    Order By month(dataPoupanca)     ");
+  and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 6 )   and idUsuario = '{$_SESSION['user_id']}'    Order By month(dataPoupanca)     ");
 } else {
 
   $consulta_Entrada = $pdo->query("Select * from poupancas where status = 'ATIVO' 
-  and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 7 )    Order By month(dataPoupanca) ");
+  and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 7 )  and idUsuario = '{$_SESSION['user_id']}'    Order By month(dataPoupanca) ");
 
   $consulta_Saida = $pdo->query("Select * from poupancas where status = 'ATIVO' 
-  and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 8 )    Order By month(dataPoupanca) ");
+  and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 8 )  and idUsuario = '{$_SESSION['user_id']}'    Order By month(dataPoupanca) ");
 }
 
 /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -273,7 +273,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO VALOR ES
 
 
 $consulta_ValorEstimado = $pdo->query("Select * from poupancas where status = 'ATIVO' 
-and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 11 ) ");
+and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 11 )  and idUsuario = '{$_SESSION['user_id']}'  ");
 
 $ValorEstimado_fetch = $consulta_ValorEstimado->fetchAll(pdo::FETCH_ASSOC);
 
@@ -298,7 +298,7 @@ if (!empty($ValorEstimado_fetch)) {
 */
 
 $consulta_TotalPoupanca = $pdo->query("Select * from poupancas where status = 'ATIVO' 
-and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 5 or idstatus_despensa = 7 )");
+and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 5 or idstatus_despensa = 7 )  and idUsuario = '{$_SESSION['user_id']}'  ");
 
 $dinheiroTotal = 0;
 foreach ($consulta_TotalPoupanca as $linha) {

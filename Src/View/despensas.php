@@ -144,7 +144,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
         $statusDespensa = 1;
       }
 
-      $Despensas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], $statusDespensa , $pdo);
+      $Despensas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], $statusDespensa , $_SESSION['user_id'] , $pdo);
     } else {
       $mensagem = "Registro já cadastrado!";
     }
@@ -234,7 +234,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
         $statusDespensa = 2;
       }
 
-      $Despensas_repositorio->cadastro_Saida($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], $statusDespensa , $pdo);
+      $Despensas_repositorio->cadastro_Saida($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], $statusDespensa , $_SESSION['user_id'] , $pdo);
     } else {
       $mensagem = "Registro já cadastrado!";
     }
@@ -262,20 +262,20 @@ if ($_SESSION['tipo_registro'] == "Registros da casa") {
 
   $consulta_Entrada = $pdo->query("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano, quinzena from despensas where status = 'ATIVO' 
   and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$_SESSION['statusMes']}' and quinzena = '{$_SESSION['quinzena']}' 
-  and ( idStatus_despensa = 1)  Order By month(dataDespensa)        ");
+  and ( idStatus_despensa = 1) and idUsuario = '{$_SESSION['user_id']}'  Order By month(dataDespensa)        ");
 
   $consulta_Saida = $pdo->query("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano, quinzena from despensas where status = 'ATIVO' 
   and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$_SESSION['statusMes']}' and quinzena = '{$_SESSION['quinzena']}' 
-  and ( idstatus_despensa = 2 )  Order By month(dataDespensa)        ");
+  and ( idstatus_despensa = 2 )  and idUsuario = '{$_SESSION['user_id']}'   Order By month(dataDespensa)        ");
 } else {
 
   $consulta_Entrada = $pdo->query("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano, quinzena from despensas where status = 'ATIVO' 
   and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$_SESSION['statusMes']}' and quinzena = '{$_SESSION['quinzena']}' 
-  and ( idStatus_despensa = 3)  Order By month(dataDespensa)        ");
+  and ( idStatus_despensa = 3)  and idUsuario = '{$_SESSION['user_id']}'   Order By month(dataDespensa)        ");
 
   $consulta_Saida = $pdo->query("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano, quinzena from despensas where status = 'ATIVO' 
   and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$_SESSION['statusMes']}' and quinzena = '{$_SESSION['quinzena']}' 
-  and ( idstatus_despensa = 4 )  Order By month(dataDespensa)        ");
+  and ( idstatus_despensa = 4 )  and idUsuario = '{$_SESSION['user_id']}'   Order By month(dataDespensa)        ");
 }
 
 ?>

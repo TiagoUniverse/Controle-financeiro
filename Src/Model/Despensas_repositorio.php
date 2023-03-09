@@ -14,7 +14,7 @@ require_once "conexao.php";
 class Despensas_repositorio
 {
 
-    public function cadastro_entrada($descricao, $valor, $data, $ano, $quinzena, $idstatus_Mes, $idStatus_despensa , $pdo)
+    public function cadastro_entrada($descricao, $valor, $data, $ano, $quinzena, $idstatus_Mes, $idStatus_despensa , $idUsuario , $pdo)
     {
         try {
         
@@ -24,8 +24,8 @@ class Despensas_repositorio
         // $sql = "Insert into clientes (descricao, valor, data, ano, quinzena, idstatus_Mes, idStatus_Despensa)
         //         Values ({$descricao}, {$valor}, {$data}, {$ano}, {$quinzena}, {$idstatus_Mes}, {$idStatus_despensa})";
 
-        $stmt =  $pdo->prepare('INSERT INTO despensas (descricao, valor, dataDespensa, ano, quinzena, idstatus_Mes, idStatus_despensa)
-        VALUES (:descricao , :valor , :dataDespensa , :ano , :quinzena , :idstatus_Mes , :statusDespensa )  ');
+        $stmt =  $pdo->prepare('INSERT INTO despensas (descricao, valor, dataDespensa, ano, quinzena, idstatus_Mes, idStatus_despensa , idUsuario)
+        VALUES (:descricao , :valor , :dataDespensa , :ano , :quinzena , :idstatus_Mes , :statusDespensa , :idUsuario )  ');
         
         $stmt->execute(array(
             ':descricao' => $descricao ,
@@ -34,7 +34,8 @@ class Despensas_repositorio
             ':ano' => $ano ,
             ':quinzena' => $quinzena ,
             ':idstatus_Mes' => $idstatus_Mes ,
-            ':statusDespensa' => $idStatus_despensa
+            ':statusDespensa' => $idStatus_despensa,
+            ':idUsuario' => $idUsuario
         ));
 
         // echo "funcionou!!";
@@ -46,7 +47,7 @@ class Despensas_repositorio
 
     }
 
-    public function cadastro_Saida($descricao, $valor, $data, $ano, $quinzena, $idstatus_Mes, $idStatus_despensa , $pdo)
+    public function cadastro_Saida($descricao, $valor, $data, $ano, $quinzena, $idstatus_Mes, $idStatus_despensa , $idUsuario , $pdo)
     {
         try {
         
@@ -56,8 +57,8 @@ class Despensas_repositorio
         // $sql = "Insert into clientes (descricao, valor, data, ano, quinzena, idstatus_Mes, idStatus_Despensa)
         //         Values ({$descricao}, {$valor}, {$data}, {$ano}, {$quinzena}, {$idstatus_Mes}, {$idStatus_despensa})";
 
-        $stmt =  $pdo->prepare('INSERT INTO despensas (descricao, valor, dataDespensa, ano, quinzena, idstatus_Mes, idStatus_despensa)
-        VALUES (:descricao , :valor , :dataDespensa , :ano , :quinzena , :idstatus_Mes , :statusDespensa )  ');
+        $stmt =  $pdo->prepare('INSERT INTO despensas (descricao, valor, dataDespensa, ano, quinzena, idstatus_Mes, idStatus_despensa , idUsuario)
+        VALUES (:descricao , :valor , :dataDespensa , :ano , :quinzena , :idstatus_Mes , :statusDespensa , :idUsuario )  ');
         
         $stmt->execute(array(
             ':descricao' => $descricao ,
@@ -66,7 +67,8 @@ class Despensas_repositorio
             ':ano' => $ano ,
             ':quinzena' => $quinzena ,
             ':idstatus_Mes' => $idstatus_Mes ,
-            ':statusDespensa' => $idStatus_despensa
+            ':statusDespensa' => $idStatus_despensa,
+            ':idUsuario' => $idUsuario
         ));
 
         // echo "funcionou!!";
