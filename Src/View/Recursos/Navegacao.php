@@ -1,3 +1,19 @@
+<?php
+session_start();
+
+function talogado()
+{
+  if ($_SESSION['connected'] !== '1') {
+    header("location: login.php");
+  }
+}
+
+
+talogado();
+
+?>
+
+
 <!-- Header -->
 <div class="container">
   <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
@@ -26,12 +42,12 @@
      * Data: 07/03/23
      */
 
-    if ($_SESSION['tipo_registro'] == null){
+    if ($_SESSION['tipo_registro'] == null) {
       $_SESSION['tipo_registro'] = "Registro pessoais";
     }
 
 
-    if (isset($_POST['tipo_registro'])){
+    if (isset($_POST['tipo_registro'])) {
       $_SESSION['tipo_registro'] = $_POST['tipo_registro'];
     }
 
@@ -40,7 +56,7 @@
 
 
 
-    <ul class="nav nav-pills" >
+    <ul class="nav nav-pills">
 
       <?php
 
@@ -79,7 +95,7 @@
 
         <li class="nav-item">
 
-          <form action="home.php" method="post" >
+          <form action="home.php" method="post">
             <input type="hidden" name="tipo_registro" value="Registros da casa">
             <button type="submit" class="btn btn-success" style="margin-right:0.5cm;">Registros da casa</button>
           </form>
@@ -97,10 +113,10 @@
         <ul class="dropdown-menu text-small">
 
           <?php
-          $nome_dividido = explode(" " , $_SESSION['user_name']);
+          $nome_dividido = explode(" ", $_SESSION['user_name']);
           ?>
 
-          <li><a class="dropdown-item" href="#"><?php echo "Perfil: <b>" . $nome_dividido[0] . "</b>" ; ?> </a></li>
+          <li><a class="dropdown-item" href="#"><?php echo "Perfil: <b>" . $nome_dividido[0] . "</b>"; ?> </a></li>
           <li>
             <hr class="dropdown-divider">
           </li>
