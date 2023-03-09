@@ -119,4 +119,24 @@ use PDOException;
         }
     }
 
+    
+    public function alterar_senha ($senha , $idUsuario, $pdo){
+
+        try{
+
+            $stmt = $pdo->prepare ("Update Usuario set senha = sha1 ( :senha ) , updated = now() where id = :idUsuario  ");
+
+            $stmt->execute(array(
+                "senha" => $senha,
+                "idUsuario" => $idUsuario
+            ));
+
+            return true;
+
+        } catch (PDOException $e){
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
  }

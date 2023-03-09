@@ -104,6 +104,7 @@
           <li>
             <hr class="dropdown-divider">
           </li>
+          <li><a class="dropdown-item" href="trocar-senha.php">Trocar senha</a></li>
           <li><a class="dropdown-item" href="logoff.php">Sair</a></li>
         </ul>
       </div>
