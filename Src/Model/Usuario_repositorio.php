@@ -14,6 +14,8 @@
 
  namespace model;
 
+use PDOException;
+
  class Usuario_repositorio{
 
     public function cadastrar($nome,  $email, $senha , $pdo){
@@ -32,6 +34,32 @@
 
         } catch(PDOException $e) {
             echo 'Error: ' . $e->getMessage();
+            return false;
+        }
+    }
+
+
+    public function verificar_existe($email , $pdo){
+        // $consulta = $pdo->query("Select * from Usuario where email = '{$email}' ");
+
+
+        try{
+            $stmt = $pdo->prepare("Select * from Usuario where email = :email  ");
+
+            $stmt->execute(array(
+                ':email' => $email
+            ));
+
+            var_dump($stmt);
+            while ($linha = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+                if ($email = $linha['email'] ) {
+                    // ECHO "tá igual";
+                    return true;
+                }
+            }
+
+        } catch (PDOException $e){
+            echo "Error: " . $e->getMessage();
             return false;
         }
     }

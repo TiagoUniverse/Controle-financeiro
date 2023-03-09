@@ -7,6 +7,10 @@ use model\Usuario_repositorio;
 
 $Usuario_repositorio = new Usuario_repositorio();
 
+$retorno = $Usuario_repositorio->verificar_existe("teste@gmail.com" , $pdo);
+
+// var_dump( $retorno);
+
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +49,7 @@ $Usuario_repositorio = new Usuario_repositorio();
         if (isset($_POST['status_criacao'])) {
           $mensagemVermelha = true;
           
-          if ()
+          // if ()
 
         }
         ?>

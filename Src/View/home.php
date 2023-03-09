@@ -23,6 +23,8 @@ require_once "Recursos/Navegacao.php";
 
 //Variáveis
 
+// var_dump((!isset($_POST['limpaFiltro'])));
+
 if (!isset($_POST['limpaFiltro'])){
   $_SESSION['ano'] = null;
 }
