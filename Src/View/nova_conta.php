@@ -3,13 +3,10 @@
 require_once "conexao.php";
 
 require_once "../Model/Usuario_repositorio.php";
+
 use model\Usuario_repositorio;
 
 $Usuario_repositorio = new Usuario_repositorio();
-
-$retorno = $Usuario_repositorio->verificar_existe("teste@gmail.com" , $pdo);
-
-// var_dump( $retorno);
 
 ?>
 
@@ -42,15 +39,30 @@ $retorno = $Usuario_repositorio->verificar_existe("teste@gmail.com" , $pdo);
       <div class="container">
         <h1>Controle<br />monetário: criar conta</h1>
 
-        <a href="login.php"> Voltar</a>
+        <a href="login.php"> Voltar</a> <br><br>
 
         <?php
 
         if (isset($_POST['status_criacao'])) {
-          $mensagemVermelha = true;
-          
-          // if ()
 
+          $mensagemVermelha = true;
+
+          if ($Usuario_repositorio->verificar_existe($_POST['email'], $pdo)) {
+            $mensagem = "Esse e-mail já foi cadastrado. Por favor, crie uma conta com um e-mail diferente";
+          } else {
+            $mensagemVermelha = false;
+            $mensagem = "Conta cadastrada com sucesso";
+            $Usuario_repositorio->cadastrar($_POST['nome'], $_POST['email'], $_POST['senha'], $pdo);
+          }
+
+          // Mensagem do resultado
+          if ($mensagemVermelha) {
+            echo "<div class='alert alert-danger' role='alert'> ";
+          } else {
+            echo "<div class='alert alert-success' role='alert'> ";
+          }
+          echo $mensagem;
+          echo "</div>";
         }
         ?>
 
@@ -59,11 +71,11 @@ $retorno = $Usuario_repositorio->verificar_existe("teste@gmail.com" , $pdo);
           <form action="nova_conta.php" method="post">
             <input type="hidden" name="status_criacao" value="CRIANDO CONTA">
             <p>Digite o seu nome</p>
-            <input type="text" placeholder="Nome:" name="nome">
+            <input type="text" placeholder="Nome:" name="nome" required>
             <p>Digite um e-mail para acesso</p>
-            <input type="email" placeholder="E-mail" name="email">
+            <input type="email" placeholder="E-mail" name="email" required>
             <p>Digite a sua senha</p>
-            <input type="password" placeholder="Senha" name="senha">
+            <input type="password" placeholder="Senha" name="senha" require>
 
             <button type="submit">Criar conta</button>
 

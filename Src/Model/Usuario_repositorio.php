@@ -50,7 +50,7 @@ use PDOException;
                 ':email' => $email
             ));
 
-            var_dump($stmt);
+            // var_dump($stmt);
             while ($linha = $stmt->fetch(\PDO::FETCH_ASSOC)) {
                 if ($email = $linha['email'] ) {
                     // ECHO "tá igual";
