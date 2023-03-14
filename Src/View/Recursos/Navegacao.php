@@ -42,7 +42,7 @@ talogado();
      * Data: 07/03/23
      */
 
-    if ($_SESSION['tipo_registro'] == null) {
+    if (!isset($_SESSION['tipo_registro'])) {
       $_SESSION['tipo_registro'] = "Registro pessoais";
     }
 
