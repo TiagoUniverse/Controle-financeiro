@@ -322,7 +322,7 @@ foreach ($consulta_TotalPoupanca as $linha) {
 <body>
 
   <?php
-  echo $_SESSION['statusMes'];
+  // echo $_SESSION['statusMes'];
   if (empty($_SESSION['statusMes'])) {
   ?>
     <form action="home.php" method="post">
