@@ -394,6 +394,124 @@ foreach ($consulta_TotalPoupanca as $linha) {
   <br>
   <h3 style="text-align: center;">Abaixo registre todas as entradas e saídas da sua poupança</h3>
 
+
+  <div class="px-4 py-5 my-5 text-center">
+    <img class="d-block mx-auto mb-4" src="../../Assets/Icons//bank.png" alt="" width="72" height="70">
+
+    <h1 class="display-5 fw-bold" id="Saida_title">Saída</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">Por favor, digite um ano e mês válido na tela inicial.</p>
+      <a href="#Entrada_title"> Navegar até os registros de Entrada</a>
+      <br><br>
+
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" style="background-color:#c79797">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Nª</th>
+              <th scope="col">Descrição</th>
+              <th scope="col">valor</th>
+              <th scope="col">Data</th>
+              <th scope="col">Alteração</th>
+              <th scope="col">Exclusão</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+
+            $contador = 1;
+            foreach ($Saida_fetch as $linha) {
+            ?>
+              <tr>
+                <!-- <th scope="row">1</th> -->
+                <td> <?php echo $contador; ?> </td>
+                <td> <?php echo $linha['descricao']; ?> </td>
+                <td> <?php echo "R$" . $linha['valor']; ?> </td>
+                <td> <?php echo $linha['dataPoupanca']; ?> </td>
+                <td>
+
+                  <form action="alterar.php" method="post">
+                    <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
+                    <input type="hidden" value="POUPANCA" name="pagina_inicial">
+                    <button type="submit"> <img src="../../Assets//Icons//pencil.png" class="icon_exclusao"></button>
+                  </form>
+
+                </td>
+                <td>
+
+                  <form action="excluir.php" method="post">
+                    <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
+                    <input type="hidden" value="POUPANCA" name="pagina_inicial">
+                    <button type="submit"> <img src="../../Assets//Icons//x-mark-xxl.png" class="icon_exclusao"></button>
+                  </form>
+
+                </td>
+              </tr>
+            <?php
+              $contador++;
+            }
+
+            if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO SAIDA") {
+            ?>
+              <form method="post">
+                <input type="hidden" name="adicionando_registro" value='SALVANDO REGISTRO SAIDA'>
+                <input type="hidden" name="statusDespensa" value='3'>
+                <tr>
+                  <th scope="col">Nª</th>
+                  <th scope="col">
+                    <input type="text" name="descricao">
+                  </th>
+                  <th scope="col">
+                    <input type="number" min="1" step="any" name="valor">
+                  </th>
+                  <th scope="col">
+                    <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'>
+                  </th>
+
+                </tr>
+              <?php
+            }
+
+              ?>
+          </tbody>
+
+        </table>
+
+      </div>
+      <?php
+      if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO SAIDA") {
+      ?>
+
+        <div class="row g-0 text-center">
+          <div class="col-sm-6 col-md-6">
+            <button type="submit" class="btn btn-primary">Registrar</button>
+            </form>
+          </div>
+          <div class="col-6 col-md-6">
+            <form action="poupancas.php" method="post">
+              <input type="hidden" value="" name="adicionando_registro">
+              <button type="submit" class="btn btn-secondary">Cancelar</button>
+            </form>
+          </div>
+        </div>
+
+      <?php
+      }
+
+      if ($adicionando_registro == null) {
+      ?>
+        <form action="poupancas.php" method="post">
+          <input type="hidden" value="REGISTRANDO SAIDA" name="adicionando_registro">
+          <button type="submit" class="btn btn-primary">Adicionar um novo registro</button>
+        </form>
+      <?php
+      }
+      ?>
+
+    </div>
+  </div>
+
+  
   <div class="px-4 py-5 my-5 text-center">
 
     <img class="d-block mx-auto mb-4" src="../../Assets/Icons//bank.png" alt="" width="72" height="70">
@@ -504,122 +622,6 @@ foreach ($consulta_TotalPoupanca as $linha) {
       ?>
         <form action="poupancas.php" method="post">
           <input type="hidden" value="REGISTRANDO ENTRADA" name="adicionando_registro">
-          <button type="submit" class="btn btn-primary">Adicionar um novo registro</button>
-        </form>
-      <?php
-      }
-      ?>
-
-    </div>
-  </div>
-
-  <div class="px-4 py-5 my-5 text-center">
-    <img class="d-block mx-auto mb-4" src="../../Assets/Icons//bank.png" alt="" width="72" height="70">
-
-    <h1 class="display-5 fw-bold" id="Saida_title">Saída</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">Por favor, digite um ano e mês válido na tela inicial.</p>
-      <a href="#Entrada_title"> Navegar até os registros de Entrada</a>
-      <br><br>
-
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" style="background-color:#c79797">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Nª</th>
-              <th scope="col">Descrição</th>
-              <th scope="col">valor</th>
-              <th scope="col">Data</th>
-              <th scope="col">Alteração</th>
-              <th scope="col">Exclusão</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-
-            $contador = 1;
-            foreach ($Saida_fetch as $linha) {
-            ?>
-              <tr>
-                <!-- <th scope="row">1</th> -->
-                <td> <?php echo $contador; ?> </td>
-                <td> <?php echo $linha['descricao']; ?> </td>
-                <td> <?php echo "R$" . $linha['valor']; ?> </td>
-                <td> <?php echo $linha['dataPoupanca']; ?> </td>
-                <td>
-
-                  <form action="alterar.php" method="post">
-                    <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
-                    <input type="hidden" value="POUPANCA" name="pagina_inicial">
-                    <button type="submit"> <img src="../../Assets//Icons//pencil.png" class="icon_exclusao"></button>
-                  </form>
-
-                </td>
-                <td>
-
-                  <form action="excluir.php" method="post">
-                    <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
-                    <input type="hidden" value="POUPANCA" name="pagina_inicial">
-                    <button type="submit"> <img src="../../Assets//Icons//x-mark-xxl.png" class="icon_exclusao"></button>
-                  </form>
-
-                </td>
-              </tr>
-            <?php
-              $contador++;
-            }
-
-            if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO SAIDA") {
-            ?>
-              <form method="post">
-                <input type="hidden" name="adicionando_registro" value='SALVANDO REGISTRO SAIDA'>
-                <input type="hidden" name="statusDespensa" value='3'>
-                <tr>
-                  <th scope="col">Nª</th>
-                  <th scope="col">
-                    <input type="text" name="descricao">
-                  </th>
-                  <th scope="col">
-                    <input type="number" min="1" step="any" name="valor">
-                  </th>
-                  <th scope="col">
-                    <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'>
-                  </th>
-
-                </tr>
-              <?php
-            }
-
-              ?>
-          </tbody>
-
-        </table>
-
-      </div>
-      <?php
-      if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO SAIDA") {
-      ?>
-
-        <div class="row g-0 text-center">
-          <div class="col-sm-6 col-md-6">
-            <button type="submit" class="btn btn-primary">Registrar</button>
-            </form>
-          </div>
-          <div class="col-6 col-md-6">
-            <form action="poupancas.php" method="post">
-              <input type="hidden" value="" name="adicionando_registro">
-              <button type="submit" class="btn btn-secondary">Cancelar</button>
-            </form>
-          </div>
-        </div>
-
-      <?php
-      }
-
-      if ($adicionando_registro == null) {
-      ?>
-        <form action="poupancas.php" method="post">
-          <input type="hidden" value="REGISTRANDO SAIDA" name="adicionando_registro">
           <button type="submit" class="btn btn-primary">Adicionar um novo registro</button>
         </form>
       <?php
