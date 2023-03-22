@@ -358,6 +358,7 @@ foreach ($consulta_TotalPoupanca as $linha) {
             ?>
               <th scope="col"> Gastos pessoais total </th>
               <th scope="col">Receita pessoal total</th>
+              <th scope="col">Total que possuo agora</th>
             <?php
             } else {
             ?>
@@ -375,6 +376,7 @@ foreach ($consulta_TotalPoupanca as $linha) {
           <tr>
             <th scope="col"><?php echo "R$" . $dinheiroSaida; ?> </th>
             <th scope="col"><?php echo "R$" . $dinheiroEntrada; ?> </th>
+            <th scope="col" style="color:#e61e19;"><?php echo "R$" . ($dinheiroEntrada - $dinheiroSaida) ?> </th>
             <th scope="col"><?php echo "R$" . $dinheiroTotal; ?> </th>
             <th scope="col">
               <form action="poupancas.php" method="post">
@@ -511,7 +513,7 @@ foreach ($consulta_TotalPoupanca as $linha) {
     </div>
   </div>
 
-  
+
   <div class="px-4 py-5 my-5 text-center">
 
     <img class="d-block mx-auto mb-4" src="../../Assets/Icons//bank.png" alt="" width="72" height="70">
