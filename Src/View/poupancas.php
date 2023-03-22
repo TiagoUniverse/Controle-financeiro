@@ -332,12 +332,6 @@ $valorLiquidoPessoal = $entradaPessoal - $saidaPessoal;
 $valorLiquidoCasa = $entradaDaCasa - $saidaDaCasa;
 
 $dinheiroTotal = $valorLiquidoCasa + $valorLiquidoPessoal;
-
-echo "O valor liquido pessoal é: " . $valorLiquidoPessoal;
-echo "<br> O valor liquido da casa é: " . $valorLiquidoCasa;
-
-echo "<br> dinheiroTotal é:" . $dinheiroTotal;
-
 ?>
 
 <!doctype html>
@@ -391,7 +385,7 @@ echo "<br> dinheiroTotal é:" . $dinheiroTotal;
             ?>
               <th scope="col"> Gastos pessoais total </th>
               <th scope="col">Receita pessoal total</th>
-              <th scope="col">Total que possuo agora (valor líquido) </th>
+             
             <?php
             } else {
             ?>
@@ -399,7 +393,8 @@ echo "<br> dinheiroTotal é:" . $dinheiroTotal;
               <th scope="col">Receita total da casa</th>
             <?php
             }
-            ?>
+            ?> 
+            <th scope="col">Total que possuo agora (valor líquido) </th>
             <th scope="col">Soma dos valores líquidos da casa com o pessoal</th>
             <th scope="col">Valor total da poupança estimado</th>
           </tr>
