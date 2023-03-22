@@ -111,6 +111,8 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
    */
   $mensagemVermelha = true;
 
+  
+
   if (!isset($_POST['data'])) {
     $mensagem = "Informe uma data";
   } else if ($_SESSION['quinzena'] == "Quinzena 1" && $dataDividida[1] != $mes_selecionado) {
@@ -127,8 +129,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
     $mensagem = "Por favor, informe um valor positivo do dinheiro";
   } else if ($_SESSION['quinzena'] == "Quinzena 1" && ($dataDividida[2] < 5 || $dataDividida[2] > 19)) {
     $mensagem = "Por favor, insira um registro dentro dos dias da primeira quinzena (dia 5 até dia 19)";
-  } else if ($_SESSION['quinzena'] == "Quinzena 2" && ($dataDividida[2] > 5     || ($dataDividida[2] != 1 && $dataDividida[2] != 2
-    && $dataDividida[2] != 3 && $dataDividida[2] != 4 &&  $dataDividida[2] < 19))) {
+  } else if ($_SESSION['quinzena'] == "Quinzena 2" && ($dataDividida[2] <= 4 || $dataDividida[2] > 31) ) {
     $mensagem = "Por favor, insira um registro dentro dos dias da segunda quinzena (20 até dia 4 do próximo mês)";
   } else {
     // echo "entrei pra registrar";
@@ -138,13 +139,13 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
       $mensagemVermelha = false;
       $mensagem = "Informação registrada com sucesso!";
 
-      if ($_SESSION['tipo_registro'] == "Registros pessoais"){
+      if ($_SESSION['tipo_registro'] == "Registros pessoais") {
         $statusDespensa = 3;
       } else {
         $statusDespensa = 1;
       }
 
-      $Despensas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], $statusDespensa , $_SESSION['user_id'] , $pdo);
+      $Despensas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], $statusDespensa, $_SESSION['user_id'], $pdo);
     } else {
       $mensagem = "Registro já cadastrado!";
     }
@@ -152,14 +153,14 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
 
   $adicionando_registro = null;
 
-    // Mensagem do resultado
-    if ($mensagemVermelha) {
-      echo "<div class='alert alert-danger' role='alert'> ";
-    } else {
-      echo "<div class='alert alert-success' role='alert'> ";
-    }
-    echo $mensagem;
-    echo "</div>";
+  // Mensagem do resultado
+  if ($mensagemVermelha) {
+    echo "<div class='alert alert-danger' role='alert'> ";
+  } else {
+    echo "<div class='alert alert-success' role='alert'> ";
+  }
+  echo $mensagem;
+  echo "</div>";
 }
 
 
@@ -217,8 +218,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
     $mensagem = "Por favor, informe um valor positivo do dinheiro";
   } else if ($_SESSION['quinzena'] == "Quinzena 1" && ($dataDividida[2] < 5 || $dataDividida[2] > 19)) {
     $mensagem = "Por favor, insira um registro dentro dos dias da primeira quinzena (dia 5 até dia 19)";
-  } else if ($_SESSION['quinzena'] == "Quinzena 2" && ($dataDividida[2] > 5     || ($dataDividida[2] != 1 && $dataDividida[2] != 2 && $dataDividida[2] != 3 &&
-    $dataDividida[2] != 4 &&  $dataDividida[2] < 19))) {
+  } else if ($_SESSION['quinzena'] == "Quinzena 2" && ($dataDividida[2] <= 4 || $dataDividida[2] > 31) ) {
     $mensagem = "Por favor, insira um registro dentro dos dias da segunda quinzena (20 até dia 4 do próximo mês)";
   } else {
 
@@ -228,13 +228,13 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
       $mensagemVermelha = false;
       $mensagem = "Informação registrada com sucesso!";
 
-      if ($_SESSION['tipo_registro'] == "Registros pessoais"){
+      if ($_SESSION['tipo_registro'] == "Registros pessoais") {
         $statusDespensa = 4;
       } else {
         $statusDespensa = 2;
       }
 
-      $Despensas_repositorio->cadastro_Saida($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], $statusDespensa , $_SESSION['user_id'] , $pdo);
+      $Despensas_repositorio->cadastro_Saida($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], $statusDespensa, $_SESSION['user_id'], $pdo);
     } else {
       $mensagem = "Registro já cadastrado!";
     }
@@ -278,6 +278,25 @@ if ($_SESSION['tipo_registro'] == "Registros da casa") {
   and ( idstatus_despensa = 4 )  and idUsuario = '{$_SESSION['user_id']}'   Order By month(dataDespensa)        ");
 }
 
+/*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+* │                                Registros do gasto e da receita                                                |
+* | Description: After viewing the SQL, we are going to calculate how many money do we have                       │
+* └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/
+$dinheiroEntrada = 0;
+$dinheiroSaida = 0;
+
+$Entrada_fetch = $consulta_Entrada->fetchAll(PDO::FETCH_ASSOC);
+$Saida_fetch = $consulta_Saida->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($Entrada_fetch as $row) {
+  $dinheiroEntrada +=  $row['valor'];
+}
+
+foreach ($Saida_fetch as $row) {
+  $dinheiroSaida +=  $row['valor'];
+}
+
 ?>
 
 <!doctype html>
@@ -302,6 +321,31 @@ if ($_SESSION['tipo_registro'] == "Registros da casa") {
   <h1 class="display-5 fw-bold" style="text-align: center;"> <?php echo $_SESSION['quinzena'];  ?> </h1>
   <h2 class="display-5 fw-bold" style="text-align: center;">Despensas: gastos pessoais</h2>
   <h3 style="text-align: center;">Quando estiver pronto, clique no botão de avançar para registrar as despensas</h3>
+
+  <!-- Dinheiro total -->
+  <br>
+  <div class="col-lg-6 mx-auto" style="background-color:cadetblue">
+
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"> Gasto total </th>
+            <th scope="col">Receita total</th>
+          </tr>
+        </thead>
+
+        <tbody style="color: #fff8f1;">
+          <tr>
+            <th scope="col"><?php echo "R$" . $dinheiroSaida; ?> </th>
+            <th scope="col"><?php echo "R$" . $dinheiroEntrada; ?> </th>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
 
   <div class="px-4 py-5 my-5 text-center">
 
@@ -336,7 +380,7 @@ if ($_SESSION['tipo_registro'] == "Registros da casa") {
             <?php
 
             $contador = 1;
-            while ($linha = $consulta_Entrada->fetch(PDO::FETCH_ASSOC)) {
+            foreach ($Entrada_fetch as $linha) {
             ?>
               <tr>
                 <!-- <th scope="row">1</th> -->
@@ -463,7 +507,7 @@ if ($_SESSION['tipo_registro'] == "Registros da casa") {
             <?php
 
             $contador = 1;
-            while ($linha = $consulta_Saida->fetch(PDO::FETCH_ASSOC)) {
+            foreach ($Saida_fetch as $linha) {
             ?>
               <tr>
                 <!-- <th scope="row">1</th> -->
