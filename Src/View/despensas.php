@@ -301,7 +301,7 @@ if ($_SESSION['tipo_registro'] == "Registros da casa") {
 
   <h1 class="display-5 fw-bold" style="text-align: center;"> <?php echo $_SESSION['quinzena'];  ?> </h1>
   <h2 class="display-5 fw-bold" style="text-align: center;">Despensas: gastos pessoais</h2>
-  <h3 style="text-align: center;">Quando estiver pronto, clique no botão de avançar para registrar as despensas da casa</h3>
+  <h3 style="text-align: center;">Quando estiver pronto, clique no botão de avançar para registrar as despensas</h3>
 
   <div class="px-4 py-5 my-5 text-center">
 

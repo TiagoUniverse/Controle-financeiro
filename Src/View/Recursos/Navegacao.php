@@ -43,7 +43,7 @@ talogado();
      */
 
     if (!isset($_SESSION['tipo_registro'])) {
-      $_SESSION['tipo_registro'] = "Registro pessoais";
+      $_SESSION['tipo_registro'] = "Registros pessoais";
     }
 
 
