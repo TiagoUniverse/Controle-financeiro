@@ -127,8 +127,7 @@ if (isset($_POST['foiAlterado']) && $_POST['foiAlterado'] == "ALTERADO") {
       $mensagem = "Por favor, informe um valor positivo do dinheiro";
     } else if ($_SESSION['quinzena'] == "Quinzena 1" && ($dataDividida[2] < 5 || $dataDividida[2] > 19)) {
       $mensagem = "Por favor, insira um registro dentro dos dias da primeira quinzena (dia 5 até dia 19)";
-    } else if ($_SESSION['quinzena'] == "Quinzena 2" && ($dataDividida[2] > 5     || ($dataDividida[2] != 1 && $dataDividida[2] != 2 && $dataDividida[2] != 3 &&
-      $dataDividida[2] != 4 &&  $dataDividida[2] < 19))) {
+    } else if ($_SESSION['quinzena'] == "Quinzena 2" && ($dataDividida[2] <= 4 || $dataDividida[2] > 31)) {
       $mensagem = "Por favor, insira um registro dentro dos dias da segunda quinzena (20 até dia 4 do próximo mês)";
     } else {
       $mensagemVermelha = false;
