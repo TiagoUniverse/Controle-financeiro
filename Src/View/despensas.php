@@ -332,6 +332,7 @@ foreach ($Saida_fetch as $row) {
           <tr>
             <th scope="col"> Gasto total </th>
             <th scope="col">Receita total</th>
+            <th scope="col">Resultado da subtração</th>
           </tr>
         </thead>
 
@@ -339,6 +340,7 @@ foreach ($Saida_fetch as $row) {
           <tr>
             <th scope="col"><?php echo "R$" . $dinheiroSaida; ?> </th>
             <th scope="col"><?php echo "R$" . $dinheiroEntrada; ?> </th>
+            <th scope="col"  style="color:#e61e19;"><?php echo "R$" . ($dinheiroEntrada - $dinheiroSaida) ; ?> </th>
             </th>
           </tr>
         </tbody>
