@@ -298,12 +298,45 @@ if (!empty($ValorEstimado_fetch)) {
 */
 
 $consulta_TotalPoupanca = $pdo->query("Select * from poupancas where status = 'ATIVO' 
-and ano = '{$_SESSION['ano']}' and ( idstatus_despensa = 5 or idstatus_despensa = 7 )  and idUsuario = '{$_SESSION['user_id']}'  ");
+and ano = '{$_SESSION['ano']}' and ( idstatus_despensa >= 5 and idstatus_despensa <= 8 )  and idUsuario = '{$_SESSION['user_id']}'  ");
 
 $dinheiroTotal = 0;
+$entradaPessoal = 0;
+$saidaPessoal = 0;
+
+$entradaDaCasa = 0;
+$saidaDaCasa = 0;
+
 foreach ($consulta_TotalPoupanca as $linha) {
-  $dinheiroTotal += $linha['valor'];
+
+  if($linha['idStatus_despensa'] == '7'){
+    $entradaPessoal +=  $linha['valor'];
+  }
+  
+  if($linha['idStatus_despensa'] == '8'){
+    $saidaPessoal +=  $linha['valor'];
+  }
+
+
+  if($linha['idStatus_despensa'] == '5'){
+    $entradaDaCasa +=  $linha['valor'];
+  }
+
+  if($linha['idStatus_despensa'] == '6'){
+    $saidaDaCasa +=  $linha['valor'];
+  }
+
 }
+
+$valorLiquidoPessoal = $entradaPessoal - $saidaPessoal;
+$valorLiquidoCasa = $entradaDaCasa - $saidaDaCasa;
+
+$dinheiroTotal = $valorLiquidoCasa + $valorLiquidoPessoal;
+
+echo "O valor liquido pessoal é: " . $valorLiquidoPessoal;
+echo "<br> O valor liquido da casa é: " . $valorLiquidoCasa;
+
+echo "<br> dinheiroTotal é:" . $dinheiroTotal;
 
 ?>
 
@@ -358,7 +391,7 @@ foreach ($consulta_TotalPoupanca as $linha) {
             ?>
               <th scope="col"> Gastos pessoais total </th>
               <th scope="col">Receita pessoal total</th>
-              <th scope="col">Total que possuo agora</th>
+              <th scope="col">Total que possuo agora (valor líquido) </th>
             <?php
             } else {
             ?>
@@ -367,7 +400,7 @@ foreach ($consulta_TotalPoupanca as $linha) {
             <?php
             }
             ?>
-            <th scope="col">Soma total da casa com o pessoal</th>
+            <th scope="col">Soma dos valores líquidos da casa com o pessoal</th>
             <th scope="col">Valor total da poupança estimado</th>
           </tr>
         </thead>
