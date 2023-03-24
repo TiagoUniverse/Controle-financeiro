@@ -131,5 +131,10 @@ footer{
 /* ALTERAR SENHA */
 
 .main-Senha{
-    background-color: red;
+    background-color: #345474;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    /* display: block; */
+
 }
