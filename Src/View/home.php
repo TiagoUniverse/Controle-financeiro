@@ -20,9 +20,13 @@ $_SESSION['statusMes'] = null;
 $_SESSION['quinzena'] = null;
 
 //Variáveis
-if (!isset($_POST['limpaFiltro'])) {
-  $_SESSION['ano'] = null;
+if (!isset($_SESSION['ano'])) {
+  $_SESSION['ano'] = "2023";
 }
+
+// if (!isset($_POST['limpaFiltro'])) {
+//   $_SESSION['ano'] = null;
+// }
 
 if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1) {
   $_SESSION['ano'] = null;
@@ -55,6 +59,7 @@ if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1) {
     </select>
     <button type="submit" class="input-pesquisar-items">Pesquisar</button>
   </form>
+  <h2 class="actual-year"><?php echo $_SESSION['ano']; ?></h2>
   <div class="gallery">
     <img src='../../Assets//img//1.png' alt="january">
     <img src='../../Assets//img//february.png' alt="february">

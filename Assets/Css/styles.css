@@ -31,6 +31,15 @@ header a:visited{
 
 
 /* GALLERY */
+.actual-year{
+    text-align: center;
+    background-color: rgba(213, 172, 166, 0.5);
+    box-shadow: 1px 1px 5px black;
+    border-radius: 5px;
+    max-width: 230px;
+    margin: 4px auto;
+}
+
 .gallery{
     display: flex;
     flex-direction: row;
