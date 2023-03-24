@@ -1,0 +1,113 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #f5f6f7;
+}
+
+button{
+    cursor: pointer;
+}
+
+header{
+    text-align: center;
+    /* text-transform: uppercase; */
+    padding: 32px;
+    background-color: #102947;
+    color: white;
+    border-bottom: 4px solid #486c89;
+}
+
+
+/* GALLERY */
+.gallery{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 13px;
+    justify-content: center;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 0 40px 0;
+}
+
+.gallery img{
+    width: 100%;
+    max-width: 270px;
+    /* height: 250px; */
+    object-fit: cover;
+}
+
+
+.gallery::after{
+    
+}
+
+/* FOOTER */
+footer{
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 3.5px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* INPUT-PESQUISAR */
+.input-pesquisar{
+    width: 100%;
+    text-align: center;
+    padding: 5px 0;
+    /* background-color: red; */
+}
+
+.input-pesquisar-items{
+    width: 100px;
+    font-size: 17px;
+}
+
+.input-pesquisar button{
+    background-color: #1fe098;
+    border: 1px solid #1fe098;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+/* NAV-BAR */
+.nav-bar{
+    background-color: #fcacac;;
+    width: 100%;
+    text-align: end;
+    padding: 3px 0;
+    
+}
+
+.nav-bar form{
+    display: inline-block;
+    /* width: 100px; */
+}
+
+.nav-bar button{
+    height: 47px;
+    font-size: 16px; 
+}
+
+.nav-bar-selecionado{
+    background-color: #33cc3d;
+    border: 1px solid #33cc3d;
+    border-radius: 5px;
+    color: white;
+}
+
+.nav-bar-desmarcado{
+    background-color: #857a81;
+    border: 1px solid #857a81;
+    border-radius: 5px;
+    color: white;
+}
+
