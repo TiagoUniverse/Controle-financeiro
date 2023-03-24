@@ -22,10 +22,14 @@ if (!isset($_SESSION['tipo_registro'])) {
 if (isset($_POST['tipo_registro'])) {
   $_SESSION['tipo_registro'] = $_POST['tipo_registro'];
 }
+
+$nome_dividido = explode(" ", $_SESSION['user_name']);
 ?>
 
 <header>
-  <h1>Controle monetário</h1>
+  <a href="home.php">
+    <h1>Controle monetário</h1>
+  </a>
 </header>
 <div class="nav-bar">
   <?php
@@ -59,9 +63,16 @@ if (isset($_POST['tipo_registro'])) {
       <img src="../../Assets//Icons//dropdown.png">
     </button>
     <div id="myDropdown" class="dropdown-content">
-      <a href="#">Perfil: <b>Tiago</b></a>
-      <a href="#">Alterar senha</a>
-      <a href="#">Sair</a>
+      <a href="#"><?php echo "Perfil: <b>" . $nome_dividido[0] . "</b>"; ?></a>
+      <a href="trocar-senha.php">Alterar senha</a>
+      <a href="logoff.php">Sair</a>
     </div>
   </div>
 </div>
+
+<footer>
+  Tiago Universe, PE 2023.
+</footer>
+<script src="../../Assets//Js//dropdown.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" 
+  integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->

@@ -21,6 +21,14 @@ header{
     border-bottom: 4px solid #486c89;
 }
 
+header a{
+   text-decoration: none; 
+}
+
+header a:visited{
+    color: white;
+}
+
 
 /* GALLERY */
 .gallery{
