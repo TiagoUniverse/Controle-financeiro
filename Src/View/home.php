@@ -24,10 +24,6 @@ if (!isset($_SESSION['ano'])) {
   $_SESSION['ano'] = "2023";
 }
 
-// if (!isset($_POST['limpaFiltro'])) {
-//   $_SESSION['ano'] = null;
-// }
-
 if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1) {
   $_SESSION['ano'] = null;
 } else if (isset($_POST['ano']) != null) {
