@@ -1,6 +1,7 @@
 <?php
 
 
+
 function talogado()
 {
   if ($_SESSION['connected'] !== 1) {
