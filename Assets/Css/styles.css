@@ -95,6 +95,11 @@ footer{
     padding: 5px;
 }
 
+.input-pesquisar button:hover{
+    background-color: #18ac75;
+    border: 1px solid #18ac75;
+}
+
 /* NAV-BAR */
 .nav-bar{
     background-color: #fcacac;;
