@@ -121,6 +121,16 @@ footer{
     color: white;
 }
 
+.nav-bar-selecionado:hover{
+    background-color: #238b29;
+    border: 1px solid #238b29;
+}
+
+.nav-bar-desmarcado:hover{
+    background-color: #595256;
+    border: 1px solid #595256;  
+}
+
 .nav-bar-desmarcado{
     background-color: #857a81;
     border: 1px solid #857a81;
