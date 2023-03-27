@@ -128,13 +128,48 @@ footer{
     color: white;
 }
 
+
+/*  VOLTAR MENU */
+
+.voltar-menu{
+    text-decoration: none; 
+    margin-left: 0.5rem;
+    color: #345474;
+}
+
 /* ALTERAR SENHA */
+
+.Senha-group{
+    background-color: #345474;
+    max-width: 900px;
+    margin: 0 auto;    
+    display: block;
+    box-shadow: 3px 3px 3px black;
+}
 
 .main-Senha{
     background-color: #345474;
     text-align: center;
-    max-width: 900px;
+    max-width: 850px;
     margin: 0 auto;
-    /* display: block; */
+    color: white;
+}
 
+.main-Senha input{
+    width: 100%;
+    margin: 0.5rem 0;
+    height: 2rem;
+}
+
+
+
+.main-Senha button{
+    border: 0 solid black;
+    border-radius: 0.25rem;
+    font-size: 16px;
+    padding: 8px 5px;
+    background-color: #dc3545;
+    margin: 0.5rem 0;
+    color: white;
+    box-shadow: 0 0 5px black;
 }

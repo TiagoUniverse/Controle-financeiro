@@ -16,9 +16,9 @@ require_once "conexao.php";
 require_once "Recursos/Navegacao.php";
 
 /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
- * │                                Usuario's section                                                              │
- * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
- */
+* │                                Usuario's section                                                              │
+* └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/
 
 require_once "../Model/Usuario_repositorio.php";
 
@@ -47,16 +47,20 @@ $Usuario_repositorio = new Usuario_repositorio();
 
 <body>
   <?php require_once "Recursos/Navegacao.php"; ?>
-  <main class="main-Senha">
-    <h2>Trocar senha</h2>
-    <form action="trocar-senha.php" method="post">
-      <input type="hidden" name="status_alteracao" value="ALTERANDO A SENHA">
-      <label>Senha</label><input type="password"  name="senha" required>
-      <label>Repita a senha</label><input type="password" name="repitaSenha" required>
-      <button type="submit">Alterar a senha</button>
-    </form>
-  </main>
-  
+  <a href="home.php" class="voltar-menu">Voltar</a>
+  <div class="Senha-group">
+    <main class="main-Senha">
+      <h2>Trocar senha</h2>
+      <form action="trocar-senha.php" method="post">
+        <input type="hidden" name="status_alteracao" value="ALTERANDO A SENHA">
+        <label>• Senha:</label><input type="password" name="senha" required>
+        <label>• Repita a senha:</label><input type="password" name="repitaSenha" required>
+        <button type="submit">Alterar a senha</button>
+      </form>
+    </main>
+  </div>
+
+
 </body>
 
 </html>
