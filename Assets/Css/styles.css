@@ -59,10 +59,42 @@ header a:visited{
     object-fit: cover;
 }
 
-
-.gallery::after{
-    
+.gallery button{
+    padding: 0;
+    border: none;
+    background-color: #f5f6f7;
 }
+
+/* MAIN-MES */
+.main-Mes{
+    text-align: center;
+    /* background-color: rgb(87, 87, 185); */
+}
+
+.main-mes-itens{
+    background-color: rgb(180, 72, 72);
+    max-width: 900px;
+    margin: 3rem auto;
+    padding-top: 2px;
+    padding-bottom: 5px;
+    border-radius: 0.5rem;
+    box-shadow: 3px 3px 5px black;
+    color: white;
+}
+
+.main-mes-itens img{
+    margin-top: 0.5rem;
+}
+
+.main-mes-itens button{
+    background-color: #d5aca6;
+    border: 3px solid #d5aca6;
+    border-radius: 0.5rem;
+    font-size: 16px;
+    box-shadow: 0 0 5px black;
+}
+
+
 
 /* FOOTER */
 footer{

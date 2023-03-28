@@ -21,7 +21,7 @@ $_SESSION['quinzena'] = null;
 
 //Variáveis
 if (!isset($_SESSION['ano'])) {
-  $_SESSION['ano'] = "2023";
+  $_SESSION['ano'] = date("Y");;
 }
 
 if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1) {
@@ -57,19 +57,26 @@ if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1) {
   </form>
   <h2 class="actual-year"><?php echo $_SESSION['ano']; ?></h2>
   <div class="gallery">
-    <img src='../../Assets//img//1.png' alt="january">
-    <img src='../../Assets//img//february.png' alt="february">
-    <img src='../../Assets//img//march.png' alt="march">
-    <img src='../../Assets//img//april.png' alt="april">
-    <img src='../../Assets//img//may.png' alt="may">
-    <img src='../../Assets//img//june.png' alt="june">
-    <img src='../../Assets//img//july.png' alt="July">
-    <img src='../../Assets//img//august.png' alt="August">
-    <img src='../../Assets//img//september.png' alt="september">
-    <img src='../../Assets//img//october.png' alt="october">
-    <img src='../../Assets//img//november.png' alt="november">
-    <img src='../../Assets//img//december.png' alt="december">
-    <img src='../../Assets//img//savings.png' alt="savings">
+    <form action="mes.php" method="post">
+      <input type="hidden" value="1" name="statusMes">
+      <input type="hidden" value="Janeiro" name="nomeMes">
+      <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
+      <button type="submit"><img src='../../Assets//img//1.png' alt="january"></button>
+    </form>
+
+
+    <a href=''><img src='../../Assets//img//february.png' alt="february"></a>
+    <a href=''><img src='../../Assets//img//march.png' alt="march"></a>
+    <a href=''><img src='../../Assets//img//april.png' alt="april"></a>
+    <a href=''><img src='../../Assets//img//may.png' alt="may"></a>
+    <a href=''><img src='../../Assets//img//june.png' alt="june"></a>
+    <a href=''><img src='../../Assets//img//july.png' alt="July"></a>
+    <a href=''><img src='../../Assets//img//august.png' alt="August"></a>
+    <a href=''><img src='../../Assets//img//september.png' alt="september"></a>
+    <a href=''><img src='../../Assets//img//october.png' alt="october"></a>
+    <a href=''><img src='../../Assets//img//november.png' alt="november"></a>
+    <a href=''><img src='../../Assets//img//december.png' alt="december"></a>
+    <a href=''><img src='../../Assets//img//savings.png' alt="savings"></a>
   </div>
 </body>
 
