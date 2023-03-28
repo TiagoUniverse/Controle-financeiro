@@ -60,6 +60,7 @@ if (isset($_POST['statusMes'])) {
   ?>
     <main class='main-Mes'>
       <div class="main-mes-itens">
+      <img src="../../Assets/Icons/bank.png" alt="a pig bank" width="42" height="40" >
         <h2><?php echo "Poupança de " . $_SESSION['ano'];  ?></h2>
         <p>Registre o dinheiro guardado nas economias.</p>
         <button>Registrar poupanças</button>

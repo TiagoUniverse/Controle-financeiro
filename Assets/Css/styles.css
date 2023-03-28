@@ -68,14 +68,13 @@ header a:visited{
 /* MAIN-MES */
 .main-Mes{
     text-align: center;
-    /* background-color: rgb(87, 87, 185); */
 }
 
 .main-mes-itens{
     background-color: rgb(180, 72, 72);
     max-width: 900px;
-    margin: 3rem auto;
-    padding-top: 2px;
+    margin: 1.6rem auto;
+    padding-top: 1px;
     padding-bottom: 5px;
     border-radius: 0.5rem;
     box-shadow: 3px 3px 5px black;
@@ -83,7 +82,7 @@ header a:visited{
 }
 
 .main-mes-itens img{
-    margin-top: 0.5rem;
+    margin-top: 2px;
 }
 
 .main-mes-itens button{
