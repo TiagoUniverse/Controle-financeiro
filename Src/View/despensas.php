@@ -321,16 +321,16 @@ foreach ($Saida_fetch as $row) {
     <table class="table-dinheiroTotal">
       <thead>
         <tr>
-          <th scope="col"> Gasto total </th>
-          <th scope="col">Receita total</th>
-          <th scope="col">Resultado da subtração</th>
+          <th> Gasto total </th>
+          <th>Receita total</th>
+          <th>Resultado da subtração</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <th scope="col"><?php echo "R$" . $dinheiroSaida; ?> </th>
-          <th scope="col"><?php echo "R$" . $dinheiroEntrada; ?> </th>
-          <th scope="col" style="color:#e61e19;"><?php echo "R$" . ($dinheiroEntrada - $dinheiroSaida); ?> </th>
+          <th><?php echo "R$" . $dinheiroSaida; ?> </th>
+          <th><?php echo "R$" . $dinheiroEntrada; ?> </th>
+          <th style="color:#e61e19;"><?php echo "R$" . ($dinheiroEntrada - $dinheiroSaida); ?> </th>
         </tr>
       </tbody>
     </table>
@@ -347,12 +347,12 @@ foreach ($Saida_fetch as $row) {
     <table class="table-saida">
       <thead>
         <tr>
-          <th scope="col">Nª</th>
-          <th scope="col">Descrição</th>
-          <th scope="col">valor</th>
-          <th scope="col">Data</th>
-          <th scope="col">Alteração</th>
-          <th scope="col">Exclusão</th>
+          <th>Nª</th>
+          <th>Descrição</th>
+          <th>valor</th>
+          <th>Data</th>
+          <th>Alteração</th>
+          <th>Exclusão</th>
         </tr>
       </thead>
       <tbody>
@@ -385,26 +385,66 @@ foreach ($Saida_fetch as $row) {
         }
 
         if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO SAIDA") {
-        ?>
-          <form method="post">
-            <input type="hidden" name="adicionando_registro" value='SALVANDO REGISTRO SAIDA'>
-            <input type="hidden" name="statusDespensa" value='3'>
-            <tr>
-              <th scope="col">Nª</th>
-              <th scope="col">
-                <input type="text" name="descricao">
-              </th>
-              <th scope="col">
-                <input type="number" min="1" step="any" name="valor">
-              </th>
-              <th scope="col">
-                <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'>
-              </th>
-            </tr>
-          <?php
-        }
           ?>
+            <form method="post">
+              <input type="hidden" name="adicionando_registro" value='SALVANDO REGISTRO SAIDA'>
+              <input type="hidden" name="statusDespensa" value='3'>
+              <tr>
+                <th scope="col">Nª</th>
+                <th scope="col">
+                  <input type="text" name="descricao">
+                </th>
+                <th scope="col">
+                  <input type="number" min="1" step="any" name="valor">
+                </th>
+                <th scope="col">
+                  <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'>
+                </th>
+
+              </tr>
+
+
+            <?php
+          }
+
+            ?>
+        </tbody>
+
+      </table>
+
+    </div>
+    <?php
+    if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO SAIDA") {
+    ?>
+
+      <div class="row g-0 text-center">
+        <div class="col-sm-6 col-md-6">
+          <button type="submit" class="btn btn-primary">Registrar</button>
+          </form>
+        </div>
+        <div class="col-6 col-md-6">
+          <form action="despensas.php" method="post">
+            <input type="hidden" value="" name="adicionando_registro">
+            <button type="submit" class="btn btn-secondary">Cancelar</button>
+          </form>
+        </div>
+      </div>
+
+
+    <?php
+    }
+
+    if ($adicionando_registro == null) {
+    ?>
+      <form action="despensas.php" method="post">
+        <input type="hidden" value="REGISTRANDO SAIDA" name="adicionando_registro">
+        <button type="submit" class="btn btn-primary">Adicionar um novo registro</button>
+      </form>
+    <?php
+    }
+    ?>
       </tbody>
+    </table>
   </main>
 
 
