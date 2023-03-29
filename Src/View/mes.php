@@ -49,7 +49,10 @@ if (isset($_POST['statusMes'])) {
         <img src="../../Assets/img/error.png" alt="Error icon" width="42" height="40">
         <h2>Error de consulta</h2>
         <p>Por favor, informe um ano e mês válido na tela inicial e tente novamente.</p>
-        <button>Voltar ao menu</button>
+        <form action="home.php" method="post">
+          <button>Voltar ao menu</button>
+        </form>
+       
       </div>
     </main>
   <?php

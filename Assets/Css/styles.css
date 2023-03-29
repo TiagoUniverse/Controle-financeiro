@@ -94,6 +94,20 @@ header a:visited{
 }
 
 
+/* MAIN-DESPENSAS */
+.main-despensas{
+    text-align: center;
+}
+
+.table-dinheiroTotal{
+    background-color: cadetblue;
+    border-style: solid;
+    border-color: inherit;
+    border-bottom: 50px solid black;
+    margin: 0 auto;
+}
+
+
 
 /* FOOTER */
 footer{
