@@ -63,20 +63,76 @@ if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1) {
       <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
       <button type="submit"><img src='../../Assets//img//1.png' alt="january"></button>
     </form>
-
-
-    <a href=''><img src='../../Assets//img//february.png' alt="february"></a>
-    <a href=''><img src='../../Assets//img//march.png' alt="march"></a>
-    <a href=''><img src='../../Assets//img//april.png' alt="april"></a>
-    <a href=''><img src='../../Assets//img//may.png' alt="may"></a>
-    <a href=''><img src='../../Assets//img//june.png' alt="june"></a>
-    <a href=''><img src='../../Assets//img//july.png' alt="July"></a>
-    <a href=''><img src='../../Assets//img//august.png' alt="August"></a>
-    <a href=''><img src='../../Assets//img//september.png' alt="september"></a>
-    <a href=''><img src='../../Assets//img//october.png' alt="october"></a>
-    <a href=''><img src='../../Assets//img//november.png' alt="november"></a>
-    <a href=''><img src='../../Assets//img//december.png' alt="december"></a>
-    <a href=''><img src='../../Assets//img//savings.png' alt="savings"></a>
+    <form action="mes.php" method="post">
+      <input type="hidden" value="2" name="statusMes">
+      <input type="hidden" value="Fevereiro" name="nomeMes">
+      <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
+      <button type="submit"><img src='../../Assets//img//february.png' alt="february"></button>
+    </form>
+    <form action="mes.php" method="post">
+      <input type="hidden" value="3" name="statusMes">
+      <input type="hidden" value="Março" name="nomeMes">
+      <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
+      <button type="submit"><img src='../../Assets//img//march.png' alt="march"></button>
+    </form>
+    <form action="mes.php" method="post">
+      <input type="hidden" value="4" name="statusMes">
+      <input type="hidden" value="Abril" name="nomeMes">
+      <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
+      <button type="submit"><img src='../../Assets//img//april.png' alt="april"></button>
+    </form>
+    <form action="mes.php" method="post">
+      <input type="hidden" value="5" name="statusMes">
+      <input type="hidden" value="Maio" name="nomeMes">
+      <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
+      <button type="submit"><img src='../../Assets//img//may.png' alt="may"></button>
+    </form>
+    <form action="mes.php" method="post">
+      <input type="hidden" value="6" name="statusMes">
+      <input type="hidden" value="Junho" name="nomeMes">
+      <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
+      <button type="submit"><img src='../../Assets//img//june.png' alt="june"></button>
+    </form>
+    <form action="mes.php" method="post">
+      <input type="hidden" value="7" name="statusMes">
+      <input type="hidden" value="Julho" name="nomeMes">
+      <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
+      <button type="submit"><img src='../../Assets//img//july.png' alt="july"></button>
+    </form>
+    <form action="mes.php" method="post">
+      <input type="hidden" value="8" name="statusMes">
+      <input type="hidden" value="Agosto" name="nomeMes">
+      <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
+      <button type="submit"><img src='../../Assets//img//august.png' alt="August"></button>
+    </form>
+    <form action="mes.php" method="post">
+      <input type="hidden" value="9" name="statusMes">
+      <input type="hidden" value="Setembro" name="nomeMes">
+      <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
+      <button type="submit"><img src='../../Assets//img//september.png' alt="september"></button>
+    </form>
+    <form action="mes.php" method="post">
+      <input type="hidden" value="10" name="statusMes">
+      <input type="hidden" value="Outubro" name="nomeMes">
+      <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
+      <button type="submit"><img src='../../Assets//img//october.png' alt="october"></button>
+    </form>
+    <form action="mes.php" method="post">
+      <input type="hidden" value="11" name="statusMes">
+      <input type="hidden" value="Novembro" name="nomeMes">
+      <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
+      <button type="submit"><img src='../../Assets//img//november.png' alt="november"></button>
+    </form>
+    <form action="mes.php" method="post">
+      <input type="hidden" value="12" name="statusMes">
+      <input type="hidden" value="Dezembro" name="nomeMes">
+      <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
+      <button type="submit"><img src='../../Assets//img//december.png' alt="december"></button>
+    </form>
+    <form action="poupancas.php" method="post">
+      <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
+      <button type="submit"><img src='../../Assets//img//savings.png' alt="savings"></button>
+    </form>
   </div>
 </body>
 
