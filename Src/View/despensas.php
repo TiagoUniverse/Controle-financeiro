@@ -334,7 +334,77 @@ foreach ($Saida_fetch as $row) {
         </tr>
       </tbody>
     </table>
+    <br>
+    <?php
+    if ($_SESSION['quinzena'] == "Quinzena 1") {
+      echo "<img src='../../Assets/img/dia 15.png' alt='a calendar with the number 15' width='72' height='70'> ";
+    } else {
+      echo "<img src='../../Assets/img/dia 30.png' alt='a calendar with the number 30' width='72' height='70'> ";
+    }
+    ?>
+    <h2>Saída</h2>
+    <a href="#Entrada_title"> Navegar até os registros de Entrada</a>
+    <table class="table-saida">
+      <thead>
+        <tr>
+          <th scope="col">Nª</th>
+          <th scope="col">Descrição</th>
+          <th scope="col">valor</th>
+          <th scope="col">Data</th>
+          <th scope="col">Alteração</th>
+          <th scope="col">Exclusão</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+        $contador = 1;
+        foreach ($Saida_fetch as $linha) {
+        ?>
+          <tr>
+            <td> <?php echo $contador; ?> </td>
+            <td> <?php echo $linha['descricao']; ?> </td>
+            <td> <?php echo "R$" . $linha['valor']; ?> </td>
+            <td> <?php echo $linha['dataDespensa']; ?> </td>
+            <td>
+              <form action="alterar.php" method="post">
+                <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
+                <input type="hidden" value="DESPENSAS" name="pagina_inicial">
+                <button type="submit"><img src="../../Assets//Icons//pencil.png" class="icon_exclusao"></button>
+              </form>
+            </td>
+            <td>
+              <form action="excluir.php" method="post">
+                <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
+                <input type="hidden" value="DESPENSAS" name="pagina_inicial">
+                <button type="submit"><img src="../../Assets//Icons//x-mark-xxl.png" class="icon_exclusao"></button>
+              </form>
+            </td>
+          </tr>
+        <?php
+          $contador++;
+        }
 
+        if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO SAIDA") {
+        ?>
+          <form method="post">
+            <input type="hidden" name="adicionando_registro" value='SALVANDO REGISTRO SAIDA'>
+            <input type="hidden" name="statusDespensa" value='3'>
+            <tr>
+              <th scope="col">Nª</th>
+              <th scope="col">
+                <input type="text" name="descricao">
+              </th>
+              <th scope="col">
+                <input type="number" min="1" step="any" name="valor">
+              </th>
+              <th scope="col">
+                <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'>
+              </th>
+            </tr>
+          <?php
+        }
+          ?>
+      </tbody>
   </main>
 
 
