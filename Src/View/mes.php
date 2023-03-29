@@ -60,19 +60,29 @@ if (isset($_POST['statusMes'])) {
         <img src="../../Assets/Icons/bank.png" alt="a pig bank" width="42" height="40">
         <h2><?php echo "Poupança de " . $_SESSION['ano'];  ?></h2>
         <p>Registre o dinheiro guardado nas economias.</p>
-        <button>Registrar poupanças</button>
+        <form action="poupancas.php" method="post">
+          <button>Registrar poupanças</button>
+        </form>
       </div>
       <div class="main-mes-itens">
         <img src="../../Assets/img/dia 15.png" alt="a calendar with the number 15" width="42" height="40">
         <h2>Despensas: Primeira quinzena</h2>
         <p>Registre os gastos entre o dia 05 até o dia 19, que são os dias da entrada de salário da casa.</p>
-        <button>Registrar despensas</button>
+        <form action="despensas.php" method="post">
+          <input type="hidden" value="<?php echo $_SESSION['statusMes'];  ?>" name="statusMes">
+          <input type="hidden" value="Quinzena 1" name="quinzena">
+          <button>Registrar despensas</button>
+        </form>
       </div>
       <div class="main-mes-itens">
         <img src="../../Assets/img/dia 30.png" alt="a calendar with the number 30" width="42" height="40">
         <h2>Despensas: Segunda quinzena</h2>
         <p>Registre os gastos entre o dia 20 até dia 04 do próximo mês, antes de começar uma nova quinzena.</p>
-        <button>Registrar despensas</button>
+        <form action="despensas.php" method="post">
+          <input type="hidden" value="<?php echo $_SESSION['statusMes'];  ?>" name="statusMes">
+          <input type="hidden" value="Quinzena 2" name="quinzena">
+          <button>Registrar despensas</button>
+        </form>
       </div>
     </main>
   <?php
