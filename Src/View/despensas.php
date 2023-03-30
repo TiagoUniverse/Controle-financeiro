@@ -335,108 +335,216 @@ foreach ($Saida_fetch as $row) {
       </tbody>
     </table>
     <br>
-    <?php
-    if ($_SESSION['quinzena'] == "Quinzena 1") {
-      echo "<img src='../../Assets/img/dia 15.png' alt='a calendar with the number 15' width='72' height='70'> ";
-    } else {
-      echo "<img src='../../Assets/img/dia 30.png' alt='a calendar with the number 30' width='72' height='70'> ";
-    }
-    ?>
-    <h2>Saída</h2>
-    <a href="#Entrada_title"> Navegar até os registros de Entrada</a>
-    <table class="table-saida">
-      <thead>
-        <tr>
-          <th>Nª</th>
-          <th>Descrição</th>
-          <th>valor</th>
-          <th>Data</th>
-          <th>Alteração</th>
-          <th>Exclusão</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php
-        $contador = 1;
-        foreach ($Saida_fetch as $linha) {
-        ?>
+    <session>
+      <?php
+      if ($_SESSION['quinzena'] == "Quinzena 1") {
+        echo "<img src='../../Assets/img/dia 15.png' alt='a calendar with the number 15' width='72' height='70'> ";
+      } else {
+        echo "<img src='../../Assets/img/dia 30.png' alt='a calendar with the number 30' width='72' height='70'> ";
+      }
+      ?>
+      <h2>Saída</h2>
+      <a href="#Entrada_title"> Navegar até os registros de Entrada</a>
+      <table class="table-saida">
+        <thead>
           <tr>
-            <td> <?php echo $contador; ?> </td>
-            <td> <?php echo $linha['descricao']; ?> </td>
-            <td> <?php echo "R$" . $linha['valor']; ?> </td>
-            <td> <?php echo $linha['dataDespensa']; ?> </td>
-            <td>
-              <form action="alterar.php" method="post">
-                <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
-                <input type="hidden" value="DESPENSAS" name="pagina_inicial">
-                <button type="submit"><img src="../../Assets//Icons//pencil.png" class="icon_exclusao"></button>
-              </form>
-            </td>
-            <td>
-              <form action="excluir.php" method="post">
-                <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
-                <input type="hidden" value="DESPENSAS" name="pagina_inicial">
-                <button type="submit"><img src="../../Assets//Icons//x-mark-xxl.png" class="icon_exclusao"></button>
-              </form>
-            </td>
+            <th>Nª</th>
+            <th>Descrição</th>
+            <th>valor</th>
+            <th>Data</th>
+            <th>Alteração</th>
+            <th>Exclusão</th>
           </tr>
-        <?php
-          $contador++;
-        }
-
-        /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-        * │                                Adicionado um novo registro                                                    │
-        * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-        */
-
-        if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO SAIDA") {
-        ?>
-          <form method="post">
-            <input type="hidden" name="adicionando_registro" value='SALVANDO REGISTRO SAIDA'>
-            <input type="hidden" name="statusDespensa" value='3'>
+        </thead>
+        <tbody>
+          <?php
+          $contador = 1;
+          foreach ($Saida_fetch as $linha) {
+          ?>
             <tr>
-              <th>Nª</th>
-              <th><input type="text" name="descricao"></th>
-              <th><input type="number" min="1" step="any" name="valor"></th>
-              <th> <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'></th>
+              <td> <?php echo $contador; ?> </td>
+              <td> <?php echo $linha['descricao']; ?> </td>
+              <td> <?php echo "R$" . $linha['valor']; ?> </td>
+              <td> <?php echo $linha['dataDespensa']; ?> </td>
+              <td>
+                <form action="alterar.php" method="post">
+                  <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
+                  <input type="hidden" value="DESPENSAS" name="pagina_inicial">
+                  <button type="submit"><img src="../../Assets//Icons//pencil.png" class="icon_exclusao"></button>
+                </form>
+              </td>
+              <td>
+                <form action="excluir.php" method="post">
+                  <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
+                  <input type="hidden" value="DESPENSAS" name="pagina_inicial">
+                  <button type="submit"><img src="../../Assets//Icons//x-mark-xxl.png" class="icon_exclusao"></button>
+                </form>
+              </td>
             </tr>
           <?php
-        }
+            $contador++;
+          }
+
+          /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+          * │                                Adicionado um novo registro                                                    │
+          * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+          */
+
+          if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO SAIDA") {
           ?>
-      </tbody>
-    </table>
+            <form method="post">
+              <input type="hidden" name="adicionando_registro" value='SALVANDO REGISTRO SAIDA'>
+              <input type="hidden" name="statusDespensa" value='3'>
+              <tr>
+                <th>Nª</th>
+                <th><input type="text" name="descricao" placeholder="Nome do produto"></th>
+                <th><input type="number" min="1" step="any" name="valor" placeholder="2.00"></th>
+                <th> <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'></th>
+              </tr>
+            <?php
+          }
+            ?>
+        </tbody>
+      </table>
 
-    <?php
+      <?php
 
-    /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-    * │                                Botões de manipulação                                                          │
-    * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-    */
+      /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+      * │                                Botões de manipulação                                                          │
+      * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+      */
 
-    if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO SAIDA") {
-    ?>
-      <div class="botoes-registro">
+      if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO SAIDA") {
+      ?>
+        <div class="botoes-registro">
 
-        <button type="submit" class="botao-registrar">Registrar</button>
-        </form>
+          <button type="submit" class="botao-registrar">Registrar</button>
+          </form>
+          <form action="despensas.php" method="post">
+            <input type="hidden" value="" name="adicionando_registro">
+            <button type="submit" class="botao-cancelar">Cancelar</button>
+          </form>
+        </div>
+
+      <?php
+      }
+
+      if ($adicionando_registro == null) {
+      ?>
         <form action="despensas.php" method="post">
-          <input type="hidden" value="" name="adicionando_registro">
-          <button type="submit" class="botao-cancelar">Cancelar</button>
+          <input type="hidden" value="REGISTRANDO SAIDA" name="adicionando_registro">
+          <button type="submit" class="botao-novoRegistro">Adicionar um novo registro</button>
         </form>
-      </div>
+      <?php
+      }
+      ?>
+    </session>
 
-    <?php
-    }
+    <session>
+      <?php
+      if ($_SESSION['quinzena'] == "Quinzena 1") {
+        echo "<img src='../../Assets/img/dia 15.png' alt='a calendar with the number 15' width='72' height='70'> ";
+      } else {
+        echo "<img src='../../Assets/img/dia 30.png' alt='a calendar with the number 30' width='72' height='70'> ";
+      }
+      ?>
+      <h2>Saída</h2>
+      <a href="#Entrada_title"> Navegar até os registros de Entrada</a>
+      <table class="table-saida">
+        <thead>
+          <tr>
+            <th>Nª</th>
+            <th>Descrição</th>
+            <th>valor</th>
+            <th>Data</th>
+            <th>Alteração</th>
+            <th>Exclusão</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          $contador = 1;
+          foreach ($Saida_fetch as $linha) {
+          ?>
+            <tr>
+              <td> <?php echo $contador; ?> </td>
+              <td> <?php echo $linha['descricao']; ?> </td>
+              <td> <?php echo "R$" . $linha['valor']; ?> </td>
+              <td> <?php echo $linha['dataDespensa']; ?> </td>
+              <td>
+                <form action="alterar.php" method="post">
+                  <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
+                  <input type="hidden" value="DESPENSAS" name="pagina_inicial">
+                  <button type="submit"><img src="../../Assets//Icons//pencil.png" class="icon_exclusao"></button>
+                </form>
+              </td>
+              <td>
+                <form action="excluir.php" method="post">
+                  <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
+                  <input type="hidden" value="DESPENSAS" name="pagina_inicial">
+                  <button type="submit"><img src="../../Assets//Icons//x-mark-xxl.png" class="icon_exclusao"></button>
+                </form>
+              </td>
+            </tr>
+          <?php
+            $contador++;
+          }
 
-    if ($adicionando_registro == null) {
-    ?>
-      <form action="despensas.php" method="post">
-        <input type="hidden" value="REGISTRANDO SAIDA" name="adicionando_registro">
-        <button type="submit" class="botao-novoRegistro">Adicionar um novo registro</button>
-      </form>
-    <?php
-    }
-    ?>
+          /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+          * │                                Adicionado um novo registro                                                    │
+          * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+          */
+
+          if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO SAIDA") {
+          ?>
+            <form method="post">
+              <input type="hidden" name="adicionando_registro" value='SALVANDO REGISTRO SAIDA'>
+              <input type="hidden" name="statusDespensa" value='3'>
+              <tr>
+                <th>Nª</th>
+                <th><input type="text" name="descricao" placeholder="Nome do produto"></th>
+                <th><input type="number" min="1" step="any" name="valor" placeholder="2.00"></th>
+                <th> <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'></th>
+              </tr>
+            <?php
+          }
+            ?>
+        </tbody>
+      </table>
+
+      <?php
+
+      /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+      * │                                Botões de manipulação                                                          │
+      * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+      */
+
+      if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO SAIDA") {
+      ?>
+        <div class="botoes-registro">
+
+          <button type="submit" class="botao-registrar">Registrar</button>
+          </form>
+          <form action="despensas.php" method="post">
+            <input type="hidden" value="" name="adicionando_registro">
+            <button type="submit" class="botao-cancelar">Cancelar</button>
+          </form>
+        </div>
+
+      <?php
+      }
+
+      if ($adicionando_registro == null) {
+      ?>
+        <form action="despensas.php" method="post">
+          <input type="hidden" value="REGISTRANDO SAIDA" name="adicionando_registro">
+          <button type="submit" class="botao-novoRegistro">Adicionar um novo registro</button>
+        </form>
+      <?php
+      }
+      ?>
+    </session>
+
   </main>
 
 

@@ -159,6 +159,9 @@ header a:visited {
     box-shadow: 0 0 5px black;
 }
 
+.table-saida tbody input{
+    padding: 0.3rem;
+}
 
 /* BOTOES REGISTRO */
 
