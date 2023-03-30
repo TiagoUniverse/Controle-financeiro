@@ -171,9 +171,10 @@ header a:visited {
 .botoes-registro button{
     margin-right: 3rem;
     border-radius: 0.5rem;
-    width: 138px; 
+    width: 110px; 
     box-shadow: 0 0 3px black;
     font-size: 16px;
+    padding: 0.4rem;
 }
 
 .botao-registrar{
@@ -184,6 +185,16 @@ header a:visited {
 .botao-cancelar{
     background-color: #b7b6b4;
     border: 1px solid #b7b6b4; 
+}
+
+.botao-novoRegistro{
+    background-color: #739ac0;
+    border: 1px solid #739ac0;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 3px black;
+    padding: 0.4rem;
+    margin: 14px 0;
+    font-size: 16px;
 }
 
 /* FOOTER */

@@ -432,7 +432,7 @@ foreach ($Saida_fetch as $row) {
     ?>
       <form action="despensas.php" method="post">
         <input type="hidden" value="REGISTRANDO SAIDA" name="adicionando_registro">
-        <button type="submit" >Adicionar um novo registro</button>
+        <button type="submit" class="botao-novoRegistro">Adicionar um novo registro</button>
       </form>
     <?php
     }
