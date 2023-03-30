@@ -160,6 +160,31 @@ header a:visited {
 }
 
 
+/* BOTOES REGISTRO */
+
+.botoes-registro{
+    display: inline-flex;
+    margin: 12px 0;
+    padding-right: 5px;
+}
+
+.botoes-registro button{
+    margin-right: 3rem;
+    border-radius: 0.5rem;
+    width: 138px; 
+    box-shadow: 0 0 3px black;
+    font-size: 16px;
+}
+
+.botao-registrar{
+ background-color: #1fe098;
+ border: 1px solid #1fe098;
+}
+
+.botao-cancelar{
+    background-color: #b7b6b4;
+    border: 1px solid #b7b6b4; 
+}
 
 /* FOOTER */
 footer {

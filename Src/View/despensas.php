@@ -384,52 +384,46 @@ foreach ($Saida_fetch as $row) {
           $contador++;
         }
 
+        /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+        * │                                Adicionado um novo registro                                                    │
+        * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+        */
+
         if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO SAIDA") {
+        ?>
+          <form method="post">
+            <input type="hidden" name="adicionando_registro" value='SALVANDO REGISTRO SAIDA'>
+            <input type="hidden" name="statusDespensa" value='3'>
+            <tr>
+              <th>Nª</th>
+              <th><input type="text" name="descricao"></th>
+              <th><input type="number" min="1" step="any" name="valor"></th>
+              <th> <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'></th>
+            </tr>
+          <?php
+        }
           ?>
-            <form method="post">
-              <input type="hidden" name="adicionando_registro" value='SALVANDO REGISTRO SAIDA'>
-              <input type="hidden" name="statusDespensa" value='3'>
-              <tr>
-                <th scope="col">Nª</th>
-                <th scope="col">
-                  <input type="text" name="descricao">
-                </th>
-                <th scope="col">
-                  <input type="number" min="1" step="any" name="valor">
-                </th>
-                <th scope="col">
-                  <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'>
-                </th>
+      </tbody>
+    </table>
 
-              </tr>
-
-
-            <?php
-          }
-
-            ?>
-        </tbody>
-
-      </table>
-
-    </div>
     <?php
+
+    /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+    * │                                Botões de manipulação                                                          │
+    * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+    */
+
     if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO SAIDA") {
     ?>
+      <div class="botoes-registro">
 
-      <div class="row g-0 text-center">
-        <div class="col-sm-6 col-md-6">
-          <button type="submit" class="btn btn-primary">Registrar</button>
-          </form>
-        </div>
-        <div class="col-6 col-md-6">
-          <form action="despensas.php" method="post">
-            <input type="hidden" value="" name="adicionando_registro">
-            <button type="submit" class="btn btn-secondary">Cancelar</button>
-          </form>
-        </div>
+        <button type="submit" class="botao-registrar">Registrar</button>
+        </form>
+        <form action="despensas.php" method="post">
+          <input type="hidden" value="" name="adicionando_registro">
+          <button type="submit" class="botao-cancelar">Cancelar</button>
+        </form>
       </div>
-
 
     <?php
     }
@@ -438,13 +432,11 @@ foreach ($Saida_fetch as $row) {
     ?>
       <form action="despensas.php" method="post">
         <input type="hidden" value="REGISTRANDO SAIDA" name="adicionando_registro">
-        <button type="submit" class="btn btn-primary">Adicionar um novo registro</button>
+        <button type="submit" >Adicionar um novo registro</button>
       </form>
     <?php
     }
     ?>
-      </tbody>
-    </table>
   </main>
 
 
