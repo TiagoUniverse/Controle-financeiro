@@ -208,6 +208,21 @@ header a:visited {
     margin-bottom: 50px;
 }
 
+
+/* ALERTS */
+
+.mensagem-alertDanger{
+    background-color:#dc3545;
+    /* color:#5b1017 ; */
+    border-color: #510e15;
+    padding: 16px;
+    /* border-radius: 0.5rem; */
+}
+
+.mensagem-alertSuces{
+    background-color:#18ac75;
+}
+
 /* FOOTER */
 footer {
     background-color: black;

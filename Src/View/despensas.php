@@ -151,9 +151,9 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
 
   // Mensagem do resultado
   if ($mensagemVermelha) {
-    echo "<div class='alert alert-danger' role='alert'> ";
+    echo "<div class='mensagem-alertDanger'> ";
   } else {
-    echo "<div class='alert alert-success' role='alert'> ";
+    echo "<div class='mensagem-alertDanger'> ";
   }
   echo $mensagem;
   echo "</div>";
@@ -240,9 +240,9 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
 
   // Mensagem do resultado
   if ($mensagemVermelha) {
-    echo "<div class='alert alert-danger' role='alert'> ";
+    echo "<div class='mensagem-alertDanger'> ";
   } else {
-    echo "<div class='alert alert-success' role='alert'> ";
+    echo "<div class='mensagem-alertSucess'> ";
   }
   echo $mensagem;
   echo "</div>";
@@ -546,10 +546,7 @@ foreach ($Saida_fetch as $row) {
       }
       ?>
     </session>
-
   </main>
-
-
 </body>
 
 </html>
