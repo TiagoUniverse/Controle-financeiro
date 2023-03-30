@@ -190,6 +190,10 @@ header a:visited {
     border: 1px solid #b7b6b4; 
 }
 
+.botao-registrar, .botao-cancelar{
+    margin-bottom: 30px;
+}
+
 .botao-novoRegistro{
     background-color: #739ac0;
     border: 1px solid #739ac0;
@@ -198,6 +202,10 @@ header a:visited {
     padding: 0.4rem;
     margin: 14px 0;
     font-size: 16px;
+}
+
+.botao-novoRegistro:last-of-type{
+    margin-bottom: 50px;
 }
 
 /* FOOTER */

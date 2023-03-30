@@ -336,6 +336,7 @@ foreach ($Saida_fetch as $row) {
     </table>
     <br>
     <session>
+      <br>
       <?php
       if ($_SESSION['quinzena'] == "Quinzena 1") {
         echo "<img src='../../Assets/img/dia 15.png' alt='a calendar with the number 15' width='72' height='70'> ";
@@ -441,6 +442,7 @@ foreach ($Saida_fetch as $row) {
     </session>
 
     <session>
+      <br>
       <?php
       if ($_SESSION['quinzena'] == "Quinzena 1") {
         echo "<img src='../../Assets/img/dia 15.png' alt='a calendar with the number 15' width='72' height='70'> ";
@@ -448,8 +450,8 @@ foreach ($Saida_fetch as $row) {
         echo "<img src='../../Assets/img/dia 30.png' alt='a calendar with the number 30' width='72' height='70'> ";
       }
       ?>
-      <h2>Saída</h2>
-      <a href="#Entrada_title"> Navegar até os registros de Entrada</a>
+      <h2>Entrada</h2>
+      <a href="#Saida_title"> Navegar até os registros de Saída</a>
       <table class="table-saida">
         <thead>
           <tr>
@@ -464,7 +466,7 @@ foreach ($Saida_fetch as $row) {
         <tbody>
           <?php
           $contador = 1;
-          foreach ($Saida_fetch as $linha) {
+          foreach ($Entrada_fetch as $linha) {
           ?>
             <tr>
               <td> <?php echo $contador; ?> </td>
@@ -495,10 +497,10 @@ foreach ($Saida_fetch as $row) {
           * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
           */
 
-          if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO SAIDA") {
+          if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO ENTRADA") {
           ?>
             <form method="post">
-              <input type="hidden" name="adicionando_registro" value='SALVANDO REGISTRO SAIDA'>
+              <input type="hidden" name="adicionando_registro" value='SALVANDO REGISTRO ENTRADA'>
               <input type="hidden" name="statusDespensa" value='3'>
               <tr>
                 <th>Nª</th>
@@ -519,7 +521,7 @@ foreach ($Saida_fetch as $row) {
       * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
       */
 
-      if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO SAIDA") {
+      if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO ENTRADA") {
       ?>
         <div class="botoes-registro">
 
@@ -537,7 +539,7 @@ foreach ($Saida_fetch as $row) {
       if ($adicionando_registro == null) {
       ?>
         <form action="despensas.php" method="post">
-          <input type="hidden" value="REGISTRANDO SAIDA" name="adicionando_registro">
+          <input type="hidden" value="REGISTRANDO ENTRADA" name="adicionando_registro">
           <button type="submit" class="botao-novoRegistro">Adicionar um novo registro</button>
         </form>
       <?php
