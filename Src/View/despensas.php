@@ -344,7 +344,7 @@ foreach ($Saida_fetch as $row) {
         echo "<img src='../../Assets/img/dia 30.png' alt='a calendar with the number 30' width='72' height='70'> ";
       }
       ?>
-      <h2>Saída</h2>
+      <h2 id="Saida_title">Saída</h2>
       <a href="#Entrada_title"> Navegar até os registros de Entrada</a>
       <table class="table-saida">
         <thead>
@@ -450,7 +450,7 @@ foreach ($Saida_fetch as $row) {
         echo "<img src='../../Assets/img/dia 30.png' alt='a calendar with the number 30' width='72' height='70'> ";
       }
       ?>
-      <h2>Entrada</h2>
+      <h2 id="Entrada_title">Entrada</h2>
       <a href="#Saida_title"> Navegar até os registros de Saída</a>
       <table class="table-saida">
         <thead>
