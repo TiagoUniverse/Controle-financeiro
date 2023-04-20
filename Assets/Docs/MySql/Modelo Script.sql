@@ -26,7 +26,7 @@ updated DATETIME NULL
 */
 insert into usuario (nome, email, senha) values ('Tiago', 'tiagocesar68@gmail.com',  sha1('tiago123')    ) ;
 
-Select * from Usuario where email = 'teste@gmail.com' and senha = sha1( 'teste123' )
+Select * from Usuario where email = 'teste@gmail.com' and senha = sha1( 'teste123' );
 
 
 /**
@@ -86,7 +86,31 @@ created	DATETIME NOT NULL DEFAULT NOW()
 * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
 
+
+
 insert into status_mes ( nome ) values (' Janeiro ' );
+
+insert into status_mes ( nome ) values (' Fevereiro ' );
+
+insert into status_mes ( nome ) values (' Março ' );
+
+insert into status_mes ( nome ) values (' Abril ' );
+
+insert into status_mes ( nome ) values (' Maio ' );
+
+insert into status_mes ( nome ) values (' Junho ' );
+
+insert into status_mes ( nome ) values (' Julho ' );
+
+insert into status_mes ( nome ) values (' Agosto ' );
+
+insert into status_mes ( nome ) values (' Setembro ' );
+
+insert into status_mes ( nome ) values (' Outubro ' );
+
+insert into status_mes ( nome ) values (' Novembro ' );
+
+insert into status_mes ( nome ) values (' Dezembro ' );
 
 
 /**
@@ -112,10 +136,12 @@ created	DATETIME NOT NULL DEFAULT NOW(),
 updated DATETIME NULL,
 IdStatus_mes INT NOT NULL,
 idStatus_despensa INT NOT NULL,
+idUsuario INT NOT NULL,
 
 
 FOREIGN KEY (IdStatus_mes) REFERENCES status_mes(id),
-FOREIGN KEY (idStatus_despensa) REFERENCES status_despensas(id)
+FOREIGN KEY (idStatus_despensa) REFERENCES status_despensas(id),
+FOREIGN KEY (idUsuario) REFERENCES Usuario(id)
 
 );
 
