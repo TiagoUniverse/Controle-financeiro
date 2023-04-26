@@ -61,7 +61,6 @@ use model\Poupancas_repositorio;
 
 $Poupancas_repositorio = new Poupancas_repositorio();
 
-
 /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 * │1-                               Cadastro de registros                                                         |
 * | Description: Quando a variável está no status de 'SALVANDO REGISTRO ENTRADA', ele só vai salvar se ele não    |
@@ -98,7 +97,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
     $mensagem = "Por favor, informe um valor positivo do dinheiro";
   } else {
 
-    $retorno = $Poupancas_repositorio->consultarRegistro($descricao, $valor, $data, 7, $_SESSION['user_id'] , $pdo);
+    $retorno = $Poupancas_repositorio->consultarRegistro($descricao, $valor, $data, 7, $_SESSION['user_id'], $pdo);
 
     if ($retorno == false) {
       $mensagemVermelha = false;
@@ -110,7 +109,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
         $statusDespensa = 5;
       }
 
-      $Poupancas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], $statusDespensa, $_SESSION['user_id'] , $pdo);
+      $Poupancas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], $statusDespensa, $_SESSION['user_id'], $pdo);
     } else {
       $mensagem = "Registro já cadastrado!";
     }
@@ -157,7 +156,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
     $mensagem = "Por favor, informe um valor positivo do dinheiro";
   } else {
 
-    $retorno = $Poupancas_repositorio->consultarRegistro($descricao, $valor, $data, 8, $_SESSION['user_id'] , $pdo);
+    $retorno = $Poupancas_repositorio->consultarRegistro($descricao, $valor, $data, 8, $_SESSION['user_id'], $pdo);
 
     if ($retorno == false) {
       $mensagemVermelha = false;
@@ -169,7 +168,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
         $statusDespensa = 6;
       }
 
-      $Poupancas_repositorio->cadastro_Saida($descricao, $valor, $data, $_SESSION['ano'], $statusDespensa, $_SESSION['user_id'] , $pdo);
+      $Poupancas_repositorio->cadastro_Saida($descricao, $valor, $data, $_SESSION['ano'], $statusDespensa, $_SESSION['user_id'], $pdo);
     } else {
       $mensagem = "Registro já cadastrado!";
     }
@@ -243,19 +242,19 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO VALOR ES
 
   if (!isset($_POST['valor_estimado'])) {
     $mensagem = "Informe um valor estimado";
-  } else if ($Poupancas_repositorio->verificar_ExisteValorEstimado($valor, $_SESSION['ano'], 11, $_SESSION['user_id'] , $pdo)) {
+  } else if ($Poupancas_repositorio->verificar_ExisteValorEstimado($valor, $_SESSION['ano'], 11, $_SESSION['user_id'], $pdo)) {
     $mensagem = "Cadastre um valor diferente";
   } else {
     $mensagemVermelha = false;
 
 
-    $retorno = $Poupancas_repositorio->consultarValorEstimado($descricao, $_SESSION['ano'], 11, $_SESSION['user_id'] ,  $pdo);
+    $retorno = $Poupancas_repositorio->consultarValorEstimado($descricao, $_SESSION['ano'], 11, $_SESSION['user_id'],  $pdo);
     if ($retorno) {
       $mensagem = "Valor estimado atualizado";
-      $Poupancas_repositorio->atualizar_ValorEstimado($descricao, $valor, 11, $_SESSION['ano'], $_SESSION['user_id'] ,  $pdo);
+      $Poupancas_repositorio->atualizar_ValorEstimado($descricao, $valor, 11, $_SESSION['ano'], $_SESSION['user_id'],  $pdo);
     } else {
       $mensagem = "Valor estimado registrado pela primeira vez!";
-      $Poupancas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], 11, $_SESSION['user_id'] , $pdo);
+      $Poupancas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], 11, $_SESSION['user_id'], $pdo);
     }
   }
 
@@ -309,23 +308,22 @@ $saidaDaCasa = 0;
 
 foreach ($consulta_TotalPoupanca as $linha) {
 
-  if($linha['idStatus_despensa'] == '7'){
+  if ($linha['idStatus_despensa'] == '7') {
     $entradaPessoal +=  $linha['valor'];
   }
-  
-  if($linha['idStatus_despensa'] == '8'){
+
+  if ($linha['idStatus_despensa'] == '8') {
     $saidaPessoal +=  $linha['valor'];
   }
 
 
-  if($linha['idStatus_despensa'] == '5'){
+  if ($linha['idStatus_despensa'] == '5') {
     $entradaDaCasa +=  $linha['valor'];
   }
 
-  if($linha['idStatus_despensa'] == '6'){
+  if ($linha['idStatus_despensa'] == '6') {
     $saidaDaCasa +=  $linha['valor'];
   }
-
 }
 
 $valorLiquidoPessoal = $entradaPessoal - $saidaPessoal;
@@ -335,333 +333,315 @@ $dinheiroTotal = $valorLiquidoCasa + $valorLiquidoPessoal;
 ?>
 
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../Assets//Css//styles.css" rel="stylesheet">
+  <link href="../../Assets//Css//dropdown.css" rel="stylesheet">
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
+  integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
   <title> Poupança de <?php echo $_SESSION['ano']; ?></title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-  <link rel="stylesheet" href="../../Assets/Css/Content.css" />
-  <link rel="stylesheet" href="../../Assets/Css/Footer.css" />
 </head>
 
 <body>
+  <?php require_once "Recursos/Navegacao.php"; ?>
 
-  <?php
-  // echo $_SESSION['statusMes'];
-  if (empty($_SESSION['statusMes'])) {
-  ?>
-    <form action="home.php" method="post">
-      <button class="btn btn-link">Voltar</button>
-    </form>
-  <?php
-  } else {
-  ?>
-    <form action="mes.php" method="post">
-      <input type="hidden" name="statusMes" value="<?php echo $_SESSION['statusMes']; ?>">
-      <button class="btn btn-link">Voltar</button>
-    </form>
-  <?php
-  }
-  ?>
+  <form action="home.php" method="post">
+    <input type="hidden" name="statusMes" value="<?php echo $_SESSION['statusMes']; ?>">
+    <button class="voltar-menu" style="border:none;">Voltar</button>
+  </form>
 
+  <main class="main-despensas">
+    <h2> <?php echo "Poupança de " . $_SESSION['ano']  . ": " . $_SESSION['tipo_registro']; ?> </h2>
 
-
-  <h2 class="display-5 fw-bold" style="text-align: center;"> <?php echo "Poupança de " . $_SESSION['ano']  . ": " . $_SESSION['tipo_registro']; ?> </h2>
-
-
-  <!-- Dinheiro total -->
-  <br>
-  <div class="col-lg-6 mx-auto" style="background-color:cadetblue">
-
-    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-      <table class="table">
-        <thead>
-          <tr>
-
-            <?php
-            if ($_SESSION['tipo_registro'] == "Registros pessoais") {
-            ?>
-              <th scope="col"> Gastos pessoais total </th>
-              <th scope="col">Receita pessoal total</th>
-             
-            <?php
-            } else {
-            ?>
-              <th scope="col"> Gasto total da casa </th>
-              <th scope="col">Receita total da casa</th>
-            <?php
-            }
-            ?> 
-            <th scope="col">Total que possuo agora (valor líquido) </th>
-            <th scope="col">Soma dos valores líquidos da casa com o pessoal</th>
-            <th scope="col">Valor total da poupança estimado</th>
-          </tr>
-        </thead>
-
-        <tbody style="color: #fff8f1;">
-          <tr>
-            <th scope="col"><?php echo "R$" . $dinheiroSaida; ?> </th>
-            <th scope="col"><?php echo "R$" . $dinheiroEntrada; ?> </th>
-            <th scope="col" style="color:#e61e19;"><?php echo "R$" . ($dinheiroEntrada - $dinheiroSaida) ?> </th>
-            <th scope="col"><?php echo "R$" . $dinheiroTotal; ?> </th>
-            <th scope="col">
-              <form action="poupancas.php" method="post">
-                <input type="hidden" value="SALVANDO VALOR ESTIMADO" name="adicionando_registro">
-                <input type="float" class="form-control" name="valor_estimado" value=" <?php echo $valorEstimado; ?> " required>
-                <button type="submit" class="btn btn-primary"> Salvar</button>
-              </form>
-
-            </th>
-          </tr>
-        </tbody>
-      </table>
-
-    </div>
-  </div>
-
-  <br>
-  <h3 style="text-align: center;">Abaixo registre todas as entradas e saídas da sua poupança</h3>
-
-
-  <div class="px-4 py-5 my-5 text-center">
-    <img class="d-block mx-auto mb-4" src="../../Assets/Icons//bank.png" alt="" width="72" height="70">
-
-    <h1 class="display-5 fw-bold" id="Saida_title">Saída</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">Por favor, digite um ano e mês válido na tela inicial.</p>
-      <a href="#Entrada_title"> Navegar até os registros de Entrada</a>
-      <br><br>
-
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" style="background-color:#c79797">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Nª</th>
-              <th scope="col">Descrição</th>
-              <th scope="col">valor</th>
-              <th scope="col">Data</th>
-              <th scope="col">Alteração</th>
-              <th scope="col">Exclusão</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-
-            $contador = 1;
-            foreach ($Saida_fetch as $linha) {
-            ?>
-              <tr>
-                <!-- <th scope="row">1</th> -->
-                <td> <?php echo $contador; ?> </td>
-                <td> <?php echo $linha['descricao']; ?> </td>
-                <td> <?php echo "R$" . $linha['valor']; ?> </td>
-                <td> <?php echo $linha['dataPoupanca']; ?> </td>
-                <td>
-
-                  <form action="alterar.php" method="post">
-                    <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
-                    <input type="hidden" value="POUPANCA" name="pagina_inicial">
-                    <button type="submit"> <img src="../../Assets//Icons//pencil.png" class="icon_exclusao"></button>
-                  </form>
-
-                </td>
-                <td>
-
-                  <form action="excluir.php" method="post">
-                    <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
-                    <input type="hidden" value="POUPANCA" name="pagina_inicial">
-                    <button type="submit"> <img src="../../Assets//Icons//x-mark-xxl.png" class="icon_exclusao"></button>
-                  </form>
-
-                </td>
-              </tr>
-            <?php
-              $contador++;
-            }
-
-            if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO SAIDA") {
-            ?>
-              <form method="post">
-                <input type="hidden" name="adicionando_registro" value='SALVANDO REGISTRO SAIDA'>
-                <input type="hidden" name="statusDespensa" value='3'>
-                <tr>
-                  <th scope="col">Nª</th>
-                  <th scope="col">
-                    <input type="text" name="descricao">
-                  </th>
-                  <th scope="col">
-                    <input type="number" min="1" step="any" name="valor">
-                  </th>
-                  <th scope="col">
-                    <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'>
-                  </th>
-
-                </tr>
-              <?php
-            }
-
-              ?>
-          </tbody>
-
-        </table>
-
-      </div>
-      <?php
-      if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO SAIDA") {
-      ?>
-
-        <div class="row g-0 text-center">
-          <div class="col-sm-6 col-md-6">
-            <button type="submit" class="btn btn-primary">Registrar</button>
-            </form>
-          </div>
-          <div class="col-6 col-md-6">
-            <form action="poupancas.php" method="post">
-              <input type="hidden" value="" name="adicionando_registro">
-              <button type="submit" class="btn btn-secondary">Cancelar</button>
-            </form>
-          </div>
-        </div>
-
-      <?php
-      }
-
-      if ($adicionando_registro == null) {
-      ?>
-        <form action="poupancas.php" method="post">
-          <input type="hidden" value="REGISTRANDO SAIDA" name="adicionando_registro">
-          <button type="submit" class="btn btn-primary">Adicionar um novo registro</button>
-        </form>
-      <?php
-      }
-      ?>
-
-    </div>
-  </div>
-
-
-  <div class="px-4 py-5 my-5 text-center">
-
-    <img class="d-block mx-auto mb-4" src="../../Assets/Icons//bank.png" alt="" width="72" height="70">
-
-    <h1 class="display-5 fw-bold" id="Entrada_title">Entrada</h1>
-    <p class="lead mb-4">Por favor, digite um ano e mês válido na tela inicial.</p>
-    <a href="#Saida_title"> Navegar até os registros de Saída</a>
-    <br><br>
-
-    <div class="col-lg-6 mx-auto" style="background-color:#c79797">
+    <!-- Dinheiro total -->
+    <div class="col-lg-6 mx-auto" style="background-color:cadetblue">
 
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Nª</th>
-              <th scope="col">Descrição</th>
-              <th scope="col">valor</th>
-              <th scope="col">Data</th>
-              <th scope="col">Alteração</th>
-              <th scope="col">Exclusão</th>
+
+              <?php
+              if ($_SESSION['tipo_registro'] == "Registros pessoais") {
+              ?>
+                <th scope="col"> Gastos pessoais total </th>
+                <th scope="col">Receita pessoal total</th>
+
+              <?php
+              } else {
+              ?>
+                <th scope="col"> Gasto total da casa </th>
+                <th scope="col">Receita total da casa</th>
+              <?php
+              }
+              ?>
+              <th scope="col">Total que possuo agora (valor líquido) </th>
+              <th scope="col">Soma dos valores líquidos da casa com o pessoal</th>
+              <th scope="col">Valor total da poupança estimado</th>
             </tr>
           </thead>
-          <tbody>
-            <?php
 
-            $contador = 1;
-            foreach ($Entrada_fetch as $linha) {
-            ?>
-              <tr>
-                <!-- <th scope="row">1</th> -->
-                <td> <?php echo $contador; ?> </td>
-                <td> <?php echo $linha['descricao']; ?> </td>
-                <td> <?php echo "R$" . $linha['valor']; ?> </td>
-                <td> <?php echo $linha['dataPoupanca']; ?> </td>
-                <td>
+          <tbody style="color: #fff8f1;">
+            <tr>
+              <th scope="col"><?php echo "R$" . $dinheiroSaida; ?> </th>
+              <th scope="col"><?php echo "R$" . $dinheiroEntrada; ?> </th>
+              <th scope="col" style="color:#e61e19;"><?php echo "R$" . ($dinheiroEntrada - $dinheiroSaida) ?> </th>
+              <th scope="col"><?php echo "R$" . $dinheiroTotal; ?> </th>
+              <th scope="col">
+                <form action="poupancas.php" method="post">
+                  <input type="hidden" value="SALVANDO VALOR ESTIMADO" name="adicionando_registro">
+                  <input type="float" class="form-control" name="valor_estimado" value=" <?php echo $valorEstimado; ?> " required>
+                  <button type="submit" class="btn btn-primary"> Salvar</button>
+                </form>
 
-                  <form action="alterar.php" method="post">
-                    <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
-                    <input type="hidden" value="POUPANCA" name="pagina_inicial">
-                    <button type="submit"> <img src="../../Assets//Icons//pencil.png" class="icon_exclusao"></button>
-                  </form>
-
-                </td>
-                <td>
-
-                  <form action="excluir.php" method="post">
-                    <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
-                    <input type="hidden" value="POUPANCA" name="pagina_inicial">
-                    <button type="submit"> <img src="../../Assets//Icons//x-mark-xxl.png" class="icon_exclusao"></button>
-                  </form>
-
-                </td>
-              </tr>
-            <?php
-              $contador++;
-            }
-
-            if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO ENTRADA") {
-            ?>
-              <form method="post">
-                <input type="hidden" name="adicionando_registro" value='SALVANDO REGISTRO ENTRADA'>
-                <input type="hidden" name="statusDespensa" value='3'>
-                <tr>
-                  <th scope="col">Nª</th>
-                  <th scope="col">
-                    <input type="text" name="descricao">
-                  </th>
-                  <th scope="col">
-                    <input type="number" min="1" step="any" name="valor">
-                  </th>
-                  <th scope="col">
-                    <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'>
-                  </th>
-
-                </tr>
-              <?php
-            }
-
-              ?>
+              </th>
+            </tr>
           </tbody>
-
         </table>
 
       </div>
-      <?php
-      if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO ENTRADA") {
-      ?>
-
-        <div class="row g-0 text-center">
-          <div class="col-sm-6 col-md-6">
-            <button type="submit" class="btn btn-primary">Registrar</button>
-            </form>
-          </div>
-          <div class="col-6 col-md-6">
-            <form action="poupancas.php" method="post">
-              <input type="hidden" value="" name="adicionando_registro">
-              <button type="submit" class="btn btn-secondary">Cancelar</button>
-            </form>
-          </div>
-        </div>
-
-
-      <?php
-      }
-
-      if ($adicionando_registro == null) {
-      ?>
-        <form action="poupancas.php" method="post">
-          <input type="hidden" value="REGISTRANDO ENTRADA" name="adicionando_registro">
-          <button type="submit" class="btn btn-primary">Adicionar um novo registro</button>
-        </form>
-      <?php
-      }
-      ?>
-
     </div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <h3>Abaixo registre todas as entradas e saídas da sua poupança</h3>
+    <img src="../../Assets/Icons//bank.png" alt="imagem de um porco de poupança" width="72" height="70">
+
+    <session>
+      <h1>Saída</h1>
+      <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">Por favor, digite um ano e mês válido na tela inicial.</p>
+        <a href="#Entrada_title"> Navegar até os registros de Entrada</a>
+        <br><br>
+
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" style="background-color:#c79797">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Nª</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">valor</th>
+                <th scope="col">Data</th>
+                <th scope="col">Alteração</th>
+                <th scope="col">Exclusão</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+
+              $contador = 1;
+              foreach ($Saida_fetch as $linha) {
+              ?>
+                <tr>
+                  <!-- <th scope="row">1</th> -->
+                  <td> <?php echo $contador; ?> </td>
+                  <td> <?php echo $linha['descricao']; ?> </td>
+                  <td> <?php echo "R$" . $linha['valor']; ?> </td>
+                  <td> <?php echo $linha['dataPoupanca']; ?> </td>
+                  <td>
+
+                    <form action="alterar.php" method="post">
+                      <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
+                      <input type="hidden" value="POUPANCA" name="pagina_inicial">
+                      <button type="submit"> <img src="../../Assets//Icons//pencil.png" class="icon_exclusao"></button>
+                    </form>
+
+                  </td>
+                  <td>
+
+                    <form action="excluir.php" method="post">
+                      <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
+                      <input type="hidden" value="POUPANCA" name="pagina_inicial">
+                      <button type="submit"> <img src="../../Assets//Icons//x-mark-xxl.png" class="icon_exclusao"></button>
+                    </form>
+
+                  </td>
+                </tr>
+              <?php
+                $contador++;
+              }
+
+              if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO SAIDA") {
+              ?>
+                <form method="post">
+                  <input type="hidden" name="adicionando_registro" value='SALVANDO REGISTRO SAIDA'>
+                  <input type="hidden" name="statusDespensa" value='3'>
+                  <tr>
+                    <th scope="col">Nª</th>
+                    <th scope="col">
+                      <input type="text" name="descricao">
+                    </th>
+                    <th scope="col">
+                      <input type="number" min="1" step="any" name="valor">
+                    </th>
+                    <th scope="col">
+                      <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'>
+                    </th>
+
+                  </tr>
+                <?php
+              }
+
+                ?>
+            </tbody>
+
+          </table>
+
+        </div>
+        <?php
+        if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO SAIDA") {
+        ?>
+
+          <div class="row g-0 text-center">
+            <div class="col-sm-6 col-md-6">
+              <button type="submit" class="btn btn-primary">Registrar</button>
+              </form>
+            </div>
+            <div class="col-6 col-md-6">
+              <form action="poupancas.php" method="post">
+                <input type="hidden" value="" name="adicionando_registro">
+                <button type="submit" class="btn btn-secondary">Cancelar</button>
+              </form>
+            </div>
+          </div>
+
+        <?php
+        }
+
+        if ($adicionando_registro == null) {
+        ?>
+          <form action="poupancas.php" method="post">
+            <input type="hidden" value="REGISTRANDO SAIDA" name="adicionando_registro">
+            <button type="submit" class="btn btn-primary">Adicionar um novo registro</button>
+          </form>
+        <?php
+        }
+        ?>
+
+      </div>
+    </session>
+
+    <session>
+      <img class="d-block mx-auto mb-4" src="../../Assets/Icons//bank.png" alt="imagem de um porco de poupança" width="72" height="70">
+
+      <h1 class="display-5 fw-bold" id="Entrada_title">Entrada</h1>
+      <p class="lead mb-4">Por favor, digite um ano e mês válido na tela inicial.</p>
+      <a href="#Saida_title"> Navegar até os registros de Saída</a>
+      <br><br>
+
+      <div class="col-lg-6 mx-auto" style="background-color:#c79797">
+
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Nª</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">valor</th>
+                <th scope="col">Data</th>
+                <th scope="col">Alteração</th>
+                <th scope="col">Exclusão</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+
+              $contador = 1;
+              foreach ($Entrada_fetch as $linha) {
+              ?>
+                <tr>
+                  <!-- <th scope="row">1</th> -->
+                  <td> <?php echo $contador; ?> </td>
+                  <td> <?php echo $linha['descricao']; ?> </td>
+                  <td> <?php echo "R$" . $linha['valor']; ?> </td>
+                  <td> <?php echo $linha['dataPoupanca']; ?> </td>
+                  <td>
+
+                    <form action="alterar.php" method="post">
+                      <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
+                      <input type="hidden" value="POUPANCA" name="pagina_inicial">
+                      <button type="submit"> <img src="../../Assets//Icons//pencil.png" class="icon_exclusao"></button>
+                    </form>
+
+                  </td>
+                  <td>
+
+                    <form action="excluir.php" method="post">
+                      <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
+                      <input type="hidden" value="POUPANCA" name="pagina_inicial">
+                      <button type="submit"> <img src="../../Assets//Icons//x-mark-xxl.png" class="icon_exclusao"></button>
+                    </form>
+
+                  </td>
+                </tr>
+              <?php
+                $contador++;
+              }
+
+              if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO ENTRADA") {
+              ?>
+                <form method="post">
+                  <input type="hidden" name="adicionando_registro" value='SALVANDO REGISTRO ENTRADA'>
+                  <input type="hidden" name="statusDespensa" value='3'>
+                  <tr>
+                    <th scope="col">Nª</th>
+                    <th scope="col">
+                      <input type="text" name="descricao">
+                    </th>
+                    <th scope="col">
+                      <input type="number" min="1" step="any" name="valor">
+                    </th>
+                    <th scope="col">
+                      <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'>
+                    </th>
+
+                  </tr>
+                <?php
+              }
+
+                ?>
+            </tbody>
+
+          </table>
+
+        </div>
+        <?php
+        if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO ENTRADA") {
+        ?>
+
+          <div class="row g-0 text-center">
+            <div class="col-sm-6 col-md-6">
+              <button type="submit" class="btn btn-primary">Registrar</button>
+              </form>
+            </div>
+            <div class="col-6 col-md-6">
+              <form action="poupancas.php" method="post">
+                <input type="hidden" value="" name="adicionando_registro">
+                <button type="submit" class="btn btn-secondary">Cancelar</button>
+              </form>
+            </div>
+          </div>
+
+
+        <?php
+        }
+
+        if ($adicionando_registro == null) {
+        ?>
+          <form action="poupancas.php" method="post">
+            <input type="hidden" value="REGISTRANDO ENTRADA" name="adicionando_registro">
+            <button type="submit" class="btn btn-primary">Adicionar um novo registro</button>
+          </form>
+        <?php
+        }
+        ?>
+
+      </div>
+    </session>
+  </main>
+
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
 </body>
 
 </html>
