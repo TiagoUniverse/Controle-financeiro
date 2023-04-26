@@ -171,6 +171,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
     $dataDividida = explode("-", $_POST['data']);
   }
 
+
   // Mês para validação
   if ($_SESSION['statusMes'] < 10) {
     $mes_selecionado = "0" . $_SESSION['statusMes'];
@@ -214,8 +215,12 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
     $mensagem = "Por favor, informe um valor positivo do dinheiro";
   } else if ($_SESSION['quinzena'] == "Quinzena 1" && ($dataDividida[2] < 5 || $dataDividida[2] > 19)) {
     $mensagem = "Por favor, insira um registro dentro dos dias da primeira quinzena (dia 5 até dia 19)";
-  } else if ($_SESSION['quinzena'] == "Quinzena 2" && ($dataDividida[2] <= 4 || $dataDividida[2] > 31)) {
-    $mensagem = "Por favor, insira um registro dentro dos dias da segunda quinzena (20 até dia 4 do próximo mês)";
+  } else if ($_SESSION['quinzena'] == "Quinzena 2" && $dataDividida[1] == $_SESSION['statusMes'] &&
+  ($dataDividida[2] < 19 || $dataDividida[2] > 32  )){
+    $mensagem = "A data para registrar na 2ª quinzena precisa está entre o dia 20 até dia 04 do próximo mês.";
+  } else if ($_SESSION['quinzena'] == "Quinzena 2" && $dataDividida[1] == ($_SESSION['statusMes'] + 1) &&
+  ($dataDividida[2] < 0 || $dataDividida[2] > 4 ) )  {
+    $mensagem = "A data desse registro precisa ir até o dia 4 do próximo mês.";
   } else {
 
     $retorno = $Despensas_repositorio->consultarRegistro($descricao, $valor, $data, 4, $pdo);
@@ -304,7 +309,7 @@ foreach ($Saida_fetch as $row) {
   <link href="../../Assets//Css//dropdown.css" rel="stylesheet">
   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
   integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
-  <title>Controle monetário</title>
+  <title><?php echo "Despensas de " . $_SESSION['nomeMes'] . " de " . $_SESSION['ano']; ?></title>
 </head>
 
 <body>
@@ -315,7 +320,7 @@ foreach ($Saida_fetch as $row) {
   </form>
 
   <main class="main-despensas">
-    <h2><?php echo $_SESSION['quinzena']; ?></h2>
+    <h2><?php echo $_SESSION['quinzena'] . ": " . $_SESSION['nomeMes'] . " de " . $_SESSION['ano']  ; ?></h2>
     <h3><?php echo "Despensas: " . $_SESSION['tipo_registro']; ?></h3>
     <p>Clique em registrar e manipule os registros</p>
     <table class="table-dinheiroTotal">

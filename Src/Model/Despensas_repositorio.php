@@ -60,6 +60,7 @@ class Despensas_repositorio
         $stmt =  $pdo->prepare('INSERT INTO despensas (descricao, valor, dataDespensa, ano, quinzena, idstatus_Mes, idStatus_despensa , idUsuario)
         VALUES (:descricao , :valor , :dataDespensa , :ano , :quinzena , :idstatus_Mes , :statusDespensa , :idUsuario )  ');
         
+
         $stmt->execute(array(
             ':descricao' => $descricao ,
             ':valor' => $valor ,
