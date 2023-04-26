@@ -214,6 +214,7 @@ header a:visited {
 .mensagem-alertDanger{
     background-color:#dc3545;
     /* color:#5b1017 ; */
+    color: white;
     border-color: #510e15;
     padding: 16px;
     /* border-radius: 0.5rem; */
@@ -221,6 +222,8 @@ header a:visited {
 
 .mensagem-alertSucess{
     background-color:#18ac75;
+    padding: 16px;
+    color: white;
 }
 
 /* FOOTER */

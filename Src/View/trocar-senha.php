@@ -30,6 +30,39 @@ use model\Usuario;
 
 $Usuario = new Usuario();
 $Usuario_repositorio = new Usuario_repositorio();
+
+/*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+* │                                Function's section                                                             │
+* └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/
+
+if (isset($_POST['status_alteracao']) && $_POST['status_alteracao'] == "ALTERANDO A SENHA") {
+
+  $mensagemVermelha = true;
+
+  if ($_POST['senha'] != $_POST['repitaSenha']) {
+    $mensagem = "Informe senhas iguais!";
+  } else {
+
+    $return = $Usuario_repositorio->alterar_senha($_POST['senha'], $_SESSION['user_id'], $pdo);
+
+    if ($return) {
+      $mensagem = "Alteração de senha com sucesso!";
+      $mensagemVermelha = false;
+    } else {
+      $mensagem = "Falha na alteração de senha! Por favor, tente novamente.";
+    }
+  }
+
+  // Mensagem do resultado
+  if ($mensagemVermelha) {
+    echo "<div class='mensagem-alertDanger'> ";
+  } else {
+    echo "<div class='mensagem-alertSucess'> ";
+  }
+  echo $mensagem;
+  echo "</div>";
+}
 ?>
 
 <!DOCTYPE html>
