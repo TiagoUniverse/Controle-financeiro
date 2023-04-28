@@ -94,18 +94,6 @@ header a:visited {
 }
 
 /* POUPANÇAS */
-/* .div-dinheiroTotal{
-    background-color:cadetblue;
-    width: 800px;
-    margin: 0 auto;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 5px black;
-}
-
-.div-dinheiroTotal tbody{
-    color: #fff8f1;
-} */
 
 #dinheiro-total-Resultado{
     color: #e61e19;
@@ -127,6 +115,16 @@ header a:visited {
     margin: 0 auto;
 }
 
+/* Da poupança */
+.table-dinheiroTotal input{
+    padding: 0.2rem;
+    margin-top: 35px;
+}
+
+.table-dinheiroTotal button{
+    background-color: red;
+}
+
 .table-dinheiroTotal th {
     color: white;
 }
@@ -136,7 +134,7 @@ header a:visited {
     color: black;
 }
 
-.table-dinheiroTotal tbody th {
+.table-dinheiroTotal tbody th, input {
     padding-top: 10px;
 }
 
