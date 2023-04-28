@@ -93,6 +93,23 @@ header a:visited {
     box-shadow: 0 0 5px black;
 }
 
+/* POUPANÇAS */
+/* .div-dinheiroTotal{
+    background-color:cadetblue;
+    width: 800px;
+    margin: 0 auto;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 5px black;
+}
+
+.div-dinheiroTotal tbody{
+    color: #fff8f1;
+} */
+
+#dinheiro-total-Resultado{
+    color: #e61e19;
+}
 
 /* MAIN-DESPENSAS */
 .main-despensas {

@@ -357,53 +357,42 @@ $dinheiroTotal = $valorLiquidoCasa + $valorLiquidoPessoal;
     <h2> <?php echo "Poupança de " . $_SESSION['ano']  . ": " . $_SESSION['tipo_registro']; ?> </h2>
 
     <!-- Dinheiro total -->
-    <div class="col-lg-6 mx-auto" style="background-color:cadetblue">
+    <table class="table-dinheiroTotal">
+      <thead>
+        <tr>
+          <?php
+          if ($_SESSION['tipo_registro'] == "Registros pessoais") {
+            echo "<th scope='col'> Gastos pessoais total </th>";
+            echo "<th scope='col'> Receita pessoal total </th>";
+          } else {
+            echo "<th scope='col'> Gastos total da casa </th>";
+            echo "<th scope='col'> Receita total da casa </th>";
+          }
+          ?>
+          <th>Total que possuo agora (valor líquido) </th>
+          <th>Soma dos valores líquidos da casa com o pessoal</th>
+          <th>Valor total da poupança estimado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th><?php echo "R$" . $dinheiroSaida; ?> </th>
+          <th><?php echo "R$" . $dinheiroEntrada; ?> </th>
+          <th id="dinheiro-total-Resultado"><?php echo "R$" . ($dinheiroEntrada - $dinheiroSaida) ?> </th>
+          <th><?php echo "R$" . $dinheiroTotal; ?> </th>
+          <th>
+            <form action="poupancas.php" method="post">
+              <input type="hidden" value="SALVANDO VALOR ESTIMADO" name="adicionando_registro">
+              <input type="float" class="form-control" name="valor_estimado" value=" <?php echo $valorEstimado; ?> " required>
+              <button type="submit" class="btn btn-primary"> Salvar</button>
+            </form>
+          </th>
+        </tr>
+      </tbody>
+    </table>
 
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <table class="table">
-          <thead>
-            <tr>
 
-              <?php
-              if ($_SESSION['tipo_registro'] == "Registros pessoais") {
-              ?>
-                <th scope="col"> Gastos pessoais total </th>
-                <th scope="col">Receita pessoal total</th>
 
-              <?php
-              } else {
-              ?>
-                <th scope="col"> Gasto total da casa </th>
-                <th scope="col">Receita total da casa</th>
-              <?php
-              }
-              ?>
-              <th scope="col">Total que possuo agora (valor líquido) </th>
-              <th scope="col">Soma dos valores líquidos da casa com o pessoal</th>
-              <th scope="col">Valor total da poupança estimado</th>
-            </tr>
-          </thead>
-
-          <tbody style="color: #fff8f1;">
-            <tr>
-              <th scope="col"><?php echo "R$" . $dinheiroSaida; ?> </th>
-              <th scope="col"><?php echo "R$" . $dinheiroEntrada; ?> </th>
-              <th scope="col" style="color:#e61e19;"><?php echo "R$" . ($dinheiroEntrada - $dinheiroSaida) ?> </th>
-              <th scope="col"><?php echo "R$" . $dinheiroTotal; ?> </th>
-              <th scope="col">
-                <form action="poupancas.php" method="post">
-                  <input type="hidden" value="SALVANDO VALOR ESTIMADO" name="adicionando_registro">
-                  <input type="float" class="form-control" name="valor_estimado" value=" <?php echo $valorEstimado; ?> " required>
-                  <button type="submit" class="btn btn-primary"> Salvar</button>
-                </form>
-
-              </th>
-            </tr>
-          </tbody>
-        </table>
-
-      </div>
-    </div>
 
     <h3>Abaixo registre todas as entradas e saídas da sua poupança</h3>
     <img src="../../Assets/Icons//bank.png" alt="imagem de um porco de poupança" width="72" height="70">
@@ -419,12 +408,12 @@ $dinheiroTotal = $valorLiquidoCasa + $valorLiquidoPessoal;
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">Nª</th>
-                <th scope="col">Descrição</th>
-                <th scope="col">valor</th>
-                <th scope="col">Data</th>
-                <th scope="col">Alteração</th>
-                <th scope="col">Exclusão</th>
+                <th>Nª</th>
+                <th>Descrição</th>
+                <th>valor</th>
+                <th>Data</th>
+                <th>Alteração</th>
+                <th>Exclusão</th>
               </tr>
             </thead>
             <tbody>
@@ -468,14 +457,14 @@ $dinheiroTotal = $valorLiquidoCasa + $valorLiquidoPessoal;
                   <input type="hidden" name="adicionando_registro" value='SALVANDO REGISTRO SAIDA'>
                   <input type="hidden" name="statusDespensa" value='3'>
                   <tr>
-                    <th scope="col">Nª</th>
-                    <th scope="col">
+                    <th>Nª</th>
+                    <th>
                       <input type="text" name="descricao">
                     </th>
-                    <th scope="col">
+                    <th>
                       <input type="number" min="1" step="any" name="valor">
                     </th>
-                    <th scope="col">
+                    <th>
                       <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'>
                     </th>
 
@@ -536,12 +525,12 @@ $dinheiroTotal = $valorLiquidoCasa + $valorLiquidoPessoal;
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">Nª</th>
-                <th scope="col">Descrição</th>
-                <th scope="col">valor</th>
-                <th scope="col">Data</th>
-                <th scope="col">Alteração</th>
-                <th scope="col">Exclusão</th>
+                <th>Nª</th>
+                <th>Descrição</th>
+                <th>valor</th>
+                <th>Data</th>
+                <th>Alteração</th>
+                <th>Exclusão</th>
               </tr>
             </thead>
             <tbody>
@@ -585,14 +574,14 @@ $dinheiroTotal = $valorLiquidoCasa + $valorLiquidoPessoal;
                   <input type="hidden" name="adicionando_registro" value='SALVANDO REGISTRO ENTRADA'>
                   <input type="hidden" name="statusDespensa" value='3'>
                   <tr>
-                    <th scope="col">Nª</th>
-                    <th scope="col">
+                    <th>Nª</th>
+                    <th>
                       <input type="text" name="descricao">
                     </th>
-                    <th scope="col">
+                    <th>
                       <input type="number" min="1" step="any" name="valor">
                     </th>
-                    <th scope="col">
+                    <th>
                       <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'>
                     </th>
 
