@@ -391,21 +391,14 @@ $dinheiroTotal = $valorLiquidoCasa + $valorLiquidoPessoal;
       </tbody>
     </table>
 
-
-
-
     <h3>Abaixo registre todas as entradas e saídas da sua poupança</h3>
     <img src="../../Assets/Icons//bank.png" alt="imagem de um porco de poupança" width="72" height="70">
 
     <session>
-      <h1>Saída</h1>
-      <div class="col-lg-6 mx-auto">
-        <p class="lead mb-4">Por favor, digite um ano e mês válido na tela inicial.</p>
+      <h2>Saída</h2>
+        <p>Por favor, digite um ano e mês válido na tela inicial.</p>
         <a href="#Entrada_title"> Navegar até os registros de Entrada</a>
-        <br><br>
-
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" style="background-color:#c79797">
-          <table class="table">
+          <table class="table-saida">
             <thead>
               <tr>
                 <th>Nª</th>
@@ -474,26 +467,19 @@ $dinheiroTotal = $valorLiquidoCasa + $valorLiquidoPessoal;
 
                 ?>
             </tbody>
-
           </table>
 
-        </div>
         <?php
         if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO SAIDA") {
         ?>
-
-          <div class="row g-0 text-center">
-            <div class="col-sm-6 col-md-6">
-              <button type="submit" class="btn btn-primary">Registrar</button>
-              </form>
-            </div>
-            <div class="col-6 col-md-6">
-              <form action="poupancas.php" method="post">
-                <input type="hidden" value="" name="adicionando_registro">
-                <button type="submit" class="btn btn-secondary">Cancelar</button>
-              </form>
-            </div>
-          </div>
+        <div class="botoes-registro">
+          <button type="submit" class="botao-registrar">Registrar</button>
+          </form>
+          <form action="poupancas.php" method="post">
+            <input type="hidden" value="" name="adicionando_registro">
+            <button type="submit" class="botao-cancelar">Cancelar</button>
+          </form>
+        </div>
 
         <?php
         }
@@ -502,27 +488,18 @@ $dinheiroTotal = $valorLiquidoCasa + $valorLiquidoPessoal;
         ?>
           <form action="poupancas.php" method="post">
             <input type="hidden" value="REGISTRANDO SAIDA" name="adicionando_registro">
-            <button type="submit" class="btn btn-primary">Adicionar um novo registro</button>
+            <button type="submit" class="botao-novoRegistro">Adicionar um novo registro</button>
           </form>
         <?php
         }
         ?>
-
-      </div>
     </session>
 
     <session>
-      <img class="d-block mx-auto mb-4" src="../../Assets/Icons//bank.png" alt="imagem de um porco de poupança" width="72" height="70">
-
-      <h1 class="display-5 fw-bold" id="Entrada_title">Entrada</h1>
-      <p class="lead mb-4">Por favor, digite um ano e mês válido na tela inicial.</p>
+      <img src="../../Assets/Icons//bank.png" alt="imagem de um porco de poupança" width="72" height="70">
+      <h2 id="Entrada_title">Entrada</h2>
       <a href="#Saida_title"> Navegar até os registros de Saída</a>
-      <br><br>
-
-      <div class="col-lg-6 mx-auto" style="background-color:#c79797">
-
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-          <table class="table">
+          <table class="table-saida">
             <thead>
               <tr>
                 <th>Nª</th>
@@ -594,23 +571,18 @@ $dinheiroTotal = $valorLiquidoCasa + $valorLiquidoPessoal;
 
           </table>
 
-        </div>
         <?php
         if ($adicionando_registro != null && $adicionando_registro == "REGISTRANDO ENTRADA") {
         ?>
 
-          <div class="row g-0 text-center">
-            <div class="col-sm-6 col-md-6">
-              <button type="submit" class="btn btn-primary">Registrar</button>
-              </form>
-            </div>
-            <div class="col-6 col-md-6">
-              <form action="poupancas.php" method="post">
-                <input type="hidden" value="" name="adicionando_registro">
-                <button type="submit" class="btn btn-secondary">Cancelar</button>
-              </form>
-            </div>
-          </div>
+        <div class="botoes-registro">
+          <button type="submit" class="botao-registrar">Registrar</button>
+          </form>
+          <form action="poupancas.php" method="post">
+            <input type="hidden" value="" name="adicionando_registro">
+            <button type="submit" class="botao-cancelar">Cancelar</button>
+          </form>
+        </div>
 
 
         <?php
@@ -620,13 +592,12 @@ $dinheiroTotal = $valorLiquidoCasa + $valorLiquidoPessoal;
         ?>
           <form action="poupancas.php" method="post">
             <input type="hidden" value="REGISTRANDO ENTRADA" name="adicionando_registro">
-            <button type="submit" class="btn btn-primary">Adicionar um novo registro</button>
+            <button type="submit" class="botao-novoRegistro">Adicionar um novo registro</button>
           </form>
         <?php
         }
         ?>
 
-      </div>
     </session>
   </main>
 
