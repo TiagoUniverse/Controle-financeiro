@@ -113,7 +113,6 @@ if (isset($_POST['foiAlterado']) && $_POST['foiAlterado'] == "ALTERADO") {
       $mensagem = "Registro alterado!";
 
 
-
       $Poupancas_repositorio->alterar($descricao, $valor, $dataDespensa, $id, $pdo);
     }
   } else {
@@ -141,7 +140,6 @@ if (isset($_POST['foiAlterado']) && $_POST['foiAlterado'] == "ALTERADO") {
       $mensagem = "Registro alterado!";
 
 
-
       $Despensas_repositorio->alterar($descricao, $valor, $dataDespensa, $id, $pdo);
     }
   }
@@ -163,22 +161,23 @@ if (isset($_POST['foiAlterado']) && $_POST['foiAlterado'] == "ALTERADO") {
 
 <body>
   <?php require_once "Recursos/Navegacao.php"; ?>
-  <div>
-    <?php
-    if ($pagina_inicial == "POUPANCA") {
-      echo "<form action='poupancas.php' method='post'>";
-    } else {
-      echo "<form action='despensas.php' method='post'>";
-    }
-    ?>
-    <input type="hidden" name="statusMes" value="<?php echo $_SESSION['statusMes']; ?>">
-    <button class="btn btn-link">Voltar</button>
-    </form>
-  </div>
-  <main>
+
+  <?php
+  if ($pagina_inicial == "POUPANCA") {
+    echo "<form action='poupancas.php' method='post'>";
+  } else {
+    echo "<form action='despensas.php' method='post'>";
+  }
+  ?>
+  <input type="hidden" name="statusMes" value="<?php echo $_SESSION['statusMes']; ?>">
+  <button class="voltar-menu" style="border:none;">Voltar</button>
+  </form>
+
+  <main class="main-alterar">
+    <img src="../../Assets/img/dia 15.png" alt="Calendário com a data 15" width="72" height="70">
     <h2><?php echo strtolower($pagina_inicial) . ": gastos pessoais"; ?></h2>
     <h3>Verifique o registro abaixo e o modifique</h3>
-    <img src="../../Assets/img/dia 15.png" alt="Calendário com a data 15" width="72" height="70">
+    
     <?php
     if (!isset($_POST['foiAlterado'])) {
 
@@ -225,7 +224,7 @@ if (isset($_POST['foiAlterado']) && $_POST['foiAlterado'] == "ALTERADO") {
           </div>
           <button type="submit" class="btn btn-danger">Alterar</button>
         </form>
-    <?php
+      <?php
       }
     } else {
 
@@ -246,7 +245,7 @@ if (isset($_POST['foiAlterado']) && $_POST['foiAlterado'] == "ALTERADO") {
 
 
 
-          <h1> <?php echo $mensagem; ?> </h1>
+          <h3 class="resultado"> <?php echo $mensagem; ?> </h3>
           </div>
         <?php
       }

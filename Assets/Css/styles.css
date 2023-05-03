@@ -99,6 +99,49 @@ header a:visited {
     color: #e61e19;
 }
 
+
+/* MAIN-ALTERAR */
+.main-alterar{
+    text-align: center;
+    /* margin-top: 116px; */
+    background-color:#bd9c9c;
+    width: 800px;
+    margin: 116px auto;
+    border-radius: 0.5rem;
+    box-shadow: 0px 0px 5px black;
+}
+
+.main-alterar form{
+
+    width: 500px;
+    margin: 0 auto;
+}
+
+.main-alterar form label,input{
+    /* background-color: purple; */
+    display: block;
+    margin-bottom: 5px;
+    
+}
+
+.resultado{
+    color:#0ceb98;
+}
+
+.main-alterar form button{
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+    width: 110px; 
+    box-shadow: 0 0 1px black;
+    font-size: 16px;
+    padding: 0.4rem;
+    background-color: rgb(223, 69, 69);
+}
+
+.main-alterar form input{
+    width: -webkit-fill-available;
+}
+
 /* MAIN-DESPENSAS */
 .main-despensas {
     text-align: center;
