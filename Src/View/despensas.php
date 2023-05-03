@@ -153,7 +153,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
   if ($mensagemVermelha) {
     echo "<div class='mensagem-alertDanger'> ";
   } else {
-    echo "<div class='mensagem-alertDanger'> ";
+    echo "<div class='mensagem-alertSucess'> ";
   }
   echo $mensagem;
   echo "</div>";

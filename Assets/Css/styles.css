@@ -118,11 +118,17 @@ header a:visited {
 /* Da poupança */
 .table-dinheiroTotal input{
     padding: 0.2rem;
-    margin-top: 35px;
+    margin-top: 53px;
 }
 
 .table-dinheiroTotal button{
-    background-color: red;
+    background-color: #1fe098;
+    border: 1px solid #1fe098;
+    border-radius:0.5rem;
+    width: 68px;
+    padding: 5px;
+    margin-top: 1em;
+
 }
 
 .table-dinheiroTotal th {
@@ -172,6 +178,7 @@ header a:visited {
 
 .table-saida tbody form button{
     box-shadow: 0 0 5px black;
+    margin-top: 10px;
 }
 
 .table-saida tbody input{
@@ -181,7 +188,7 @@ header a:visited {
 /* BOTOES REGISTRO */
 
 .botoes-registro{
-    display: inline-flex;
+    display: -webkit-inline-box;
     margin: 12px 0;
     padding-right: 5px;
 }
