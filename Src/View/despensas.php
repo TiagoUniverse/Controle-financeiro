@@ -215,11 +215,15 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
     $mensagem = "Por favor, informe um valor positivo do dinheiro";
   } else if ($_SESSION['quinzena'] == "Quinzena 1" && ($dataDividida[2] < 5 || $dataDividida[2] > 19)) {
     $mensagem = "Por favor, insira um registro dentro dos dias da primeira quinzena (dia 5 até dia 19)";
-  } else if ($_SESSION['quinzena'] == "Quinzena 2" && $dataDividida[1] == $_SESSION['statusMes'] &&
-  ($dataDividida[2] < 19 || $dataDividida[2] > 32  )){
+  } else if (
+    $_SESSION['quinzena'] == "Quinzena 2" && $dataDividida[1] == $_SESSION['statusMes'] &&
+    ($dataDividida[2] < 19 || $dataDividida[2] > 32)
+  ) {
     $mensagem = "A data para registrar na 2ª quinzena precisa está entre o dia 20 até dia 04 do próximo mês.";
-  } else if ($_SESSION['quinzena'] == "Quinzena 2" && $dataDividida[1] == ($_SESSION['statusMes'] + 1) &&
-  ($dataDividida[2] < 0 || $dataDividida[2] > 4 ) )  {
+  } else if (
+    $_SESSION['quinzena'] == "Quinzena 2" && $dataDividida[1] == ($_SESSION['statusMes'] + 1) &&
+    ($dataDividida[2] < 0 || $dataDividida[2] > 4)
+  ) {
     $mensagem = "A data desse registro precisa ir até o dia 4 do próximo mês.";
   } else {
 
@@ -321,7 +325,7 @@ foreach ($Saida_fetch as $row) {
   </form>
 
   <main class="main-despensas">
-    <h2><?php echo $_SESSION['quinzena'] . ": " . $_SESSION['nomeMes'] . " de " . $_SESSION['ano']  ; ?></h2>
+    <h2><?php echo $_SESSION['quinzena'] . ": " . $_SESSION['nomeMes'] . " de " . $_SESSION['ano']; ?></h2>
     <h3><?php echo "Despensas: " . $_SESSION['tipo_registro']; ?></h3>
     <p>Clique em registrar e manipule os registros</p>
     <table class="table-dinheiroTotal">
@@ -359,6 +363,7 @@ foreach ($Saida_fetch as $row) {
             <th>Descrição</th>
             <th>valor</th>
             <th>Data</th>
+            <th>Tipo</th>
             <th>Alteração</th>
             <th>Exclusão</th>
           </tr>
@@ -407,6 +412,14 @@ foreach ($Saida_fetch as $row) {
                 <th><input type="text" name="descricao" placeholder="Nome do produto"></th>
                 <th><input type="number" min="1" step="any" name="valor" placeholder="2.00"></th>
                 <th> <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'></th>
+                <th>
+                  <select name="cars" id="cars">
+                    <option value="escolha uma">Escolha uma</option>
+                    <option value="saab">Saab</option>
+                    <option value="opel">Opel</option>
+                    <option value="audi">Audi</option>
+                  </select>
+                </th>
               </tr>
             <?php
           }
@@ -465,6 +478,7 @@ foreach ($Saida_fetch as $row) {
             <th>Descrição</th>
             <th>valor</th>
             <th>Data</th>
+            <th>Tipo</th>
             <th>Alteração</th>
             <th>Exclusão</th>
           </tr>
@@ -513,6 +527,9 @@ foreach ($Saida_fetch as $row) {
                 <th><input type="text" name="descricao" placeholder="Nome do produto"></th>
                 <th><input type="number" min="1" step="any" name="valor" placeholder="2.00"></th>
                 <th> <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'></th>
+                <th>
+                  <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'>
+                </th>
               </tr>
             <?php
           }

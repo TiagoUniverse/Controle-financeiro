@@ -26,7 +26,7 @@ updated DATETIME NULL
 */
 insert into usuario (nome, email, senha) values ('Tiago', 'tiagocesar68@gmail.com',  sha1('tiago123')    ) ;
 
-Select * from Usuario where email = 'teste@gmail.com' and senha = sha1( 'teste123' );
+Select * from Usuario where email = 'teste@gmail.com' and senha = sha1( 'teste123' )
 
 
 /**
@@ -86,31 +86,7 @@ created	DATETIME NOT NULL DEFAULT NOW()
 * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
 
-
-
 insert into status_mes ( nome ) values (' Janeiro ' );
-
-insert into status_mes ( nome ) values (' Fevereiro ' );
-
-insert into status_mes ( nome ) values (' Março ' );
-
-insert into status_mes ( nome ) values (' Abril ' );
-
-insert into status_mes ( nome ) values (' Maio ' );
-
-insert into status_mes ( nome ) values (' Junho ' );
-
-insert into status_mes ( nome ) values (' Julho ' );
-
-insert into status_mes ( nome ) values (' Agosto ' );
-
-insert into status_mes ( nome ) values (' Setembro ' );
-
-insert into status_mes ( nome ) values (' Outubro ' );
-
-insert into status_mes ( nome ) values (' Novembro ' );
-
-insert into status_mes ( nome ) values (' Dezembro ' );
 
 
 /**
@@ -137,13 +113,31 @@ updated DATETIME NULL,
 IdStatus_mes INT NOT NULL,
 idStatus_despensa INT NOT NULL,
 idUsuario INT NOT NULL,
+idTipo_despensa INT NOT NULL,
 
 
 FOREIGN KEY (IdStatus_mes) REFERENCES status_mes(id),
-FOREIGN KEY (idStatus_despensa) REFERENCES status_despensas(id),
-FOREIGN KEY (idUsuario) REFERENCES Usuario(id)
+FOREIGN KEY (idStatus_despensa) REFERENCES status_despensas(id) ,
+FOREIGN KEY (idUsuario) REFERENCES Usuario(id),
+FOREIGN KEY (idTipo_despensa) references tipo_despensas(id)
 
 );
+
+/*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+* │ ALTER TABLE																									  |
+* └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/
+
+ALTER TABLE despensas
+ADD COLUMN idTipoDespensa INT NOT NULL,
+ADD CONSTRAINT idTipoDespensa_fk FOREIGN KEY (idTipoDespensa) REFERENCES tipo_despensa(id);
+
+/*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+* │ UPDATE																										  |
+* └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/
+
+UPDATE despensas SET idTipoDespensa = 1 WHERE id > 0;
 
 
 /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -175,10 +169,42 @@ status			VARCHAR(300) 	NOT NULL DEFAULT 'ATIVO',
 created			DATETIME	 	NOT NULL default NOW(),
 updated			DATETIME 			NULL,
 
-idUsuario INT,
-idStatus_despensa INT,
+idUsuario INT NOT NULL,
+idStatus_despensa INT NOT NULL,
 
 Foreign key (idUsuario) references Usuario(id) ,
 FOREIGN KEY (idStatus_despensa) references Status_despensas(id)
 
 );
+
+/**
+* ╔═══════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
+* ║ 6-                                         Tipo_despensas 	                          	                      ║
+* ╚═══════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
+*
+* ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+* │ @description: Category of a "despensa"			                                                              │
+* └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/
+
+Create table tipo_despensas (
+id 			INT  NOT NULL PRIMARY KEY AUTO_INCREMENT,
+nome		VARCHAR(300) 	NOT NULL,
+descricao 	VARCHAR(300) 		NULL,
+created	DATETIME NOT NULL DEFAULT NOW()
+);
+
+/*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+* │ INSERT INTO										                                                              │
+* └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/
+
+INSERT INTO tipo_despensas (nome, descricao) VALUES ('Mercado', 'Uma das categorias de classificação das despensas');
+INSERT INTO tipo_despensas (nome, descricao) VALUES ('Transporte', 'Uma das categorias de classificação das despensas');
+INSERT INTO tipo_despensas (nome, descricao) VALUES ('TV / Internet / telefone', 'Uma das categorias de classificação das despensas');
+INSERT INTO tipo_despensas (nome, descricao) VALUES ('Lazer', 'Uma das categorias de classificação das despensas');
+INSERT INTO tipo_despensas (nome, descricao) VALUES ('Comida fora ou Ifood', 'Uma das categorias de classificação das despensas');
+INSERT INTO tipo_despensas (nome, descricao) VALUES ('Saúde e Beleza', 'Uma das categorias de classificação das despensas');
+INSERT INTO tipo_despensas (nome, descricao) VALUES ('Moradia', 'Uma das categorias de classificação das despensas');
+INSERT INTO tipo_despensas (nome, descricao) VALUES ('Roupas', 'Uma das categorias de classificação das despensas');
+
