@@ -66,6 +66,27 @@ $Despensas_repositorio = new Despensas_repositorio();
 
 
 /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+* │                                Tipo_despensa's section                                                        │
+* └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/
+
+require_once "../Model/Tipo_despensa.php";
+use model\tipo_despensa;
+
+require_once "../Model/Tipo_despensa_repositorio.php";
+use model\Tipo_despensa_repositorio;
+
+$tipo_despensa = new tipo_despensa();
+
+$tipo_despensa_repositorio = new Tipo_despensa_repositorio();
+
+
+$listar = $tipo_despensa_repositorio->listar($tipo_despensa, $pdo);
+
+var_dump($listar);
+
+
+/*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 * │1-                               Cadastro de registros                                                         |
 * | Description: Quando a variável está no status de 'SALVANDO REGISTRO ENTRADA', ele só vai salvar se ele não    |
 * | encontrar o mesmo registro já salvo .   Data: 16/02/23                                                        │

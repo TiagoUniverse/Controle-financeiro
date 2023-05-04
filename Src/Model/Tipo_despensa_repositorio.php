@@ -14,12 +14,33 @@
 
 namespace model;
 
+use PDOException;
+
 class Tipo_despensa_repositorio{
 
-    public function listar(){
+    public function listar($tipo_despensa, $pdo){
         try{
 
-        } catch
+            $stmt = $pdo->prepare ("Select * from tipo_despensas");
+
+            $stmt->execute();
+
+            $listagem = array();
+            while ($linha = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $tipo_despensa->setId($linha['id']);
+                $tipo_despensa->setNome($linha['nome']);
+                $tipo_despensa->setDescricao($linha['descricao']);
+                $tipo_despensa->setCreated($linha['created']);
+
+                $listagem[] = $tipo_despensa;
+            }
+
+            return $listagem;
+
+        } catch (PDOException $e){
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
 
