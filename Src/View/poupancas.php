@@ -262,9 +262,9 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO VALOR ES
 
   // Mensagem do resultado
   if ($mensagemVermelha) {
-    echo "<div class='alert alert-danger' role='alert'> ";
+    echo "<div class='mensagem-alertDanger'> ";
   } else {
-    echo "<div class='alert alert-success' role='alert'> ";
+    echo "<div class='mensagem-alertSucess'> ";
   }
   echo $mensagem;
   echo "</div>";
