@@ -337,8 +337,8 @@ $dinheiroTotal = $valorLiquidoCasa + $valorLiquidoPessoal;
 
 <head>
   <meta charset="UTF-8">
-  <link rel="shortcut icon" type="x-icon" href="../../Assets/img/calendario.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" type="x-icon" href="../../Assets/img/calendario.png">
   <link href="../../Assets//Css//styles.css" rel="stylesheet">
   <link href="../../Assets//Css//dropdown.css" rel="stylesheet">
   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
