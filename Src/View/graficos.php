@@ -32,10 +32,30 @@ if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1) {
 
 
 /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-* │                                Validações                                                                     │
+* │                                Despensa's section                                                             │
 * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-*/
+*/ 
+require_once "../Model/Despensas.php";
+use model\Despensas;
 
+require_once "../Model/Despensas_repositorio.php";
+use model\Despensas_repositorio;
+
+$despensa = new Despensas();
+$despensa_repositorio = new Despensas_repositorio();
+
+if ($_SESSION['tipo_registro'] == "Registros pessoais"){
+    $idStatusDespensa = 4;
+} else {
+    $idStatusDespensa = 2;
+}
+
+
+// GASTO ANUAL 
+
+$gasto_anual = $despensa_repositorio->listarGastos_ByAno($_SESSION['ano'] , $idStatusDespensa , $_SESSION['user_id'] , $pdo);
+
+var_dump($gasto_anual);
 
 ?>
 
