@@ -145,9 +145,10 @@ input {
 
 /* CHARTS / GRÁFICOS */
 
-.graficos .mychartBar, .chartPie {
+.graficos .mychartBar, .chartPie, .stackedChart{
     max-width: 900px;
     margin: 0 auto;
+    text-align: center;
 }
 
 .gasto-anual{

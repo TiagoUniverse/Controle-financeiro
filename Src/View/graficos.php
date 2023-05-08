@@ -116,14 +116,23 @@ for ($tipo_despensa = 1; $tipo_despensa <= 8; $tipo_despensa++) {
     <session class="graficos">
         <!-- Gráfico dos gastos de todos os meses -->
         <div class="mychartBar">
+            <h2>Gastos mensais do ano:</h2>
             <canvas id="ChartBar"></canvas>
         </div>
 
         <br>
         <div class="chartPie">
+            <h2>Gasto anual baseado no tipo de despensa:</h2>
             <canvas id="chartPie"></canvas>
         </div>
+
+        <div class="stackedChart">
+            <h2>Gasto mensal de cada tipo de despensa</h2>
+            <canvas id="stackedChart"></canvas>
+        </div>
     </session>
+
+    <br><br>
 
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -178,6 +187,67 @@ for ($tipo_despensa = 1; $tipo_despensa <= 8; $tipo_despensa++) {
         });
     </script>
 
+<script>
+        const ctx3 = document.getElementById('stackedChart');
+        var dados_array = <?php echo json_encode($gasto_mensal) ?>;
+        console.log(dados_array);
+
+        new Chart(ctx3, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                datasets: [
+                    {
+                    label: 'Gastos mensais do ano',
+                    data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Gastos mensais do ano',
+                    data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Gastos mensais do ano',
+                    data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Gastos mensais do ano',
+                    data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Gastos mensais do ano',
+                    data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Gastos mensais do ano',
+                    data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Gastos mensais do ano',
+                    data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Gastos mensais do ano',
+                    data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
+                    borderWidth: 1
+                }
+            ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 
 </body>
 
