@@ -137,6 +137,7 @@ class Despensas_repositorio
             $Despensas->setAno($linha['ano']);
             $Despensas->setQuinzena($linha['quinzena']);
             $Despensas->setStatus($linha['status']);
+            $Despensas->setIdTipoDespensa($linha['idTipoDespensa']);
         }
 
         return $Despensas;
@@ -162,12 +163,13 @@ class Despensas_repositorio
     }
 
 
-    public function alterar($descricao, $valor, $dataDespensa, $id , $pdo)
+    public function alterar($descricao, $valor, $dataDespensa, $id , $idTipoDespensa, $pdo)
     {
         require_once "../view/conexao.php";
         try {
 
-        $stmt =  $pdo->prepare('Update despensas  SET descricao = (:descricao), valor = (:valor) , dataDespensa = (:dataDespensa) , updated = current_time()
+        $stmt =  $pdo->prepare('Update despensas  SET descricao = (:descricao), valor = (:valor) , dataDespensa = (:dataDespensa) , idTipoDespensa = (:idTipoDespensa), 
+        updated = current_time()
 
         Where id = (:id)');
         
@@ -176,6 +178,7 @@ class Despensas_repositorio
             ':valor' => $valor, 
             ':dataDespensa' => $dataDespensa, 
             ':id' => $id, 
+            'idTipoDespensa' => $idTipoDespensa
         ));
 
         // echo "funcionou!!";

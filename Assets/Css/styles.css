@@ -130,6 +130,11 @@ header a:visited {
     
 }
 
+.main-alterar form select{
+    width: 182px;
+    padding: 5px;
+}
+
 .resultado{
     color:#0ceb98;
 }

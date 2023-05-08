@@ -21,6 +21,8 @@
     
     private string $status;
 
+    private int $idTipoDespensa;
+
 
     public function __construct()
     {
@@ -52,6 +54,10 @@
     }
 
 
+    public function getIdTipoDespensa(){
+        return $this->idTipoDespensa;
+    }
+
 
     public function setDescricao(string $descricao){
         $this->descricao = $descricao;
@@ -76,4 +82,9 @@
     public function setStatus(string $status){
         $this->status = $status;
     }
+
+    public function setIdTipoDespensa(int $idTipoDespensa){
+        $this->idTipoDespensa = $idTipoDespensa;
+    }
+
  }

@@ -41,6 +41,20 @@ use model\Despensas;
 $Despensas_repositorio = new Despensas_repositorio();
 $Despensas = new Despensas();
 
+
+/*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+* │                               TipoDespensa's section                                                          │
+* └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/
+require_once "../Model/Tipo_despensa.php";
+require_once "../Model/Tipo_despensa_repositorio.php";
+
+use model\tipo_despensa;
+use model\Tipo_despensa_repositorio;
+
+$tipo_despensa = new tipo_despensa();
+$tipo_despensa_repositorio = new Tipo_despensa_repositorio();
+
 /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 * │                               Variables                                                                       │
 * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
@@ -50,10 +64,27 @@ $id = $_POST['id'];
 
 $pagina_inicial = $_POST['pagina_inicial'];
 
+
 if ($pagina_inicial == "POUPANCA") {
   $Despensas = $Poupancas_repositorio->consultaById($id, $pdo);
 } else {
   $Despensas = $Despensas_repositorio->consultaById($id, $pdo);
+
+  /**
+   * Exibição dos options de Tipo_Despensa
+   * Data: 08/05/23
+   */
+
+  $listar = $tipo_despensa_repositorio->listar($tipo_despensa, $pdo);
+  $listagem_tipoDespensa = "";
+
+  foreach ($listar as $tipo_despensa) {
+    if ($tipo_despensa->getId() == $Despensas->getIdTipoDespensa()) {
+      $listagem_tipoDespensa .= "<option selected value='{$tipo_despensa->getId()}'>{$tipo_despensa->getNome()}</option>";
+    } else {
+      $listagem_tipoDespensa .= "<option value='{$tipo_despensa->getId()}'>{$tipo_despensa->getNome()}</option>";
+    }
+  }
 }
 
 
@@ -115,6 +146,7 @@ if (isset($_POST['foiAlterado']) && $_POST['foiAlterado'] == "ALTERADO") {
 
       $Poupancas_repositorio->alterar($descricao, $valor, $dataDespensa, $id, $pdo);
     }
+
   } else {
     $mensagemVermelha = true;
     if (!isset($_POST['dataDespensa'])) {
@@ -140,7 +172,7 @@ if (isset($_POST['foiAlterado']) && $_POST['foiAlterado'] == "ALTERADO") {
       $mensagem = "Registro alterado!";
 
 
-      $Despensas_repositorio->alterar($descricao, $valor, $dataDespensa, $id, $pdo);
+      $Despensas_repositorio->alterar($descricao, $valor, $dataDespensa, $id, $_POST['tipo_despensa_selecionado'] , $pdo);
     }
   }
 }
@@ -178,11 +210,16 @@ if (isset($_POST['foiAlterado']) && $_POST['foiAlterado'] == "ALTERADO") {
     <img src="../../Assets/img/dia 15.png" alt="Calendário com a data 15" width="72" height="70">
     <h2><?php echo strtolower($pagina_inicial) . ": gastos pessoais"; ?></h2>
     <h3>Verifique o registro abaixo e o modifique</h3>
-    
+
     <?php
     if (!isset($_POST['foiAlterado'])) {
 
       if ($pagina_inicial == "POUPANCA") {
+
+        /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+        * │                               View da Poupança                                                                │
+        * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+        */
     ?>
         <form action="alterar.php" method="post">
           <input type="hidden" name="foiAlterado" value="ALTERADO">
@@ -205,6 +242,10 @@ if (isset($_POST['foiAlterado']) && $_POST['foiAlterado'] == "ALTERADO") {
         </form>
       <?php
       } else {
+        /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+        * │                               View da Despensa                                                                │
+        * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+        */
       ?>
         <form action="alterar.php" method="post">
           <input type="hidden" name="foiAlterado" value="ALTERADO">
@@ -223,6 +264,14 @@ if (isset($_POST['foiAlterado']) && $_POST['foiAlterado'] == "ALTERADO") {
             <label for="exampleInputPassword1" class="form-label">Data:</label>
             <input type="text" value="<?php echo $Despensas->getData();  ?> " name="dataDespensa" class="form-control" id="exampleInputPassword1">
           </div>
+
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Tipo de despensa:</label>
+            <select name="tipo_despensa_selecionado" required>
+              <?= $listagem_tipoDespensa; ?>
+            </select>
+          </div>
+
           <button type="submit" class="btn btn-danger">Alterar</button>
         </form>
       <?php
