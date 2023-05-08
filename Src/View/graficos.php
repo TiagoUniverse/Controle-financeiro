@@ -30,7 +30,7 @@ if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1) {
     $_SESSION['ano'] = $_POST['ano'];
 }
 
-if ($_SESSION['tipo_registro'] == "Registros pessoais"){
+if ($_SESSION['tipo_registro'] == "Registros pessoais") {
     $idStatusDespensa = 4;
 } else {
     $idStatusDespensa = 2;
@@ -39,11 +39,13 @@ if ($_SESSION['tipo_registro'] == "Registros pessoais"){
 /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 * │                                Despensa's section                                                             │
 * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-*/ 
+*/
 require_once "../Model/Despensas.php";
+
 use model\Despensas;
 
 require_once "../Model/Despensas_repositorio.php";
+
 use model\Despensas_repositorio;
 
 $despensa = new Despensas();
@@ -53,15 +55,15 @@ $despensa_repositorio = new Despensas_repositorio();
 
 // GASTO ANUAL 
 
-$gasto_anual = $despensa_repositorio->listarGastos_Anuais($_SESSION['ano'] , $idStatusDespensa , $_SESSION['user_id'] , $pdo);
+$gasto_anual = $despensa_repositorio->listarGastos_Anuais($_SESSION['ano'], $idStatusDespensa, $_SESSION['user_id'], $pdo);
 
 // var_dump($gasto_anual);
 
 
 // GASTO POR MES
 $gasto_mensal = array();
-for($mes = 0; $mes < 12 ; $mes++){
-    $gasto_mensal[$mes] = $despensa_repositorio->listarGastosMensais_ByAno($_SESSION['ano'] , $idStatusDespensa, $_SESSION['user_id'] , $mes , $pdo);
+for ($mes = 0; $mes < 12; $mes++) {
+    $gasto_mensal[$mes] = $despensa_repositorio->listarGastosMensais_ByAno($_SESSION['ano'], $idStatusDespensa, $_SESSION['user_id'], $mes, $pdo);
 }
 
 // var_dump($gasto_mensal);
@@ -69,11 +71,11 @@ for($mes = 0; $mes < 12 ; $mes++){
 
 // GASTO POR TIPO DE DESPENSA
 $gastoAnual_tipoDespensa = array();
-for($tipo_despensa = 1; $tipo_despensa <= 8 ; $tipo_despensa++){
-    $gastoAnual_tipoDespensa[$tipo_despensa - 1] = $despensa_repositorio->listarGastos_ByTipoDespensa($_SESSION['ano'] , $idStatusDespensa, $_SESSION['user_id'] , $tipo_despensa, $pdo);
+for ($tipo_despensa = 1; $tipo_despensa <= 8; $tipo_despensa++) {
+    $gastoAnual_tipoDespensa[$tipo_despensa - 1] = $despensa_repositorio->listarGastos_ByTipoDespensa($_SESSION['ano'], $idStatusDespensa, $_SESSION['user_id'], $tipo_despensa, $pdo);
 }
 
-var_dump($gastoAnual_tipoDespensa);
+// var_dump($gastoAnual_tipoDespensa);
 
 ?>
 
@@ -137,8 +139,7 @@ var_dump($gastoAnual_tipoDespensa);
                 labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
                 datasets: [{
                     label: 'Gastos mensais do ano',
-                    data: [dados_array[0] , dados_array[1] , dados_array[2] , dados_array[3] , dados_array[4] , dados_array[5] , dados_array[6] , dados_array[7] , dados_array[8]
-                , dados_array[9] , dados_array[10] , dados_array[11]],
+                    data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
                     borderWidth: 1
                 }]
             },
@@ -160,10 +161,10 @@ var_dump($gastoAnual_tipoDespensa);
         new Chart(ctx2, {
             type: 'pie',
             data: {
-                labels: ['Mercado', 'Transporte', 'TV/ Internet/ telefone', 'Lazer', 'Comida fora ou Ifood', 'Saúde e Beleza', 'Moradia' , 'Roupas'],
+                labels: ['Mercado', 'Transporte', 'TV/ Internet/ telefone', 'Lazer', 'Comida fora ou Ifood', 'Saúde e Beleza', 'Moradia', 'Roupas'],
                 datasets: [{
                     label: 'Gasto anual baseado no tipo de despensa',
-                    data: [dados2_array[0], dados2_array[1], dados2_array[2] , dados2_array[3] , dados2_array[4] , dados2_array[5] , dados2_array[6] , dados2_array[7]],
+                    data: [dados2_array[0], dados2_array[1], dados2_array[2], dados2_array[3], dados2_array[4], dados2_array[5], dados2_array[6], dados2_array[7]],
                     borderWidth: 1
                 }]
             },
