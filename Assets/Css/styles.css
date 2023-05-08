@@ -31,7 +31,7 @@ header a:visited {
 
 
 
-#tipo_despensa{
+#tipo_despensa {
     /* color: white; */
 }
 
@@ -101,55 +101,68 @@ header a:visited {
 
 /* POUPANÇAS */
 
-#dinheiro-total-Resultado{
+#dinheiro-total-Resultado {
     color: #e61e19;
 }
 
 
 /* MAIN-ALTERAR */
-.main-alterar{
+.main-alterar {
     text-align: center;
     /* margin-top: 116px; */
-    background-color:#bd9c9c;
+    background-color: #bd9c9c;
     width: 800px;
     margin: 116px auto;
     border-radius: 0.5rem;
     box-shadow: 0px 0px 5px black;
 }
 
-.main-alterar form{
+.main-alterar form {
 
     width: 500px;
     margin: 0 auto;
 }
 
-.main-alterar form label,input{
+.main-alterar form label,
+input {
     /* background-color: purple; */
     display: block;
     margin-bottom: 5px;
-    
+
 }
 
-.main-alterar form select{
+.main-alterar form select {
     width: 182px;
     padding: 5px;
 }
 
-.resultado{
-    color:#0ceb98;
+.resultado {
+    color: #0ceb98;
 }
 
-.main-alterar form button{
+
+
+
+/* CHARTS / GRÁFICOS */
+
+.graficos .mychartBar, .chartPie {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.mychartBar {}
+
+.main-alterar form button {
     margin-top: 1rem;
     border-radius: 0.5rem;
-    width: 110px; 
+    width: 110px;
     box-shadow: 0 0 1px black;
     font-size: 16px;
     padding: 0.4rem;
     background-color: rgb(223, 69, 69);
 }
 
-.main-alterar form input{
+.main-alterar form input {
     width: -webkit-fill-available;
 }
 
@@ -170,15 +183,15 @@ header a:visited {
 }
 
 /* Da poupança */
-.table-dinheiroTotal input{
+.table-dinheiroTotal input {
     padding: 0.2rem;
     margin-top: 53px;
 }
 
-.table-dinheiroTotal button{
+.table-dinheiroTotal button {
     background-color: #1fe098;
     border: 1px solid #1fe098;
-    border-radius:0.5rem;
+    border-radius: 0.5rem;
     width: 68px;
     padding: 5px;
     margin-top: 1em;
@@ -194,7 +207,8 @@ header a:visited {
     color: black;
 }
 
-.table-dinheiroTotal tbody th, input {
+.table-dinheiroTotal tbody th,
+input {
     padding-top: 10px;
 }
 
@@ -210,8 +224,8 @@ header a:visited {
 }
 
 
-.table-saida th{
-    color:white;
+.table-saida th {
+    color: white;
 }
 
 .table-saida tbody th {
@@ -230,47 +244,48 @@ header a:visited {
     border-radius: 0.25rem;
 }
 
-.table-saida tbody form button{
+.table-saida tbody form button {
     box-shadow: 0 0 5px black;
     margin-top: 10px;
 }
 
-.table-saida tbody input{
+.table-saida tbody input {
     padding: 0.3rem;
 }
 
 /* BOTOES REGISTRO */
 
-.botoes-registro{
+.botoes-registro {
     display: -webkit-inline-box;
     margin: 12px 0;
     padding-right: 5px;
 }
 
-.botoes-registro button{
+.botoes-registro button {
     margin-right: 3rem;
     border-radius: 0.5rem;
-    width: 110px; 
+    width: 110px;
     box-shadow: 0 0 3px black;
     font-size: 16px;
     padding: 0.4rem;
 }
 
-.botao-registrar{
- background-color: #1fe098;
- border: 1px solid #1fe098;
+.botao-registrar {
+    background-color: #1fe098;
+    border: 1px solid #1fe098;
 }
 
-.botao-cancelar{
+.botao-cancelar {
     background-color: #b7b6b4;
-    border: 1px solid #b7b6b4; 
+    border: 1px solid #b7b6b4;
 }
 
-.botao-registrar, .botao-cancelar{
+.botao-registrar,
+.botao-cancelar {
     margin-bottom: 30px;
 }
 
-.botao-novoRegistro{
+.botao-novoRegistro {
     background-color: #739ac0;
     border: 1px solid #739ac0;
     border-radius: 0.5rem;
@@ -280,15 +295,15 @@ header a:visited {
     font-size: 16px;
 }
 
-.botao-novoRegistro:last-of-type{
+.botao-novoRegistro:last-of-type {
     margin-bottom: 50px;
 }
 
 
 /* ALERTS */
 
-.mensagem-alertDanger{
-    background-color:#dc3545;
+.mensagem-alertDanger {
+    background-color: #dc3545;
     /* color:#5b1017 ; */
     color: white;
     border-color: #510e15;
@@ -296,8 +311,8 @@ header a:visited {
     /* border-radius: 0.5rem; */
 }
 
-.mensagem-alertSucess{
-    background-color:#18ac75;
+.mensagem-alertSucess {
+    background-color: #18ac75;
     padding: 16px;
     color: white;
 }
