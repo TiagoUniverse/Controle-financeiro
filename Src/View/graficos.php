@@ -55,7 +55,7 @@ if ($_SESSION['tipo_registro'] == "Registros pessoais"){
 
 $gasto_anual = $despensa_repositorio->listarGastos_Anuais($_SESSION['ano'] , $idStatusDespensa , $_SESSION['user_id'] , $pdo);
 
-var_dump($gasto_anual);
+// var_dump($gasto_anual);
 
 
 // GASTO POR MES
@@ -64,7 +64,7 @@ for($mes = 0; $mes < 12 ; $mes++){
     $gasto_mensal[$mes] = $despensa_repositorio->listarGastosMensais_ByAno($_SESSION['ano'] , $idStatusDespensa, $_SESSION['user_id'] , $mes , $pdo);
 }
 
-var_dump($gasto_mensal);
+// var_dump($gasto_mensal);
 
 
 ?>
@@ -101,6 +101,8 @@ var_dump($gasto_mensal);
     </form>
     <h2 class="actual-year"><?php echo $_SESSION['ano']; ?></h2>
 
+    <h3 class="gasto-anual">Gasto total deste ano: <u>R$<?php echo $gasto_anual; ?> </u> </h3>
+
     <session class="graficos">
         <!-- Gráfico dos gastos de todos os meses -->
         <div class="mychartBar">
@@ -118,6 +120,8 @@ var_dump($gasto_mensal);
 
     <script>
         const ctx = document.getElementById('ChartBar');
+        var dados_array = <?php echo json_encode($gasto_mensal) ?>;
+        console.log(dados_array);
 
         new Chart(ctx, {
             type: 'bar',
@@ -125,7 +129,8 @@ var_dump($gasto_mensal);
                 labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
                 datasets: [{
                     label: 'Gastos mensais do ano',
-                    data: [12, 19, 3, 5, 2, 3],
+                    data: [dados_array[0] , dados_array[1] , dados_array[2] , dados_array[3] , dados_array[4] , dados_array[5] , dados_array[6] , dados_array[7] , dados_array[8]
+                , dados_array[9] , dados_array[10] , dados_array[11]],
                     borderWidth: 1
                 }]
             },

@@ -150,6 +150,10 @@ input {
     margin: 0 auto;
 }
 
+.gasto-anual{
+    text-align: center;
+}
+
 .mychartBar {}
 
 .main-alterar form button {
