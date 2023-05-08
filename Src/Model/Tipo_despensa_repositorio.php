@@ -35,14 +35,9 @@ class Tipo_despensa_repositorio{
                 $tipo_despensa->setDescricao($linha['descricao']);
                 $tipo_despensa->setCreated($linha['created']);
 
-                // var_dump($tipo_despensa);
-
                 $listagem[] = $tipo_despensa;
 
             }
-
-            var_dump($listagem);
-
             return $listagem;
 
         } catch (PDOException $e){

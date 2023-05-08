@@ -442,10 +442,8 @@ foreach ($Saida_fetch as $row) {
                 <th> <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'></th>
                 <th>
                   <select name="cars" id="cars">
-                    <option value="escolha uma">Escolha uma</option>
-                    <option value="saab">Saab</option>
-                    <option value="opel">Opel</option>
-                    <option value="audi">Audi</option>
+                    <option selected disabled value="">Escolha uma</option>
+                    <?= $listagem_tipoDespensa; ?>
                   </select>
                 </th>
               </tr>
