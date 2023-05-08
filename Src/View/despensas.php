@@ -142,6 +142,8 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
 
   if (!isset($_POST['data'])) {
     $mensagem = "Informe uma data";
+  }  else if ($_POST['tipo_despensa_selecionado'] == null) {
+    $mensagem = "Selecione um tipo de despensa";
   } else if ($_SESSION['quinzena'] == "Quinzena 1" && $dataDividida[1] != $mes_selecionado) {
     $mensagem = "Selecione uma data do mes de " . $_SESSION['nomeMes'];
   } else if ($_SESSION['quinzena'] == "Quinzena 2" && $dataDividida[1] != $mes_selecionado && $dataDividida[2] > 5) {
@@ -171,7 +173,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
         $statusDespensa = 1;
       }
 
-      $Despensas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], $statusDespensa, $_SESSION['user_id'], $pdo);
+      $Despensas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], $statusDespensa, $_SESSION['user_id'], $_POST['tipo_despensa_selecionado'] , $pdo);
     } else {
       $mensagem = "Registro já cadastrado!";
     }
@@ -191,7 +193,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
 
 
 if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO SAIDA") {
-  var_dump($_POST['tipo_despensa_selecionado']);
+  // var_dump($_POST['tipo_despensa_selecionado']);
 
   /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
   * │                                Validações                                                                     │
@@ -232,6 +234,8 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
 
   if (!isset($_POST['data'])) {
     $mensagem = "Informe uma data";
+  } else if ($_POST['tipo_despensa_selecionado'] == null) {
+    $mensagem = "Selecione um tipo de despensa";
   } else if ($_SESSION['quinzena'] == "Quinzena 1" && $dataDividida[1] != $mes_selecionado) {
     $mensagem = "Selecione uma data do mes de " . $_SESSION['nomeMes'];
   } else if ($_SESSION['quinzena'] == "Quinzena 2" && $dataDividida[1] != $mes_selecionado && $dataDividida[2] > 5) {
@@ -270,7 +274,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
         $statusDespensa = 2;
       }
 
-      $Despensas_repositorio->cadastro_Saida($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], $statusDespensa, $_SESSION['user_id'], $pdo);
+      $Despensas_repositorio->cadastro_Saida($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], $statusDespensa, $_SESSION['user_id'], $_POST['tipo_despensa_selecionado'] , $pdo);
     } else {
       $mensagem = "Registro já cadastrado!";
     }
