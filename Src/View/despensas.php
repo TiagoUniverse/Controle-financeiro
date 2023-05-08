@@ -82,8 +82,15 @@ $tipo_despensa_repositorio = new Tipo_despensa_repositorio();
 
 
 $listar = $tipo_despensa_repositorio->listar($tipo_despensa, $pdo);
+$listagem_tipoDespensa = "";
 
-var_dump($listar);
+// var_dump($listar);
+
+foreach($listar as $tipo_despensa){
+  $listagem_tipoDespensa .= "<option value='{$tipo_despensa->getId()}'>{$tipo_despensa->getNome()}</option>";
+}
+
+// var_dump($listagem_tipoDespensa);
 
 
 /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
