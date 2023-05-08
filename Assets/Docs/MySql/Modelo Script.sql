@@ -149,6 +149,9 @@ UPDATE despensas SET idTipoDespensa = 1 WHERE id > 0;
 Select * from despensas where status = "ATIVO" and ano = "2023"  and IdStatus_mes = "1" and quinzena = "Quinzena 01" and ( idStatus_despensa = 3 OR idstatus_despensa = 4 );
 
 
+Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano, quinzena, IdStatus_mes, idTipoDespensa from despensas where status = 'ATIVO' 
+and IdStatus_mes = '4'  and ano = '2023'  and ( idstatus_despensa = 4 )  and idUsuario = '1'   Order By month(dataDespensa)
+
 
 /**
 * ╔═══════════════════════════════════════════════════════════════════════════════════════════════════════════════╗

@@ -30,6 +30,11 @@ if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1) {
     $_SESSION['ano'] = $_POST['ano'];
 }
 
+if ($_SESSION['tipo_registro'] == "Registros pessoais"){
+    $idStatusDespensa = 4;
+} else {
+    $idStatusDespensa = 2;
+}
 
 /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 * │                                Despensa's section                                                             │
@@ -44,11 +49,6 @@ use model\Despensas_repositorio;
 $despensa = new Despensas();
 $despensa_repositorio = new Despensas_repositorio();
 
-if ($_SESSION['tipo_registro'] == "Registros pessoais"){
-    $idStatusDespensa = 4;
-} else {
-    $idStatusDespensa = 2;
-}
 
 
 // GASTO ANUAL 
@@ -66,6 +66,14 @@ for($mes = 0; $mes < 12 ; $mes++){
 
 // var_dump($gasto_mensal);
 
+
+// GASTO POR TIPO DE DESPENSA
+$gastoAnual_tipoDespensa = array();
+for($tipo_despensa = 1; $tipo_despensa <= 8 ; $tipo_despensa++){
+    $gastoAnual_tipoDespensa[$tipo_despensa - 1] = $despensa_repositorio->listarGastos_ByTipoDespensa($_SESSION['ano'] , $idStatusDespensa, $_SESSION['user_id'] , $tipo_despensa, $pdo);
+}
+
+var_dump($gastoAnual_tipoDespensa);
 
 ?>
 
@@ -147,14 +155,15 @@ for($mes = 0; $mes < 12 ; $mes++){
 
     <script>
         const ctx2 = document.getElementById('chartPie');
+        var dados2_array = <?php echo json_encode($gastoAnual_tipoDespensa) ?>;
 
         new Chart(ctx2, {
             type: 'pie',
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: ['Mercado', 'Transporte', 'TV/ Internet/ telefone', 'Lazer', 'Comida fora ou Ifood', 'Saúde e Beleza', 'Moradia' , 'Roupas'],
                 datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
+                    label: 'Gasto anual baseado no tipo de despensa',
+                    data: [dados2_array[0], dados2_array[1], dados2_array[2] , dados2_array[3] , dados2_array[4] , dados2_array[5] , dados2_array[6] , dados2_array[7]],
                     borderWidth: 1
                 }]
             },

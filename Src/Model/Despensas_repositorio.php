@@ -163,6 +163,37 @@ class Despensas_repositorio
     }
 
 
+    public function listarGastos_ByTipoDespensa($ano, $idStatusDespensa, $idUsuario , $idTipoDespensa, $pdo){
+        try{
+
+            $stmt = $pdo->prepare ("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano, quinzena, IdStatus_mes, idTipoDespensa 
+            from despensas where status = 'ATIVO'  and idTipoDespensa = :idTipoDespensa
+            and ano = :ano  and ( idstatus_despensa = :idStatusDespensa )  and idUsuario = :idUsuario   Order By month(dataDespensa)");
+
+            $stmt->execute(array(
+                'idTipoDespensa' => $idTipoDespensa,
+                ':ano' => $ano,
+                'idStatusDespensa' => $idStatusDespensa,
+                'idUsuario' => $idUsuario
+            ));
+
+            $somatorio = 0;
+
+            while ($linha = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $somatorio += $linha['valor'];
+            }
+            // var_dump($somatorio);
+            return $somatorio;
+
+        } catch (PDOException $e){
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
+
+
+
     public function consultarRegistro($descricao, $valor, $dataDespensa , $idStatus_despensa ,$pdo ){
         
         $consulta = $pdo->query("SELECT * FROM despensas WHERE descricao = '{$descricao}' and valor = '{$valor}' and dataDespensa = '{$dataDespensa}' and idStatus_despensa = '{$idStatus_despensa}'   ;");
