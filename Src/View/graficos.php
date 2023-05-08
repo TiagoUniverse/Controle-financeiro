@@ -53,9 +53,19 @@ if ($_SESSION['tipo_registro'] == "Registros pessoais"){
 
 // GASTO ANUAL 
 
-$gasto_anual = $despensa_repositorio->listarGastos_ByAno($_SESSION['ano'] , $idStatusDespensa , $_SESSION['user_id'] , $pdo);
+$gasto_anual = $despensa_repositorio->listarGastos_Anuais($_SESSION['ano'] , $idStatusDespensa , $_SESSION['user_id'] , $pdo);
 
 var_dump($gasto_anual);
+
+
+// GASTO POR MES
+$gasto_mensal = array();
+for($mes = 0; $mes < 12 ; $mes++){
+    $gasto_mensal[$mes] = $despensa_repositorio->listarGastosMensais_ByAno($_SESSION['ano'] , $idStatusDespensa, $_SESSION['user_id'] , $mes , $pdo);
+}
+
+var_dump($gasto_mensal);
+
 
 ?>
 
