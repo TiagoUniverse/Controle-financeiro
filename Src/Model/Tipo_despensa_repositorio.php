@@ -47,4 +47,32 @@ class Tipo_despensa_repositorio{
     }
 
 
+    public function consultar( $idTipoDespensa, $pdo){
+        try{
+
+            $stmt = $pdo->prepare ("Select * from tipo_despensas Where id = :idTipoDespensa ");
+
+            $stmt->execute(array(
+                ':idTipoDespensa' => $idTipoDespensa
+            ));
+
+            While($linha = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $tipo_despensa = new tipo_despensa();
+
+                $tipo_despensa->setId($linha['id']);
+                $tipo_despensa->setNome($linha['nome']);
+                $tipo_despensa->setDescricao($linha['descricao']);
+                $tipo_despensa->setCreated($linha['created']);
+
+                return $tipo_despensa;
+            }
+
+            return false;
+
+        }catch (PDOException $e){
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
 }

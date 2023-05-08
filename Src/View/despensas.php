@@ -195,6 +195,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
 if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO SAIDA") {
   // var_dump($_POST['tipo_despensa_selecionado']);
 
+
   /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
   * │                                Validações                                                                     │
   * └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
@@ -300,24 +301,27 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
 
 if ($_SESSION['tipo_registro'] == "Registros da casa") {
 
-  $consulta_Entrada = $pdo->query("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano, quinzena from despensas where status = 'ATIVO' 
+  $consulta_Entrada = $pdo->query("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano,  quinzena, idTipoDespensa 
+  from despensas where status = 'ATIVO' 
   and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$_SESSION['statusMes']}' and quinzena = '{$_SESSION['quinzena']}' 
   and ( idStatus_despensa = 1) and idUsuario = '{$_SESSION['user_id']}'  Order By month(dataDespensa)        ");
 
-  $consulta_Saida = $pdo->query("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano, quinzena from despensas where status = 'ATIVO' 
+  $consulta_Saida = $pdo->query("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano,  quinzena, idTipoDespensa from despensas where status = 'ATIVO' 
   and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$_SESSION['statusMes']}' and quinzena = '{$_SESSION['quinzena']}' 
   and ( idstatus_despensa = 2 )  and idUsuario = '{$_SESSION['user_id']}'   Order By month(dataDespensa)        ");
 } else {
 
-  $consulta_Entrada = $pdo->query("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano, quinzena from despensas where status = 'ATIVO' 
+  $consulta_Entrada = $pdo->query("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano,  quinzena, idTipoDespensa from despensas where status = 'ATIVO' 
   and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$_SESSION['statusMes']}' and quinzena = '{$_SESSION['quinzena']}' 
   and ( idStatus_despensa = 3)  and idUsuario = '{$_SESSION['user_id']}'   Order By month(dataDespensa)        ");
 
-  $consulta_Saida = $pdo->query("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano, quinzena from despensas where status = 'ATIVO' 
+  $consulta_Saida = $pdo->query("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano,  quinzena, idTipoDespensa from despensas where status = 'ATIVO' 
   and ano = '{$_SESSION['ano']}'  and IdStatus_mes = '{$_SESSION['statusMes']}' and quinzena = '{$_SESSION['quinzena']}' 
   and ( idstatus_despensa = 4 )  and idUsuario = '{$_SESSION['user_id']}'   Order By month(dataDespensa)        ");
 }
 
+
+// var_dump($consulta_Saida);
 /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 * │                                Registros do gasto e da receita                                                |
 * | Description: After viewing the SQL, we are going to calculate how many money do we have                       │
@@ -328,6 +332,8 @@ $dinheiroSaida = 0;
 
 $Entrada_fetch = $consulta_Entrada->fetchAll(PDO::FETCH_ASSOC);
 $Saida_fetch = $consulta_Saida->fetchAll(PDO::FETCH_ASSOC);
+
+// var_dump($Saida_fetch);
 
 foreach ($Entrada_fetch as $row) {
   $dinheiroEntrada +=  $row['valor'];
@@ -406,6 +412,9 @@ foreach ($Saida_fetch as $row) {
         <tbody>
           <?php
           $contador = 1;
+
+          // var_dump($Saida_fetch);
+
           foreach ($Saida_fetch as $linha) {
           ?>
             <tr>
@@ -413,6 +422,12 @@ foreach ($Saida_fetch as $row) {
               <td> <?php echo $linha['descricao']; ?> </td>
               <td> <?php echo "R$" . $linha['valor']; ?> </td>
               <td> <?php echo $linha['dataDespensa']; ?> </td>
+              <td id="tipo_despensa"> 
+                <?php
+                $retorno_tipoDespensa = $tipo_despensa_repositorio->consultar($linha['idTipoDespensa'] , $pdo);  
+                echo "{$retorno_tipoDespensa->getNome()}";         
+                 ?> 
+              </td>
               <td>
                 <form action="alterar.php" method="post">
                   <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
@@ -526,6 +541,12 @@ foreach ($Saida_fetch as $row) {
               <td> <?php echo $linha['descricao']; ?> </td>
               <td> <?php echo "R$" . $linha['valor']; ?> </td>
               <td> <?php echo $linha['dataDespensa']; ?> </td>
+              <td id="tipo_despensa"> 
+                <?php
+                $retorno_tipoDespensa = $tipo_despensa_repositorio->consultar($linha['idTipoDespensa'] , $pdo);  
+                echo "{$retorno_tipoDespensa->getNome()}";         
+                 ?> 
+              </td>
               <td>
                 <form action="alterar.php" method="post">
                   <input type="hidden" value=" <?php echo $linha['id']; ?>" name="id">
