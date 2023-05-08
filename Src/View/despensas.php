@@ -71,9 +71,11 @@ $Despensas_repositorio = new Despensas_repositorio();
 */
 
 require_once "../Model/Tipo_despensa.php";
+
 use model\tipo_despensa;
 
 require_once "../Model/Tipo_despensa_repositorio.php";
+
 use model\Tipo_despensa_repositorio;
 
 $tipo_despensa = new tipo_despensa();
@@ -86,7 +88,7 @@ $listagem_tipoDespensa = "";
 
 // var_dump($listar);
 
-foreach($listar as $tipo_despensa){
+foreach ($listar as $tipo_despensa) {
   $listagem_tipoDespensa .= "<option value='{$tipo_despensa->getId()}'>{$tipo_despensa->getNome()}</option>";
 }
 
@@ -189,6 +191,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
 
 
 if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO SAIDA") {
+  var_dump($_POST['tipo_despensa_selecionado']);
 
   /*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
   * │                                Validações                                                                     │
@@ -441,8 +444,8 @@ foreach ($Saida_fetch as $row) {
                 <th><input type="number" min="1" step="any" name="valor" placeholder="2.00"></th>
                 <th> <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'></th>
                 <th>
-                  <select name="cars" id="cars">
-                    <option selected disabled value="">Escolha uma</option>
+                  <select name="tipo_despensa_selecionado"  required>
+                    <option selected disabled value="" >Escolha uma</option>
                     <?= $listagem_tipoDespensa; ?>
                   </select>
                 </th>
@@ -554,7 +557,10 @@ foreach ($Saida_fetch as $row) {
                 <th><input type="number" min="1" step="any" name="valor" placeholder="2.00"></th>
                 <th> <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'></th>
                 <th>
-                  <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'>
+                  <select name="tipo_despensa_selecionado"   required>
+                    <option selected disabled value="" >Escolha uma</option>
+                    <?= $listagem_tipoDespensa; ?>
+                  </select>
                 </th>
               </tr>
             <?php
