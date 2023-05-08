@@ -134,6 +134,10 @@ if (isset($_POST['limpaFiltro']) && $_POST['limpaFiltro'] == 1) {
       <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
       <button type="submit"><img src='../../Assets//img//savings.png' alt="savings"></button>
     </form>
+    <form action="graficos.php" method="post">
+      <input type="hidden" value="<?php echo $_SESSION['ano']; ?>" name="ano">
+      <button type="submit"><img src='../../Assets//img//pie-chart.png' alt="Tela de exibição de gráficos"></button>
+    </form>
   </div>
 </body>
 
