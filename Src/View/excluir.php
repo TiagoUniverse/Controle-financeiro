@@ -42,18 +42,38 @@ use model\Despensas;
 $Despensas_repositorio = new Despensas_repositorio();
 $Despensas = new Despensas();
 
+/*┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+* │                                TipoDespensa's section                                                         │
+* └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+*/
+
+require_once "../Model/Tipo_despensa.php";
+use model\tipo_despensa;
+
+require_once "../Model/Tipo_despensa_repositorio.php";
+use model\Tipo_despensa_repositorio;
+
+$tipo_despensa = new tipo_despensa();
+$tipo_despensa_repositorio = new Tipo_despensa_repositorio();
+
+
+
 // Variables
 $id = $_POST['id'];
 $pagina_inicial = $_POST['pagina_inicial'];
+$possui_TipoDespensa = false;
 
 if ($pagina_inicial == "POUPANCA") {
   $Despensas = $Poupancas_repositorio->consultaById($id, $pdo);
+  $possui_TipoDespensa = false;
 } else {
   $Despensas = $Despensas_repositorio->consultaById($id, $pdo);
+  $possui_TipoDespensa = true;
 }
 
 if (isset($_POST['foiExcluido']) && $_POST['foiExcluido'] == "EXCLUIDO") {
 
+  
   if ($pagina_inicial == "POUPANCA") {
     $Poupancas_repositorio->excluir_registro($id, $pdo);
   } else {
@@ -122,6 +142,21 @@ if (isset($_POST['foiExcluido']) && $_POST['foiExcluido'] == "EXCLUIDO") {
               <label for="exampleInputPassword1" class="form-label">Data:</label>
               <input type="text" value="<?php echo $Despensas->getData();  ?> " class="form-control" id="exampleInputPassword1" disabled>
             </div>
+
+            <?php
+            if($possui_TipoDespensa){
+             $nomeDespensa = $tipo_despensa_repositorio->consultar($Despensas->getIdTipoDespensa() , $pdo);
+              ?>
+              <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Tipo de despensa:</label>
+              <input type="text" value="<?php echo $nomeDespensa->getNome();  ?> " class="form-control" id="exampleInputPassword1" disabled>
+            </div>
+              <?php
+            }
+
+
+            ?>
+
             <button type="submit" class="btn btn-danger">Excluir</button>
           </form>
 
