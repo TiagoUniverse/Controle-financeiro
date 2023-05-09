@@ -66,7 +66,7 @@ for ($mes = 1; $mes <= 12; $mes++) {
     $gasto_mensal[$mes] = $despensa_repositorio->listarGastosMensais_ByAno($_SESSION['ano'], $idStatusDespensa, $_SESSION['user_id'], $mes, $pdo);
 }
 
-var_dump($gasto_mensal);
+// var_dump($gasto_mensal);
 
 
 // GASTO POR TIPO DE DESPENSA
@@ -344,7 +344,7 @@ for ($tipo_despensa = 1; $tipo_despensa <= 8; $tipo_despensa++) {
             }
         });
     </script>
-    
+
     <!-- 3.Gasto anual por tipo -->
     <script>
         const ctx2 = document.getElementById('chartPie');
