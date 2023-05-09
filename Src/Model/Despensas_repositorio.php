@@ -163,7 +163,7 @@ class Despensas_repositorio
     }
 
 
-    public function listarGastos_ByTipoDespensa($ano, $idStatusDespensa, $idUsuario , $idTipoDespensa, $pdo){
+    public function listarGastosAnuais_ByTipoDespensa($ano, $idStatusDespensa, $idUsuario , $idTipoDespensa, $pdo){
         try{
 
             $stmt = $pdo->prepare ("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano, quinzena, IdStatus_mes, idTipoDespensa 
@@ -171,10 +171,40 @@ class Despensas_repositorio
             and ano = :ano  and ( idstatus_despensa = :idStatusDespensa )  and idUsuario = :idUsuario   Order By month(dataDespensa)");
 
             $stmt->execute(array(
-                'idTipoDespensa' => $idTipoDespensa,
+                ':idTipoDespensa' => $idTipoDespensa,
                 ':ano' => $ano,
                 'idStatusDespensa' => $idStatusDespensa,
-                'idUsuario' => $idUsuario
+                ':idUsuario' => $idUsuario
+            ));
+
+            $somatorio = 0;
+
+            while ($linha = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $somatorio += $linha['valor'];
+            }
+            // var_dump($somatorio);
+            return $somatorio;
+
+        } catch (PDOException $e){
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
+
+    public function listarGastosMensais_ByTipoDespensa($ano, $idStatusDespensa, $idUsuario , $idTipoDespensa, $idStatusMes , $pdo){
+        try{
+
+            $stmt = $pdo->prepare ("Select id, descricao, valor, DATE_FORMAT(dataDespensa, '%d/%m/%Y') as dataDespensa, ano, quinzena, IdStatus_mes, idTipoDespensa 
+            from despensas where status = 'ATIVO'  and idTipoDespensa = :idTipoDespensa and idStatus_mes = :idStatusMes
+            and ano = :ano  and ( idstatus_despensa = :idStatusDespensa )  and idUsuario = :idUsuario   Order By month(dataDespensa)");
+
+            $stmt->execute(array(
+                ':idTipoDespensa' => $idTipoDespensa,
+                ':idStatusMes' => $idStatusMes,
+                ':ano' => $ano,
+                'idStatusDespensa' => $idStatusDespensa,
+                ':idUsuario' => $idUsuario
             ));
 
             $somatorio = 0;

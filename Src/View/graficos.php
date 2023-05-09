@@ -72,10 +72,114 @@ for ($mes = 0; $mes < 12; $mes++) {
 // GASTO POR TIPO DE DESPENSA
 $gastoAnual_tipoDespensa = array();
 for ($tipo_despensa = 1; $tipo_despensa <= 8; $tipo_despensa++) {
-    $gastoAnual_tipoDespensa[$tipo_despensa - 1] = $despensa_repositorio->listarGastos_ByTipoDespensa($_SESSION['ano'], $idStatusDespensa, $_SESSION['user_id'], $tipo_despensa, $pdo);
+    $gastoAnual_tipoDespensa[$tipo_despensa - 1] = $despensa_repositorio->listarGastosAnuais_ByTipoDespensa($_SESSION['ano'], $idStatusDespensa, $_SESSION['user_id'], $tipo_despensa, $pdo);
 }
 
 // var_dump($gastoAnual_tipoDespensa);
+
+
+// Gasto mensal por tipo de despensa
+$gastoMensal_Mercado = array();
+$gastoMensal_Transporte = array();
+$gastoMensal_Tv = array();
+$gastoMensal_Lazer = array();
+$gastoMensal_Comida = array();
+$gastoMensal_Saude = array();
+$gastoMensal_Moradia = array();
+$gastoMensal_Roupas = array();
+
+for ($tipo_despensa = 1; $tipo_despensa <= 8; $tipo_despensa++) {
+
+    for ($idStatusMes = 1; $idStatusMes <= 12; $idStatusMes++) {
+        switch ($tipo_despensa) {
+            case 1:
+                $gastoMensal_Mercado[] = $despensa_repositorio->listarGastosMensais_ByTipoDespensa(
+                    $_SESSION['ano'],
+                    $idStatusDespensa,
+                    $_SESSION['user_id'],
+                    $tipo_despensa,
+                    $idStatusMes,
+                    $pdo
+                );
+                break;
+            case 2:
+                $gastoMensal_Transporte[] = $despensa_repositorio->listarGastosMensais_ByTipoDespensa(
+                    $_SESSION['ano'],
+                    $idStatusDespensa,
+                    $_SESSION['user_id'],
+                    $tipo_despensa,
+                    $idStatusMes,
+                    $pdo
+                );
+                break;
+            case 3:
+                $gastoMensal_Tv[] = $despensa_repositorio->listarGastosMensais_ByTipoDespensa(
+                    $_SESSION['ano'],
+                    $idStatusDespensa,
+                    $_SESSION['user_id'],
+                    $tipo_despensa,
+                    $idStatusMes,
+                    $pdo
+                );
+                break;
+            case 4:
+                $gastoMensal_Lazer[] = $despensa_repositorio->listarGastosMensais_ByTipoDespensa(
+                    $_SESSION['ano'],
+                    $idStatusDespensa,
+                    $_SESSION['user_id'],
+                    $tipo_despensa,
+                    $idStatusMes,
+                    $pdo
+                );
+                break;
+            case 5:
+                $gastoMensal_Comida[] = $despensa_repositorio->listarGastosMensais_ByTipoDespensa(
+                    $_SESSION['ano'],
+                    $idStatusDespensa,
+                    $_SESSION['user_id'],
+                    $tipo_despensa,
+                    $idStatusMes,
+                    $pdo
+                );
+                break;
+            case 6:
+                $gastoMensal_Saude[] = $despensa_repositorio->listarGastosMensais_ByTipoDespensa(
+                    $_SESSION['ano'],
+                    $idStatusDespensa,
+                    $_SESSION['user_id'],
+                    $tipo_despensa,
+                    $idStatusMes,
+                    $pdo
+                );
+                break;
+            case 7:
+                $gastoMensal_Moradia[] = $despensa_repositorio->listarGastosMensais_ByTipoDespensa(
+                    $_SESSION['ano'],
+                    $idStatusDespensa,
+                    $_SESSION['user_id'],
+                    $tipo_despensa,
+                    $idStatusMes,
+                    $pdo
+                );
+                break;
+            case 8:
+                $gastoMensal_Roupas[] = $despensa_repositorio->listarGastosMensais_ByTipoDespensa(
+                    $_SESSION['ano'],
+                    $idStatusDespensa,
+                    $_SESSION['user_id'],
+                    $tipo_despensa,
+                    $idStatusMes,
+                    $pdo
+                );
+                break;
+            default:
+                echo "Erro na busca dos dados mensais do tipo de despensa";
+                break;
+        }
+    }
+}
+
+var_dump($gastoMensal_Lazer);
 
 ?>
 
@@ -150,6 +254,7 @@ for ($tipo_despensa = 1; $tipo_despensa <= 8; $tipo_despensa++) {
                     label: 'Gastos mensais do ano',
                     data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
                     borderWidth: 1
+                    // backgroundColor: ["red"], 
                 }]
             },
             options: {
@@ -175,6 +280,7 @@ for ($tipo_despensa = 1; $tipo_despensa <= 8; $tipo_despensa++) {
                     label: 'Gasto anual baseado no tipo de despensa',
                     data: [dados2_array[0], dados2_array[1], dados2_array[2], dados2_array[3], dados2_array[4], dados2_array[5], dados2_array[6], dados2_array[7]],
                     borderWidth: 1
+                    // backgroundColor: ["red"], 
                 }]
             },
             options: {
@@ -187,7 +293,7 @@ for ($tipo_despensa = 1; $tipo_despensa <= 8; $tipo_despensa++) {
         });
     </script>
 
-<script>
+    <script>
         const ctx3 = document.getElementById('stackedChart');
         var dados_array = <?php echo json_encode($gasto_mensal) ?>;
         console.log(dados_array);
@@ -196,48 +302,55 @@ for ($tipo_despensa = 1; $tipo_despensa <= 8; $tipo_despensa++) {
             type: 'bar',
             data: {
                 labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-                datasets: [
+                datasets: [{
+                        label: 'Mercado',
+                        data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
+                        borderWidth: 1,
+                        backgroundColor: ["blue"],
+                    },
                     {
-                    label: 'Gastos mensais do ano',
-                    data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
-                    borderWidth: 1
-                },
-                {
-                    label: 'Gastos mensais do ano',
-                    data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
-                    borderWidth: 1
-                },
-                {
-                    label: 'Gastos mensais do ano',
-                    data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
-                    borderWidth: 1
-                },
-                {
-                    label: 'Gastos mensais do ano',
-                    data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
-                    borderWidth: 1
-                },
-                {
-                    label: 'Gastos mensais do ano',
-                    data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
-                    borderWidth: 1
-                },
-                {
-                    label: 'Gastos mensais do ano',
-                    data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
-                    borderWidth: 1
-                },
-                {
-                    label: 'Gastos mensais do ano',
-                    data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
-                    borderWidth: 1
-                },
-                {
-                    label: 'Gastos mensais do ano',
-                    data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
-                    borderWidth: 1
-                }
-            ]
+                        label: 'Transporte',
+                        data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
+                        borderWidth: 1,
+                        backgroundColor: ["red"],
+                    },
+                    {
+                        label: 'TV/ Internet/ telefone',
+                        data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
+                        borderWidth: 1,
+                        backgroundColor: ["green"],
+                    },
+                    {
+                        label: 'Lazer',
+                        data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
+                        borderWidth: 1,
+                        backgroundColor: ["yellow"],
+                    },
+                    {
+                        label: 'Comida fora ou Ifood',
+                        data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
+                        borderWidth: 1,
+                        backgroundColor: ["orange"],
+                    },
+                    {
+                        label: 'Saúde e beleza',
+                        data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
+                        borderWidth: 1,
+                        backgroundColor: ["gray"],
+                    },
+                    {
+                        label: 'Moradia',
+                        data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
+                        borderWidth: 1,
+                        backgroundColor: ["purple"],
+                    },
+                    {
+                        label: 'Roupas',
+                        data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
+                        borderWidth: 1,
+                        backgroundColor: ["pink"],
+                    }
+                ]
             },
             options: {
                 scales: {
