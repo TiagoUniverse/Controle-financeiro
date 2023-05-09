@@ -62,11 +62,11 @@ $gasto_anual = $despensa_repositorio->listarGastos_Anuais($_SESSION['ano'], $idS
 
 // GASTO POR MES
 $gasto_mensal = array();
-for ($mes = 0; $mes < 12; $mes++) {
+for ($mes = 1; $mes <= 12; $mes++) {
     $gasto_mensal[$mes] = $despensa_repositorio->listarGastosMensais_ByAno($_SESSION['ano'], $idStatusDespensa, $_SESSION['user_id'], $mes, $pdo);
 }
 
-// var_dump($gasto_mensal);
+var_dump($gasto_mensal);
 
 
 // GASTO POR TIPO DE DESPENSA
@@ -179,7 +179,7 @@ for ($tipo_despensa = 1; $tipo_despensa <= 8; $tipo_despensa++) {
     }
 }
 
-var_dump($gastoMensal_Lazer);
+// var_dump($gastoMensal_Lazer);
 
 ?>
 
@@ -225,14 +225,14 @@ var_dump($gastoMensal_Lazer);
         </div>
 
         <br>
-        <div class="chartPie">
-            <h2>Gasto anual baseado no tipo de despensa:</h2>
-            <canvas id="chartPie"></canvas>
-        </div>
-
         <div class="stackedChart">
             <h2>Gasto mensal de cada tipo de despensa</h2>
             <canvas id="stackedChart"></canvas>
+        </div>
+
+        <div class="chartPie">
+            <h2>Gasto anual baseado no tipo de despensa:</h2>
+            <canvas id="chartPie"></canvas>
         </div>
     </session>
 
@@ -241,6 +241,7 @@ var_dump($gastoMensal_Lazer);
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <!-- 1.Gasto mensal -->
     <script>
         const ctx = document.getElementById('ChartBar');
         var dados_array = <?php echo json_encode($gasto_mensal) ?>;
@@ -252,7 +253,8 @@ var_dump($gastoMensal_Lazer);
                 labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
                 datasets: [{
                     label: 'Gastos mensais do ano',
-                    data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
+                    data: [dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9],
+                    dados_array[10], dados_array[11], dados_array[12]],
                     borderWidth: 1
                     // backgroundColor: ["red"], 
                 }]
@@ -267,7 +269,83 @@ var_dump($gastoMensal_Lazer);
         });
     </script>
 
+    <!-- 2.Gasto mensal por tipo -->
+    <script>
+        const ctx3 = document.getElementById('stackedChart');
+        var mercado_array = <?php echo json_encode($gastoMensal_Mercado)  ?> ;
+        var Transporte_array = <?php echo json_encode($gastoMensal_Transporte)  ?> ;
+        var TV_array = <?php echo json_encode($gastoMensal_Tv)  ?> ;
+        var Lazer_array = <?php echo json_encode($gastoMensal_Lazer)  ?> ;
+        var Comida_array = <?php echo json_encode($gastoMensal_Comida)  ?> ;
+        var Saude_array = <?php echo json_encode($gastoMensal_Saude)  ?> ;
+        var Moradia_array = <?php echo json_encode($gastoMensal_Moradia)  ?> ;
+        var Roupas_array = <?php echo json_encode($gastoMensal_Roupas)  ?> ;
 
+        new Chart(ctx3, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                datasets: [{
+                        label: 'Mercado',
+                        data: [mercado_array[0], mercado_array[1], mercado_array[2], mercado_array[3], mercado_array[4], mercado_array[5], mercado_array[6], mercado_array[7], mercado_array[8], mercado_array[9], mercado_array[10], mercado_array[11]],
+                        borderWidth: 1,
+                        backgroundColor: ["blue"],
+                    },
+                    {
+                        label: 'Transporte',
+                        data: [Transporte_array[0], Transporte_array[1], Transporte_array[2], Transporte_array[3], Transporte_array[4], Transporte_array[5], Transporte_array[6], Transporte_array[7], Transporte_array[8], Transporte_array[9], Transporte_array[10], Transporte_array[11]],
+                        borderWidth: 1,
+                        backgroundColor: ["red"],
+                    },
+                    {
+                        label: 'TV/ Internet/ telefone',
+                        data: [TV_array[0], TV_array[1], TV_array[2], TV_array[3], TV_array[4], TV_array[5], TV_array[6], TV_array[7], TV_array[8], TV_array[9], TV_array[10], TV_array[11]],
+                        borderWidth: 1,
+                        backgroundColor: ["green"],
+                    },
+                    {
+                        label: 'Lazer',
+                        data: [Lazer_array[0], Lazer_array[1], Lazer_array[2], Lazer_array[3], Lazer_array[4], Lazer_array[5], Lazer_array[6], Lazer_array[7], Lazer_array[8], Lazer_array[9], Lazer_array[10], Lazer_array[11]],
+                        borderWidth: 1,
+                        backgroundColor: ["yellow"],
+                    },
+                    {
+                        label: 'Comida fora ou Ifood',
+                        data: [Comida_array[0], Comida_array[1], Comida_array[2], Comida_array[3], Comida_array[4], Comida_array[5], Comida_array[6], Comida_array[7], Comida_array[8], Comida_array[9], Comida_array[10], Comida_array[11]],
+                        borderWidth: 1,
+                        backgroundColor: ["orange"],
+                    },
+                    {
+                        label: 'Saúde e beleza',
+                        data: [Saude_array[0], Saude_array[1], Saude_array[2], Saude_array[3], Saude_array[4], Saude_array[5], Saude_array[6], Saude_array[7], Saude_array[8], Saude_array[9], Saude_array[10], Saude_array[11]],
+                        borderWidth: 1,
+                        backgroundColor: ["gray"],
+                    },
+                    {
+                        label: 'Moradia',
+                        data: [Moradia_array[0], Moradia_array[1], Moradia_array[2], Moradia_array[3], Moradia_array[4], Moradia_array[5], Moradia_array[6], Moradia_array[7], Moradia_array[8], Moradia_array[9], Moradia_array[10], Moradia_array[11]],
+                        borderWidth: 1,
+                        backgroundColor: ["purple"],
+                    },
+                    {
+                        label: 'Roupas',
+                        data: [Roupas_array[0], Roupas_array[1], Roupas_array[2], Roupas_array[3], Roupas_array[4], Roupas_array[5], Roupas_array[6], Roupas_array[7], Roupas_array[8], Roupas_array[9], Roupas_array[10], Roupas_array[11]],
+                        borderWidth: 1,
+                        backgroundColor: ["pink"],
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    
+    <!-- 3.Gasto anual por tipo -->
     <script>
         const ctx2 = document.getElementById('chartPie');
         var dados2_array = <?php echo json_encode($gastoAnual_tipoDespensa) ?>;
@@ -293,74 +371,7 @@ var_dump($gastoMensal_Lazer);
         });
     </script>
 
-    <script>
-        const ctx3 = document.getElementById('stackedChart');
-        var dados_array = <?php echo json_encode($gasto_mensal) ?>;
-        console.log(dados_array);
-
-        new Chart(ctx3, {
-            type: 'bar',
-            data: {
-                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-                datasets: [{
-                        label: 'Mercado',
-                        data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
-                        borderWidth: 1,
-                        backgroundColor: ["blue"],
-                    },
-                    {
-                        label: 'Transporte',
-                        data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
-                        borderWidth: 1,
-                        backgroundColor: ["red"],
-                    },
-                    {
-                        label: 'TV/ Internet/ telefone',
-                        data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
-                        borderWidth: 1,
-                        backgroundColor: ["green"],
-                    },
-                    {
-                        label: 'Lazer',
-                        data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
-                        borderWidth: 1,
-                        backgroundColor: ["yellow"],
-                    },
-                    {
-                        label: 'Comida fora ou Ifood',
-                        data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
-                        borderWidth: 1,
-                        backgroundColor: ["orange"],
-                    },
-                    {
-                        label: 'Saúde e beleza',
-                        data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
-                        borderWidth: 1,
-                        backgroundColor: ["gray"],
-                    },
-                    {
-                        label: 'Moradia',
-                        data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
-                        borderWidth: 1,
-                        backgroundColor: ["purple"],
-                    },
-                    {
-                        label: 'Roupas',
-                        data: [dados_array[0], dados_array[1], dados_array[2], dados_array[3], dados_array[4], dados_array[5], dados_array[6], dados_array[7], dados_array[8], dados_array[9], dados_array[10], dados_array[11]],
-                        borderWidth: 1,
-                        backgroundColor: ["pink"],
-                    }
-                ]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
+    
 
 </body>
 
