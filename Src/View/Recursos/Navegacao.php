@@ -71,7 +71,7 @@ $nome_dividido = explode(" ", $_SESSION['user_name']);
 </div>
 
 <footer>
-  Tiago Universe, PE 2023.
+  <a id="name_footer" href="https://github.com/TiagoUniverse" target="_blank" >Tiago Lopes</a>, PE 2023.
 </footer>
 <script src="../../Assets//Js//dropdown.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" 
