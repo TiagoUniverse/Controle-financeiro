@@ -25,7 +25,7 @@ class Poupancas_repositorio
             // $sql = "Insert into clientes (descricao, valor, data, ano, quinzena, idstatus_Mes, idStatus_Despensa)
             //         Values ({$descricao}, {$valor}, {$data}, {$ano}, {$quinzena}, {$idstatus_Mes}, {$idStatus_despensa})";
 
-            $stmt =  $pdo->prepare('INSERT INTO Poupancas (descricao, valor, dataPoupanca, ano, idStatus_despensa , idUsuario)
+            $stmt =  $pdo->prepare('INSERT INTO poupancas (descricao, valor, dataPoupanca, ano, idStatus_despensa , idUsuario)
         VALUES (:descricao , :valor , :dataPoupanca , :ano , :statusDespensa, :idUsuario )  ');
 
             $stmt->execute(array(
@@ -55,7 +55,7 @@ class Poupancas_repositorio
             // $sql = "Insert into clientes (descricao, valor, data, ano, quinzena, idstatus_Mes, idStatus_Despensa)
             //         Values ({$descricao}, {$valor}, {$data}, {$ano}, {$quinzena}, {$idstatus_Mes}, {$idStatus_despensa})";
 
-            $stmt =  $pdo->prepare('INSERT INTO Poupancas (descricao, valor, dataPoupanca, ano, idStatus_despensa , idUsuario)
+            $stmt =  $pdo->prepare('INSERT INTO poupancas (descricao, valor, dataPoupanca, ano, idStatus_despensa , idUsuario)
         VALUES (:descricao , :valor , :dataPoupanca , :ano , :statusDespensa, :idUsuario )  ');
 
             $stmt->execute(array(

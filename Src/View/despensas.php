@@ -142,7 +142,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
 
   if (!isset($_POST['data'])) {
     $mensagem = "Informe uma data";
-  }  else if ($_POST['tipo_despensa_selecionado'] == null) {
+  } else if ($_POST['tipo_despensa_selecionado'] == null) {
     $mensagem = "Selecione um tipo de despensa";
   } else if ($_SESSION['quinzena'] == "Quinzena 1" && $dataDividida[1] != $mes_selecionado) {
     $mensagem = "Selecione uma data do mes de " . $_SESSION['nomeMes'];
@@ -158,8 +158,16 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
     $mensagem = "Por favor, informe um valor positivo do dinheiro";
   } else if ($_SESSION['quinzena'] == "Quinzena 1" && ($dataDividida[2] < 5 || $dataDividida[2] > 19)) {
     $mensagem = "Por favor, insira um registro dentro dos dias da primeira quinzena (dia 5 até dia 19)";
-  } else if ($_SESSION['quinzena'] == "Quinzena 2" && ($dataDividida[2] <= 4 || $dataDividida[2] > 31)) {
-    $mensagem = "Por favor, insira um registro dentro dos dias da segunda quinzena (20 até dia 4 do próximo mês)";
+  } else if (
+    $_SESSION['quinzena'] == "Quinzena 2" && $dataDividida[1] == $_SESSION['statusMes'] &&
+    ($dataDividida[2] < 19 || $dataDividida[2] > 32)
+  ) {
+    $mensagem = "A data para registrar na 2ª quinzena precisa está entre o dia 20 até dia 04 do próximo mês.";
+  } else if (
+    $_SESSION['quinzena'] == "Quinzena 2" && $dataDividida[1] == ($_SESSION['statusMes'] + 1) &&
+    ($dataDividida[2] < 0 || $dataDividida[2] > 4)
+  ) {
+    $mensagem = "A data desse registro precisa ir até o dia 4 do próximo mês.";
   } else {
     $retorno = $Despensas_repositorio->consultarRegistro($descricao, $valor, $data, 3, $pdo);
 
@@ -173,7 +181,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
         $statusDespensa = 1;
       }
 
-      $Despensas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], $statusDespensa, $_SESSION['user_id'], $_POST['tipo_despensa_selecionado'] , $pdo);
+      $Despensas_repositorio->cadastro_entrada($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], $statusDespensa, $_SESSION['user_id'], $_POST['tipo_despensa_selecionado'], $pdo);
     } else {
       $mensagem = "Registro já cadastrado!";
     }
@@ -275,7 +283,7 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
         $statusDespensa = 2;
       }
 
-      $Despensas_repositorio->cadastro_Saida($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], $statusDespensa, $_SESSION['user_id'], $_POST['tipo_despensa_selecionado'] , $pdo);
+      $Despensas_repositorio->cadastro_Saida($descricao, $valor, $data, $_SESSION['ano'], $_SESSION['quinzena'], $_SESSION['statusMes'], $statusDespensa, $_SESSION['user_id'], $_POST['tipo_despensa_selecionado'], $pdo);
     } else {
       $mensagem = "Registro já cadastrado!";
     }
@@ -422,11 +430,11 @@ foreach ($Saida_fetch as $row) {
               <td> <?php echo $linha['descricao']; ?> </td>
               <td> <?php echo "R$" . $linha['valor']; ?> </td>
               <td> <?php echo $linha['dataDespensa']; ?> </td>
-              <td id="tipo_despensa"> 
+              <td id="tipo_despensa">
                 <?php
-                $retorno_tipoDespensa = $tipo_despensa_repositorio->consultar($linha['idTipoDespensa'] , $pdo);  
-                echo "{$retorno_tipoDespensa->getNome()}";         
-                 ?> 
+                $retorno_tipoDespensa = $tipo_despensa_repositorio->consultar($linha['idTipoDespensa'], $pdo);
+                echo "{$retorno_tipoDespensa->getNome()}";
+                ?>
               </td>
               <td>
                 <form action="alterar.php" method="post">
@@ -463,8 +471,8 @@ foreach ($Saida_fetch as $row) {
                 <th><input type="number" min="1" step="any" name="valor" placeholder="2.00"></th>
                 <th> <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'></th>
                 <th>
-                  <select name="tipo_despensa_selecionado"  required>
-                    <option selected disabled value="" >Escolha uma</option>
+                  <select name="tipo_despensa_selecionado" required>
+                    <option selected disabled value="">Escolha uma</option>
                     <?= $listagem_tipoDespensa; ?>
                   </select>
                 </th>
@@ -541,11 +549,11 @@ foreach ($Saida_fetch as $row) {
               <td> <?php echo $linha['descricao']; ?> </td>
               <td> <?php echo "R$" . $linha['valor']; ?> </td>
               <td> <?php echo $linha['dataDespensa']; ?> </td>
-              <td id="tipo_despensa"> 
+              <td id="tipo_despensa">
                 <?php
-                $retorno_tipoDespensa = $tipo_despensa_repositorio->consultar($linha['idTipoDespensa'] , $pdo);  
-                echo "{$retorno_tipoDespensa->getNome()}";         
-                 ?> 
+                $retorno_tipoDespensa = $tipo_despensa_repositorio->consultar($linha['idTipoDespensa'], $pdo);
+                echo "{$retorno_tipoDespensa->getNome()}";
+                ?>
               </td>
               <td>
                 <form action="alterar.php" method="post">
@@ -582,8 +590,8 @@ foreach ($Saida_fetch as $row) {
                 <th><input type="number" min="1" step="any" name="valor" placeholder="2.00"></th>
                 <th> <input type="date" name="data" value='<?php echo date("Y-m-d"); ?>'></th>
                 <th>
-                  <select name="tipo_despensa_selecionado"   required>
-                    <option selected disabled value="" >Escolha uma</option>
+                  <select name="tipo_despensa_selecionado" required>
+                    <option selected disabled value="">Escolha uma</option>
                     <?= $listagem_tipoDespensa; ?>
                   </select>
                 </th>
