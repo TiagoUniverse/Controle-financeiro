@@ -20,7 +20,7 @@ class Despensas_repositorio
         
         // echo $idStatus_despensa;
 
-        require_once "../view/conexao.php";
+       // require_once "../view/conexao.php";
         // $sql = "Insert into clientes (descricao, valor, data, ano, quinzena, idstatus_Mes, idStatus_Despensa)
         //         Values ({$descricao}, {$valor}, {$data}, {$ano}, {$quinzena}, {$idstatus_Mes}, {$idStatus_despensa})";
 
@@ -54,7 +54,7 @@ class Despensas_repositorio
         
         // echo $idStatus_despensa;
 
-        require_once "../view/conexao.php";
+       // require_once "../view/conexao.php";
         // $sql = "Insert into clientes (descricao, valor, data, ano, quinzena, idstatus_Mes, idStatus_Despensa)
         //         Values ({$descricao}, {$valor}, {$data}, {$ano}, {$quinzena}, {$idstatus_Mes}, {$idStatus_despensa})";
 
@@ -86,7 +86,7 @@ class Despensas_repositorio
 
     public function cadastro_StatusDespensas($nome , $pdo)
     {
-        require_once "../view/conexao.php";
+       // require_once "../view/conexao.php";
         try {
 
         $stmt =  $pdo->prepare('INSERT INTO status_despensas (nome) VALUES (:nome) ');
@@ -265,7 +265,7 @@ class Despensas_repositorio
 
     public function excluir_registro($id , $pdo)
     {
-        require_once "../view/conexao.php";
+       // require_once "../view/conexao.php";
 
         try {
             $stmt = $pdo->prepare('DELETE FROM despensas WHERE id = :id');
@@ -284,7 +284,7 @@ class Despensas_repositorio
 
     public function alterar($descricao, $valor, $dataDespensa, $id , $idTipoDespensa, $pdo)
     {
-        require_once "../view/conexao.php";
+       // require_once "../view/conexao.php";
         try {
 
         $stmt =  $pdo->prepare('Update despensas  SET descricao = (:descricao), valor = (:valor) , dataDespensa = (:dataDespensa) , idTipoDespensa = (:idTipoDespensa), 

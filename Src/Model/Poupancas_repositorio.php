@@ -21,7 +21,7 @@ class Poupancas_repositorio
 
             // echo $idStatus_despensa;
 
-            require_once "../view/conexao.php";
+           // require_once "../view/conexao.php";
             // $sql = "Insert into clientes (descricao, valor, data, ano, quinzena, idstatus_Mes, idStatus_Despensa)
             //         Values ({$descricao}, {$valor}, {$data}, {$ano}, {$quinzena}, {$idstatus_Mes}, {$idStatus_despensa})";
 
@@ -51,7 +51,7 @@ class Poupancas_repositorio
 
             // echo $idStatus_despensa;
 
-            require_once "../view/conexao.php";
+           // require_once "../view/conexao.php";
             // $sql = "Insert into clientes (descricao, valor, data, ano, quinzena, idstatus_Mes, idStatus_Despensa)
             //         Values ({$descricao}, {$valor}, {$data}, {$ano}, {$quinzena}, {$idstatus_Mes}, {$idStatus_despensa})";
 
@@ -170,7 +170,7 @@ class Poupancas_repositorio
 
     public function excluir_registro($id, $pdo)
     {
-        require_once "../view/conexao.php";
+       // require_once "../view/conexao.php";
 
         try {
             $stmt = $pdo->prepare('DELETE FROM poupancas WHERE id = :id');
@@ -186,7 +186,7 @@ class Poupancas_repositorio
 
     public function alterar($descricao, $valor, $dataPoupanca, $id, $pdo)
     {
-        require_once "../view/conexao.php";
+       // require_once "../view/conexao.php";
         try {
 
             $stmt =  $pdo->prepare('Update poupancas  SET descricao = (:descricao), valor = (:valor) , dataPoupanca = (:dataPoupanca) , updated = current_time()
