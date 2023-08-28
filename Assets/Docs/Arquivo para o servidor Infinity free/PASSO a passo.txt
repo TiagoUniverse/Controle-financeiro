@@ -1,0 +1,14 @@
+1ª Verifique os arquivos model se o código não veio duplicado
+
+2ª Vá no repositório de Usuario e coloque todas as consultas SQL para tabela usuario, com u minusculo
+
+3ª Crie um arquivo .htaccess no seu diretório e modifique o arquivo .htacess para direcionar todos os usuários para a versão HTTPS
+
+
+Origem/ htdocs/.htaccess
+
+
+
+.
+
+Tem um backup do banco de dados, caso seja necessário
