@@ -113,13 +113,13 @@ updated DATETIME NULL,
 IdStatus_mes INT NOT NULL,
 idStatus_despensa INT NOT NULL,
 idUsuario INT NOT NULL,
-idTipo_despensa INT NOT NULL,
+idTipoDespensa INT NOT NULL,
 
 
 FOREIGN KEY (IdStatus_mes) REFERENCES status_mes(id),
 FOREIGN KEY (idStatus_despensa) REFERENCES status_despensas(id) ,
 FOREIGN KEY (idUsuario) REFERENCES Usuario(id),
-FOREIGN KEY (idTipo_despensa) references tipo_despensas(id)
+FOREIGN KEY (idTipoDespensa) references tipo_despensas(id)
 
 );
 
