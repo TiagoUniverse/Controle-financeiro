@@ -148,7 +148,8 @@ if ($adicionando_registro != null && $adicionando_registro == "SALVANDO REGISTRO
     $mensagem = "Selecione uma data do mes de " . $_SESSION['nomeMes'];
   } else if ($_SESSION['quinzena'] == "Quinzena 2" && $dataDividida[1] != $mes_selecionado && $dataDividida[2] > 5) {
     $mensagem = "Informe um valor da segunda quinzena até o dia 4";
-  } else if ($dataDividida[1] > $mes_limite) {
+  } else if (($dataDividida[1] > $mes_limite ) && $dataDividida[1] != 12 ) {
+    // Acrescentei uma nova validação no caso de ser dezembro, já que 12 não é maior que 1 [28/12/23]
     $mensagem = "Para cadastrar na 2ª quinzena, insira registro entre o mês atual e o próximo mês.";
   } else if ($dataDividida[0] != $_SESSION['ano']) {
     $mensagem = "Faça um registro no ano de " . $_SESSION['ano'];
